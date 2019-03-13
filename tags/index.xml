@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Show me the code</title>
+    <link>https://kingfsen.github.io/tags/</link>
+    <description>Recent content in Tags on Show me the code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Mar 2019 15:59:41 +0000</lastBuildDate>
+    
+	<atom:link href="https://kingfsen.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Clair</title>
+      <link>https://kingfsen.github.io/tags/clair/</link>
+      <pubDate>Mon, 11 Mar 2019 15:59:41 +0000</pubDate>
+      
+      <guid>https://kingfsen.github.io/tags/clair/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>https://kingfsen.github.io/tags/docker/</link>
+      <pubDate>Mon, 11 Mar 2019 15:14:25 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Harbor</title>
+      <link>https://kingfsen.github.io/tags/harbor/</link>
+      <pubDate>Mon, 11 Mar 2019 15:59:41 +0000</pubDate>
+      
+      <guid>https://kingfsen.github.io/tags/harbor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Leader Elect</title>
+      <link>https://kingfsen.github.io/tags/leader-elect/</link>
+      <pubDate>Mon, 11 Mar 2019 15:14:25 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/tags/leader-elect/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>镜像扫描</title>
+      <link>https://kingfsen.github.io/tags/%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F/</link>
+      <pubDate>Mon, 11 Mar 2019 15:59:41 +0000</pubDate>
+      
+      <guid>https://kingfsen.github.io/tags/%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
