@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://kingfsen.github.io/post/prometheus_monitor_k8s/</loc>
+    <lastmod>2019-03-13T10:29:13+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kingfsen.github.io/post/docker_deploy_wordpress/</loc>
+    <lastmod>2019-03-13T10:28:01+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kingfsen.github.io/about/profile/</loc>
     <lastmod>2019-03-12T16:14:56+08:00</lastmod>
   </url>
@@ -46,7 +56,13 @@
   
   <url>
     <loc>https://kingfsen.github.io/tags/docker/</loc>
-    <lastmod>2019-03-11T15:14:25+08:00</lastmod>
+    <lastmod>2019-03-13T10:28:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kingfsen.github.io/categories/docker/</loc>
+    <lastmod>2019-03-13T10:28:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -75,14 +91,26 @@
   </url>
   
   <url>
+    <loc>https://kingfsen.github.io/tags/mysql/</loc>
+    <lastmod>2019-03-13T10:28:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://kingfsen.github.io/post/</loc>
-    <lastmod>2019-03-11T15:59:41+00:00</lastmod>
+    <lastmod>2019-03-13T10:29:13+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kingfsen.github.io/tags/</loc>
     <lastmod>2019-03-11T15:59:41+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kingfsen.github.io/tags/wordpress/</loc>
+    <lastmod>2019-03-13T10:28:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   

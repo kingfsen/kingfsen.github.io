@@ -6,10 +6,28 @@
     <description>Recent content in Posts on Show me the code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Mar 2019 15:59:41 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 13 Mar 2019 10:29:13 +0800</lastBuildDate>
     
 	<atom:link href="https://kingfsen.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>基于Prometheus搭建Kubernetes监控服务(一)</title>
+      <link>https://kingfsen.github.io/post/prometheus_monitor_k8s/</link>
+      <pubDate>Wed, 13 Mar 2019 10:29:13 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/post/prometheus_monitor_k8s/</guid>
+      <description>Prometheus功能结构 Prometheus是基于golang编写的一个开源监控项目，当前应用非常广泛，尤其是与当前的容器调度平台kubernetes融合，使用Prometheus之前，我们应该了解下它的使用场景，它不能用来进行大量无规则数据的收集，不能替代日志收集工具，同时由于Prometheus基于时间序列的sample采样收集，如果某个系统对自身的每个请求都要求精准监控，那Prometheus也不适合。Prometheus更多的用于基于时间序列的一个sample采样，统计分析，比如某个功能接口某段时间的调用频率、调用次数等。 橙色框 Pushgat</description>
+    </item>
+    
+    <item>
+      <title>基于Docker快速搭建wordpress博客</title>
+      <link>https://kingfsen.github.io/post/docker_deploy_wordpress/</link>
+      <pubDate>Wed, 13 Mar 2019 10:28:01 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/post/docker_deploy_wordpress/</guid>
+      <description>wordpress数据存储依赖mysql数据库，以docker容器方式部署完整的wordpress博客服务，则需要从镜像仓库拉取mysql、wordpress镜像，这里选择从开源的docker hub 获取mysql 5.7版本，wordpress latest版本，同时需要准备一台具备外网环境的机器，硬件配置最好1C2G以上，当然1C1G也是没有问题的。 docker pull mysql:5.7 docker pull wordpress:latest 数据库服务 启动mysql数据库服务 docker run --name mysql-db -p 3306:3306 -v /data/mysql:/var/lib/mysql -d -e MYSQL_ROOT_PASSWORD=root mysql:5.7 mysql容器的名字为mysql-db，数据库文件则保存在当前机器的/data/mysql目录下，-e MYSQL_ROOT_PASSWORD以环</description>
+    </item>
     
     <item>
       <title>Harbor仓库镜像扫描原理</title>
