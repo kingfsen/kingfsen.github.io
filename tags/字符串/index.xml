@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>字符串 on 写了一行代码</title>
+    <link>https://kingfsen.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+    <description>Recent content in 字符串 on 写了一行代码</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Mar 2019 15:32:46 +0800</lastBuildDate>
+    
+	<atom:link href="https://kingfsen.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>寻找字符串中不重复最长子串</title>
+      <link>https://kingfsen.github.io/arithmetic/getmaxuniquesubstring/</link>
+      <pubDate>Thu, 14 Mar 2019 15:32:46 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/arithmetic/getmaxuniquesubstring/</guid>
+      <description>问题 给定一个字符串，找出这个字符串中最长的不重复子串。假定字符串编码范围在256之内(排除中文等特殊字符)，同时如果有相同长度的子串，优先获取首次寻找的子串，时间复杂度O(N)。 &amp;ldquo;abcd&amp;rdquo; -&amp;gt; &amp;ldquo;abcd&amp;rdquo; &amp;ldquo;abccd&amp;rdquo; -&amp;gt; &amp;ldquo;abc&amp;rdquo; &amp;ldquo;somok39ebab3yuvwz123&amp;rdquo; -&amp;gt; &amp;ldquo;ab3yuvwz12&amp;rdquo; 思路 用一个int数组position保存每个字符在字符串中的位置 用一个int变量mark标记下一次可获取子串的开始位置 用一个String变量maxUniqueStr保存循环过程中始终最长的无重复子串。 初始化position中每个元素值为-1，同时将字符串转化成字符数组chars 遍历chars数组，当前字符上次出现，取出上次的位置lastPos(注意mark必须小</description>
+    </item>
+    
+  </channel>
+</rss>
