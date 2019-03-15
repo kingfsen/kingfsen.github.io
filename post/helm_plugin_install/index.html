@@ -130,7 +130,7 @@ hooks:
 <ul>
 <li>LocalInstaller
 这种方式最简单，插件目录已经在本地文件系统。比如插件目录在/data/kingfsen/helm-push，helm首先校验该目录下是否存在plugin.yaml文件，校验通过之后，helm调用系统创建一个文件软链接，
-<code>$HELM_HOME/helm-push -&gt; /data/kingfsen/helm-push</code> 。</li>
+<code>$HELM_HOME/plugins/helm-push -&gt; /data/kingfsen/helm-push</code> 。</li>
 <li>HTTPInstaller
 首先检查$HELM_HOME/cache/plugins目录是否存在对应的文件，不存在则先通过http请求下载文件，然后解压在/HELM_HOME/cache/plugins目录下。
 文件在本地之后，接下来逻辑则和LocalInstaller一致。</li>
@@ -143,7 +143,7 @@ hooks:
 
 <p><code>sh -c cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh</code></p>
 
-<p>某种意义上来说，hook是helm提供给第三方插件的一个初始化逻辑。Helm插件的命令不能与helm自身的命令名称重复，即plugin.yaml中的name属性是全局唯一。根据上面的流程分析，完全可以手动给Helm创建一个插件。</p>
+<p>某种意义上来说，hook install是helm提供给第三方插件的一个初始化逻辑。Helm插件的命令不能与helm自身的命令名称重复，即plugin.yaml中的name属性是全局唯一。根据上面的流程分析，完全可以手动给Helm创建一个插件。</p>
 
 <h3 id="插件加载">插件加载</h3>
 
