@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 写了一行代码</title>
+    <title>Posts on 码无止境</title>
     <link>https://kingfsen.github.io/post/</link>
-    <description>Recent content in Posts on 写了一行代码</description>
+    <description>Recent content in Posts on 码无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Mar 2019 10:29:13 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 15 Mar 2019 09:48:52 +0800</lastBuildDate>
     
 	<atom:link href="https://kingfsen.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>基于Prometheus搭建Kubernetes监控服务(一)</title>
+      <title>Prometheus监控Kubernetes服务(二)</title>
+      <link>https://kingfsen.github.io/post/prometheusmonitork8s2/</link>
+      <pubDate>Fri, 15 Mar 2019 09:48:52 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/post/prometheusmonitork8s2/</guid>
+      <description>prometheus相关的服务已经在kubernetes中部署完成，请参阅文章 Prometheus监控Kubernetes服务(一) 。 Prometheus Label Label在prometheus服务抓取中非常重要，通过标签重写或者标签过滤抓取目标等是非常强大的功能。除了目标本身自定义的标签，prometheus还会内置给每个目标一些基础标签， 比如job、instance、metrics、schema等。prometheus获取的初始标签一般以__meta__开头，我们可以根据需要针对部分标签进行自定义命名重写，这样prometheus就会为目标保存这些自定义标签，那些以__开头</description>
+    </item>
+    
+    <item>
+      <title>Prometheus监控Kubernetes服务(一)</title>
       <link>https://kingfsen.github.io/post/prometheus_monitor_k8s/</link>
       <pubDate>Wed, 13 Mar 2019 10:29:13 +0800</pubDate>
       
