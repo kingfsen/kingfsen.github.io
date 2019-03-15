@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Helm on 码无止境</title>
+    <link>https://kingfsen.github.io/tags/helm/</link>
+    <description>Recent content in Helm on 码无止境</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Mar 2019 16:40:22 +0800</lastBuildDate>
+    
+	<atom:link href="https://kingfsen.github.io/tags/helm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Helm插件安装原理详解</title>
+      <link>https://kingfsen.github.io/post/helm_plugin_install/</link>
+      <pubDate>Fri, 15 Mar 2019 16:40:22 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/post/helm_plugin_install/</guid>
+      <description>Helm是Kubernetes集群的安装包管理工具，它与Kubernetes的关系类似于RPM与Centos。Helm提供了安装插件方式去扩展其核心功能，插件主要在客户端执行，并且存放在$HELM_HOME的plugins目录中。 Helm的插件安装源可以支持多种形式，Helm插件是以plugin.yaml文件来组织的，这个文件是必须的，plugin.yaml的模板如下。 name: &amp;quot;push&amp;quot; version: &amp;quot;0.7.1&amp;quot; usage: &amp;quot;Please see https://github.com/chartmuseum/helm-push for usage&amp;quot; description: &amp;quot;Push chart package to ChartMuseum&amp;quot; command: &amp;quot;$HELM_PLUGIN_DIR/bin/helmpush&amp;quot; downloaders: - command: &amp;quot;bin/helmpush&amp;quot; protocols: - &amp;quot;cm&amp;quot; useTunnel: false hooks: install: &amp;quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&amp;quot; update: &amp;quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&amp;quot; helm如果通过VCS安装插件，可以通过指定版本version参数来拉取指定的tag、branch、commit等，</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Kubernetes - 码无止境</title>
+	<title>Helm - 码无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<meta name="generator" content="Hugo 0.54.0" />
@@ -12,7 +12,7 @@
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/tags/kubernetes/index.xml" title="码无止境">
+	<link rel="alternate" type="application/rss+xml" href="/categories/helm/index.xml" title="码无止境">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	
@@ -59,52 +59,27 @@
 <article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/post/prometheusmonitork8s2/" rel="bookmark">
-			Prometheus监控Kubernetes服务(二)
+			<a href="/post/helm_plugin_install/" rel="bookmark">
+			Helm插件安装原理详解
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-15T09:48:52">2019-03-15</time>
+	<time class="meta__text" datetime="2019-03-15T16:40:22">2019-03-15</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/prometheus" rel="category">Prometheus</a></span>
+	<span class="meta__text"><a class="meta__link" href="/categories/helm" rel="category">Helm</a></span>
 </div>
 </div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		prometheus相关的服务已经在kubernetes中部署完成，请参阅文章 Prometheus监控Kubernetes服务(一) 。 Prometheus Label Label在prometheus服务抓取中非常重要，通过标签重写或者标签过滤抓取目标等是非常强大的功能。除了目标本身自定义的标签，prometheus还会内置给每个目标一些基础标签， 比如job、instance、metrics、schema等。prometheus获取的初始标签一般以__meta__开头，我们可以根据需要针对部分标签进行自定义命名重写，这样prometheus就会为目标保存这些自定义标签，那些以__开头
+		Helm是Kubernetes集群的安装包管理工具，它与Kubernetes的关系类似于RPM与Centos。Helm提供了安装插件方式去扩展其核心功能，插件主要在客户端执行，并且存放在$HELM_HOME的plugins目录中。 Helm的插件安装源可以支持多种形式，Helm插件是以plugin.yaml文件来组织的，这个文件是必须的，plugin.yaml的模板如下。 name: &quot;push&quot; version: &quot;0.7.1&quot; usage: &quot;Please see https://github.com/chartmuseum/helm-push for usage&quot; description: &quot;Push chart package to ChartMuseum&quot; command: &quot;$HELM_PLUGIN_DIR/bin/helmpush&quot; downloaders: - command: &quot;bin/helmpush&quot; protocols: - &quot;cm&quot; useTunnel: false hooks: install: &quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&quot; update: &quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&quot; helm如果通过VCS安装插件，可以通过指定版本version参数来拉取指定的tag、branch、commit等，
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/prometheusmonitork8s2/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/prometheus_monitor_k8s/" rel="bookmark">
-			Prometheus监控Kubernetes服务(一)
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-13T10:29:13">2019-03-13</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/prometheus" rel="category">Prometheus</a></span>
-</div>
-</div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Prometheus功能结构 Prometheus是基于golang编写的一个开源监控项目，当前应用非常广泛，尤其是与当前的容器调度平台kubernetes融合，使用Prometheus之前，我们应该了解下它的使用场景，它不能用来进行大量无规则数据的收集，不能替代日志收集工具，同时由于Prometheus基于时间序列的sample采样收集，如果某个系统对自身的每个请求都要求精准监控，那Prometheus也不适合。Prometheus更多的用于基于时间序列的一个sample采样，统计分析，比如某个功能接口某段时间的调用频率、调用次数等。 橙色框 Pushgat
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/prometheus_monitor_k8s/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/post/helm_plugin_install/">Read more…</a>
 	</div>
 </article>
 </main>

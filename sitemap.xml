@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://kingfsen.github.io/post/helm_plugin_install/</loc>
+    <lastmod>2019-03-15T16:40:22+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kingfsen.github.io/post/prometheusmonitork8s2/</loc>
     <lastmod>2019-03-15T09:48:52+08:00</lastmod>
   </url>
@@ -106,6 +111,18 @@
   </url>
   
   <url>
+    <loc>https://kingfsen.github.io/tags/helm/</loc>
+    <lastmod>2019-03-15T16:40:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kingfsen.github.io/categories/helm/</loc>
+    <lastmod>2019-03-15T16:40:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://kingfsen.github.io/tags/kubernetes/</loc>
     <lastmod>2019-03-15T09:48:52+08:00</lastmod>
     <priority>0</priority>
@@ -125,7 +142,7 @@
   
   <url>
     <loc>https://kingfsen.github.io/post/</loc>
-    <lastmod>2019-03-15T09:48:52+08:00</lastmod>
+    <lastmod>2019-03-15T16:40:22+08:00</lastmod>
     <priority>0</priority>
   </url>
   
