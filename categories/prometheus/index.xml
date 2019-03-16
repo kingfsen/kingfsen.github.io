@@ -13,10 +13,10 @@
     
     <item>
       <title>Prometheus监控Kubernetes服务(二)</title>
-      <link>https://kingfsen.github.io/post/prometheusmonitork8s2/</link>
+      <link>https://kingfsen.github.io/post/prometheus_monitor_k8s2/</link>
       <pubDate>Fri, 15 Mar 2019 09:48:52 +0800</pubDate>
       
-      <guid>https://kingfsen.github.io/post/prometheusmonitork8s2/</guid>
+      <guid>https://kingfsen.github.io/post/prometheus_monitor_k8s2/</guid>
       <description>prometheus相关的服务已经在kubernetes中部署完成，请参阅文章 Prometheus监控Kubernetes服务(一) 。 Prometheus Label Label在prometheus服务抓取中非常重要，通过标签重写或者标签过滤抓取目标等是非常强大的功能。除了目标本身自定义的标签，prometheus还会内置给每个目标一些基础标签， 比如job、instance、metrics、schema等。prometheus获取的初始标签一般以__meta__开头，我们可以根据需要针对部分标签进行自定义命名重写，这样prometheus就会为目标保存这些自定义标签，那些以__开头</description>
     </item>
     

@@ -12,6 +12,33 @@
     
     
     <item>
+      <title>字符串的最小包含子串</title>
+      <link>https://kingfsen.github.io/arithmetic/get_min_contains_sub_string/</link>
+      <pubDate>Sat, 16 Mar 2019 13:19:14 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/arithmetic/get_min_contains_sub_string/</guid>
+      <description>问题 给定字符串str1，str2，获取字符串str1中包含str2的最小字符子串。 str1=&amp;ldquo;abcde&amp;rdquo;, str2=&amp;ldquo;bd&amp;rdquo; -&amp;gt; bcd str1=&amp;ldquo;abcde&amp;rdquo;, str2=&amp;ldquo;cg&amp;rdquo; -&amp;gt; &amp;ldquo;&amp;rdquo; 思路 假定字符编码范围0~255 创建一个size为256的整形数组charCount，用来保存字符串str2所有字符的出现次数 整形变量match用来表示当前差几个字符未匹配 将str1、str2分别转换为字符数组parentArray、subArray 遍历subArray，保存str2每个字符出现的次数 从左向右遍历parentArray，将每个字符对应的次数做&amp;ndash;运算，之后如果字符的次数为零，表示匹配上一个字符，则match&amp;ndash; 若match等</description>
+    </item>
+    
+    <item>
+      <title>判断两个单词是否为变形词</title>
+      <link>https://kingfsen.github.io/arithmetic/check_deformation_word/</link>
+      <pubDate>Sat, 16 Mar 2019 11:29:21 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/arithmetic/check_deformation_word/</guid>
+      <description>问题 给定两个单词word1，word2，判断两个单词是否是变形词，即两个单词中的每个字符出现的次数一致。 word1=&amp;ldquo;abcc&amp;rdquo;, word=&amp;ldquo;acbc&amp;rdquo;, 返回true word1=&amp;ldquo;abcc&amp;rdquo;, word=&amp;ldquo;abbc&amp;rdquo;, 返回false word1=&amp;ldquo;abc&amp;rdquo;, word=&amp;ldquo;cba&amp;rdquo;, 返回true 思路 假定字符串的编码范围0~255。 &amp;gt; * 新建一个size为256的int数组 &amp;gt; * 分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray &amp;gt; * 遍历word1CharArray，将字符出现的字符保存在int数组中 &amp;gt; * 遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false 代码 /** * 判断两个单词是否是变形</description>
+    </item>
+    
+    <item>
+      <title>Docker Login执行流程与原理</title>
+      <link>https://kingfsen.github.io/post/docker_login_process/</link>
+      <pubDate>Sat, 16 Mar 2019 08:54:16 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/post/docker_login_process/</guid>
+      <description>docker安装的时候已经同时安装了docker client，通过命令docker version即可查看客户端以及服务端的版本信息，通过执行命令docker version查看docker版本信息。docker最近暴露的runc漏洞CVE-2019-5736，企业环境请安装18.09.2以上版本。 Client: Version: 18.06.0-ce API version: 1.38 Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:08:18 2018 OS/Arch: linux/amd64 Experimental: false Server: Engine: Version: 18.06.0-ce API version: 1.38 (minimum version 1.12) Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:10:42 2018 OS/Arch: linux/amd64 Experimental: false docker login等命令行则是用来对harbor服务发起http请求，早期版本的harbor registry服务url为/v1，后期harbor改为了/v2，所以如果你的do</description>
+    </item>
+    
+    <item>
       <title>Helm插件安装原理详解</title>
       <link>https://kingfsen.github.io/post/helm_plugin_install/</link>
       <pubDate>Fri, 15 Mar 2019 16:40:22 +0800</pubDate>
@@ -22,28 +49,28 @@
     
     <item>
       <title>Prometheus监控Kubernetes服务(二)</title>
-      <link>https://kingfsen.github.io/post/prometheusmonitork8s2/</link>
+      <link>https://kingfsen.github.io/post/prometheus_monitor_k8s2/</link>
       <pubDate>Fri, 15 Mar 2019 09:48:52 +0800</pubDate>
       
-      <guid>https://kingfsen.github.io/post/prometheusmonitork8s2/</guid>
+      <guid>https://kingfsen.github.io/post/prometheus_monitor_k8s2/</guid>
       <description>prometheus相关的服务已经在kubernetes中部署完成，请参阅文章 Prometheus监控Kubernetes服务(一) 。 Prometheus Label Label在prometheus服务抓取中非常重要，通过标签重写或者标签过滤抓取目标等是非常强大的功能。除了目标本身自定义的标签，prometheus还会内置给每个目标一些基础标签， 比如job、instance、metrics、schema等。prometheus获取的初始标签一般以__meta__开头，我们可以根据需要针对部分标签进行自定义命名重写，这样prometheus就会为目标保存这些自定义标签，那些以__开头</description>
     </item>
     
     <item>
       <title>寻找字符串中不重复最长子串</title>
-      <link>https://kingfsen.github.io/arithmetic/getmaxuniquesubstring/</link>
+      <link>https://kingfsen.github.io/arithmetic/get_max_unique_sub_string/</link>
       <pubDate>Thu, 14 Mar 2019 15:32:46 +0800</pubDate>
       
-      <guid>https://kingfsen.github.io/arithmetic/getmaxuniquesubstring/</guid>
+      <guid>https://kingfsen.github.io/arithmetic/get_max_unique_sub_string/</guid>
       <description>问题 给定一个字符串，找出这个字符串中最长的不重复子串。假定字符串编码范围在256之内(排除中文等特殊字符)，同时如果有相同长度的子串，优先获取首次寻找的子串，时间复杂度O(N)。 &amp;ldquo;abcd&amp;rdquo; -&amp;gt; &amp;ldquo;abcd&amp;rdquo; &amp;ldquo;abccd&amp;rdquo; -&amp;gt; &amp;ldquo;abc&amp;rdquo; &amp;ldquo;somok39ebab3yuvwz123&amp;rdquo; -&amp;gt; &amp;ldquo;ab3yuvwz12&amp;rdquo; 思路 用一个int数组position保存每个字符在字符串中的位置 用一个int变量mark标记下一次可获取子串的开始位置 用一个String变量maxUniqueStr保存循环过程中始终最长的无重复子串。 初始化position中每个元素值为-1，同时将字符串转化成字符数组chars 遍历chars数组，当前字符上次出现，取出上次的位置lastPos(注意mark必须小</description>
     </item>
     
     <item>
       <title>从数组中获取指定数量的随机元素</title>
-      <link>https://kingfsen.github.io/arithmetic/getrandomnumberfromarray/</link>
+      <link>https://kingfsen.github.io/arithmetic/get_random_number_from_array/</link>
       <pubDate>Wed, 13 Mar 2019 20:41:18 +0800</pubDate>
       
-      <guid>https://kingfsen.github.io/arithmetic/getrandomnumberfromarray/</guid>
+      <guid>https://kingfsen.github.io/arithmetic/get_random_number_from_array/</guid>
       <description>问题 从给定的一个整型数组中，随机获取指定数量的数组元素。 思路一 新建一个与整型数组相同长度的boolean类型数组用来做标志位，标志位值为true表示当前元素是否已经获取，如果数组元素未被获取，则取出该元素，同时把对应的标志位置位true，如果发现当前元素已经获取，则重新随机获取。 public static int[] get(int[] array, int num) { int[] res = new int[num]; if (array == null || array.length == 0 || num &amp;lt;= 0) { return res; } boolean[] used = new boolean[array.length]; int i = 0; Random r = new Random(); while(i &amp;lt; num) { int index = r.nextInt(array.length); if (!used[index]) { used[index] = true; res[i] = array[index]; i++; } } return res; } 该算法牺牲了内存空间(创建了数组used), 同时随着num参数接近array长度效率会逐渐降低。 思路二 将每次取出的元素与末位元素交换位置，每次生成的</description>
     </item>
     

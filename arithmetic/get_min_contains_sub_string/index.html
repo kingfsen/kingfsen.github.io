@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>从数组中获取指定数量的随机元素 - 码无止境</title>
+	<title>字符串的最小包含子串 - 码无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<meta name="generator" content="Hugo 0.54.0" />
@@ -57,11 +57,11 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">从数组中获取指定数量的随机元素</h1>
+			<h1 class="post__title">字符串的最小包含子串</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-13T20:41:18">2019-03-13</time>
+	<time class="meta__text" datetime="2019-03-16T13:19:14">2019-03-16</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -80,8 +80,8 @@
 <li>
 <ul>
 <li><a href="#问题">问题</a></li>
-<li><a href="#思路一">思路一</a></li>
-<li><a href="#思路二">思路二</a></li>
+<li><a href="#思路">思路</a></li>
+<li><a href="#代码">代码</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -93,103 +93,81 @@
 
 <h3 id="问题">问题</h3>
 
-<p>从给定的一个整型数组中，随机获取指定数量的数组元素。</p>
+<p>给定字符串str1，str2，获取字符串str1中包含str2的最小字符子串。</p>
 
-<h3 id="思路一">思路一</h3>
+<blockquote>
+<ul>
+<li>str1=&ldquo;abcde&rdquo;, str2=&ldquo;bd&rdquo; -&gt; bcd</li>
+<li>str1=&ldquo;abcde&rdquo;, str2=&ldquo;cg&rdquo; -&gt; &ldquo;&rdquo;</li>
+</ul>
+</blockquote>
 
-<p>新建一个与整型数组相同长度的boolean类型数组用来做标志位，标志位值为true表示当前元素是否已经获取，如果数组元素未被获取，则取出该元素，同时把对应的标志位置位true，如果发现当前元素已经获取，则重新随机获取。</p>
+<h3 id="思路">思路</h3>
 
-<pre><code>public static int[] get(int[] array, int num) {
-        int[] res = new int[num];
-        if (array == null || array.length == 0 || num &lt;= 0) {
-            return res;
+<p>假定字符编码范围0~255</p>
+
+<blockquote>
+<ul>
+<li>创建一个size为256的整形数组charCount，用来保存字符串str2所有字符的出现次数</li>
+<li>整形变量match用来表示当前差几个字符未匹配</li>
+<li>将str1、str2分别转换为字符数组parentArray、subArray</li>
+<li>遍历subArray，保存str2每个字符出现的次数</li>
+<li>从左向右遍历parentArray，将每个字符对应的次数做&ndash;运算，之后如果字符的次数为零，表示匹配上一个字符，则match&ndash;</li>
+<li>若match等于0，表示str2中的所有字符均已匹配上，此时parentArray的字符位置则是最小子串的右边界限</li>
+<li>开始确定最小子串的左边界限，再次遍历parentArray，查找第一次出现次数为-1的字符位置，该位置则为左边界限</li>
+<li>获取最小子串str1.subString(左边界+1,右边界+1)</li>
+</ul>
+</blockquote>
+
+<h3 id="代码">代码</h3>
+
+<pre><code>**
+ * 获取最小包含的子串
+ * str1=&quot;some3gs&quot;, str2=&quot;og&quot; -&gt; ome3g
+ */
+public class GetMinContainsSubString {
+
+    public static String getMinSubString(String str1, String str2) {
+        if (str1 == null || str2 == null || str2.length() &gt; str1.length()) {
+            return &quot;&quot;;
         }
-        boolean[] used = new boolean[array.length];
+        int[] charCount = new int[256];
+        char[] parentArray = str1.toCharArray();
+        char[] subArray = str2.toCharArray();
+        for (int i=0;i&lt;subArray.length;i++) {
+            charCount[subArray[i]]++;
+        }
+        //最小子串右边界位置
         int i = 0;
-        Random r = new Random();
-        while(i &lt; num) {
-            int index = r.nextInt(array.length);
-            if (!used[index]) {
-                used[index] = true;
-                res[i] = array[index];
-                i++;
+        //最小子串左边界位置
+        int j = 0;
+        //需要匹配的总字符数
+        int match = str2.length();
+        String minSubString = &quot;&quot;;
+        while(i != parentArray.length) {
+            char c = parentArray[i];
+            charCount[c]--;
+            //减1之后还大于等于0,表示之前存在该字符
+            if (charCount[c] &gt;= 0) {
+                match--;
             }
-        }
-        return res;
-    }
-</code></pre>
-
-<p>该算法牺牲了内存空间(创建了数组used), 同时随着num参数接近array长度效率会逐渐降低。</p>
-
-<h3 id="思路二">思路二</h3>
-
-<p>将每次取出的元素与末位元素交换位置，每次生成的<font color="red">index</font>下标逐渐缩小范围。</p>
-
-<pre><code>public static int[] optimizeGet(int[] array, int num) {
-        int[] res = new int[num];
-        if (array == null || array.length == 0 || num &lt;= 0) {
-            return res;
-        }
-        Random r = new Random();
-        for (int i=0;i&lt;num;i++) {
-            int index = r.nextInt(array.length - i);
-            res[i] = array[index];
-            array[index] = array[array.length - i - 1];
-            array[array.length - i - 1] = res[i];
-        }
-        return res;
-    }
-</code></pre>
-
-<p>完整demo</p>
-
-<pre><code>public class GetRandNumbersFromArray {
-
-
-    public static int[] get(int[] array, int num) {
-        int[] res = new int[num];
-        if (array == null || array.length == 0 || num &lt;= 0) {
-            return res;
-        }
-        boolean[] used = new boolean[array.length];
-
-        int i = 0;
-        int seq = 0;
-        Random r = new Random();
-        while(i &lt; num) {
-            System.out.println(seq++);
-            int index = r.nextInt(array.length);
-            if (!used[index]) {
-                used[index] = true;
-                res[i] = array[index];
-                i++;
+            //此时已全部匹配,i则是右边界位置，此时还需压缩左边界位置
+            if (match == 0) {
+                while(charCount[parentArray[j++]] == -1 ) {
+                    minSubString = str1.substring(j + 1, i + 1);
+                    return minSubString;
+                }
             }
+            i++;
         }
-        return res;
-    }
-
-    public static int[] optimizeGet(int[] array, int num) {
-        int[] res = new int[num];
-        if (array == null || array.length == 0 || num &lt;= 0) {
-            return res;
-        }
-        Random r = new Random();
-        for (int i=0;i&lt;num;i++) {
-            int index = r.nextInt(array.length - i);
-            res[i] = array[index];
-            array[index] = array[array.length - i - 1];
-            array[array.length - i - 1] = res[i];
-        }
-        return res;
+        return minSubString;
     }
 
     public static void main(String[] args) {
-        int[] array = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20};
-        int[] res = get(array, 19);
-        Arrays.sort(res);
-        System.out.println(Arrays.toString(res));
+        String str1 = &quot;some45baby&quot;;
+        String str2 = &quot;m4a&quot;;
+        System.out.println(getMinSubString(str1, str2));
     }
-
 }
 </code></pre>
 
@@ -199,7 +177,7 @@
 	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
 	<ul class="tags__list">
 		<li class="tags__item"><a class="tags__link btn" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li>
-		<li class="tags__item"><a class="tags__link btn" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li>
 	</ul>
 </div>
 	</article>
@@ -218,8 +196,8 @@
 </div>
 
 <nav class="post-nav flex">
-	<div class="post-nav__item post-nav__item--next">
-		<a class="post-nav__link" href="/arithmetic/getmaxuniquesubstring/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">寻找字符串中不重复最长子串</p></a>
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/arithmetic/check_deformation_word/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">判断两个单词是否为变形词</p></a>
 	</div>
 </nav>
 

@@ -128,23 +128,23 @@
 <p>在kubernetes中部署了一个简单的Java Springboot应用，系统暴露的merics接口不再是/merics，而是/prometheus，由于需要让prometheus取获取该应用在每个pod中的merics数据，所以job的角色必须是endpoint。</p>
 
 <pre><code>  - job_name: 'kubernetes-java-endpoints'
-	kubernetes_sd_configs:
-	- role: endpoints
-	metrics_path: /prometheus
-	relabel_configs:
-	- source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
-	  action: keep
-	  regex: prometheus
-	- source_labels: [__meta_kubernetes_pod_name]
-	  target_label: pod_name
-	- source_labels: [__meta_kubernetes_pod_ready]
-	  target_label: ready
-	- source_labels: [__meta_kubernetes_service_name]
-	  target_label: service_name
-	- source_labels: [__meta_kubernetes_namespace]
-	  target_label: namespace
-	- source_labels: [__meta_kubernetes_pod_host_ip]
-	  target_label: host_ip
+    kubernetes_sd_configs:
+    - role: endpoints
+    metrics_path: /prometheus
+    relabel_configs:
+    - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+      action: keep
+      regex: prometheus
+    - source_labels: [__meta_kubernetes_pod_name]
+      target_label: pod_name
+    - source_labels: [__meta_kubernetes_pod_ready]
+      target_label: ready
+    - source_labels: [__meta_kubernetes_service_name]
+      target_label: service_name
+    - source_labels: [__meta_kubernetes_namespace]
+      target_label: namespace
+    - source_labels: [__meta_kubernetes_pod_host_ip]
+      target_label: host_ip
 </code></pre>
 
 <p>__meta_kubernetes_service_annotation等都是prometheus自动附加的前缀，每个目标能获取的原始标签都是prometheus内置功能，这个具体看官方文档。这个抓取任务kubernetes-java-endpoints的merics_path强制写成了/prometheus，它的默认值是/metrics。再通过keep动作过滤抓取的目标，由于kubernetes中的pod很多，不能让job无限制去抓取，
@@ -165,33 +165,33 @@
 <p>接着看一下复杂点的探针服务的Label配置</p>
 
 <pre><code>  - job_name: 'kubernetes-pod-tcp-probe'
-	kubernetes_sd_configs:
-	- role: pod
-	tls_config:
-	  ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-	bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-	metrics_path: /probe
-	params:
-	  module: [tcp_connect]
-	relabel_configs:
-	- source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_tcp_probe]
-	  action: keep
-	  regex: true
-	- source_labels: [__meta_kubernetes_pod_ip, __meta_kubernetes_pod_container_port_number]
-	  action: replace
-	  target_label: __param_target
-	  regex: (.+);(.+)
-	  replacement: $1:$2
-	- target_label: __address__
-	  replacement: blackbox-exporter.kube-prometheus.svc:9115
-	- source_labels: [__param_target]
-	  target_label: instance
-	- action: labelmap
-	  regex: __meta_kubernetes_pod_label_(.+)
-	- source_labels: [__meta_kubernetes_namespace]
-	  target_label: namespace
-	- source_labels: [__meta_kubernetes_pod_name]
-	  target_label: pod_name
+    kubernetes_sd_configs:
+    - role: pod
+    tls_config:
+      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+    metrics_path: /probe
+    params:
+      module: [tcp_connect]
+    relabel_configs:
+    - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_tcp_probe]
+      action: keep
+      regex: true
+    - source_labels: [__meta_kubernetes_pod_ip, __meta_kubernetes_pod_container_port_number]
+      action: replace
+      target_label: __param_target
+      regex: (.+);(.+)
+      replacement: $1:$2
+    - target_label: __address__
+      replacement: blackbox-exporter.kube-prometheus.svc:9115
+    - source_labels: [__param_target]
+      target_label: instance
+    - action: labelmap
+      regex: __meta_kubernetes_pod_label_(.+)
+    - source_labels: [__meta_kubernetes_namespace]
+      target_label: namespace
+    - source_labels: [__meta_kubernetes_pod_name]
+      target_label: pod_name
 </code></pre>
 
 <p>首先第一条标签操作通过keep动作过滤出需要抓取的pod，第二条标签操作将_param_target标签值设置成 pod的ip:pod的端口，第三条操作直接将 <code>__address__</code> 的值设置成 blackbox-exporter.kube-prometheus.svc:9115 服务地址，由于<code>__address__</code>被重写了，第四条操作重新给instance附上当前pod的ip以及端口值，__param_xx开头的
@@ -303,7 +303,7 @@ public class Monitor {
     long t = System.currentTimeMillis();
     try {
         //business logic
-		.......
+        .......
         Monitor.recordSuccess(&quot;business_xx&quot;, System.currentTimeMillis() - t);
     } catch (Exception e) {
         Monitor.recordException(&quot;business_xx&quot;, System.currentTimeMillis() - t);

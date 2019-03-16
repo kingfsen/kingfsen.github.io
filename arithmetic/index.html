@@ -58,7 +58,57 @@
 <main class="main list" role="main"><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/arithmetic/getmaxuniquesubstring/" rel="bookmark">
+			<a href="/arithmetic/get_min_contains_sub_string/" rel="bookmark">
+			字符串的最小包含子串
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-03-16T13:19:14">2019-03-16</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/%e7%ae%97%e6%b3%95" rel="category">算法</a></span>
+</div>
+</div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		问题 给定字符串str1，str2，获取字符串str1中包含str2的最小字符子串。 str1=&ldquo;abcde&rdquo;, str2=&ldquo;bd&rdquo; -&gt; bcd str1=&ldquo;abcde&rdquo;, str2=&ldquo;cg&rdquo; -&gt; &ldquo;&rdquo; 思路 假定字符编码范围0~255 创建一个size为256的整形数组charCount，用来保存字符串str2所有字符的出现次数 整形变量match用来表示当前差几个字符未匹配 将str1、str2分别转换为字符数组parentArray、subArray 遍历subArray，保存str2每个字符出现的次数 从左向右遍历parentArray，将每个字符对应的次数做&ndash;运算，之后如果字符的次数为零，表示匹配上一个字符，则match&ndash; 若match等
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/arithmetic/get_min_contains_sub_string/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/arithmetic/check_deformation_word/" rel="bookmark">
+			判断两个单词是否为变形词
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-03-16T11:29:21">2019-03-16</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/%e7%ae%97%e6%b3%95" rel="category">算法</a></span>
+</div>
+</div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		问题 给定两个单词word1，word2，判断两个单词是否是变形词，即两个单词中的每个字符出现的次数一致。 word1=&ldquo;abcc&rdquo;, word=&ldquo;acbc&rdquo;, 返回true word1=&ldquo;abcc&rdquo;, word=&ldquo;abbc&rdquo;, 返回false word1=&ldquo;abc&rdquo;, word=&ldquo;cba&rdquo;, 返回true 思路 假定字符串的编码范围0~255。 &gt; * 新建一个size为256的int数组 &gt; * 分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray &gt; * 遍历word1CharArray，将字符出现的字符保存在int数组中 &gt; * 遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false 代码 /** * 判断两个单词是否是变形
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/arithmetic/check_deformation_word/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/arithmetic/get_max_unique_sub_string/" rel="bookmark">
 			寻找字符串中不重复最长子串
 			</a>
 		</h3>
@@ -78,12 +128,12 @@
 		问题 给定一个字符串，找出这个字符串中最长的不重复子串。假定字符串编码范围在256之内(排除中文等特殊字符)，同时如果有相同长度的子串，优先获取首次寻找的子串，时间复杂度O(N)。 &ldquo;abcd&rdquo; -&gt; &ldquo;abcd&rdquo; &ldquo;abccd&rdquo; -&gt; &ldquo;abc&rdquo; &ldquo;somok39ebab3yuvwz123&rdquo; -&gt; &ldquo;ab3yuvwz12&rdquo; 思路 用一个int数组position保存每个字符在字符串中的位置 用一个int变量mark标记下一次可获取子串的开始位置 用一个String变量maxUniqueStr保存循环过程中始终最长的无重复子串。 初始化position中每个元素值为-1，同时将字符串转化成字符数组chars 遍历chars数组，当前字符上次出现，取出上次的位置lastPos(注意mark必须小
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/arithmetic/getmaxuniquesubstring/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/arithmetic/get_max_unique_sub_string/">Read more…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/arithmetic/getrandomnumberfromarray/" rel="bookmark">
+			<a href="/arithmetic/get_random_number_from_array/" rel="bookmark">
 			从数组中获取指定数量的随机元素
 			</a>
 		</h3>
@@ -103,7 +153,7 @@
 		问题 从给定的一个整型数组中，随机获取指定数量的数组元素。 思路一 新建一个与整型数组相同长度的boolean类型数组用来做标志位，标志位值为true表示当前元素是否已经获取，如果数组元素未被获取，则取出该元素，同时把对应的标志位置位true，如果发现当前元素已经获取，则重新随机获取。 public static int[] get(int[] array, int num) { int[] res = new int[num]; if (array == null || array.length == 0 || num &lt;= 0) { return res; } boolean[] used = new boolean[array.length]; int i = 0; Random r = new Random(); while(i &lt; num) { int index = r.nextInt(array.length); if (!used[index]) { used[index] = true; res[i] = array[index]; i++; } } return res; } 该算法牺牲了内存空间(创建了数组used), 同时随着num参数接近array长度效率会逐渐降低。 思路二 将每次取出的元素与末位元素交换位置，每次生成的
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/arithmetic/getrandomnumberfromarray/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/arithmetic/get_random_number_from_array/">Read more…</a>
 	</div>
 </article>
 </main>
@@ -117,15 +167,16 @@
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/arithmetic/get_min_contains_sub_string/">字符串的最小包含子串</a></li>
+			<li class="widget__item"><a class="widget__link" href="/arithmetic/check_deformation_word/">判断两个单词是否为变形词</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/docker_login_process/">Docker Login执行流程与原理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/helm_plugin_install/">Helm插件安装原理详解</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/prometheusmonitork8s2/">Prometheus监控Kubernetes服务(二)</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/getmaxuniquesubstring/">寻找字符串中不重复最长子串</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/getrandomnumberfromarray/">从数组中获取指定数量的随机元素</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/prometheus_monitor_k8s2/">Prometheus监控Kubernetes服务(二)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/arithmetic/get_max_unique_sub_string/">寻找字符串中不重复最长子串</a></li>
+			<li class="widget__item"><a class="widget__link" href="/arithmetic/get_random_number_from_array/">从数组中获取指定数量的随机元素</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/prometheus_monitor_k8s/">Prometheus监控Kubernetes服务(一)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/docker_deploy_wordpress/">基于Docker快速搭建wordpress博客</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/harbor_image_scan/">Harbor仓库镜像扫描原理</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/leader_elect_golang/">基于数据库的简单Leader Elect</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/deploy_harbor_service/">部署企业级Harbor镜像仓库服务</a></li>
 		</ul>
 	</div>
 </div>
@@ -146,17 +197,18 @@
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/mysql" title="Mysql">Mysql (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/wordpress" title="Wordpress">Wordpress (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e7%ac%a6%e4%b8%b2" title="字符串">字符串 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%8f%98%e5%bd%a2%e8%af%8d" title="变形词">变形词 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e7%ac%a6%e4%b8%b2" title="字符串">字符串 (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e7%bb%84" title="数组">数组 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e7%ae%97%e6%b3%95" title="算法">算法 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e7%ae%97%e6%b3%95" title="算法">算法 (4)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%95%9c%e5%83%8f%e6%89%ab%e6%8f%8f" title="镜像扫描">镜像扫描 (1)</a>
 	</div>
 </div>
