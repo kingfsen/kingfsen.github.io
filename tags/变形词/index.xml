@@ -17,7 +17,7 @@
       <pubDate>Sat, 16 Mar 2019 11:29:21 +0800</pubDate>
       
       <guid>https://kingfsen.github.io/arithmetic/check_deformation_word/</guid>
-      <description>问题 给定两个单词word1，word2，判断两个单词是否是变形词，即两个单词中的每个字符出现的次数一致。 word1=&amp;ldquo;abcc&amp;rdquo;, word=&amp;ldquo;acbc&amp;rdquo;, 返回true word1=&amp;ldquo;abcc&amp;rdquo;, word=&amp;ldquo;abbc&amp;rdquo;, 返回false word1=&amp;ldquo;abc&amp;rdquo;, word=&amp;ldquo;cba&amp;rdquo;, 返回true 思路 假定字符串的编码范围0~255。 &amp;gt; * 新建一个size为256的int数组 &amp;gt; * 分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray &amp;gt; * 遍历word1CharArray，将字符出现的字符保存在int数组中 &amp;gt; * 遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false 代码 /** * 判断两个单词是否是变形</description>
+      <description>问题 给定两个单词word1，word2，判断两个单词是否是变形词，即两个单词中的每个字符出现的次数一致。 word1=&amp;ldquo;abcc&amp;rdquo;, word=&amp;ldquo;acbc&amp;rdquo;, 返回true word1=&amp;ldquo;abcc&amp;rdquo;, word=&amp;ldquo;abbc&amp;rdquo;, 返回false word1=&amp;ldquo;abc&amp;rdquo;, word=&amp;ldquo;cba&amp;rdquo;, 返回true 思路 假定字符串的编码范围0~255。 新建一个size为256的int数组 分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray 遍历word1CharArray，将字符出现的字符保存在int数组中 遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false 代码 /** * 判断两个单词是否是变形词 */ public class CheckDeformationWord { public static</description>
     </item>
     
   </channel>

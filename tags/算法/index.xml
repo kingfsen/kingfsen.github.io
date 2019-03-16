@@ -6,10 +6,19 @@
     <description>Recent content in 算法 on 码无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Mar 2019 13:19:14 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 16 Mar 2019 19:00:11 +0800</lastBuildDate>
     
 	<atom:link href="https://kingfsen.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>字典树的应用与实现</title>
+      <link>https://kingfsen.github.io/arithmetic/trie/</link>
+      <pubDate>Sat, 16 Mar 2019 19:00:11 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/arithmetic/trie/</guid>
+      <description>字典树又称为单词查找树或者前缀树，是一种用于快速检索的树形结构，比如小写字母词典数是一个26叉数，数字的字典树是一个10叉数。字典数的键并未保存在节点中，而是由节点在树中的位置决定的。 根节点一般对应空信息。字典树的优点是查询效率高，其核心思想是利用空间换时间，利用字符串的公共前缀来提高效率。 基本性质 根节点没有字符路径，除根节点外，每一个节点都被一个字符路径找到 从根节点到某一个节点，将路径上经过的字符连接起来，为扫过的对应字符串 每个节点向下所有的字符路径上的字符都不同 特点 插入、查找的时间复杂度均为O(N)，其中N为字符串长度 空间复杂度是26^n级别的，非常</description>
+    </item>
     
     <item>
       <title>字符串的最小包含子串</title>
@@ -26,7 +35,7 @@
       <pubDate>Sat, 16 Mar 2019 11:29:21 +0800</pubDate>
       
       <guid>https://kingfsen.github.io/arithmetic/check_deformation_word/</guid>
-      <description>问题 给定两个单词word1，word2，判断两个单词是否是变形词，即两个单词中的每个字符出现的次数一致。 word1=&amp;ldquo;abcc&amp;rdquo;, word=&amp;ldquo;acbc&amp;rdquo;, 返回true word1=&amp;ldquo;abcc&amp;rdquo;, word=&amp;ldquo;abbc&amp;rdquo;, 返回false word1=&amp;ldquo;abc&amp;rdquo;, word=&amp;ldquo;cba&amp;rdquo;, 返回true 思路 假定字符串的编码范围0~255。 &amp;gt; * 新建一个size为256的int数组 &amp;gt; * 分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray &amp;gt; * 遍历word1CharArray，将字符出现的字符保存在int数组中 &amp;gt; * 遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false 代码 /** * 判断两个单词是否是变形</description>
+      <description>问题 给定两个单词word1，word2，判断两个单词是否是变形词，即两个单词中的每个字符出现的次数一致。 word1=&amp;ldquo;abcc&amp;rdquo;, word=&amp;ldquo;acbc&amp;rdquo;, 返回true word1=&amp;ldquo;abcc&amp;rdquo;, word=&amp;ldquo;abbc&amp;rdquo;, 返回false word1=&amp;ldquo;abc&amp;rdquo;, word=&amp;ldquo;cba&amp;rdquo;, 返回true 思路 假定字符串的编码范围0~255。 新建一个size为256的int数组 分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray 遍历word1CharArray，将字符出现的字符保存在int数组中 遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false 代码 /** * 判断两个单词是否是变形词 */ public class CheckDeformationWord { public static</description>
     </item>
     
     <item>

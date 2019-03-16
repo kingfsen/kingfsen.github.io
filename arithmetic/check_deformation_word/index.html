@@ -70,6 +70,7 @@
 </div>
 </div>
 		</header>
+
 <div class="post__toc toc">
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
@@ -105,11 +106,16 @@
 
 <h3 id="思路">思路</h3>
 
-<p>假定字符串的编码范围0~255。
-&gt; * 新建一个size为256的int数组
-&gt; * 分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray
-&gt; * 遍历word1CharArray，将字符出现的字符保存在int数组中
-&gt; * 遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false</p>
+<p>假定字符串的编码范围0~255。</p>
+
+<blockquote>
+<ul>
+<li>新建一个size为256的int数组</li>
+<li>分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray</li>
+<li>遍历word1CharArray，将字符出现的字符保存在int数组中</li>
+<li>遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false</li>
+</ul>
+</blockquote>
 
 <h3 id="代码">代码</h3>
 
