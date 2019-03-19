@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 码无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Mar 2019 08:54:16 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 19 Mar 2019 10:02:41 +0800</lastBuildDate>
     
 	<atom:link href="https://kingfsen.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Helm Harbor</title>
+      <link>https://kingfsen.github.io/post/helm_harbor/</link>
+      <pubDate>Tue, 19 Mar 2019 10:02:41 +0800</pubDate>
+      
+      <guid>https://kingfsen.github.io/post/helm_harbor/</guid>
+      <description>chartmuseum chartmuseum是helm chart的仓库，它的存储层支持FileSystem以及各大云厂商的对象存储中间件， 默认支持阿里云的OSS、百度的BOS、Amazon S3、Microsoft Azure、Oracle、Openstack、Google等， 其他厂商需自行实现Storage的Backend接口方法，同时增加了缓存redis，提升系统处理效率，项目地址https://github.com/helm/chartmuseum 。 chartmuseum支持多租户的实现，它通过一个index-cache.yaml索引文件来维护租户上传记录，类似docke</description>
+    </item>
     
     <item>
       <title>Docker Login执行流程与原理</title>

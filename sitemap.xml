@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://kingfsen.github.io/post/helm_harbor/</loc>
+    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kingfsen.github.io/arithmetic/trie/</loc>
     <lastmod>2019-03-16T19:00:11+08:00</lastmod>
   </url>
@@ -95,6 +100,12 @@
   </url>
   
   <url>
+    <loc>https://kingfsen.github.io/tags/chartmuseum/</loc>
+    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://kingfsen.github.io/tags/clair/</loc>
     <lastmod>2019-03-11T15:59:41+00:00</lastmod>
     <priority>0</priority>
@@ -120,25 +131,25 @@
   
   <url>
     <loc>https://kingfsen.github.io/tags/harbor/</loc>
-    <lastmod>2019-03-16T08:54:16+08:00</lastmod>
+    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kingfsen.github.io/categories/harbor/</loc>
-    <lastmod>2019-03-16T08:54:16+08:00</lastmod>
+    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kingfsen.github.io/tags/helm/</loc>
-    <lastmod>2019-03-15T16:40:22+08:00</lastmod>
+    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kingfsen.github.io/categories/helm/</loc>
-    <lastmod>2019-03-15T16:40:22+08:00</lastmod>
+    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -162,7 +173,7 @@
   
   <url>
     <loc>https://kingfsen.github.io/post/</loc>
-    <lastmod>2019-03-16T08:54:16+08:00</lastmod>
+    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -180,7 +191,7 @@
   
   <url>
     <loc>https://kingfsen.github.io/tags/</loc>
-    <lastmod>2019-03-11T15:59:41+00:00</lastmod>
+    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   

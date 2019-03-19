@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Helm - 码无止境</title>
+	<title>Chartmuseum - 码无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<meta name="generator" content="Hugo 0.54.0" />
@@ -12,7 +12,7 @@
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/categories/helm/index.xml" title="码无止境">
+	<link rel="alternate" type="application/rss+xml" href="/tags/chartmuseum/index.xml" title="码无止境">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	
@@ -85,36 +85,6 @@
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/post/helm_harbor/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="https://kingfsen.github.io/post/helm_plugin_install/">
-			<img src="/img/helm.png" alt="Helm插件安装原理详解" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/helm_plugin_install/" rel="bookmark">
-			Helm插件安装原理详解
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-15T16:40:22">2019-03-15</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/helm" rel="category">Helm</a></span>
-</div>
-</div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Helm是Kubernetes集群的安装包管理工具，它与Kubernetes的关系类似于RPM与Centos。Helm提供了安装插件方式去扩展其核心功能，插件主要在客户端执行，并且存放在$HELM_HOME的plugins目录中。 Helm的插件安装源可以支持多种形式，Helm插件是以plugin.yaml文件来组织的，这个文件是必须的，plugin.yaml的模板如下。 name: &quot;push&quot; version: &quot;0.7.1&quot; usage: &quot;Please see https://github.com/chartmuseum/helm-push for usage&quot; description: &quot;Push chart package to ChartMuseum&quot; command: &quot;$HELM_PLUGIN_DIR/bin/helmpush&quot; downloaders: - command: &quot;bin/helmpush&quot; protocols: - &quot;cm&quot; useTunnel: false hooks: install: &quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&quot; update: &quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&quot; helm如果通过VCS安装插件，可以通过指定版本version参数来拉取指定的tag、branch、commit等，
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/helm_plugin_install/">Read more…</a>
 	</div>
 </article>
 </main>
