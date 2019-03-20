@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://kingfsen.github.io/post/hugo_blog/</loc>
+    <lastmod>2019-03-19T20:05:49+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kingfsen.github.io/post/helm_harbor/</loc>
     <lastmod>2019-03-19T10:02:41+08:00</lastmod>
   </url>
@@ -154,6 +159,18 @@
   </url>
   
   <url>
+    <loc>https://kingfsen.github.io/tags/hugo/</loc>
+    <lastmod>2019-03-19T20:05:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kingfsen.github.io/categories/hugo/</loc>
+    <lastmod>2019-03-19T20:05:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://kingfsen.github.io/tags/kubernetes/</loc>
     <lastmod>2019-03-15T09:48:52+08:00</lastmod>
     <priority>0</priority>
@@ -173,7 +190,7 @@
   
   <url>
     <loc>https://kingfsen.github.io/post/</loc>
-    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
+    <lastmod>2019-03-19T20:05:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   

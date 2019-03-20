@@ -162,30 +162,34 @@ Sep 14 14:08:09 172.18.0.1 proxy[13966]: 10.69.56.148 - &quot;GET /v2/ HTTP/1.1&
 <p>第一个get请求/v2首先通过nginx转发到ui服务，经过ui的handleChain处理之后，又转发到registry服务，registry服务经过验证，发现请求header中未传递token，直接返回401。
 docker client收到401之后，马上请求/service/token，这个服务是nginx直接转发给ui组件，ui组件检测到请求类型不是repository操作，则会强制要求用户名密码不能为空，下面请看docker login 与docker pull获取token具体的参数。</p>
 
-<p>docker login发起的请求</p>
+<ul>
+<li><p>docker login发起的请求</p>
 
 <pre><code>GET /service/token?account=2000014559&amp;client_id=docker&amp;offline_token=true&amp;service=harbor-registry
-</code></pre>
+</code></pre></li>
 
-<p>docker pull发起的请求</p>
+<li><p>docker pull发起的请求</p>
 
-<pre><code> GET /service/tokenaccount=2000014559&amp;scope=repository%3Alibrary%2Fprome%2Fnodeexporter%3Apull&amp;service=harbor-registry
-</code></pre>
+<pre><code>GET /service/tokenaccount=2000014559&amp;scope=repository%3Alibrary%2Fprome%2Fnodeexporter%3Apull&amp;service=harbor-registry
+</code></pre></li>
+</ul>
 
 <p>docker login的时候没有scope，会强制鉴权，即username:password然后base64编码之后，塞在请求头中的Authorization中。ui鉴权通过之后，获取private_key，
 利用jwt算法生成一个token，这个token还有个有效期。</p>
 
-<p>jwt完整token示例</p>
+<ul>
+<li><p>jwt完整token示例</p>
 
-<pre><code>  eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFDWTI6Qkk3RTpLMkpWOldYR1g6SEZGSDpMVUJOOlo3Q0k6TFlETDpEUkhaOlBBR1M6RFpQTDpUM1JQIn0.eyJpc3MiOi
-  JoYXJib3ItdG9rZW4taXNzdWVyIiwic3ViIjoiMjAwMDAxNDU1OSIsImF1ZCI6ImhhcmJvci1yZWdpc3RyeSIsImV4cCI6MTUzNjkwNzA4OSwibmJmIjoxNTM2OTA1Mjg5LCJpYXQi
-  OjE1MzY5MDUyODksImp0aSI6IlJuVzhIdGdqdThiQkswbUsiLCJhY2Nlc3MiOm51bGx9.LQveGSQqQ-XvRBYewY2ojqnlNfqhCUhy99s9oQ5WTJ5zdZInBiLJPMKfZReTaZriwTB3c
-  CYwUAvaolLcthLdPZlJil48gG5hWRBeNoiJJNcNHY054wrxhhcJq9v0xcfdJnJAK_sVeuz1pA4v99Z-MMMBYLXHp0mx_sqy1kCJiGrtwU4JshVgG4NBAQLHB8atpdjvfhimFxHfs8-
-  oRyY4EjMJx5-SKYEQadA4SR53VhYaLlL10LBhMSyZj-1C54P1GCf6zn2HHiqaRFOur8zQbX7nNgVz2WszgSCIU9gmxkzS2jD6QWJdfJKvBCHeY8lmoNxGROJvoYAppK6h_f3edOQjg
-  tfrdxyLcneQEtNoVRUzXPwPxtJIh1ISm8xbF0NVfuV2Ntbn4nnUTcJBEw8y4sTyb-l5J8XFzs8idFdN4a7JPSlne4L4lm6pPJsKXTgUp4vFdNvN8lY2pQmtUvEKFPZRgGVFoyIvo8U
-  5KoKX120CGMsXiZ89k_bm98mFwbq2S4hI2jRujUTNopN0qG3TqK2dl6cF_YzoGEt9eU7cblPGpHbE5bqxsXojXsyxn3R8ErmhDo3__-2Z9vyKWTTgy8MLVSj-bMsXfeM3oT6fdNoFH
-  tYxYwQ9FrAiMOO7cirZAETGN5bwoeNRCF1UCuvJgQpzvzH-PKzuez91OdI8NtE
-</code></pre>
+<pre><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFDWTI6Qkk3RTpLMkpWOldYR1g6SEZGSDpMVUJOOlo3Q0k6TFlETDpEUkhaOlBBR1M6RFpQTDpUM1JQIn0.eyJpc3MiOi
+JoYXJib3ItdG9rZW4taXNzdWVyIiwic3ViIjoiMjAwMDAxNDU1OSIsImF1ZCI6ImhhcmJvci1yZWdpc3RyeSIsImV4cCI6MTUzNjkwNzA4OSwibmJmIjoxNTM2OTA1Mjg5LCJpYXQi
+OjE1MzY5MDUyODksImp0aSI6IlJuVzhIdGdqdThiQkswbUsiLCJhY2Nlc3MiOm51bGx9.LQveGSQqQ-XvRBYewY2ojqnlNfqhCUhy99s9oQ5WTJ5zdZInBiLJPMKfZReTaZriwTB3c
+CYwUAvaolLcthLdPZlJil48gG5hWRBeNoiJJNcNHY054wrxhhcJq9v0xcfdJnJAK_sVeuz1pA4v99Z-MMMBYLXHp0mx_sqy1kCJiGrtwU4JshVgG4NBAQLHB8atpdjvfhimFxHfs8-
+oRyY4EjMJx5-SKYEQadA4SR53VhYaLlL10LBhMSyZj-1C54P1GCf6zn2HHiqaRFOur8zQbX7nNgVz2WszgSCIU9gmxkzS2jD6QWJdfJKvBCHeY8lmoNxGROJvoYAppK6h_f3edOQjg
+tfrdxyLcneQEtNoVRUzXPwPxtJIh1ISm8xbF0NVfuV2Ntbn4nnUTcJBEw8y4sTyb-l5J8XFzs8idFdN4a7JPSlne4L4lm6pPJsKXTgUp4vFdNvN8lY2pQmtUvEKFPZRgGVFoyIvo8U
+5KoKX120CGMsXiZ89k_bm98mFwbq2S4hI2jRujUTNopN0qG3TqK2dl6cF_YzoGEt9eU7cblPGpHbE5bqxsXojXsyxn3R8ErmhDo3__-2Z9vyKWTTgy8MLVSj-bMsXfeM3oT6fdNoFH
+tYxYwQ9FrAiMOO7cirZAETGN5bwoeNRCF1UCuvJgQpzvzH-PKzuez91OdI8NtE
+</code></pre></li>
+</ul>
 
 <p>docker client获取到token之后再去重复第一步的请求，这时候响应结果状态码为200，docker client才认为用户名密码是有效的，它才会提示Login Success，同时保存在/root/.docker/config.json中，用于后面操作镜像仓库的时候，让用户免输入。从上面的分析看，这里所谓的docker login，并不是去调用harbor服务的登录接口生成session，只是用来验证一下是否可以正确获取到token，当然这时候的用户名密码必须真实存在。</p>
 
@@ -212,6 +216,26 @@ docker client收到401之后，马上请求/service/token，这个服务是nginx
 </div>
 	</article>
 </main>
+
+
+<aside class="sidebar">
+<h4>See Also</h4>
+<div class="widget__content">
+		<ul class="widget__list">
+	
+	<li><a href="/post/deploy_harbor_service/">部署企业级Harbor镜像仓库服务</a></li>
+	
+	<li><a href="/post/helm_harbor/">Helm Harbor</a></li>
+	
+	<li><a href="/post/docker_deploy_wordpress/">基于Docker快速搭建wordpress博客</a></li>
+	
+	<li><a href="/post/harbor_image_scan/">Harbor仓库镜像扫描原理</a></li>
+	
+</ul>
+</div>
+<br/>
+</aside>
+
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
@@ -242,9 +266,7 @@ docker client收到401之后，马上请求/service/token，这个服务是nginx
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">
-		<div class="footer__links">
-	<a class="footer__link" href=""></a>
-</div>
+		
 		<div class="footer__copyright">
 			&copy; 2019 码无止境.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>

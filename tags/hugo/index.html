@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>变形词 - 码无止境</title>
+	<title>Hugo - 码无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<meta name="generator" content="Hugo 0.54.0" />
@@ -12,7 +12,7 @@
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/tags/%E5%8F%98%E5%BD%A2%E8%AF%8D/index.xml" title="码无止境">
+	<link rel="alternate" type="application/rss+xml" href="/tags/hugo/index.xml" title="码无止境">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	
@@ -57,29 +57,34 @@
 			
 <main class="main list" role="main">
 <article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="https://kingfsen.github.io/post/hugo_blog/">
+			<img src="/img/hugo.png" alt="Hugo构建静态博客" />
+		</a>
+	</figure>
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/arithmetic/check_deformation_word/" rel="bookmark">
-			判断两个单词是否为变形词
+			<a href="/post/hugo_blog/" rel="bookmark">
+			Hugo构建静态博客
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-16T11:29:21">2019-03-16</time>
+	<time class="meta__text" datetime="2019-03-19T20:05:49">2019-03-19</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/%e7%ae%97%e6%b3%95" rel="category">算法</a></span>
+	<span class="meta__text"><a class="meta__link" href="/categories/hugo" rel="category">hugo</a></span>
 </div>
 </div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		问题 给定两个单词word1，word2，判断两个单词是否是变形词，即两个单词中的每个字符出现的次数一致。 word1=&ldquo;abcc&rdquo;, word=&ldquo;acbc&rdquo;, 返回true word1=&ldquo;abcc&rdquo;, word=&ldquo;abbc&rdquo;, 返回false word1=&ldquo;abc&rdquo;, word=&ldquo;cba&rdquo;, 返回true 思路 假定字符串的编码范围0~255。 新建一个size为256的int数组 分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray 遍历word1CharArray，将字符出现的字符保存在int数组中 遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false 代码 /** * 判断两个单词是否是变形词 */ public class CheckDeformationWord { public static
+		静态网站比较适用于博客、宣传、文档类的站点，静态站点比动态站点占用资源更小，访问速度更快。当前最流行的Wordpress博客系统功能很强大，插件也很丰富， 但是整体感觉很臃肿，占用资源也比较大，同时还需要部署一个MySQL数据库，国内有一些个人或者小团队研发了一些开源的轻量级博客，感觉都很一般，根本没什么吸引力。 越来越多的人更喜欢使用静态博客，甚至一些企业同样采用布局静态官网，因为静态网页可以托管在github等一些平台上，这种方式经常是一些开源项目的官方网站主要布局。 kubernetes，https://kubernetes.io prometheus，h
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/arithmetic/check_deformation_word/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/post/hugo_blog/">Read more…</a>
 	</div>
 </article>
 </main>
