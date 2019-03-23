@@ -8,11 +8,6 @@
   </url>
   
   <url>
-    <loc>https://www.kingfsen.cn/post/binary_tree_base/</loc>
-    <lastmod>2019-03-23T09:55:45+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.kingfsen.cn/post/hugo_blog/</loc>
     <lastmod>2019-03-19T20:05:49+08:00</lastmod>
   </url>
@@ -200,7 +195,7 @@
   
   <url>
     <loc>https://www.kingfsen.cn/post/</loc>
-    <lastmod>2019-03-23T09:55:45+08:00</lastmod>
+    <lastmod>2019-03-19T20:05:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -261,12 +256,6 @@
   <url>
     <loc>https://www.kingfsen.cn/tags/%E6%95%B0%E7%BB%84/</loc>
     <lastmod>2019-03-13T20:41:18+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kingfsen.cn/tags/%E6%A0%91/</loc>
-    <lastmod>2019-03-23T09:55:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
