@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Hugo构建静态博客 - 码无止境</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta name="generator" content="Hugo 0.54.0" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="码无止境" rel="home">
+				<div class="logo__title">码无止境</div>
+				<div class="logo__tagline">每天撸一点，总有一天成为撸大师</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">关于我</a>
+		</li>
+		
+		<li class="menu__item">
+			<a class="menu__link" href="/arithmetic/">基础算法</a>
+		</li>
+		
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">技术博客</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Hugo构建静态博客</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-03-19T20:05:49">2019-03-19</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/hugo" rel="category">hugo</a></span>
+</div>
+</div>
+		</header>
+
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p>静态网站比较适用于博客、宣传、文档类的站点，静态站点比动态站点占用资源更小，访问速度更快。当前最流行的Wordpress博客系统功能很强大，插件也很丰富，
+但是整体感觉很臃肿，占用资源也比较大，同时还需要部署一个MySQL数据库，国内有一些个人或者小团队研发了一些开源的轻量级博客，感觉都很一般，根本没什么吸引力。
+越来越多的人更喜欢使用静态博客，甚至一些企业同样采用布局静态官网，因为静态网页可以托管在github等一些平台上，这种方式经常是一些开源项目的官方网站主要布局。</p>
+
+<blockquote>
+<ul>
+<li>kubernetes，<code>https://kubernetes.io</code></li>
+<li>prometheus，<code>https://prometheus.io</code></li>
+<li>hogo，<code>https://gohugo.io</code></li>
+</ul>
+</blockquote>
+
+<p>静态网站逐渐流行的原因在于，涌现出很多生成静态网站的框架，比如hexo、jekyll、hugo等，这些框架有成熟的社区生态，社区中有很多人无私奉献的主题、插件等。
+静态网站生成框架一般都支持Markdown渲染，Markdown是最简洁最容易上手的轻量型标记语言，博主可以快速利用Markdown编写具备统一格式的文章。当前博客则是采用
+hugo框架生成的，主题直接从github免费获取。这里暂不比较hexo、jekyll、hugo优缺点，只介绍如何使用hugo构建独特风格的博客网站，hugo的中文资料网上很难寻找，
+想完全玩转hugo，还是需要直接在官方<code>https://gohugo.io</code>通读它的英文文档，文档写的很全面。</p>
+
+<p>hugo是一个快而灵活的静态HTML和CSS的生成器，它使用Go语言编写，集成Markdown的引擎对.md文件进行渲染。hugo与前端框架Vue.js的渲染思路不谋而合，了解Vue.js的都知道，
+每个html文件中都可以定义元数据，然后绑定到当前HTML的某个Element上进行渲染，只不过在hugo中定义的数据称为Front Matter，在每个md文件开头通过特定格式可以预定义一些元数据，支持多种格式。</p>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/hugo/" rel="tag">hugo</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="孙金福 avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About 孙金福</span>
+	</div>
+	<div class="authorbox__description">
+		一个优秀的高级研发工程师，擅长使用Java、Go语言。
+	</div>
+</div>
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/post/helm_harbor/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Helm Harbor</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next">
+		<a class="post-nav__link" href="/post/binary_tree_base/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">二叉树</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			
+			
+						
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2019 码无止境.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script></body>
+</html>

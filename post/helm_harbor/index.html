@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Helm Harbor - 码无止境</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta name="generator" content="Hugo 0.54.0" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="码无止境" rel="home">
+				<div class="logo__title">码无止境</div>
+				<div class="logo__tagline">每天撸一点，总有一天成为撸大师</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">关于我</a>
+		</li>
+		
+		<li class="menu__item">
+			<a class="menu__link" href="/arithmetic/">基础算法</a>
+		</li>
+		
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">技术博客</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Helm Harbor</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-03-19T10:02:41">2019-03-19</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/harbor" rel="category">harbor</a>, <a class="meta__link" href="/categories/helm" rel="category">helm</a></span>
+</div>
+</div>
+		</header>
+
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#chartmuseum">chartmuseum</a></li>
+<li><a href="#harbor">harbor</a></li>
+<li><a href="#helm">helm</a>
+<ul>
+<li><a href="#helm-install">helm install</a></li>
+<li><a href="#helm-repo">helm repo</a></li>
+<li><a href="#helm-fetch">helm fetch</a></li>
+<li><a href="#helm-push">helm push</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			
+
+<h3 id="chartmuseum">chartmuseum</h3>
+
+<p>chartmuseum是helm chart的仓库，它的存储层支持FileSystem以及各大云厂商的对象存储中间件，
+默认支持阿里云的OSS、百度的BOS、Amazon S3、Microsoft Azure、Oracle、Openstack、Google等，
+其他厂商需自行实现Storage的Backend接口方法，同时增加了缓存redis，提升系统处理效率，项目地址<code>https://github.com/helm/chartmuseum</code> 。</p>
+
+<p>chartmuseum支持多租户的实现，它通过一个index-cache.yaml索引文件来维护租户上传记录，类似docker镜像中的manifest文件概念。</p>
+
+<pre><code>--depth=0:
+    Path: &quot;/index.yaml&quot;
+    Repo: &quot;&quot;
+--depth=1:
+    Path: &quot;/myrepo/index.yaml&quot;
+    Repo: &quot;myrepo&quot;
+--depth=2:
+    Path: &quot;/myorg/myrepo/index.yaml&quot;
+    Repo: &quot;myorg/myrepo&quot;
+--depth=3:
+    Path: &quot;/myorg/myteam/myrepo/index.yaml&quot;
+    Repo: &quot;myorg/myteam/myrepo&quot;
+</code></pre>
+
+<p>对于harbor来说，在harbor中项目名称是全局唯一，因此harbor集成helm的时候depth设置为1即可。index.yaml记录了当前repo中上传的chart清单，
+chartmuseum在请求index相关接口时会维护清单内容是否与系统中真实文件列表的一致性，下面这个index-cache.yaml文件表示当前repo下有两个
+charts分别为etcd、postgresql。</p>
+
+<pre><code>apiVersion: v1
+entries:
+  etcd:
+  - appVersion: 3.3.11
+    created: &quot;2019-03-13T09:58:43.260050243Z&quot;
+    description: etcd is a distributed key value store that provides a reliable way
+      to store data across a cluster of machines
+    digest: b98c70e5a384a3b5619c978fe3f6d9d386fcb09dea3b831a9802d7323ccff2b2
+    engine: gotpl
+    home: https://coreos.com/etcd/
+    icon: https://bitnami.com/assets/stacks/etcd/img/etcd-stack-110x117.png
+    keywords:
+    - etcd
+    - cluster
+    - database
+    - cache
+    - key-value
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: etcd
+    sources:
+    - https://github.com/bitnami/bitnami-docker-etcd
+    urls:
+    - charts/etcd-1.4.3.tgz
+    version: 1.4.3
+  postgresql:
+  - appVersion: 9.6.2
+    created: &quot;2019-03-13T09:50:52.162006382Z&quot;
+    description: Object-relational database management system (ORDBMS) with an emphasis
+      on extensibility and on standards-compliance.
+    digest: bf9f5b811037706b1a928a94f6d1fa40cf73b2e3149660810dee929554bde3de
+    engine: gotpl
+    home: https://www.postgresql.org/
+    icon: https://www.postgresql.org/media/img/about/press/elephant.png
+    keywords:
+    - postgresql
+    - postgres
+    - database
+    - sql
+    name: postgresql
+    sources:
+    - https://github.com/kubernetes/charts
+    - https://github.com/docker-library/postgres
+    urls:
+    - charts/postgresql-0.19.0.tgz
+    version: 0.19.0
+generated: &quot;2019-03-13T09:58:43Z&quot;
+</code></pre>
+
+<p>chartmuseum对外提供的http api也就10个，支持BasicAuth、BeareAuth等鉴权认证方式以及https安全协议。</p>
+
+<ul>
+<li>GET /，欢迎页</li>
+<li>GET /health ， 健康检查</li>
+<li>GET /:repo/index.yaml，获取index.yaml文件</li>
+<li>GET /:repo/charts/:filename，获取指定的chart包，比如/kingfsen1026/charts/etcd-1.4.3.tgz</li>
+<li>GET /api/:repo/charts 获取repo下所有的charts包基本描述信息</li>
+<li>GET /api/:repo/charts/:name，获取repo下指定名字的chart包基本描述信息</li>
+<li>GET /api/:repo/charts/:name/:version，获取repo下指定名字和版本的chart包基本描述信息</li>
+<li>POST /api/:repo/charts，上传charts包</li>
+<li>POST /api/:repo/prov，上传chart包对应的prov文件</li>
+<li>DELETE /api/:repo/charts/:name/:version，删除repo下指定名字和版本的chart包</li>
+</ul>
+
+<p>chartmuseum中有两个重要的参数就是AllowOverwrite、AllowForceOverwrite，会出现多次更新charts包的时候，务必将这两个参数设置为true。</p>
+
+<h3 id="harbor">harbor</h3>
+
+<p>harbor从1.6.0开始已经支持chartmuseum功能了，harbor中把URL中带有chartrepo的请求都交给后面的chartmuseum服务处理，harbor中chartmuseum的服务endpoint
+为<code>http://chartmuseum:9999/</code>。对于普通的请求，harbor直接调用chartmuseum的http接口完成，对应文件上传harbor则是完全将请求转发给chartmuseum。</p>
+
+<pre><code>4733260bc6bc        goharbor/nginx-photon:v1.7.0                &quot;nginx -g 'daemon of…&quot;   11 days ago         Up 11 days (healthy)   0.0.0.0:80-&gt;80/tcp, 0.0.0.0:443-&gt;443/tcp, 0.0.0.0:4443-&gt;4443/tcp   nginx
+8cf0b84192ba        goharbor/harbor-portal:v1.7.0               &quot;nginx -g 'daemon of…&quot;   11 days ago         Up 11 days (healthy)   80/tcp                                                             harbor-portal
+3f6f8057af65        goharbor/harbor-jobservice:v1.7.0           &quot;/harbor/start.sh&quot;       11 days ago         Up 11 days                                                                                harbor-jobservice
+75e5cc3d7465        goharbor/harbor-core:v1.7.0                 &quot;/harbor/start.sh&quot;       11 days ago         Up 11 days (healthy)                                                                      harbor-core
+0f1693dfdcc7        goharbor/chartmuseum-photon:v0.7.1-v1.7.0   &quot;/docker-entrypoint.…&quot;   11 days ago         Up 11 days (healthy)   9999/tcp                                                           chartmuseum
+5bd6d1c87735        goharbor/harbor-registryctl:v1.7.0          &quot;/harbor/start.sh&quot;       11 days ago         Up 11 days (healthy)                                                                      registryctl
+5f4f28c15fb2        goharbor/redis-photon:v1.7.0                &quot;docker-entrypoint.s…&quot;   11 days ago         Up 11 days             6379/tcp                                                           redis
+d56aec03b170        goharbor/harbor-db:v1.7.0                   &quot;/entrypoint.sh post…&quot;   11 days ago         Up 11 days (healthy)   5432/tcp                                                           harbor-db
+ad5dc6d6eede        goharbor/registry-photon:v2.6.2-v1.7.0      &quot;/entrypoint.sh /etc…&quot;   11 days ago         Up 11 days (healthy)   5000/tcp                                                           registry
+a29256d185c5        goharbor/harbor-adminserver:v1.7.0          &quot;/harbor/start.sh&quot;       11 days ago         Up 11 days (healthy)                                                                      harbor-adminserver
+ce307d6dc619        goharbor/harbor-log:v1.7.0                  &quot;/bin/sh -c /usr/loc…&quot;   11 days ago         Up 11 days (healthy)   127.0.0.1:1514-&gt;10514/tcp                                          harbor-log
+9a8acfda148b        goharbor/redis-photon:v1.7.0                &quot;docker-entrypoint.s…&quot;   2 weeks ago         Up 2 weeks             0.0.0.0:6379-&gt;6379/tcp                                             my-redis
+</code></pre>
+
+<h3 id="helm">helm</h3>
+
+<p>helm包括两部分，Helm Client(Helm) 以及Helm Server(Tiller)。安装的方式很多种，可以直接下载二进制可执行程序安装。
+进入 <a href="https://github.com/helm/helm/releases">https://github.com/helm/helm/releases</a> ，根据系统下载不同的版本，然后解压进行安装。</p>
+
+<h4 id="helm-install">helm install</h4>
+
+<p><code>Linux</code></p>
+
+<p>由于国内网络环境，不翻墙无法获取tiller镜像gcr.io/kubernetes-helm/tiller:v2.13.0，需事先下载好该镜像，然后tag之后存入本地的harbor仓库中。</p>
+
+<pre><code>docker tag gcr.io/kubernetes-helm/tiller:v2.13.0 hub.test.company.com/library/tiller:v2.13.0 
+docker push hub.test.company.com/library/tiller:v2.13.0 
+</code></pre>
+
+<blockquote>
+<ul>
+<li>tar -zxvf helm-v2.0.0-linux-amd64.tgz</li>
+<li>mv linux-amd64/helm /usr/local/bin/helm</li>
+<li>helm init &ndash;tiller-namespace kube-system &ndash;tiller-image=hub.test.company.com/library/tiller:v2.13.0</li>
+<li>kubectl get pods -n kube-system</li>
+<li>helm version</li>
+</ul>
+</blockquote>
+
+<p><code>Windows</code></p>
+
+<p>windows一般用于本地开发调试，其helm服务端tiller在本地运行，并非运行在kubernetes中，它通过配置连接到远程的kubernetes。
+由于windows的cmd操作不便，这里以git bash进行操作，以本机为例。</p>
+
+<ul>
+<li>解压安装包之后放在d:/tools/helm，该目录下有helm.exe以及tiller.exe</li>
+<li>将kubernetes的服务$HOME下的.kube/config文件copy至本机的$HOME下</li>
+
+<li><p>打开git bash，启动tiller</p>
+
+<pre><code>$ tiller
+[main] 2019/03/19 14:18:21 Starting Tiller v2.13.0 (tls=false)
+[main] 2019/03/19 14:18:21 GRPC listening on :44134
+[main] 2019/03/19 14:18:21 Probes listening on :44135
+[main] 2019/03/19 14:18:21 Storage driver is ConfigMap
+[main] 2019/03/19 14:18:21 Max history per release is 0
+
+</code></pre>
+
+<p>从日志看tiller服务已经成功启动，端口44134，接着启动helm client。</p></li>
+
+<li><p>创建系统环境变量HELM_HOST=localhost:44134，告诉helm client对应的tiller服务地址。</p></li>
+
+<li><p>以管理员身份再启动一个bash窗口，执行helm init，如果未设置$HOME_HOST，helm init &ndash;host=localhost:44134</p>
+
+<pre><code>$ helm init
+Creating C:\Users\SUNJINFU\.helm
+Creating C:\Users\SUNJINFU\.helm\repository
+Creating C:\Users\SUNJINFU\.helm\repository\cache
+Creating C:\Users\SUNJINFU\.helm\repository\local
+Creating C:\Users\SUNJINFU\.helm\plugins
+Creating C:\Users\SUNJINFU\.helm\starters
+Creating C:\Users\SUNJINFU\.helm\cache\archive
+Creating C:\Users\SUNJINFU\.helm\repository\repositories.yaml
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com
+Adding local repo with URL: http://127.0.0.1:8879/charts
+$HELM_HOME has been configured at C:\Users\SUNJINFU\.helm.
+Warning: Tiller is already installed in the cluster.
+(Use --client-only to suppress this message, or --upgrade to upgrade Tiller to the current version.)
+Happy Helming!
+
+</code></pre>
+
+<p>helm init的时候默认添加<code>https://kubernetes-charts.storage.googleapis.com</code> 作为stable仓库，如果本地网络不通，则无法获取该仓库的
+index.yaml文件，则helm初始化失败，解决办法是带上flag参数，helm init &ndash;client-only。安装完毕之后执行helm version查看版本信息。</p>
+
+<pre><code>$ helm version
+Client: &amp;version.Version{SemVer:&quot;v2.13.0&quot;, GitCommit:&quot;79d07943b03aea2b76c12644b4b54733bc5958d6&quot;, GitTreeState:&quot;clean&quot;}
+Server: &amp;version.Version{SemVer:&quot;v2.13.0&quot;, GitCommit:&quot;79d07943b03aea2b76c12644b4b54733bc5958d6&quot;, GitTreeState:&quot;clean&quot;}
+
+</code></pre></li>
+</ul>
+
+<h4 id="helm-repo">helm repo</h4>
+
+<p>现在我们的harbor服务<code>https://hub.test.company.com</code> 中的账户admin/Harbor12345有一个私有项目kingfsen1026，用户需要把charts包上传到这个项目下。</p>
+
+<p>添加仓库</p>
+
+<pre><code>$ helm repo add hub https://hub.test.company.com/chartrepo/kingfsen1026 --username admin --password=Harbor12345
+&quot;hub&quot; has been added to your repositories
+</code></pre>
+
+<p>路径中的chartrepo是固定的，kingfsen1026是项目名称，它是动态的。查看$HOME/.helm/repository/repositores.yaml</p>
+
+<pre><code>apiVersion: v1
+generated: 2019-03-19T14:24:05.322548+08:00
+repositories:
+- caFile: &quot;&quot;
+  cache: C:\Users\SUNJINFU\.helm\repository\cache\stable-index.yaml
+  certFile: &quot;&quot;
+  keyFile: &quot;&quot;
+  name: stable
+  password: &quot;&quot;
+  url: https://kubernetes-charts.storage.googleapis.com
+  username: &quot;&quot;
+- caFile: &quot;&quot;
+  cache: C:\Users\SUNJINFU\.helm\repository\cache\local-index.yaml
+  certFile: &quot;&quot;
+  keyFile: &quot;&quot;
+  name: local
+  password: &quot;&quot;
+  url: http://127.0.0.1:8879/charts
+  username: &quot;&quot;
+- caFile: &quot;&quot;
+  cache: C:\Users\SUNJINFU\.helm\repository\cache\hub-index.yaml
+  certFile: &quot;&quot;
+  keyFile: &quot;&quot;
+  name: hub
+  password: Harbor12345
+  url: https://hub.test.company.com/chartrepo/kingfsen1026
+  username: admin
+</code></pre>
+
+<p>同时helm在$HOME/.helm/repository/cache会生成hub-index.yaml文件，该文件记录了用户项目kingfsen1026下全部的chart包描述信息。
+当执行helm search xx的时候则直接搜索当前目录下所有index.yaml文件中的keywords关键字。
+helm在请求url的时候会把username、password以Basic Auth塞在http请求头中，
+harbor收到请求之后，进行授权校验，授权成功之后再把请求转给chartmuseum处理，harbor代理了chartmuseum的授权管理。</p>
+
+<p>helm repo相关操作</p>
+
+<blockquote>
+<ul>
+<li>helm repo add hub xx， 添加repository</li>
+<li>helm repo remove hub， 删除repository</li>
+<li>helm repo update， 更新所有repo的index.yaml</li>
+<li>helm repo list，列出所有repository</li>
+<li>helm repo index，在包含chart package的目录下生成index.yaml</li>
+</ul>
+</blockquote>
+
+<h4 id="helm-fetch">helm fetch</h4>
+
+<p>拉取chart</p>
+
+<pre><code>$helm fetch hub/etcd
+</code></pre>
+
+<p>拉取指定版本chart</p>
+
+<pre><code>$helm fetch hub/etcd --version 1.4.3
+</code></pre>
+
+<p>最终下载的文件为etcd-1.4.3.tgz，如果事先没有执行helm repo add hub操作，可以以完整路径拉取chart包。</p>
+
+<pre><code>helm fetch https://hub.test.company.com/chartrepo/kingfsen1026/charts/etcd-1.4.3.tgz --username admin --password Harbor12345
+</code></pre>
+
+<h4 id="helm-push">helm push</h4>
+
+<p>helm push并不在helm的项目，官方以plugin的形式提供helm push，插件的安装流程阅读文章 <a href="/post/helm_plugin_install">Helm插件安装原理</a>，
+helm-push官方项目地址<code>https://github.com/chartmuseum/helm-push</code>。</p>
+
+<p>helm plugin相关命令</p>
+
+<blockquote>
+<ul>
+<li>helm plugin install xx， 安装插件</li>
+<li>helm plugin remove xx，卸载插件</li>
+<li>helm plugin list，列举插件</li>
+<li>helm plugin update xx，更新插件</li>
+</ul>
+</blockquote>
+
+<p>安装helm push</p>
+
+<pre><code>$helm plugin install https://github.com/chartmuseum/helm-push
+Downloading and installing helm-push v0.7.1 ...
+https://github.com/chartmuseum/helm-push/releases/download/v0.7.1/helm-push_0.7.1_windows_amd64.tar.gz
+Installed plugin: push
+</code></pre>
+
+<p>安装成功之后，通过helm help即可看到helm push命令，同时在$HOME/.helm/plugins目录下即可看到插件对应的目录。helm push这个插件
+是官方提供的，功能比较丰富。它支持上传.tgz以及文件夹方式上传，它首先会校验tgz文件或者文件夹中的Chart.yaml以及values.yaml是否合法等，
+校验成功之后重新生成一个tgz文件上传到chartmuseum。</p>
+
+<p>推送etcd-1.4.3.tgz到hub</p>
+
+<pre><code>$ helm push etcd-1.4.3.tgz hub
+Pushing etcd-1.4.3.tgz to hub...
+Done.
+</code></pre>
+
+<p>helm push首先会解压该文件，然后抽取其中的文件，验证是否满足chart的基本结构，
+然后重新按照标准在临时目录生成一个全新的name-version.tgz的包，推送成功之后删除临时目录。</p>
+
+<p>推送文件夹</p>
+
+<pre><code>$helm push ./etcd hub
+</code></pre>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/helm/" rel="tag">helm</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/harbor/" rel="tag">harbor</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/chartmuseum/" rel="tag">chartmuseum</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+<aside class="sidebar">
+<h4>See Also</h4>
+<div class="widget__content">
+		<ul class="widget__list">
+	
+	<li><a href="/post/docker_login_process/">Docker Login执行流程与原理</a></li>
+	
+	<li><a href="/post/helm_plugin_install/">Helm插件安装原理详解</a></li>
+	
+	<li><a href="/post/harbor_image_scan/">Harbor仓库镜像扫描原理</a></li>
+	
+	<li><a href="/post/deploy_harbor_service/">部署企业级Harbor镜像仓库服务</a></li>
+	
+</ul>
+</div>
+<br/>
+</aside>
+
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="孙金福 avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About 孙金福</span>
+	</div>
+	<div class="authorbox__description">
+		一个优秀的高级研发工程师，擅长使用Java、Go语言。
+	</div>
+</div>
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/post/docker_login_process/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Docker Login执行流程与原理</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next">
+		<a class="post-nav__link" href="/post/hugo_blog/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Hugo构建静态博客</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			
+			
+						
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2019 码无止境.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script></body>
+</html>
