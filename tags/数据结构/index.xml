@@ -6,10 +6,19 @@
     <description>Recent content in 数据结构 on 码无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Mar 2019 09:55:45 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 24 Mar 2019 16:01:34 +0800</lastBuildDate>
     
 	<atom:link href="https://www.kingfsen.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>递归与非递归遍历二叉树</title>
+      <link>https://www.kingfsen.cn/arithmetic/tree_traverse/</link>
+      <pubDate>Sun, 24 Mar 2019 16:01:34 +0800</pubDate>
+      
+      <guid>https://www.kingfsen.cn/arithmetic/tree_traverse/</guid>
+      <description>二叉树的遍历有三种方法，分别是先序、中序、后序，先序遍历顺序为根、左、右，中序遍历顺序为左、根、右，后序遍历顺序为左、右、根。 遍历二叉树的方式又包括递归、非递归两种方式。 先序遍历结果：50、30、20、40、60 中序遍历结果：20、30、40、50、60 后序遍历结果：20、40、30、60、50 树节点Node对象结构 class Node { public Node left; public Node right; public int data; public Node() { } public Node(int data) { this.data = data; } public boolean equals(Node node) { if (node == null) { return false; } return node.data == this.data; } } 递归 递归遍历二叉树代码实现相对比较简单 先序遍历 public void preOrder(Node root) { if (root == null) { return; } System.out.println(root.data); preOrder(root.left); preOrder(root.right); } 中序遍历 public void inOrder(Node root) { if (root == null) { return; } inOrder(root.left); System.out.println(root.data); inOrder(root.right); } 后序遍历 public void postOrder(Node root) { if (root == null) { return; } postOrder(root.left); postOrder(root.right); System.out.println(root.data);</description>
+    </item>
     
     <item>
       <title>二叉树</title>
