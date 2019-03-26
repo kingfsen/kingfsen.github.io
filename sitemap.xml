@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.kingfsen.cn/post/futuretask/</loc>
+    <lastmod>2019-03-25T16:31:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.kingfsen.cn/arithmetic/tree_traverse/</loc>
+    <lastmod>2019-03-24T16:01:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.kingfsen.cn/arithmetic/binary_tree_base/</loc>
+    <lastmod>2019-03-23T09:55:45+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.kingfsen.cn/post/hugo_blog/</loc>
     <lastmod>2019-03-19T20:05:49+08:00</lastmod>
   </url>
@@ -95,7 +110,7 @@
   
   <url>
     <loc>https://www.kingfsen.cn/arithmetic/</loc>
-    <lastmod>2019-03-16T19:00:11+08:00</lastmod>
+    <lastmod>2019-03-24T16:01:34+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -171,6 +186,18 @@
   </url>
   
   <url>
+    <loc>https://www.kingfsen.cn/categories/java/</loc>
+    <lastmod>2019-03-25T16:31:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kingfsen.cn/tags/java%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2019-03-25T16:31:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kingfsen.cn/tags/kubernetes/</loc>
     <lastmod>2019-03-15T09:48:52+08:00</lastmod>
     <priority>0</priority>
@@ -190,7 +217,7 @@
   
   <url>
     <loc>https://www.kingfsen.cn/post/</loc>
-    <lastmod>2019-03-19T20:05:49+08:00</lastmod>
+    <lastmod>2019-03-25T16:31:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -219,6 +246,12 @@
   </url>
   
   <url>
+    <loc>https://www.kingfsen.cn/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
+    <lastmod>2019-03-24T16:01:34+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kingfsen.cn/tags/%E5%8F%98%E5%BD%A2%E8%AF%8D/</loc>
     <lastmod>2019-03-16T11:29:21+08:00</lastmod>
     <priority>0</priority>
@@ -237,6 +270,12 @@
   </url>
   
   <url>
+    <loc>https://www.kingfsen.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2019-03-24T16:01:34+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kingfsen.cn/tags/%E6%95%B0%E7%BB%84/</loc>
     <lastmod>2019-03-13T20:41:18+08:00</lastmod>
     <priority>0</priority>
@@ -250,7 +289,7 @@
   
   <url>
     <loc>https://www.kingfsen.cn/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2019-03-16T19:00:11+08:00</lastmod>
+    <lastmod>2019-03-24T16:01:34+08:00</lastmod>
     <priority>0</priority>
   </url>
   

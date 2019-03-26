@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>递归与非递归遍历二叉树 - 码无止境</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta name="generator" content="Hugo 0.54.0" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="码无止境" rel="home">
+				<div class="logo__title">码无止境</div>
+				<div class="logo__tagline">每天撸一点，总有一天成为撸大师</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">关于我</a>
+		</li>
+		
+		<li class="menu__item">
+			<a class="menu__link" href="/arithmetic/">基础算法</a>
+		</li>
+		
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">技术博客</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">递归与非递归遍历二叉树</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-03-24T16:01:34">2019-03-24</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/%e7%ae%97%e6%b3%95" rel="category">算法</a></span>
+</div>
+</div>
+		</header>
+
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#递归">递归</a></li>
+<li><a href="#非递归">非递归</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			
+
+<p>二叉树的遍历有三种方法，分别是先序、中序、后序，先序遍历顺序为根、左、右，中序遍历顺序为左、根、右，后序遍历顺序为左、右、根。
+遍历二叉树的方式又包括递归、非递归两种方式。</p>
+
+<p><img src="https://raw.githubusercontent.com/kingfsen/blog-images/master/blog/tree_traverse/tree.png" alt="tree" /></p>
+
+<ul>
+<li>先序遍历结果：50、30、20、40、60</li>
+<li>中序遍历结果：20、30、40、50、60</li>
+<li>后序遍历结果：20、40、30、60、50</li>
+</ul>
+
+<p>树节点Node对象结构</p>
+
+<pre><code>class Node {
+    public Node left;
+    public Node right;
+    public int data;
+
+    public Node() {
+
+    }
+
+    public Node(int data) {
+        this.data = data;
+    }
+
+    public boolean equals(Node node) {
+        if (node == null) {
+            return false;
+        }
+        return node.data == this.data;
+    }
+}
+</code></pre>
+
+<h3 id="递归">递归</h3>
+
+<p>递归遍历二叉树代码实现相对比较简单</p>
+
+<ul>
+<li><p>先序遍历</p>
+
+<pre><code>public void preOrder(Node root) {
+        if (root == null) {
+            return;
+        }
+        System.out.println(root.data);
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+</code></pre></li>
+
+<li><p>中序遍历</p>
+
+<pre><code>public void inOrder(Node root) {
+    if (root == null) {
+        return;
+    }
+    inOrder(root.left);
+    System.out.println(root.data);
+    inOrder(root.right);
+}
+</code></pre></li>
+
+<li><p>后序遍历</p>
+
+<pre><code>public void postOrder(Node root) {
+    if (root == null) {
+        return;
+    }
+    postOrder(root.left);
+    postOrder(root.right);
+    System.out.println(root.data);
+}
+</code></pre></li>
+</ul>
+
+<h3 id="非递归">非递归</h3>
+
+<p>用递归方法解决的问题都能用非递归的方法去实现，因为递归方法无非是利用了系统函数栈来保存中间结果信息，
+非递归方式则完全由我们自己选择数据结构来代替函数栈，实现相同功能。</p>
+
+<ul>
+<li><p>先序遍历</p>
+
+<p>创建一个Stack来保存节点，首先把根节点压入栈中，循环判断Stack是否为空，不为空，弹出节点，然后把节点的右子节点压入栈中，接着把节点的左子节点压入栈中。</p>
+
+<ul>
+<li>首先将节点50入栈</li>
+<li>弹出栈中节点50，打印其值</li>
+<li>节点50右子节点不为空，将右子节点压入栈中</li>
+<li>节点50左子节点不为空，将左子节点压入栈中</li>
+<li>弹出栈中节点，依照第二步逻辑循环处理节点
+<br /></li>
+</ul>
+
+<pre><code>public void preOrderUnRecur(Node root) {
+    if (root == null) {
+        return;
+    }
+    Stack&lt;Node&gt; stack = new Stack&lt;&gt;();
+    stack.add(root);
+    while (!stack.empty()) {
+        Node node = stack.pop();
+        System.out.println(node.data);
+        if (node.right != null) {
+            stack.push(node.right);
+        }
+        if (node.left != null) {
+            stack.push(node.left);
+        }
+    }
+}
+</code></pre></li>
+
+<li><p>中序遍历</p>
+
+<p>创建一个Stack来保存节点，先依次将节点的左子节点压入栈中，当左子节点为空时，弹出栈中节点，将节点的右子节点压入栈中，循环处理。</p>
+
+<ul>
+<li>将节点50、30、20依次入栈</li>
+<li>节点20无左字节点，则弹出节点20，打印其值</li>
+<li>将root设置为20节点的右子节点</li>
+<li>20右子节点为空，继续弹出节点30</li>
+<li>将节点30的右子节点作为root，依照上面的逻辑循环处理
+<br /></li>
+</ul>
+
+<pre><code>public void inOrderUnRecur(Node root) {
+    if (root == null) {
+        return;
+    }
+    Stack&lt;Node&gt; stack = new Stack&lt;&gt;();
+    while (root != null || !stack.empty()) {
+        if (root != null) {
+            stack.push(root);
+            root = root.left;
+        } else {
+            Node node = stack.pop();
+            System.out.println(node.data);
+            root = root.right;
+        }
+    }
+}
+</code></pre></li>
+
+<li><p>后序遍历</p>
+
+<p>方式一：申请两个栈来保存节点</p>
+
+<pre><code>public void postOrderUnRecur(Node root) {
+    if (root == null) {
+        return;
+    }
+    Stack&lt;Node&gt; s1 = new Stack&lt;&gt;();
+    Stack&lt;Node&gt; s2 = new Stack&lt;&gt;();
+    s1.push(root);
+    while (!s1.empty()) {
+        root = s1.pop();
+        if (root.left != null) {
+            s1.push(root.left);
+        }
+        if (root.right != null) {
+            s1.push(root.right);
+        }
+    }
+    while (!s2.empty()) {
+        System.out.println(s2.pop().data);
+    }
+}
+</code></pre>
+
+<p>方式二：只申请一个栈保存节点</p>
+
+<pre><code>public void postOrderUnRecurByOneStack(Node root) {
+    if (root == null) {
+        return;
+    }
+    Stack&lt;Node&gt; stack = new Stack&lt;&gt;();
+    stack.push(root);
+    Node node = null;
+    while (!stack.empty()) {
+        node = stack.peek();
+        if (node.left != null &amp;&amp; root != node.left &amp;&amp; root != node.right) {
+            stack.push(node.left);
+        } else if (node.right != null &amp;&amp; root != node.right) {
+            stack.push(node.right);
+        } else {
+            System.out.println(stack.pop());
+            root = node;
+        }
+    }
+}
+</code></pre></li>
+</ul>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+<aside class="sidebar">
+<h4>See Also</h4>
+<div class="widget__content">
+		<ul class="widget__list">
+	
+	<li><a href="/arithmetic/binary_tree_base/">二叉树</a></li>
+	
+</ul>
+</div>
+<br/>
+</aside>
+
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="孙金福 avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About 孙金福</span>
+	</div>
+	<div class="authorbox__description">
+		一个没有天赋但很勤奋的开发工程师
+	</div>
+</div>
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/arithmetic/binary_tree_base/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">二叉树</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			
+			
+						
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2019 码无止境.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script></body>
+</html>
