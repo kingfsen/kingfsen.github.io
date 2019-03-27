@@ -132,13 +132,13 @@
   </url>
   
   <url>
-    <loc>https://www.kingfsen.cn/tags/docker/</loc>
+    <loc>https://www.kingfsen.cn/categories/docker/</loc>
     <lastmod>2019-03-16T08:54:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.kingfsen.cn/categories/docker/</loc>
+    <loc>https://www.kingfsen.cn/tags/docker/</loc>
     <lastmod>2019-03-16T08:54:16+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -150,19 +150,13 @@
   </url>
   
   <url>
-    <loc>https://www.kingfsen.cn/tags/harbor/</loc>
-    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kingfsen.cn/categories/harbor/</loc>
     <lastmod>2019-03-19T10:02:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.kingfsen.cn/tags/helm/</loc>
+    <loc>https://www.kingfsen.cn/tags/harbor/</loc>
     <lastmod>2019-03-19T10:02:41+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -174,13 +168,19 @@
   </url>
   
   <url>
-    <loc>https://www.kingfsen.cn/tags/hugo/</loc>
-    <lastmod>2019-03-19T20:05:49+08:00</lastmod>
+    <loc>https://www.kingfsen.cn/tags/helm/</loc>
+    <lastmod>2019-03-19T10:02:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.kingfsen.cn/categories/hugo/</loc>
+    <lastmod>2019-03-19T20:05:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kingfsen.cn/tags/hugo/</loc>
     <lastmod>2019-03-19T20:05:49+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -222,13 +222,13 @@
   </url>
   
   <url>
-    <loc>https://www.kingfsen.cn/tags/prometheus/</loc>
+    <loc>https://www.kingfsen.cn/categories/prometheus/</loc>
     <lastmod>2019-03-15T09:48:52+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.kingfsen.cn/categories/prometheus/</loc>
+    <loc>https://www.kingfsen.cn/tags/prometheus/</loc>
     <lastmod>2019-03-15T09:48:52+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -282,14 +282,14 @@
   </url>
   
   <url>
-    <loc>https://www.kingfsen.cn/tags/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2019-03-16T19:00:11+08:00</lastmod>
+    <loc>https://www.kingfsen.cn/categories/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2019-03-24T16:01:34+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.kingfsen.cn/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2019-03-24T16:01:34+08:00</lastmod>
+    <loc>https://www.kingfsen.cn/tags/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2019-03-16T19:00:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
