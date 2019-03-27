@@ -20,8 +20,6 @@
 	
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 
 </head>
 <body class="body">
@@ -116,19 +114,10 @@
 	</div>
 </div>
 
-<div id="comments"></div>
-<script>
-var gitment = new Gitment({
-  owner: 'kingfsen',              
-  repo: 'kingfsen.github.io',                 
-  oauth: {
-    client_id: 'e9a184bd0907ef170cef',          
-    client_secret: '177aa10a16adf51879648010756f9c4ab1e46878',  
-  },
-})
-gitment.render('comments')
+<script data-isso="https://www.kingfsen.cn/isso/"
+        src="https://www.kingfsen.cn/isso/js/embed.min.js"></script>
 
-</script>
+<section id="isso-thread"></section>
 
 			</div>
 			
