@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mysql on 码无止境</title>
-    <link>https://www.kingfsen.cn/tags/mysql/</link>
-    <description>Recent content in Mysql on 码无止境</description>
+    <title>Mysql on 君无止境</title>
+    <link>https://www.youendless.com/tags/mysql/</link>
+    <description>Recent content in Mysql on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 13 Mar 2019 10:28:01 +0800</lastBuildDate>
     
-	<atom:link href="https://www.kingfsen.cn/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.youendless.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>基于Docker快速搭建wordpress博客</title>
-      <link>https://www.kingfsen.cn/post/docker_deploy_wordpress/</link>
+      <link>https://www.youendless.com/post/docker_deploy_wordpress/</link>
       <pubDate>Wed, 13 Mar 2019 10:28:01 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/docker_deploy_wordpress/</guid>
+      <guid>https://www.youendless.com/post/docker_deploy_wordpress/</guid>
       <description>wordpress数据存储依赖mysql数据库，以docker容器方式部署完整的wordpress博客服务，则需要从镜像仓库拉取mysql、wordpress镜像，这里选择从开源的docker hub 获取mysql 5.7版本，wordpress latest版本，同时需要准备一台具备外网环境的机器，硬件配置最好1C2G以上，当然1C1G也是没有问题的。 docker pull mysql:5.7 docker pull wordpress:latest 数据库服务 启动mysql数据库服务 docker run --name mysql-db -p 3306:3306 -v /data/mysql:/var/lib/mysql -d -e MYSQL_ROOT_PASSWORD=root mysql:5.7 mysql容器的名字为mysql-db，数据库文件则保存在当前机器的/data/mysql目录下，-e MYSQL_ROOT_PASSWORD以环</description>
     </item>
     
