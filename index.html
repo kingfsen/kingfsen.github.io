@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/share.min.css">
+	<link rel="stylesheet" href="/css/card.css">
 	<script src="/js/social-share.min.js"></script>
 	<script src="/js/qrcode.js"></script>
 	
@@ -62,122 +63,331 @@
 			<div class="primary">
 			
 <main class="main list" role="main">
-	<div class="content main__content clearfix">
-		<pre><code>                                .::::.                        
-                              .::::::::.                      
-                              :::::::::::                     
-                              ':::::::::::..                  
-                              .:::::::::::::::'               
-                                '::::::::::::::.`             
-                                  .::::::::::::::::.'         
-                                .::::::::::::..               
-                              .::::::::::::::''               
-                   .:::.       '::::::::''::::                
-                 .::::::::.      ':::::'  '::::               
-                .::::':::::::.    :::::    '::::.             
-              .:::::' ':::::::::. :::::.     ':::.            
-            .:::::'     ':::::::::.::::::.      '::.          
-          .::::''         ':::::::::::::::'       '::.        
-         .::''              '::::::::::::::'        ::..      
-      ..::::                  ':::::::::::'         :'''`     
-   ..''''':'                    '::::::.'                     
-</code></pre>
+<div class="list">
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB">开源分享</a>
+  
+  
+  </div>
+  <h3><a href="/post/share_js/">网站一键分享插件Share.js</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-27</span>
+  </div>
+  <div class="summary">
+    <a href="/post/share_js/">
+    
+    
+    
+    <div class="thumbnail"><img src="https://raw.githubusercontent.com/kingfsen/blog-images/master/blog/share_js/001.png" alt="Thumbnail" /></div>
+     
+    
+    
+      
+    
+    一键分享功能是网站社交化的一个重要组件，当前发现一款使用非常简单的js插件，就是share.js，项目地址: <a href="https://github.com/overtrue/share.js">https://github.com/overtrue/share.js</a> 。 share.js使用非常简单，它可以通过参数配置自由控制展示哪些分享图标，同时它还可以自定义分享时的title以及icon。 如此简单的一个js组件，对于我这样的一个后端开发人员，那也是分分钟上手，用法这里不细说， 请参考作者github。现在结合share.js，给自己的静态博客实现一键分享功能，同时给自己的博客实现通过参数控制分享图标的显示位置。 要使用share.js功能，首先要把share.js的css文件、js文件都引入到html中。本博客
+    </a>
+  </div>
+</section>
 
-<pre><code>
-__../)
--._  \          /:
-_.-'  \        ( \___
-  ,'   \     .'`\.) :&quot;-._______
-,' .'/||    / /   _ `&quot;&quot;`  ```  `,        _ _  ~ - _
- .' / ||   / |   ( `.~v~v~v~v~v'  _  -- *     *  _ -
-'  /  ||  | .\    `. `.  __-  ~ -     ~         --   -
-  /   ||  | :  `----`. `.  -~ _  _ ~ *           *  -
- /    ||   \:_     /  `. `.  - *__   -    -       __
-/    .'/    `.`----\    `._;        --  _ *  -     _
-     ||      `,_    `                     - -__ -
-     ||       /  `---':
-          HERE BE DRAGONS!!!
-</code></pre>
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB">开源分享</a>
+  
+  
+  </div>
+  <h3><a href="/post/isso/">开源评论系统isso</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-27</span>
+  </div>
+  <div class="summary">
+    <a href="/post/isso/">
+    
+    <div class="thumbnail"><img src="/img/isso.png" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    评论功能是静态博客系统的一个特色，是阅读者交流学习的一种手段。当前国内外都开源出很多评论系统， 包括企业或者个人贡献的，但是很多评论系统临时开放出来，过一段时间则关闭停止服务，所以给自己的博客选择一款稳定 的评论系统非常重要。 对于静态博客来说，由于它缺失后台服务，所以用户的评论数据都是落地在第三方评论系统中，通过第三方提供的JS脚本来实现阅读评论功能。 优点 博客不用搭建后台服务、数据库等就实现了一个完整的评论系统 缺点 数据在第三方，如果第三方评论系统停止服务，那么评论数据面临丢失，博客评论功能瘫痪，需要重新更换其他评论组件 总结当前一些流行的评论组件现状 Disqus Disq
+    </a>
+  </div>
+</section>
 
-	</div>
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/java">Java</a>
+  
+  
+  </div>
+  <h3><a href="/post/futuretask/">FutureTask原理分析</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-25</span>
+  </div>
+  <div class="summary">
+    <a href="/post/futuretask/">
+    
+    <div class="thumbnail"><img src="/img/futuretask.png" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    Callable Runnable 在Java中可以通过继承Thread或者实现Runnable接口两种方式来创建多线程，这两种方式创建的线程执行完毕之后，我们无法获取执行结果， 除非通过共享变量或者线程通信方式(Q消息等)间接实现，Java在1.5之后可以通过Callable和Future接口在线程执行完毕之后获取执行结果。 在了解FutureTask之前，有必要先了解清楚Java中Callable、Runnable之间的区别，Callable是java.util.concurrent包下的接口，而Runnable 是java.lang包下的接口。 public interface Runnable { public abstract void run(); } public interface Callable&lt;V&gt; { V call() throws Exception; } 面试中
+    </a>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>
+  
+  
+  </div>
+  <h3><a href="/arithmetic/tree_traverse/">递归与非递归遍历二叉树</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-24</span>
+  </div>
+  <div class="summary">
+    <a href="/arithmetic/tree_traverse/">
+    
+    <div class="thumbnail"><img src="/img/traverse.png" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    二叉树的遍历有三种方法，分别是先序、中序、后序，先序遍历顺序为根、左、右，中序遍历顺序为左、根、右，后序遍历顺序为左、右、根。 遍历二叉树的方式又包括递归、非递归两种方式。 先序遍历结果：50、30、20、40、60 中序遍历结果：20、30、40、50、60 后序遍历结果：20、40、30、60、50 树节点Node对象结构 class Node { public Node left; public Node right; public int data; public Node() { } public Node(int data) { this.data = data; } public boolean equals(Node node) { if (node == null) { return false; } return node.data == this.data; } } 递归 递归遍历二叉树代码实现相对比较简单 先序遍历 public void preOrder(Node root) { if (root == null) { return; } System.out.println(root.data); preOrder(root.left); preOrder(root.right); } 中序遍历 public void inOrder(Node root) { if (root == null) { return; } inOrder(root.left); System.out.println(root.data); inOrder(root.right); } 后序遍历 public void postOrder(Node root) { if (root == null) { return; } postOrder(root.left); postOrder(root.right); System.out.println(root.data);
+    </a>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>
+  
+  
+  </div>
+  <h3><a href="/arithmetic/binary_tree_base/">二叉树</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-23</span>
+  </div>
+  <div class="summary">
+    <a href="/arithmetic/binary_tree_base/">
+    
+    <div class="thumbnail"><img src="/img/binary.png" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    先简单了解下有序数组和链表两种数据结构 有序数组 优点：用二分查找法可以在有序数组中快速查找特定的值，时间O(logN)，当然按顺序遍历也只是O(N) 缺点：插入或者删除，需要多次移动数据项，平均要移动N/2次，不适合发生很多插入或者删除操作的场景 链表 优点：链表的插入和删除都非常快，时间O(1) 缺点：查找数据必须从头开始，平均查找N/2个数据，时间趋近O(N) 二叉树结合了有序数组和链表的优点，在树中查找数据和有序数组一样快，并且插入和删除数据和链表的速度也和链表一样。 基本概念 树的定义是从根节点到其他任何一个节点有且只有一条路径，根据树的定义，下图展示的并不是一
+    </a>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB">开源分享</a>
+  
+  
+  </div>
+  <h3><a href="/post/hugo_blog/">Hugo构建静态博客</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-19</span>
+  </div>
+  <div class="summary">
+    <a href="/post/hugo_blog/">
+    
+    <div class="thumbnail"><img src="/img/hugo.png" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    静态网站比较适用于博客、宣传、文档类的站点，静态站点比动态站点占用资源更小，访问速度更快。当前最流行的Wordpress博客系统功能很强大，插件也很丰富， 但是整体感觉很臃肿，占用资源也比较大，同时还需要部署一个MySQL数据库，国内有一些个人或者小团队研发了一些开源的轻量级博客，感觉都很一般，根本没什么吸引力。 越来越多的人更喜欢使用静态博客，甚至一些企业同样采用布局静态官网，因为静态网页可以托管在github等一些平台上，这种方式经常是一些开源项目的官方网站主要布局。 kubernetes，<a href="https://kubernetes.io">https://kubernetes.io</a> prometheus，h
+    </a>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81">容器生态</a>
+  
+  
+  </div>
+  <h3><a href="/post/helm_harbor/">Helm Harbor</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-19</span>
+  </div>
+  <div class="summary">
+    <a href="/post/helm_harbor/">
+    
+    <div class="thumbnail"><img src="/img/helm.png" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    chartmuseum chartmuseum是helm chart的仓库，它的存储层支持FileSystem以及各大云厂商的对象存储中间件， 默认支持阿里云的OSS、百度的BOS、Amazon S3、Microsoft Azure、Oracle、Openstack、Google等， 其他厂商需自行实现Storage的Backend接口方法，同时增加了缓存redis，提升系统处理效率，项目地址<a href="https://github.com/helm/chartmuseum">https://github.com/helm/chartmuseum</a> 。 chartmuseum支持多租户的实现，它通过一个index-cache.yaml索引文件来维护租户上传记录，类似docke
+    </a>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>
+  
+  
+  </div>
+  <h3><a href="/arithmetic/trie/">字典树的应用与实现</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-16</span>
+  </div>
+  <div class="summary">
+    <a href="/arithmetic/trie/">
+    
+    <div class="thumbnail"><img src="/img/avatar.png" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    字典树又称为单词查找树或者前缀树，是一种用于快速检索的树形结构，比如小写字母词典数是一个26叉数，数字的字典树是一个10叉数。字典数的键并未保存在节点中，而是由节点在树中的位置决定的。 根节点一般对应空信息。字典树的优点是查询效率高，其核心思想是利用空间换时间，利用字符串的公共前缀来提高效率。 基本性质 根节点没有字符路径，除根节点外，每一个节点都被一个字符路径找到 从根节点到某一个节点，将路径上经过的字符连接起来，为扫过的对应字符串 每个节点向下所有的字符路径上的字符都不同 特点 插入、查找的时间复杂度均为O(N)，其中N为字符串长度 空间复杂度是26^n级别的，非常
+    </a>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>
+  
+  
+  </div>
+  <h3><a href="/arithmetic/get_min_contains_sub_string/">字符串的最小包含子串</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-16</span>
+  </div>
+  <div class="summary">
+    <a href="/arithmetic/get_min_contains_sub_string/">
+    
+    
+     
+    
+    
+      
+    
+    问题 给定字符串str1，str2，获取字符串str1中包含str2的最小字符子串。 str1=&ldquo;abcde&rdquo;, str2=&ldquo;bd&rdquo; -&gt; bcd str1=&ldquo;abcde&rdquo;, str2=&ldquo;cg&rdquo; -&gt; &ldquo;&rdquo; 思路 假定字符编码范围0~255 创建一个size为256的整形数组charCount，用来保存字符串str2所有字符的出现次数 整形变量match用来表示当前差几个字符未匹配 将str1、str2分别转换为字符数组parentArray、subArray 遍历subArray，保存str2每个字符出现的次数 从左向右遍历parentArray，将每个字符对应的次数做&ndash;运算，之后如果字符的次数为零，表示匹配上一个字符，则match&ndash; 若match等
+    </a>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>
+  
+  
+  </div>
+  <h3><a href="/arithmetic/check_deformation_word/">判断两个单词是否为变形词</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-16</span>
+  </div>
+  <div class="summary">
+    <a href="/arithmetic/check_deformation_word/">
+    
+    
+     
+    
+    
+      
+    
+    问题 给定两个单词word1，word2，判断两个单词是否是变形词，即两个单词中的每个字符出现的次数一致。 word1=&ldquo;abcc&rdquo;, word=&ldquo;acbc&rdquo;, 返回true word1=&ldquo;abcc&rdquo;, word=&ldquo;abbc&rdquo;, 返回false word1=&ldquo;abc&rdquo;, word=&ldquo;cba&rdquo;, 返回true 思路 假定字符串的编码范围0~255。 新建一个size为256的int数组 分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray 遍历word1CharArray，将字符出现的字符保存在int数组中 遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false 代码 /** * 判断两个单词是否是变形词 */ public class CheckDeformationWord { public static
+    </a>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/docker">docker</a>
+  
+  
+  </div>
+  <h3><a href="/post/docker_login_process/">Docker Login执行流程与原理</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-16</span>
+  </div>
+  <div class="summary">
+    <a href="/post/docker_login_process/">
+    
+    <div class="thumbnail"><img src="/img/docker.jpg" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    docker安装的时候已经同时安装了docker client，通过命令docker version即可查看客户端以及服务端的版本信息，通过执行命令docker version查看docker版本信息。docker最近暴露的runc漏洞CVE-2019-5736，企业环境请安装18.09.2以上版本。 Client: Version: 18.06.0-ce API version: 1.38 Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:08:18 2018 OS/Arch: linux/amd64 Experimental: false Server: Engine: Version: 18.06.0-ce API version: 1.38 (minimum version 1.12) Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:10:42 2018 OS/Arch: linux/amd64 Experimental: false docker login等命令行则是用来对harbor服务发起http请求，早期版本的harbor registry服务url为/v1，后期harbor改为了/v2，所以如果你的do
+    </a>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81">容器生态</a>
+  
+  
+  </div>
+  <h3><a href="/post/helm_plugin_install/">Helm插件安装原理详解</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-15</span>
+  </div>
+  <div class="summary">
+    <a href="/post/helm_plugin_install/">
+    
+    <div class="thumbnail"><img src="/img/helm.png" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    Helm是Kubernetes集群的安装包管理工具，它与Kubernetes的关系类似于RPM与Centos。Helm提供了安装插件方式去扩展其核心功能，插件主要在客户端执行，并且存放在$HELM_HOME的plugins目录中。 Helm的插件安装源可以支持多种形式，Helm插件是以plugin.yaml文件来组织的，这个文件是必须的，plugin.yaml的模板如下。 name: &quot;push&quot; version: &quot;0.7.1&quot; usage: &quot;Please see <a href="https://github.com/chartmuseum/helm-push">https://github.com/chartmuseum/helm-push</a> for usage&quot; description: &quot;Push chart package to ChartMuseum&quot; command: &quot;$HELM_PLUGIN_DIR/bin/helmpush&quot; downloaders: - command: &quot;bin/helmpush&quot; protocols: - &quot;cm&quot; useTunnel: false hooks: install: &quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&quot; update: &quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&quot; helm如果通过VCS安装插件，可以通过指定版本version参数来拉取指定的tag、branch、commit等，
+    </a>
+  </div>
+</section>
+
+</div>
 </main>
 
 			</div>
 			
-			<aside class="sidebar">
-<div class="widget-recent widget">
-	<h4 class="widget__title">Recent Posts</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/post/share_js/">网站一键分享插件Share.js</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/isso/">开源评论系统isso</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/futuretask/">FutureTask原理分析</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/tree_traverse/">递归与非递归遍历二叉树</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/binary_tree_base/">二叉树</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/hugo_blog/">Hugo构建静态博客</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/helm_harbor/">Helm Harbor</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/trie/">字典树的应用与实现</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/get_min_contains_sub_string/">字符串的最小包含子串</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/check_deformation_word/">判断两个单词是否为变形词</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-categories widget">
-	<h4 class="widget__title">Categories</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/categories/docker">Docker</a></li>
-			<li class="widget__item"><a class="widget__link" href="/categories/golang">Golang</a></li>
-			<li class="widget__item"><a class="widget__link" href="/categories/harbor">Harbor</a></li>
-			<li class="widget__item"><a class="widget__link" href="/categories/helm">Helm</a></li>
-			<li class="widget__item"><a class="widget__link" href="/categories/hugo">Hugo</a></li>
-			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
-			<li class="widget__item"><a class="widget__link" href="/categories/prometheus">Prometheus</a></li>
-			<li class="widget__item"><a class="widget__link" href="/categories/%e5%8d%9a%e5%ae%a2%e5%88%a9%e5%99%a8">博客利器</a></li>
-			<li class="widget__item"><a class="widget__link" href="/categories/%e7%ae%97%e6%b3%95">算法</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-taglist widget">
-	<h4 class="widget__title">Tags</h4>
-	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/chartmuseum" title="Chartmuseum">Chartmuseum (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (4)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js%e6%8f%92%e4%bb%b6" title="Js插件">Js插件 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql" title="Mysql">Mysql (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/wordpress" title="Wordpress">Wordpress (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e4%ba%8c%e5%8f%89%e6%a0%91" title="二叉树">二叉树 (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%8f%98%e5%bd%a2%e8%af%8d" title="变形词">变形词 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e5%85%b8%e6%a0%91" title="字典树">字典树 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e7%ac%a6%e4%b8%b2" title="字符串">字符串 (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" title="数据结构">数据结构 (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e7%bb%84" title="数组">数组 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e7%ae%97%e6%b3%95" title="算法">算法 (5)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e8%af%84%e8%ae%ba%e7%b3%bb%e7%bb%9f" title="评论系统">评论系统 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%95%9c%e5%83%8f%e6%89%ab%e6%8f%8f" title="镜像扫描">镜像扫描 (1)</a>
-	</div>
-</div>
-<div class="widget-social widget">
-	<h4 class="widget-social__title widget__title">Social</h4>
-	<div class="widget-social__content widget__content">
-		<div class="widget-social__item widget__item">
-			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/kingfsen" target="_blank">
-				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
-				<span>GitHub</span>
-			</a>
-		</div>
-	</div>
-</div>
-</aside>
-						
+&nbsp;
+			
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">
