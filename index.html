@@ -72,6 +72,32 @@
   <div class="categories">
   
   
+    <a href="/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81">容器生态</a>
+  
+  
+  </div>
+  <h3><a href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败分析</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-29</span>
+  </div>
+  <div class="summary">
+    <a href="/post/kubernetes_image_pull/">
+    
+    <div class="thumbnail"><img src="/img/kubernetes.png" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    Docker Hub以及利用开源harbor项目搭建的镜像仓库服务，对于Docker Client发起的docker login、docker push、docker pull等命令都会做基本的用户认证， 最简单常用的认证方式就是Basic Auth，即在发起的http请求头中添加一个Authorization，其值为base64(username:password)，当前Docker Client都是这么处理。 在Kubernetes中，Secret资源对象用来存储和管理一些敏感信息，比如密码、Auth Token以及SSH keys，把这些敏感信息放入Secret对象中，相对来说更
+    </a>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="categories">
+  
+  
     <a href="/categories/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB">开源分享</a>
   
   
@@ -355,32 +381,6 @@
       
     
     docker安装的时候已经同时安装了docker client，通过命令docker version即可查看客户端以及服务端的版本信息，通过执行命令docker version查看docker版本信息。docker最近暴露的runc漏洞CVE-2019-5736，企业环境请安装18.09.2以上版本。 Client: Version: 18.06.0-ce API version: 1.38 Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:08:18 2018 OS/Arch: linux/amd64 Experimental: false Server: Engine: Version: 18.06.0-ce API version: 1.38 (minimum version 1.12) Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:10:42 2018 OS/Arch: linux/amd64 Experimental: false docker login等命令行则是用来对harbor服务发起http请求，早期版本的harbor registry服务url为/v1，后期harbor改为了/v2，所以如果你的do
-    </a>
-  </div>
-</section>
-
-<section class="article-list">
-  <div class="categories">
-  
-  
-    <a href="/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81">容器生态</a>
-  
-  
-  </div>
-  <h3><a href="/post/helm_plugin_install/">Helm插件安装原理详解</a></h3>
-  <div class="date-author">
-    <span class="author"> Kingfsen </span> / 
-    <span class="date">2019-03-15</span>
-  </div>
-  <div class="summary">
-    <a href="/post/helm_plugin_install/">
-    
-    <div class="thumbnail"><img src="/img/helm.png" alt="Thumbnail" /></div>
-    
-    
-      
-    
-    Helm是Kubernetes集群的安装包管理工具，它与Kubernetes的关系类似于RPM与Centos。Helm提供了安装插件方式去扩展其核心功能，插件主要在客户端执行，并且存放在$HELM_HOME的plugins目录中。 Helm的插件安装源可以支持多种形式，Helm插件是以plugin.yaml文件来组织的，这个文件是必须的，plugin.yaml的模板如下。 name: &quot;push&quot; version: &quot;0.7.1&quot; usage: &quot;Please see <a href="https://github.com/chartmuseum/helm-push">https://github.com/chartmuseum/helm-push</a> for usage&quot; description: &quot;Push chart package to ChartMuseum&quot; command: &quot;$HELM_PLUGIN_DIR/bin/helmpush&quot; downloaders: - command: &quot;bin/helmpush&quot; protocols: - &quot;cm&quot; useTunnel: false hooks: install: &quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&quot; update: &quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&quot; helm如果通过VCS安装插件，可以通过指定版本version参数来拉取指定的tag、branch、commit等，
     </a>
   </div>
 </section>

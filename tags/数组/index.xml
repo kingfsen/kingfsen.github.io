@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>数组 on 君无止境</title>
-    <link>https://www.youendless.com/tags/%E6%95%B0%E7%BB%84/</link>
+    <link>/tags/%E6%95%B0%E7%BB%84/</link>
     <description>Recent content in 数组 on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 13 Mar 2019 20:41:18 +0800</lastBuildDate>
     
-	<atom:link href="https://www.youendless.com/tags/%E6%95%B0%E7%BB%84/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/%E6%95%B0%E7%BB%84/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>从数组中获取指定数量的随机元素</title>
-      <link>https://www.youendless.com/arithmetic/get_random_number_from_array/</link>
+      <link>/arithmetic/get_random_number_from_array/</link>
       <pubDate>Wed, 13 Mar 2019 20:41:18 +0800</pubDate>
       
-      <guid>https://www.youendless.com/arithmetic/get_random_number_from_array/</guid>
+      <guid>/arithmetic/get_random_number_from_array/</guid>
       <description>问题 从给定的一个整型数组中，随机获取指定数量的数组元素。 思路一 新建一个与整型数组相同长度的boolean类型数组用来做标志位，标志位值为true表示当前元素是否已经获取，如果数组元素未被获取，则取出该元素，同时把对应的标志位置位true，如果发现当前元素已经获取，则重新随机获取。 public static int[] get(int[] array, int num) { int[] res = new int[num]; if (array == null || array.length == 0 || num &amp;lt;= 0) { return res; } boolean[] used = new boolean[array.length]; int i = 0; Random r = new Random(); while(i &amp;lt; num) { int index = r.nextInt(array.length); if (!used[index]) { used[index] = true; res[i] = array[index]; i++; } } return res; } 该算法牺牲了内存空间(创建了数组used), 同时随着num参数接近array长度效率会逐渐降低。 思路二 将每次取出的元素与末位元素交换位置，每次生成的</description>
     </item>
     

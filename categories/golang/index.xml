@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Golang on 君无止境</title>
-    <link>https://www.youendless.com/categories/golang/</link>
+    <link>/categories/golang/</link>
     <description>Recent content in Golang on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 11 Mar 2019 15:14:25 +0800</lastBuildDate>
     
-	<atom:link href="https://www.youendless.com/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>基于数据库的简单Leader Elect</title>
-      <link>https://www.youendless.com/post/leader_elect_golang/</link>
+      <link>/post/leader_elect_golang/</link>
       <pubDate>Mon, 11 Mar 2019 15:14:25 +0800</pubDate>
       
-      <guid>https://www.youendless.com/post/leader_elect_golang/</guid>
+      <guid>/post/leader_elect_golang/</guid>
       <description>某个系统只用来执行定时任务，如果只部署单台服务，那么又容易单点故障，如果部署多台服务，又如何只保证每次只会其中一台去执行呢，在这里，可以对N台服务，做一个简单的leader elect，成为leader的实例才可以去执行定时任务。虽然当前出现很多开源的leader选举组件，比如zookeeper、etcd等，但有时候对我们个人开发者或者小项目来说，代价太高。因此，我们可以基于mysql数据库进行一个简单的leader elect。 设计 首先，新建一张表，表结构如下 CREATE TABLE IF NOT EXISTS `leader_election` ( `service_id` varchar(50) NOT NULL DEFAULT &#39;&#39;, `leader_id` varchar(50) NOT NULL DEFAULT &#39;&#39;, `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`service_id`), UNIQUE KEY `uniq_service_id` (`service_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; service_id指的是</description>
     </item>
     
