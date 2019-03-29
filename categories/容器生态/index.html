@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>容器生态 - 码无止境</title>
+	<title>容器生态 - 君无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<meta name="generator" content="Hugo 0.54.0" />
@@ -12,7 +12,7 @@
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/index.xml" title="码无止境">
+	<link rel="alternate" type="application/rss+xml" href="/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/index.xml" title="君无止境">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/share.min.css">
@@ -31,10 +31,14 @@
 		<header class="header">
 	<div class="container">
 		<div class="logo">
-			<a class="logo__link" href="/" title="码无止境" rel="home">
-				<div class="logo__title">码无止境</div>
-				<div class="logo__tagline">每天撸一点，总有一天成为撸大师</div>
+			<a class="logo__link" href="/" title="君无止境" rel="home">
+				<div class="logo__title">君无止境</div>
+				
+				<div class="logo__tagline">代码沉淀技术，技术成就梦想~
+				</div>
+				
 			</a>
+			<div class="float_right"><div class="social-share"></div></div>
 		</div>
 		
 <nav class="menu">
@@ -65,7 +69,37 @@
 <main class="main list" role="main">
 <article class="list__item post">
 	<figure class="list__thumbnail">
-		<a href="https://www.kingfsen.cn/post/helm_harbor/">
+		<a href="/post/kubernetes_image_pull/">
+			<img src="/img/kubernetes.png" alt="kubernetes镜像拉取失败分析" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/post/kubernetes_image_pull/" rel="bookmark">
+			kubernetes镜像拉取失败分析
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-03-29T10:17:45">2019-03-29</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81" rel="category">容器生态</a></span>
+</div>
+</div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Docker Hub以及利用开源harbor项目搭建的镜像仓库服务，对于Docker Client发起的docker login、docker push、docker pull等命令都会做基本的用户认证， 最简单常用的认证方式就是Basic Auth，即在发起的http请求头中添加一个Authorization，其值为base64(username:password)，当前Docker Client都是这么处理。 在Kubernetes中，Secret资源对象用来存储和管理一些敏感信息，比如密码、Auth Token以及SSH keys，把这些敏感信息放入Secret对象中，相对来说更
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/kubernetes_image_pull/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="/post/helm_harbor/">
 			<img src="/img/helm.png" alt="Helm Harbor" />
 		</a>
 	</figure>
@@ -95,7 +129,7 @@
 	</div>
 </article><article class="list__item post">
 	<figure class="list__thumbnail">
-		<a href="https://www.kingfsen.cn/post/helm_plugin_install/">
+		<a href="/post/helm_plugin_install/">
 			<img src="/img/helm.png" alt="Helm插件安装原理详解" />
 		</a>
 	</figure>
@@ -125,7 +159,7 @@
 	</div>
 </article><article class="list__item post">
 	<figure class="list__thumbnail">
-		<a href="https://www.kingfsen.cn/post/prometheus_monitor_k8s2/">
+		<a href="/post/prometheus_monitor_k8s2/">
 			<img src="/img/prometheus.png" alt="Prometheus监控Kubernetes服务(二)" />
 		</a>
 	</figure>
@@ -155,7 +189,7 @@
 	</div>
 </article><article class="list__item post">
 	<figure class="list__thumbnail">
-		<a href="https://www.kingfsen.cn/post/prometheus_monitor_k8s/">
+		<a href="/post/prometheus_monitor_k8s/">
 			<img src="/img/prometheus.png" alt="Prometheus监控Kubernetes服务(一)" />
 		</a>
 	</figure>
@@ -195,16 +229,16 @@
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败分析</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/share_js/">网站一键分享插件Share.js</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/isso/">开源评论系统isso</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/futuretask/">FutureTask原理分析</a></li>
 			<li class="widget__item"><a class="widget__link" href="/arithmetic/tree_traverse/">递归与非递归遍历二叉树</a></li>
 			<li class="widget__item"><a class="widget__link" href="/arithmetic/binary_tree_base/">二叉树</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/hugo_blog/">Hugo构建静态博客</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/hugo_blog/">高效的静态网站生成器Hugo</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/helm_harbor/">Helm Harbor</a></li>
 			<li class="widget__item"><a class="widget__link" href="/arithmetic/trie/">字典树的应用与实现</a></li>
 			<li class="widget__item"><a class="widget__link" href="/arithmetic/get_min_contains_sub_string/">字符串的最小包含子串</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/check_deformation_word/">判断两个单词是否为变形词</a></li>
 		</ul>
 	</div>
 </div>
@@ -231,7 +265,7 @@
 		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/mysql" title="Mysql">Mysql (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
@@ -266,8 +300,8 @@
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2019 码无止境.
-			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+			&copy; 2019 君无止境.&nbsp;
+			<span class="footer__copyright-credits">Generator by Hugo</span>&nbsp;&nbsp;
 		</div>
 	</div>
 </footer>
@@ -286,6 +320,14 @@
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
-
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bc50444185089759841f5c78a2ecb638";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </body>
 </html>

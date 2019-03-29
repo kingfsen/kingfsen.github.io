@@ -1,130 +1,139 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 码无止境</title>
-    <link>https://www.kingfsen.cn/post/</link>
-    <description>Recent content in Posts on 码无止境</description>
+    <title>Posts on 君无止境</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Mar 2019 23:02:17 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 29 Mar 2019 10:17:45 +0800</lastBuildDate>
     
-	<atom:link href="https://www.kingfsen.cn/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>kubernetes镜像拉取失败分析</title>
+      <link>/post/kubernetes_image_pull/</link>
+      <pubDate>Fri, 29 Mar 2019 10:17:45 +0800</pubDate>
+      
+      <guid>/post/kubernetes_image_pull/</guid>
+      <description>Docker Hub以及利用开源harbor项目搭建的镜像仓库服务，对于Docker Client发起的docker login、docker push、docker pull等命令都会做基本的用户认证， 最简单常用的认证方式就是Basic Auth，即在发起的http请求头中添加一个Authorization，其值为base64(username:password)，当前Docker Client都是这么处理。 在Kubernetes中，Secret资源对象用来存储和管理一些敏感信息，比如密码、Auth Token以及SSH keys，把这些敏感信息放入Secret对象中，相对来说更</description>
+    </item>
+    
+    <item>
       <title>网站一键分享插件Share.js</title>
-      <link>https://www.kingfsen.cn/post/share_js/</link>
+      <link>/post/share_js/</link>
       <pubDate>Wed, 27 Mar 2019 23:02:17 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/share_js/</guid>
+      <guid>/post/share_js/</guid>
       <description>一键分享功能是网站社交化的一个重要组件，当前发现一款使用非常简单的js插件，就是share.js，项目地址: https://github.com/overtrue/share.js 。 share.js使用非常简单，它可以通过参数配置自由控制展示哪些分享图标，同时它还可以自定义分享时的title以及icon。 如此简单的一个js组件，对于我这样的一个后端开发人员，那也是分分钟上手，用法这里不细说， 请参考作者github。现在结合share.js，给自己的静态博客实现一键分享功能，同时给自己的博客实现通过参数控制分享图标的显示位置。 要使用share.js功能，首先要把share.js的css文件、js文件都引入到html中。本博客</description>
     </item>
     
     <item>
       <title>开源评论系统isso</title>
-      <link>https://www.kingfsen.cn/post/isso/</link>
+      <link>/post/isso/</link>
       <pubDate>Wed, 27 Mar 2019 16:18:10 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/isso/</guid>
+      <guid>/post/isso/</guid>
       <description>评论功能是静态博客系统的一个特色，是阅读者交流学习的一种手段。当前国内外都开源出很多评论系统， 包括企业或者个人贡献的，但是很多评论系统临时开放出来，过一段时间则关闭停止服务，所以给自己的博客选择一款稳定 的评论系统非常重要。 对于静态博客来说，由于它缺失后台服务，所以用户的评论数据都是落地在第三方评论系统中，通过第三方提供的JS脚本来实现阅读评论功能。 优点 博客不用搭建后台服务、数据库等就实现了一个完整的评论系统 缺点 数据在第三方，如果第三方评论系统停止服务，那么评论数据面临丢失，博客评论功能瘫痪，需要重新更换其他评论组件 总结当前一些流行的评论组件现状 Disqus Disq</description>
     </item>
     
     <item>
       <title>FutureTask原理分析</title>
-      <link>https://www.kingfsen.cn/post/futuretask/</link>
+      <link>/post/futuretask/</link>
       <pubDate>Mon, 25 Mar 2019 16:31:58 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/futuretask/</guid>
+      <guid>/post/futuretask/</guid>
       <description>Callable Runnable 在Java中可以通过继承Thread或者实现Runnable接口两种方式来创建多线程，这两种方式创建的线程执行完毕之后，我们无法获取执行结果， 除非通过共享变量或者线程通信方式(Q消息等)间接实现，Java在1.5之后可以通过Callable和Future接口在线程执行完毕之后获取执行结果。 在了解FutureTask之前，有必要先了解清楚Java中Callable、Runnable之间的区别，Callable是java.util.concurrent包下的接口，而Runnable 是java.lang包下的接口。 public interface Runnable { public abstract void run(); } public interface Callable&amp;lt;V&amp;gt; { V call() throws Exception; } 面试中</description>
     </item>
     
     <item>
-      <title>Hugo构建静态博客</title>
-      <link>https://www.kingfsen.cn/post/hugo_blog/</link>
+      <title>高效的静态网站生成器Hugo</title>
+      <link>/post/hugo_blog/</link>
       <pubDate>Tue, 19 Mar 2019 20:05:49 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/hugo_blog/</guid>
-      <description>静态网站比较适用于博客、宣传、文档类的站点，静态站点比动态站点占用资源更小，访问速度更快。当前最流行的Wordpress博客系统功能很强大，插件也很丰富， 但是整体感觉很臃肿，占用资源也比较大，同时还需要部署一个MySQL数据库，国内有一些个人或者小团队研发了一些开源的轻量级博客，感觉都很一般，根本没什么吸引力。 越来越多的人更喜欢使用静态博客，甚至一些企业同样采用布局静态官网，因为静态网页可以托管在github等一些平台上，这种方式经常是一些开源项目的官方网站主要布局。 kubernetes，https://kubernetes.io prometheus，h</description>
+      <guid>/post/hugo_blog/</guid>
+      <description>静态网站比较适用于博客、宣传、文档类的站点，比动态站点占用资源更小，访问速度更快。当前最流行的Wordpress博客系统功能很强大，插件也很丰富， 但是整体感觉很臃肿，占用资源也比较大，同时还需要部署一个MySQL数据库，国内有一些个人或者小团队研发了一些开源的轻量级博客，根本没什么吸引力。 越来越多的人更喜欢使用静态博客，甚至一些企业同样采用静态布局官网，因为静态网页可以托管在github等一些平台上，例如下面这些开源项目。 kubernetes，https://kubernetes.io prometheus，https://prometheus.io hog</description>
     </item>
     
     <item>
       <title>Helm Harbor</title>
-      <link>https://www.kingfsen.cn/post/helm_harbor/</link>
+      <link>/post/helm_harbor/</link>
       <pubDate>Tue, 19 Mar 2019 10:02:41 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/helm_harbor/</guid>
+      <guid>/post/helm_harbor/</guid>
       <description>chartmuseum chartmuseum是helm chart的仓库，它的存储层支持FileSystem以及各大云厂商的对象存储中间件， 默认支持阿里云的OSS、百度的BOS、Amazon S3、Microsoft Azure、Oracle、Openstack、Google等， 其他厂商需自行实现Storage的Backend接口方法，同时增加了缓存redis，提升系统处理效率，项目地址https://github.com/helm/chartmuseum 。 chartmuseum支持多租户的实现，它通过一个index-cache.yaml索引文件来维护租户上传记录，类似docke</description>
     </item>
     
     <item>
       <title>Docker Login执行流程与原理</title>
-      <link>https://www.kingfsen.cn/post/docker_login_process/</link>
+      <link>/post/docker_login_process/</link>
       <pubDate>Sat, 16 Mar 2019 08:54:16 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/docker_login_process/</guid>
+      <guid>/post/docker_login_process/</guid>
       <description>docker安装的时候已经同时安装了docker client，通过命令docker version即可查看客户端以及服务端的版本信息，通过执行命令docker version查看docker版本信息。docker最近暴露的runc漏洞CVE-2019-5736，企业环境请安装18.09.2以上版本。 Client: Version: 18.06.0-ce API version: 1.38 Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:08:18 2018 OS/Arch: linux/amd64 Experimental: false Server: Engine: Version: 18.06.0-ce API version: 1.38 (minimum version 1.12) Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:10:42 2018 OS/Arch: linux/amd64 Experimental: false docker login等命令行则是用来对harbor服务发起http请求，早期版本的harbor registry服务url为/v1，后期harbor改为了/v2，所以如果你的do</description>
     </item>
     
     <item>
       <title>Helm插件安装原理详解</title>
-      <link>https://www.kingfsen.cn/post/helm_plugin_install/</link>
+      <link>/post/helm_plugin_install/</link>
       <pubDate>Fri, 15 Mar 2019 16:40:22 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/helm_plugin_install/</guid>
+      <guid>/post/helm_plugin_install/</guid>
       <description>Helm是Kubernetes集群的安装包管理工具，它与Kubernetes的关系类似于RPM与Centos。Helm提供了安装插件方式去扩展其核心功能，插件主要在客户端执行，并且存放在$HELM_HOME的plugins目录中。 Helm的插件安装源可以支持多种形式，Helm插件是以plugin.yaml文件来组织的，这个文件是必须的，plugin.yaml的模板如下。 name: &amp;quot;push&amp;quot; version: &amp;quot;0.7.1&amp;quot; usage: &amp;quot;Please see https://github.com/chartmuseum/helm-push for usage&amp;quot; description: &amp;quot;Push chart package to ChartMuseum&amp;quot; command: &amp;quot;$HELM_PLUGIN_DIR/bin/helmpush&amp;quot; downloaders: - command: &amp;quot;bin/helmpush&amp;quot; protocols: - &amp;quot;cm&amp;quot; useTunnel: false hooks: install: &amp;quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&amp;quot; update: &amp;quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&amp;quot; helm如果通过VCS安装插件，可以通过指定版本version参数来拉取指定的tag、branch、commit等，</description>
     </item>
     
     <item>
       <title>Prometheus监控Kubernetes服务(二)</title>
-      <link>https://www.kingfsen.cn/post/prometheus_monitor_k8s2/</link>
+      <link>/post/prometheus_monitor_k8s2/</link>
       <pubDate>Fri, 15 Mar 2019 09:48:52 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/prometheus_monitor_k8s2/</guid>
+      <guid>/post/prometheus_monitor_k8s2/</guid>
       <description>prometheus相关的服务已经在kubernetes中部署完成，请参阅文章 Prometheus监控Kubernetes服务(一) 。 Prometheus Label Label在prometheus服务抓取中非常重要，通过标签重写或者标签过滤抓取目标等是非常强大的功能。除了目标本身自定义的标签，prometheus还会内置给每个目标一些基础标签， 比如job、instance、metrics、schema等。prometheus获取的初始标签一般以__meta__开头，我们可以根据需要针对部分标签进行自定义命名重写，这样prometheus就会为目标保存这些自定义标签，那些以__开头</description>
     </item>
     
     <item>
       <title>Prometheus监控Kubernetes服务(一)</title>
-      <link>https://www.kingfsen.cn/post/prometheus_monitor_k8s/</link>
+      <link>/post/prometheus_monitor_k8s/</link>
       <pubDate>Wed, 13 Mar 2019 10:29:13 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/prometheus_monitor_k8s/</guid>
+      <guid>/post/prometheus_monitor_k8s/</guid>
       <description>Prometheus功能结构 Prometheus是基于golang编写的一个开源监控项目，当前应用非常广泛，尤其是与当前的容器调度平台kubernetes融合，使用Prometheus之前，我们应该了解下它的使用场景，它不能用来进行大量无规则数据的收集，不能替代日志收集工具，同时由于Prometheus基于时间序列的sample采样收集，如果某个系统对自身的每个请求都要求精准监控，那Prometheus也不适合。Prometheus更多的用于基于时间序列的一个sample采样，统计分析，比如某个功能接口某段时间的调用频率、调用次数等。 橙色框 Pushgat</description>
     </item>
     
     <item>
       <title>基于Docker快速搭建wordpress博客</title>
-      <link>https://www.kingfsen.cn/post/docker_deploy_wordpress/</link>
+      <link>/post/docker_deploy_wordpress/</link>
       <pubDate>Wed, 13 Mar 2019 10:28:01 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/docker_deploy_wordpress/</guid>
+      <guid>/post/docker_deploy_wordpress/</guid>
       <description>wordpress数据存储依赖mysql数据库，以docker容器方式部署完整的wordpress博客服务，则需要从镜像仓库拉取mysql、wordpress镜像，这里选择从开源的docker hub 获取mysql 5.7版本，wordpress latest版本，同时需要准备一台具备外网环境的机器，硬件配置最好1C2G以上，当然1C1G也是没有问题的。 docker pull mysql:5.7 docker pull wordpress:latest 数据库服务 启动mysql数据库服务 docker run --name mysql-db -p 3306:3306 -v /data/mysql:/var/lib/mysql -d -e MYSQL_ROOT_PASSWORD=root mysql:5.7 mysql容器的名字为mysql-db，数据库文件则保存在当前机器的/data/mysql目录下，-e MYSQL_ROOT_PASSWORD以环</description>
     </item>
     
     <item>
       <title>Harbor仓库镜像扫描原理</title>
-      <link>https://www.kingfsen.cn/post/harbor_image_scan/</link>
+      <link>/post/harbor_image_scan/</link>
       <pubDate>Mon, 11 Mar 2019 15:59:41 +0000</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/harbor_image_scan/</guid>
+      <guid>/post/harbor_image_scan/</guid>
       <description>初次听说镜像扫描的人肯定有很多疑惑，总会想原理是什么呢？我们可以先思考下，windows控制面板、包括一些第三方软件比如三六零等，它们都能获取系统安装的软件以及版本，当然绿色解压版他们就无法识别，获取软件版本之后，他们就能提供一些升级的版本、以及当前软件版本的漏洞列举出来，由此可见，系统安装了哪些版本的软件，第三方都可以通过系统相关文件获取，那么Linux系统也一样。 Harbor仓库中的镜像扫描这个功能，看似很高大上，其实等你了解了它的底层原理与流程，你就会发现就是做了那么一件事而已，用通俗的一句话概括，就是找到每个镜像文件系统中已经安装的软件包与版本，</description>
     </item>
     
     <item>
       <title>基于数据库的简单Leader Elect</title>
-      <link>https://www.kingfsen.cn/post/leader_elect_golang/</link>
+      <link>/post/leader_elect_golang/</link>
       <pubDate>Mon, 11 Mar 2019 15:14:25 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/leader_elect_golang/</guid>
+      <guid>/post/leader_elect_golang/</guid>
       <description>某个系统只用来执行定时任务，如果只部署单台服务，那么又容易单点故障，如果部署多台服务，又如何只保证每次只会其中一台去执行呢，在这里，可以对N台服务，做一个简单的leader elect，成为leader的实例才可以去执行定时任务。虽然当前出现很多开源的leader选举组件，比如zookeeper、etcd等，但有时候对我们个人开发者或者小项目来说，代价太高。因此，我们可以基于mysql数据库进行一个简单的leader elect。 设计 首先，新建一张表，表结构如下 CREATE TABLE IF NOT EXISTS `leader_election` ( `service_id` varchar(50) NOT NULL DEFAULT &#39;&#39;, `leader_id` varchar(50) NOT NULL DEFAULT &#39;&#39;, `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`service_id`), UNIQUE KEY `uniq_service_id` (`service_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; service_id指的是</description>
     </item>
     
     <item>
       <title>部署企业级Harbor镜像仓库服务</title>
-      <link>https://www.kingfsen.cn/post/deploy_harbor_service/</link>
+      <link>/post/deploy_harbor_service/</link>
       <pubDate>Mon, 11 Mar 2019 15:14:25 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/deploy_harbor_service/</guid>
+      <guid>/post/deploy_harbor_service/</guid>
       <description>harbor初期版本1.4是在vmware旗下，当前已经成立了新项目goharbor。并且1.6.0版本之后进行了重构，数据库由mysql转换到postgresql，部分表结构也稍微改变了，代码也增强了很多，同时新增了helm chartmuseum仓库功能。对于harbor这个项目，可能有些开发者不太了解或者疑惑，为什么不直接使用docker registry，然后在registry上面再增加一个Auth鉴权。当然对于个人开发者或者企业内部，完全可以这样，不用管授权的问题。但是对于一个企业对外提供镜像存储服务，没有授权，那是不行的，A上传的镜像，B可以随便</description>
     </item>
     
