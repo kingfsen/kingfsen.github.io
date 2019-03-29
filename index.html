@@ -4,15 +4,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>码无止境</title>
+	<title>君无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="这里是孙金福的个人技术博客">
+	<meta name="description" content="孙金福个人技术博客">
 	<meta name="generator" content="Hugo 0.54.0" />
 	
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="码无止境">
+	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="君无止境">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/share.min.css">
@@ -31,10 +31,14 @@
 		<header class="header">
 	<div class="container">
 		<div class="logo">
-			<a class="logo__link" href="/" title="码无止境" rel="home">
-				<div class="logo__title">码无止境</div>
-				<div class="logo__tagline">每天撸一点，总有一天成为撸大师</div>
+			<a class="logo__link" href="/" title="君无止境" rel="home">
+				<div class="logo__title">君无止境</div>
+				
+				<div class="logo__tagline">代码沉淀技术，技术成就梦想~
+				</div>
+				
 			</a>
+			<div class="float_right"><div class="social-share"></div></div>
 		</div>
 		
 <nav class="menu">
@@ -64,6 +68,32 @@
 			
 <main class="main list" role="main">
 <div class="list">
+<section class="article-list">
+  <div class="categories">
+  
+  
+    <a href="/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81">容器生态</a>
+  
+  
+  </div>
+  <h3><a href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败分析</a></h3>
+  <div class="date-author">
+    <span class="author"> Kingfsen </span> / 
+    <span class="date">2019-03-29</span>
+  </div>
+  <div class="summary">
+    <a href="/post/kubernetes_image_pull/">
+    
+    <div class="thumbnail"><img src="/img/kubernetes.png" alt="Thumbnail" /></div>
+    
+    
+      
+    
+    Docker Hub以及利用开源harbor项目搭建的镜像仓库服务，对于Docker Client发起的docker login、docker push、docker pull等命令都会做基本的用户认证， 最简单常用的认证方式就是Basic Auth，即在发起的http请求头中添加一个Authorization，其值为base64(username:password)，当前Docker Client都是这么处理。 在Kubernetes中，Secret资源对象用来存储和管理一些敏感信息，比如密码、Auth Token以及SSH keys，把这些敏感信息放入Secret对象中，相对来说更
+    </a>
+  </div>
+</section>
+
 <section class="article-list">
   <div class="categories">
   
@@ -205,7 +235,7 @@
   
   
   </div>
-  <h3><a href="/post/hugo_blog/">Hugo构建静态博客</a></h3>
+  <h3><a href="/post/hugo_blog/">高效的静态网站生成器Hugo</a></h3>
   <div class="date-author">
     <span class="author"> Kingfsen </span> / 
     <span class="date">2019-03-19</span>
@@ -218,7 +248,7 @@
     
       
     
-    静态网站比较适用于博客、宣传、文档类的站点，静态站点比动态站点占用资源更小，访问速度更快。当前最流行的Wordpress博客系统功能很强大，插件也很丰富， 但是整体感觉很臃肿，占用资源也比较大，同时还需要部署一个MySQL数据库，国内有一些个人或者小团队研发了一些开源的轻量级博客，感觉都很一般，根本没什么吸引力。 越来越多的人更喜欢使用静态博客，甚至一些企业同样采用布局静态官网，因为静态网页可以托管在github等一些平台上，这种方式经常是一些开源项目的官方网站主要布局。 kubernetes，<a href="https://kubernetes.io">https://kubernetes.io</a> prometheus，h
+    静态网站比较适用于博客、宣传、文档类的站点，比动态站点占用资源更小，访问速度更快。当前最流行的Wordpress博客系统功能很强大，插件也很丰富， 但是整体感觉很臃肿，占用资源也比较大，同时还需要部署一个MySQL数据库，国内有一些个人或者小团队研发了一些开源的轻量级博客，根本没什么吸引力。 越来越多的人更喜欢使用静态博客，甚至一些企业同样采用静态布局官网，因为静态网页可以托管在github等一些平台上，例如下面这些开源项目。 kubernetes，<a href="https://kubernetes.io">https://kubernetes.io</a> prometheus，<a href="https://prometheus.io">https://prometheus.io</a> hog
     </a>
   </div>
 </section>
@@ -355,32 +385,6 @@
   </div>
 </section>
 
-<section class="article-list">
-  <div class="categories">
-  
-  
-    <a href="/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81">容器生态</a>
-  
-  
-  </div>
-  <h3><a href="/post/helm_plugin_install/">Helm插件安装原理详解</a></h3>
-  <div class="date-author">
-    <span class="author"> Kingfsen </span> / 
-    <span class="date">2019-03-15</span>
-  </div>
-  <div class="summary">
-    <a href="/post/helm_plugin_install/">
-    
-    <div class="thumbnail"><img src="/img/helm.png" alt="Thumbnail" /></div>
-    
-    
-      
-    
-    Helm是Kubernetes集群的安装包管理工具，它与Kubernetes的关系类似于RPM与Centos。Helm提供了安装插件方式去扩展其核心功能，插件主要在客户端执行，并且存放在$HELM_HOME的plugins目录中。 Helm的插件安装源可以支持多种形式，Helm插件是以plugin.yaml文件来组织的，这个文件是必须的，plugin.yaml的模板如下。 name: &quot;push&quot; version: &quot;0.7.1&quot; usage: &quot;Please see <a href="https://github.com/chartmuseum/helm-push">https://github.com/chartmuseum/helm-push</a> for usage&quot; description: &quot;Push chart package to ChartMuseum&quot; command: &quot;$HELM_PLUGIN_DIR/bin/helmpush&quot; downloaders: - command: &quot;bin/helmpush&quot; protocols: - &quot;cm&quot; useTunnel: false hooks: install: &quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&quot; update: &quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&quot; helm如果通过VCS安装插件，可以通过指定版本version参数来拉取指定的tag、branch、commit等，
-    </a>
-  </div>
-</section>
-
 </div>
 </main>
 
@@ -393,8 +397,8 @@
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2019 码无止境.
-			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+			&copy; 2019 君无止境.&nbsp;
+			<span class="footer__copyright-credits">Generator by Hugo</span>&nbsp;&nbsp;
 		</div>
 	</div>
 </footer>
@@ -413,6 +417,14 @@
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
-
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d1e67661b3863a9b6eb774699867e148";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </body>
 </html>

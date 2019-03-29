@@ -1271,3 +1271,11 @@ textarea {
 		font-size: .6875rem;
 	}
 }
+
+.footer__copyright {
+	margin: auto;
+}
+
+.float_right {
+	float: right;
+}

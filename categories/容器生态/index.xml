@@ -1,49 +1,58 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>容器生态 on 码无止境</title>
-    <link>https://www.kingfsen.cn/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/</link>
-    <description>Recent content in 容器生态 on 码无止境</description>
+    <title>容器生态 on 君无止境</title>
+    <link>/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/</link>
+    <description>Recent content in 容器生态 on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Mar 2019 10:02:41 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 29 Mar 2019 10:17:45 +0800</lastBuildDate>
     
-	<atom:link href="https://www.kingfsen.cn/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>kubernetes镜像拉取失败分析</title>
+      <link>/post/kubernetes_image_pull/</link>
+      <pubDate>Fri, 29 Mar 2019 10:17:45 +0800</pubDate>
+      
+      <guid>/post/kubernetes_image_pull/</guid>
+      <description>Docker Hub以及利用开源harbor项目搭建的镜像仓库服务，对于Docker Client发起的docker login、docker push、docker pull等命令都会做基本的用户认证， 最简单常用的认证方式就是Basic Auth，即在发起的http请求头中添加一个Authorization，其值为base64(username:password)，当前Docker Client都是这么处理。 在Kubernetes中，Secret资源对象用来存储和管理一些敏感信息，比如密码、Auth Token以及SSH keys，把这些敏感信息放入Secret对象中，相对来说更</description>
+    </item>
+    
+    <item>
       <title>Helm Harbor</title>
-      <link>https://www.kingfsen.cn/post/helm_harbor/</link>
+      <link>/post/helm_harbor/</link>
       <pubDate>Tue, 19 Mar 2019 10:02:41 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/helm_harbor/</guid>
+      <guid>/post/helm_harbor/</guid>
       <description>chartmuseum chartmuseum是helm chart的仓库，它的存储层支持FileSystem以及各大云厂商的对象存储中间件， 默认支持阿里云的OSS、百度的BOS、Amazon S3、Microsoft Azure、Oracle、Openstack、Google等， 其他厂商需自行实现Storage的Backend接口方法，同时增加了缓存redis，提升系统处理效率，项目地址https://github.com/helm/chartmuseum 。 chartmuseum支持多租户的实现，它通过一个index-cache.yaml索引文件来维护租户上传记录，类似docke</description>
     </item>
     
     <item>
       <title>Helm插件安装原理详解</title>
-      <link>https://www.kingfsen.cn/post/helm_plugin_install/</link>
+      <link>/post/helm_plugin_install/</link>
       <pubDate>Fri, 15 Mar 2019 16:40:22 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/helm_plugin_install/</guid>
+      <guid>/post/helm_plugin_install/</guid>
       <description>Helm是Kubernetes集群的安装包管理工具，它与Kubernetes的关系类似于RPM与Centos。Helm提供了安装插件方式去扩展其核心功能，插件主要在客户端执行，并且存放在$HELM_HOME的plugins目录中。 Helm的插件安装源可以支持多种形式，Helm插件是以plugin.yaml文件来组织的，这个文件是必须的，plugin.yaml的模板如下。 name: &amp;quot;push&amp;quot; version: &amp;quot;0.7.1&amp;quot; usage: &amp;quot;Please see https://github.com/chartmuseum/helm-push for usage&amp;quot; description: &amp;quot;Push chart package to ChartMuseum&amp;quot; command: &amp;quot;$HELM_PLUGIN_DIR/bin/helmpush&amp;quot; downloaders: - command: &amp;quot;bin/helmpush&amp;quot; protocols: - &amp;quot;cm&amp;quot; useTunnel: false hooks: install: &amp;quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&amp;quot; update: &amp;quot;cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh&amp;quot; helm如果通过VCS安装插件，可以通过指定版本version参数来拉取指定的tag、branch、commit等，</description>
     </item>
     
     <item>
       <title>Prometheus监控Kubernetes服务(二)</title>
-      <link>https://www.kingfsen.cn/post/prometheus_monitor_k8s2/</link>
+      <link>/post/prometheus_monitor_k8s2/</link>
       <pubDate>Fri, 15 Mar 2019 09:48:52 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/prometheus_monitor_k8s2/</guid>
+      <guid>/post/prometheus_monitor_k8s2/</guid>
       <description>prometheus相关的服务已经在kubernetes中部署完成，请参阅文章 Prometheus监控Kubernetes服务(一) 。 Prometheus Label Label在prometheus服务抓取中非常重要，通过标签重写或者标签过滤抓取目标等是非常强大的功能。除了目标本身自定义的标签，prometheus还会内置给每个目标一些基础标签， 比如job、instance、metrics、schema等。prometheus获取的初始标签一般以__meta__开头，我们可以根据需要针对部分标签进行自定义命名重写，这样prometheus就会为目标保存这些自定义标签，那些以__开头</description>
     </item>
     
     <item>
       <title>Prometheus监控Kubernetes服务(一)</title>
-      <link>https://www.kingfsen.cn/post/prometheus_monitor_k8s/</link>
+      <link>/post/prometheus_monitor_k8s/</link>
       <pubDate>Wed, 13 Mar 2019 10:29:13 +0800</pubDate>
       
-      <guid>https://www.kingfsen.cn/post/prometheus_monitor_k8s/</guid>
+      <guid>/post/prometheus_monitor_k8s/</guid>
       <description>Prometheus功能结构 Prometheus是基于golang编写的一个开源监控项目，当前应用非常广泛，尤其是与当前的容器调度平台kubernetes融合，使用Prometheus之前，我们应该了解下它的使用场景，它不能用来进行大量无规则数据的收集，不能替代日志收集工具，同时由于Prometheus基于时间序列的sample采样收集，如果某个系统对自身的每个请求都要求精准监控，那Prometheus也不适合。Prometheus更多的用于基于时间序列的一个sample采样，统计分析，比如某个功能接口某段时间的调用频率、调用次数等。 橙色框 Pushgat</description>
     </item>
     
