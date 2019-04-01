@@ -21,7 +21,7 @@
     </item>
     
     <item>
-      <title>深入理解Go语言的入门知识</title>
+      <title>深入理解Go语言的基础概念</title>
       <link>/post/go_base/</link>
       <pubDate>Sat, 30 Mar 2019 13:48:07 +0800</pubDate>
       
@@ -30,7 +30,7 @@
     </item>
     
     <item>
-      <title>kubernetes镜像拉取失败分析</title>
+      <title>kubernetes镜像拉取失败解决方法</title>
       <link>/post/kubernetes_image_pull/</link>
       <pubDate>Fri, 29 Mar 2019 10:17:45 +0800</pubDate>
       

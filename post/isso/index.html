@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>开源评论系统isso - 君无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 	<meta name="description" content="一款超级好用的静态博客评论系统isso">
 	<meta name="generator" content="Hugo 0.54.0" />
 	
@@ -13,7 +14,9 @@
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css">	
+	<link rel="stylesheet" type="text/css" href="/css/highlight.css">
+	
 	
 	<link rel="stylesheet" href="/css/share.min.css">
 	<script src="/js/social-share.min.js"></script>
@@ -32,6 +35,10 @@
 				<div class="logo__title">君无止境</div>
 				<div class="logo__tagline">代码沉淀技术，技术成就梦想!   Hugo、Java、Go、Docker、Harbor、Kubernetes~</div>
 			</a>
+			
+			<div class="float_right"><div class="social-share"></div>
+  <br/></div>
+			
 		</div>
 		
 <nav class="menu">
@@ -70,11 +77,14 @@
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
 	<span class="meta__text"><a class="meta__link" href="/categories/%e5%bc%80%e6%ba%90%e5%88%86%e4%ba%ab" rel="category">开源分享</a></span>
 </div>
-</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">2283 字</time>
+</div></div>
 		</header>
 
 <div class="post__toc toc">
-	<div class="toc__title">大纲视图</div>
+	<div class="toc__title">目录结构</div>
 	<div class="toc__menu">
 		
 	</div>
@@ -133,7 +143,7 @@ gitment是由个人提供出来的评论系统，它依托github的仓库issue�
 这里推荐大家使用Docker容器方式启动isso服务，这样就避免了环境的配置以及依赖组件的安装。isso的镜像已经提供在docker hub上，地址 <a href="https://hub.docker.com/r/wonderfall/isso">https://hub.docker.com/r/wonderfall/isso</a> 。
 这个isso镜像ui是汉化版的，是其他开发者上传的，使用任何docker镜像之前，都应该先阅读一遍其Dockerfile文件。</p>
 
-<pre><code>FROM alpine:3.9
+<pre><code class="language-Dockerfile">FROM alpine:3.9
 
 ARG ISSO_VER=0.12.2
 
@@ -181,7 +191,7 @@ listen = http://localhost:1234/
 <p>其中host参数是比较重要的，这个host可以配置多个，类似一个白名单的作用，listen是服务器启动的监听地址。isso后端支持配置多个网站同时使用其作为评论系统，
 这里提供稍微丰富一点的真实配置。</p>
 
-<pre><code>[general]
+<pre><code class="language-text">[general]
 
 dbpath = /db/comments.db
 host = https://www.kingfsen.cn/
@@ -232,7 +242,7 @@ require-email = false
 <p>容器启动之后，isso容器服务端口映射到了宿主机的8080，同时/data/isso/db目录将备份了评论数据。由于我的博客也是部署在当前机器上的nginx中，
 接着增加一段配置，nginx代理了isso的服务接口，HTML页面通过域名跨域请求isso服务。</p>
 
-<pre><code>location /isso {
+<pre><code class="language-Bash">location /isso {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Script-Name /isso;
     proxy_set_header Host $host;
@@ -261,7 +271,7 @@ password = goodnight;
 <p>isso后端服务没问题，则可以开始在HTML中添加isso的js脚本了。hugo生成的website就是方便，直接新建一个模板isso.html，
 通过定义block，在要添加评论的地方直接引入接口，没有模板，则直接把下面的内容添加到需要评论的HTML中即可，有模板，直接将如下内容添加模板中，再把模板嵌入到需要的其他模板中即可。</p>
 
-<pre><code>&lt;script data-isso=&quot;https://www.youendless.com/isso/&quot;
+<pre><code class="language-JS">&lt;script data-isso=&quot;https://www.youendless.com/isso/&quot;
         src=&quot;https://www.youendless.com/isso/js/embed.min.js&quot;&gt;&lt;/script&gt;
 
 &lt;section id=&quot;isso-thread&quot;&gt;&lt;/section&gt;
@@ -342,8 +352,8 @@ password = goodnight;
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/post/hugo_base/">Hugo入门详细教程</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/go_base/">深入理解Go语言的入门知识</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败分析</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/go_base/">深入理解Go语言的基础概念</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败解决方法</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/share_js/">网站一键分享插件Share.js</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/isso/">开源评论系统isso</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/futuretask/">FutureTask原理分析</a></li>
@@ -416,12 +426,12 @@ password = goodnight;
 <div class="widget-social widget">
 	<h4 class="widget-social__title widget__title">友情链接</h4>
 	<div class="widget-social__item widget__item">
-		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://www.kingfsen.cn" target="_blank">
+		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://youendless.com" target="_blank">
 			<svg class="widget-social__link-icon icon-telegram" viewBox="0 0 132 110" width="24" height="24">
 			<path fill="#ddd" d="M50 103c-4 0-3-1-5-5L34 60l88-52"/><path fill="#aaa" d="M50 103c3 0 4-1 6-3l16-16-20-12"/><path fill="#fff" d="M52 72l48 36c6 3 10 2 11-5l20-93c2-8-3-11-8-9L7 45c-8 4-8 8-1 10l29 9 69-43c3-2 6-1 4 1"/></svg>
 			<span>君无止境</span>
 		</a>
-		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://www.kingfsen.cn" target="_blank">
+		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://youendless.com" target="_blank">
 			<svg class="widget-social__link-icon icon-telegram" viewBox="0 0 132 110" width="24" height="24">
 			<path fill="#ddd" d="M50 103c-4 0-3-1-5-5L34 60l88-52"/><path fill="#aaa" d="M50 103c3 0 4-1 6-3l16-16-20-12"/><path fill="#fff" d="M52 72l48 36c6 3 10 2 11-5l20-93c2-8-3-11-8-9L7 45c-8 4-8 8-1 10l29 9 69-43c3-2 6-1 4 1"/></svg>
 			<span>君无止境</span>
@@ -441,7 +451,8 @@ password = goodnight;
 	</div>
 </footer>
 	</div>
-<script async defer src="/js/menu.js"></script> 
+<script async defer src="/js/menu.js"></script>
+<script async src="/js/highlight.js"></script> 
   <script>
 (function(){
     var bp = document.createElement('script');
@@ -472,5 +483,10 @@ var _hmt = _hmt || [];
 
 
 
+<script type="text/javascript">
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+</script>
 </body>
 </html>

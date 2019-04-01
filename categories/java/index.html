@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Java - 君无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 	<meta name="description" content="">
 	<meta name="generator" content="Hugo 0.54.0" />
 	
@@ -14,7 +15,9 @@
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="alternate" type="application/rss+xml" href="/categories/java/index.xml" title="君无止境">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css">	
+	<link rel="stylesheet" type="text/css" href="/css/highlight.css">
+	
 	
 	<link rel="stylesheet" href="/css/share.min.css">
 	<script src="/js/social-share.min.js"></script>
@@ -33,6 +36,10 @@
 				<div class="logo__title">君无止境</div>
 				<div class="logo__tagline">代码沉淀技术，技术成就梦想!   Hugo、Java、Go、Docker、Harbor、Kubernetes~</div>
 			</a>
+			
+			<div class="float_right"><div class="social-share"></div>
+  <br/></div>
+			
 		</div>
 		
 <nav class="menu">
@@ -79,7 +86,10 @@
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
 	<span class="meta__text"><a class="meta__link" href="/categories/java" rel="category">Java</a></span>
 </div>
-</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">5054 字</time>
+</div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		Callable Runnable 在Java中可以通过继承Thread或者实现Runnable接口两种方式来创建多线程，这两种方式创建的线程执行完毕之后，我们无法获取执行结果， 除非通过共享变量或者线程通信方式(Q消息等)间接实现，Java在1.5之后可以通过Callable和Future接口在线程执行完毕之后获取执行结
@@ -107,8 +117,8 @@
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/post/hugo_base/">Hugo入门详细教程</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/go_base/">深入理解Go语言的入门知识</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败分析</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/go_base/">深入理解Go语言的基础概念</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败解决方法</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/share_js/">网站一键分享插件Share.js</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/isso/">开源评论系统isso</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/futuretask/">FutureTask原理分析</a></li>
@@ -181,12 +191,12 @@
 <div class="widget-social widget">
 	<h4 class="widget-social__title widget__title">友情链接</h4>
 	<div class="widget-social__item widget__item">
-		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://www.kingfsen.cn" target="_blank">
+		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://youendless.com" target="_blank">
 			<svg class="widget-social__link-icon icon-telegram" viewBox="0 0 132 110" width="24" height="24">
 			<path fill="#ddd" d="M50 103c-4 0-3-1-5-5L34 60l88-52"/><path fill="#aaa" d="M50 103c3 0 4-1 6-3l16-16-20-12"/><path fill="#fff" d="M52 72l48 36c6 3 10 2 11-5l20-93c2-8-3-11-8-9L7 45c-8 4-8 8-1 10l29 9 69-43c3-2 6-1 4 1"/></svg>
 			<span>君无止境</span>
 		</a>
-		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://www.kingfsen.cn" target="_blank">
+		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://youendless.com" target="_blank">
 			<svg class="widget-social__link-icon icon-telegram" viewBox="0 0 132 110" width="24" height="24">
 			<path fill="#ddd" d="M50 103c-4 0-3-1-5-5L34 60l88-52"/><path fill="#aaa" d="M50 103c3 0 4-1 6-3l16-16-20-12"/><path fill="#fff" d="M52 72l48 36c6 3 10 2 11-5l20-93c2-8-3-11-8-9L7 45c-8 4-8 8-1 10l29 9 69-43c3-2 6-1 4 1"/></svg>
 			<span>君无止境</span>
@@ -206,7 +216,8 @@
 	</div>
 </footer>
 	</div>
-<script async defer src="/js/menu.js"></script> 
+<script async defer src="/js/menu.js"></script>
+<script async src="/js/highlight.js"></script> 
   <script>
 (function(){
     var bp = document.createElement('script');
@@ -237,5 +248,10 @@ var _hmt = _hmt || [];
 
 
 
+<script type="text/javascript">
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+</script>
 </body>
 </html>

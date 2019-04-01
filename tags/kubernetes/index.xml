@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>kubernetes镜像拉取失败分析</title>
+      <title>kubernetes镜像拉取失败解决方法</title>
       <link>/post/kubernetes_image_pull/</link>
       <pubDate>Fri, 29 Mar 2019 10:17:45 +0800</pubDate>
       

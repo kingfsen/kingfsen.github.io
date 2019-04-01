@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>FutureTask原理分析 - 君无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 	<meta name="description" content="深入分析FutureTask原码，彻底了解FutureTask的执行原理">
 	<meta name="generator" content="Hugo 0.54.0" />
 	
@@ -13,7 +14,9 @@
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css">	
+	<link rel="stylesheet" type="text/css" href="/css/highlight.css">
+	
 	
 	<link rel="stylesheet" href="/css/share.min.css">
 	<script src="/js/social-share.min.js"></script>
@@ -32,6 +35,10 @@
 				<div class="logo__title">君无止境</div>
 				<div class="logo__tagline">代码沉淀技术，技术成就梦想!   Hugo、Java、Go、Docker、Harbor、Kubernetes~</div>
 			</a>
+			
+			<div class="float_right"><div class="social-share"></div>
+  <br/></div>
+			
 		</div>
 		
 <nav class="menu">
@@ -70,11 +77,14 @@
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
 	<span class="meta__text"><a class="meta__link" href="/categories/java" rel="category">Java</a></span>
 </div>
-</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">5054 字</time>
+</div></div>
 		</header>
 
 <div class="post__toc toc">
-	<div class="toc__title">大纲视图</div>
+	<div class="toc__title">目录结构</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
 <ul>
@@ -109,7 +119,7 @@
 在了解FutureTask之前，有必要先了解清楚Java中Callable、Runnable之间的区别，Callable是java.util.concurrent包下的接口，而Runnable
 是java.lang包下的接口。</p>
 
-<pre><code>public interface Runnable {
+<pre><code class="language-Java">public interface Runnable {
 
     public abstract void run();
 }
@@ -117,7 +127,7 @@
 
 <hr />
 
-<pre><code>public interface Callable&lt;V&gt; {
+<pre><code class="language-Java">public interface Callable&lt;V&gt; {
 
     V call() throws Exception;
 }
@@ -133,7 +143,7 @@
 
 <p>Runnable与Callable本身并没有任何关系，但是可以通过java.util.concurrent中Executors的callable方法将Runnable包装成Callable。</p>
 
-<pre><code>//包装成具有自定义返回值的Callable
+<pre><code class="language-Java">//包装成具有自定义返回值的Callable
 public static &lt;T&gt; Callable&lt;T&gt; callable(Runnable task, T result) {
     if (task == null)
         throw new NullPointerException();
@@ -175,7 +185,7 @@ static final class RunnableAdapter&lt;T&gt; implements Callable&lt;T&gt; {
 任务还未开始执行，则取消成功，如果任务已经开始执行，参数mayInterruptIfRunning决定了执行任务线程是否应该被中断。<br/>
 <code>注意:任务开始执行，mayInterruptIfRunning为true，中断了执行任务的线程，仅仅是设置了该线程的中断标志，至于任务是否真正的停止执行具体要看任务逻辑的实现。</code></p>
 
-<pre><code>    public class MyTask implements Runnable {
+<pre><code class="language-Java">    public class MyTask implements Runnable {
 
         @Override
         public void run() {
@@ -204,7 +214,7 @@ static final class RunnableAdapter&lt;T&gt; implements Callable&lt;T&gt; {
 
 <p>RunnableFuture接口中未增加新的方法，重新申明了父类Runnable中的run方法。</p>
 
-<pre><code>public interface RunnableFuture&lt;V&gt; extends Runnable, Future&lt;V&gt; {
+<pre><code class="language-Java">public interface RunnableFuture&lt;V&gt; extends Runnable, Future&lt;V&gt; {
 
     void run();
 }
@@ -214,7 +224,7 @@ static final class RunnableAdapter&lt;T&gt; implements Callable&lt;T&gt; {
 
 <p>FutureTask中的任务类型是Callable，整个过程中这个Callable都具有一个状态state，首先看看FutureTask中定义的一些变量。</p>
 
-<pre><code>//Callable任务的状态，可能有下面的0-6种状态值
+<pre><code class="language-Java">//Callable任务的状态，可能有下面的0-6种状态值
 private volatile int state;
 private static final int NEW          = 0;
 private static final int COMPLETING   = 1;
@@ -236,7 +246,7 @@ private volatile WaitNode waiters;
 
 <p>WaitNode的next属性引用了下一个WaitNode，这样构成了一个链表结构。</p>
 
-<pre><code>static final class WaitNode {
+<pre><code class="language-Java">static final class WaitNode {
     volatile Thread thread;
     volatile WaitNode next;
     WaitNode() { thread = Thread.currentThread(); }
@@ -245,7 +255,7 @@ private volatile WaitNode waiters;
 
 <p>用volatile修饰的变量保证了线程间的可见性，在FutureTask中这些变量都是通过CAS原子操作。</p>
 
-<pre><code>private static final sun.misc.Unsafe UNSAFE;
+<pre><code class="language-Java">private static final sun.misc.Unsafe UNSAFE;
 private static final long stateOffset;
 private static final long runnerOffset;
 private static final long waitersOffset;
@@ -277,7 +287,7 @@ static {
 <p>FutureTask是Java中唯一实现了RunnableFuture接口的类，它提供了两个构造方法，分别支持以Callable、Runnable类型传入任务，任务类型是
 Runnable的则利用Executors.callable方法将Runnable包装Callable，上面已经展示相关包装代码。FutureTask构造完成之后，其任务callable的状态为初始状态NEW。</p>
 
-<pre><code>public FutureTask(Callable&lt;V&gt; callable) {
+<pre><code class="language-Java">public FutureTask(Callable&lt;V&gt; callable) {
     if (callable == null)
         throw new NullPointerException();
     this.callable = callable;
@@ -295,7 +305,7 @@ public FutureTask(Runnable runnable, V result) {
 
 <p>FutureTask实现了Runnable接口，因此run方法是执行线程或者线程池调度执行核心方法，详细分析run方法源码。</p>
 
-<pre><code>public void run() {
+<pre><code class="language-Java">public void run() {
     //Thread.currentThread此时是任务执行线程，不是发起线程
     if (state != NEW ||
         !UNSAFE.compareAndSwapObject(this, runnerOffset,
@@ -341,7 +351,7 @@ public FutureTask(Runnable runnable, V result) {
 <li>如果state状态此时为INTERRUPTING，表示有线程正在取消(中断)任务，此时执行线程执行Thread.yield()让出cpu执行时间，尽快让发起线程将state设置为最终状态INTERRUPTED</li>
 </ul>
 
-<pre><code>private void handlePossibleCancellationInterrupt(int s) {
+<pre><code class="language-Java">private void handlePossibleCancellationInterrupt(int s) {
     if (s == INTERRUPTING)
         while (state == INTERRUPTING)
             Thread.yield(); 
@@ -350,7 +360,7 @@ public FutureTask(Runnable runnable, V result) {
 
 <p>任务正常执行结束，将执行结果赋值给变量outcome，state从COMPLETING状态过渡到NORMAL状态。</p>
 
-<pre><code>protected void set(V v) {
+<pre><code class="language-Java">protected void set(V v) {
     if (UNSAFE.compareAndSwapInt(this, stateOffset, NEW, COMPLETING)) {
         outcome = v;
         UNSAFE.putOrderedInt(this, stateOffset, NORMAL); // final state
@@ -361,7 +371,7 @@ public FutureTask(Runnable runnable, V result) {
 
 <p>任务执行过程中发生异常，将异常对象赋值给变量outcome，因为outcome是一个Object类型，state从COMPLETING过渡到EXCEPTIONAL。</p>
 
-<pre><code>protected void setException(Throwable t) {
+<pre><code class="language-Java">protected void setException(Throwable t) {
     if (UNSAFE.compareAndSwapInt(this, stateOffset, NEW, COMPLETING)) {
         outcome = t;
         UNSAFE.putOrderedInt(this, stateOffset, EXCEPTIONAL); // final state
@@ -373,7 +383,7 @@ public FutureTask(Runnable runnable, V result) {
 <p>不管任务正常执行结束，还是发生异常，最后都要调用finishCompletion方法处理，该方法主要用来唤醒因调用get方法而阻塞的线程，同时
 将FutureTask中的一些变量比如callable赋值null，最后调用done()方法，done方法在FutureTask中空实现，子类可以进行覆盖。</p>
 
-<pre><code>private void finishCompletion() {
+<pre><code class="language-Java">private void finishCompletion() {
     // 通过for循环调用CAS操作，保证操作一定可以成功
     for (WaitNode q; (q = waiters) != null;) {
         if (UNSAFE.compareAndSwapObject(this, waitersOffset, q, null)) {
@@ -405,7 +415,7 @@ public FutureTask(Runnable runnable, V result) {
 
 <p>FutureTask中同时提供了方法isDone方法，用来表示任务是否处理完成，只要state的值不是初始状态NEW，返回true。</p>
 
-<pre><code>public boolean isDone() {
+<pre><code class="language-Java">public boolean isDone() {
     return state != NEW;
 }
 </code></pre>
@@ -415,7 +425,7 @@ public FutureTask(Runnable runnable, V result) {
 <p>cancel方法主要用来取消任务的执行，前面已经介绍过，并不是任务都能取消成功，同时要理解取消操作成功，也不能意味着任务就一定未执行，因为执行线程可能还未将state从NEW设置为COMPLETING，但是已经开始执行了。
 取消方法带着一个参数mayInterruptIfRunning，该参数表示是否中断正在执行的任务，也就是说任务正在被某个执行线程处理，只是还未处理完成，针对这种情况根据该参数判断是否需要中断执行线程。</p>
 
-<pre><code>public boolean cancel(boolean mayInterruptIfRunning) {
+<pre><code class="language-Java">public boolean cancel(boolean mayInterruptIfRunning) {
     //任务状态不是初始状态NEW，则取消失败，直接返回false
     //或者CAS设置任务状态为INTERRUPTING/CANCELLED时失败，表示状态已经被某个执行线程修改了，直接返回false
     if (!(state == NEW &amp;&amp;
@@ -447,7 +457,7 @@ public FutureTask(Runnable runnable, V result) {
 finishCompletion方法唤醒所有阻塞的线程。FutureTask中提供了方法isCancel判断任务是否已经被取消，它的逻辑则是只要state是CALCELLED、
 INTERRUPTING、INTERRUPTED任何一种则表示任务被取消。</p>
 
-<pre><code>public boolean isCancelled() {
+<pre><code class="language-Java">public boolean isCancelled() {
     return state &gt;= CANCELLED;
 }
 </code></pre>
@@ -458,7 +468,7 @@ INTERRUPTING、INTERRUPTED任何一种则表示任务被取消。</p>
 超过给定的时间还未获取到执行结果，则抛出TimeoutException，两个get方法均支持线程中断，发成中断时抛出InterruptedException，
 如果任务被取消，两个方法都会抛出运行时异常CancellationException。</p>
 
-<pre><code>public V get() throws InterruptedException, ExecutionException {
+<pre><code class="language-Java">public V get() throws InterruptedException, ExecutionException {
     int s = state;
     if (s &lt;= COMPLETING)
         s = awaitDone(false, 0L);
@@ -479,7 +489,7 @@ public V get(long timeout, TimeUnit unit)
 
 <p>两个get方法底层都是调用相同的awaitDone方法实现，只是传入参数区别，awaitDone方法是实现线程阻塞的核心方法。</p>
 
-<pre><code>private int awaitDone(boolean timed, long nanos)
+<pre><code class="language-Java">private int awaitDone(boolean timed, long nanos)
     throws InterruptedException {
     //如果设置超时等待，计算出线程阻塞截止时间
     final long deadline = timed ? System.nanoTime() + nanos : 0L;
@@ -528,7 +538,7 @@ public V get(long timeout, TimeUnit unit)
 
 <h3 id="demo">Demo</h3>
 
-<pre><code>public class Test {
+<pre><code class="language-Java">public class Test {
 
     public static void main(String[] args) {
         Callable&lt;String&gt; callable = () -&gt; {
@@ -618,8 +628,8 @@ public V get(long timeout, TimeUnit unit)
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/post/hugo_base/">Hugo入门详细教程</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/go_base/">深入理解Go语言的入门知识</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败分析</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/go_base/">深入理解Go语言的基础概念</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败解决方法</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/share_js/">网站一键分享插件Share.js</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/isso/">开源评论系统isso</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/futuretask/">FutureTask原理分析</a></li>
@@ -692,12 +702,12 @@ public V get(long timeout, TimeUnit unit)
 <div class="widget-social widget">
 	<h4 class="widget-social__title widget__title">友情链接</h4>
 	<div class="widget-social__item widget__item">
-		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://www.kingfsen.cn" target="_blank">
+		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://youendless.com" target="_blank">
 			<svg class="widget-social__link-icon icon-telegram" viewBox="0 0 132 110" width="24" height="24">
 			<path fill="#ddd" d="M50 103c-4 0-3-1-5-5L34 60l88-52"/><path fill="#aaa" d="M50 103c3 0 4-1 6-3l16-16-20-12"/><path fill="#fff" d="M52 72l48 36c6 3 10 2 11-5l20-93c2-8-3-11-8-9L7 45c-8 4-8 8-1 10l29 9 69-43c3-2 6-1 4 1"/></svg>
 			<span>君无止境</span>
 		</a>
-		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://www.kingfsen.cn" target="_blank">
+		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://youendless.com" target="_blank">
 			<svg class="widget-social__link-icon icon-telegram" viewBox="0 0 132 110" width="24" height="24">
 			<path fill="#ddd" d="M50 103c-4 0-3-1-5-5L34 60l88-52"/><path fill="#aaa" d="M50 103c3 0 4-1 6-3l16-16-20-12"/><path fill="#fff" d="M52 72l48 36c6 3 10 2 11-5l20-93c2-8-3-11-8-9L7 45c-8 4-8 8-1 10l29 9 69-43c3-2 6-1 4 1"/></svg>
 			<span>君无止境</span>
@@ -717,7 +727,8 @@ public V get(long timeout, TimeUnit unit)
 	</div>
 </footer>
 	</div>
-<script async defer src="/js/menu.js"></script> 
+<script async defer src="/js/menu.js"></script>
+<script async src="/js/highlight.js"></script> 
   <script>
 (function(){
     var bp = document.createElement('script');
@@ -748,5 +759,10 @@ var _hmt = _hmt || [];
 
 
 
+<script type="text/javascript">
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+</script>
 </body>
 </html>
