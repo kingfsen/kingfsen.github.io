@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en-us">
+<html class="no-js" lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,48 +15,39 @@
 	<link rel="alternate" type="application/rss+xml" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/index.xml" title="君无止境">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
+	
 	<link rel="stylesheet" href="/css/share.min.css">
-	<link rel="stylesheet" href="/css/card.css">
 	<script src="/js/social-share.min.js"></script>
 	<script src="/js/qrcode.js"></script>
 	
+	
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-
 </head>
 <body class="body">
-    
-  
 	<div class="container container--outer">
 		<header class="header">
 	<div class="container">
 		<div class="logo">
 			<a class="logo__link" href="/" title="君无止境" rel="home">
 				<div class="logo__title">君无止境</div>
-				
-				<div class="logo__tagline">代码沉淀技术，技术成就梦想~
-				</div>
-				
+				<div class="logo__tagline">代码沉淀技术，技术成就梦想!   Hugo、Java、Go、Docker、Harbor、Kubernetes~</div>
 			</a>
-			<div class="float_right"><div class="social-share"></div></div>
 		</div>
 		
 <nav class="menu">
 	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
-		<span class="menu__btn-title" tabindex="-1">Menu</span>
+		<span class="menu__btn-title" tabindex="-1">选择</span>
 	</button>
 	<ul class="menu__list">
-		
 		<li class="menu__item">
 			<a class="menu__link" href="/about/">关于我</a>
 		</li>
-		
 		<li class="menu__item">
-			<a class="menu__link" href="/arithmetic/">基础算法</a>
+			<a class="menu__link" href="/post/">博客</a>
 		</li>
-		
 		<li class="menu__item">
-			<a class="menu__link" href="/post/">技术博客</a>
+			<a class="menu__link" href="/timeline/">时间轴</a>
 		</li>
 	</ul>
 </nav>
@@ -66,11 +57,10 @@
 		<div class="wrapper flex">
 			<div class="primary">
 			
-<main class="main list" role="main">
-<article class="list__item post">
+<main class="main list" role="main"><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/arithmetic/get_min_contains_sub_string/" rel="bookmark">
+			<a href="/post/get_min_contains_sub_string/" rel="bookmark">
 			字符串的最小包含子串
 			</a>
 		</h3>
@@ -87,15 +77,15 @@
 </div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		问题 给定字符串str1，str2，获取字符串str1中包含str2的最小字符子串。 str1=&ldquo;abcde&rdquo;, str2=&ldquo;bd&rdquo; -&gt; bcd str1=&ldquo;abcde&rdquo;, str2=&ldquo;cg&rdquo; -&gt; &ldquo;&rdquo; 思路 假定字符编码范围0~255 创建一个size为256的整形数组charCount，用来保存字符串str2所有字符的出现次数 整形变量match用来表示当前差几个字符未匹配 将str1、str2分别转换为字符数组parentArray、subArray 遍历subArray，保存str2每个字符出现的次数 从左向右遍历parentArray，将每个字符对应的次数做&ndash;运算，之后如果字符的次数为零，表示匹配上一个字符，则match&ndash; 若match等
+		问题 给定字符串str1，str2，获取字符串str1中包含str2的最小字符子串。 str1=&ldquo;abcde&rdquo;, str2=&ldquo;bd&rdquo; -&gt; bcd str1=&ldquo;abcde&rdquo;, str2=&ldquo;cg&rdquo; -&gt; &ldquo;&rdquo; 思路 假定字符编码范围0~255 创建一个size为256的整形数组charCount，用来保存字符串str2所有字符的出现次数 整形变量match用来表示当前差几个字符未匹配 将str1、str2分
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/arithmetic/get_min_contains_sub_string/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/post/get_min_contains_sub_string/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/arithmetic/check_deformation_word/" rel="bookmark">
+			<a href="/post/check_deformation_word/" rel="bookmark">
 			判断两个单词是否为变形词
 			</a>
 		</h3>
@@ -112,15 +102,15 @@
 </div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		问题 给定两个单词word1，word2，判断两个单词是否是变形词，即两个单词中的每个字符出现的次数一致。 word1=&ldquo;abcc&rdquo;, word=&ldquo;acbc&rdquo;, 返回true word1=&ldquo;abcc&rdquo;, word=&ldquo;abbc&rdquo;, 返回false word1=&ldquo;abc&rdquo;, word=&ldquo;cba&rdquo;, 返回true 思路 假定字符串的编码范围0~255。 新建一个size为256的int数组 分别将单词word1、word2转换为对应的字符数组word1CharArray、word2CharArray 遍历word1CharArray，将字符出现的字符保存在int数组中 遍历word2CharArray，将int数组中对应字符位置的值减1，如果减1之后值小于0，直接返回false 代码 /** * 判断两个单词是否是变形词 */ public class CheckDeformationWord { public static
+		问题 给定两个单词word1，word2，判断两个单词是否是变形词，即两个单词中的每个字符出现的次数一致。 word1=&ldquo;abcc&rdquo;, word=&ldquo;acbc&rdquo;, 返回true word1=&ldquo;abcc&rdquo;, word=&ldquo;abbc&rdquo;, 返回false word1=&ldquo;abc&rdquo;, word=&ldquo;cba&rdquo;, 返回true 思路 假定字符串的编码范围0~255。 新建一个size为256的int数组 分别将单词word1、word2转换为对应的字符数组word1C
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/arithmetic/check_deformation_word/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/post/check_deformation_word/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/arithmetic/get_max_unique_sub_string/" rel="bookmark">
+			<a href="/post/get_max_unique_sub_string/" rel="bookmark">
 			寻找字符串中不重复最长子串
 			</a>
 		</h3>
@@ -137,10 +127,10 @@
 </div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		问题 给定一个字符串，找出这个字符串中最长的不重复子串。假定字符串编码范围在256之内(排除中文等特殊字符)，同时如果有相同长度的子串，优先获取首次寻找的子串，时间复杂度O(N)。 &ldquo;abcd&rdquo; -&gt; &ldquo;abcd&rdquo; &ldquo;abccd&rdquo; -&gt; &ldquo;abc&rdquo; &ldquo;somok39ebab3yuvwz123&rdquo; -&gt; &ldquo;ab3yuvwz12&rdquo; 思路 用一个int数组position保存每个字符在字符串中的位置 用一个int变量mark标记下一次可获取子串的开始位置 用一个String变量maxUniqueStr保存循环过程中始终最长的无重复子串。 初始化position中每个元素值为-1，同时将字符串转化成字符数组chars 遍历chars数组，当前字符上次出现，取出上次的位置lastPos(注意mark必须小
+		问题 给定一个字符串，找出这个字符串中最长的不重复子串。假定字符串编码范围在256之内(排除中文等特殊字符)，同时如果有相同长度的子串，优先获取首次寻找的子串，时间复杂度O(N)。 &ldquo;abcd&rdquo; -&gt; &ldquo;abcd&rdquo; &ldquo;abccd&rdquo; -&gt; &ldquo;abc&rdquo; &ldquo;somok39ebab3yuvwz123&rdquo; -&gt; &ldquo;ab3yuvwz12&rdquo; 思路 用一个int数组position保存每个字符在字符串中的位置 用一个int变量mark标记下
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/arithmetic/get_max_unique_sub_string/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/post/get_max_unique_sub_string/">阅读全文…</a>
 	</div>
 </article>
 </main>
@@ -148,31 +138,39 @@
 
 			</div>
 			
-			
-<aside class="sidebar">
+<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="" />
+	</form>
+</div>
 <div class="widget-recent widget">
-	<h4 class="widget__title">Recent Posts</h4>
+	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/hugo_base/">Hugo入门详细教程</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/go_base/">深入理解Go语言的入门知识</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败分析</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/share_js/">网站一键分享插件Share.js</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/isso/">开源评论系统isso</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/futuretask/">FutureTask原理分析</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/tree_traverse/">递归与非递归遍历二叉树</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/binary_tree_base/">二叉树</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/tree_traverse/">递归与非递归遍历二叉树</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/binary_tree_base/">二叉树</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/hugo_blog/">高效的静态网站生成器Hugo</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/helm_harbor/">Helm Harbor</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/trie/">字典树的应用与实现</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/get_min_contains_sub_string/">字符串的最小包含子串</a></li>
 		</ul>
 	</div>
 </div>
 <div class="widget-categories widget">
-	<h4 class="widget__title">Categories</h4>
+	<h4 class="widget__title">分类</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/categories/docker">Docker</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/golang">Golang</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/hugo">Hugo</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81">容器生态</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/%e5%bc%80%e6%ba%90%e5%88%86%e4%ba%ab">开源分享</a></li>
@@ -181,14 +179,15 @@
 	</div>
 </div>
 <div class="widget-taglist widget">
-	<h4 class="widget__title">Tags</h4>
+	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/chartmuseum" title="Chartmuseum">Chartmuseum (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (4)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
@@ -208,7 +207,7 @@
 	</div>
 </div>
 <div class="widget-social widget">
-	<h4 class="widget-social__title widget__title">Social</h4>
+	<h4 class="widget-social__title widget__title">社群</h4>
 	<div class="widget-social__content widget__content">
 		<div class="widget-social__item widget__item">
 			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/kingfsen" target="_blank">
@@ -216,23 +215,44 @@
 				<span>GitHub</span>
 			</a>
 		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:562620163@qq.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>562620163@qq.com</span>
+			</a>
+		</div>
 	</div>
 </div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">友情链接</h4>
+	<div class="widget-social__item widget__item">
+		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://www.kingfsen.cn" target="_blank">
+			<svg class="widget-social__link-icon icon-telegram" viewBox="0 0 132 110" width="24" height="24">
+			<path fill="#ddd" d="M50 103c-4 0-3-1-5-5L34 60l88-52"/><path fill="#aaa" d="M50 103c3 0 4-1 6-3l16-16-20-12"/><path fill="#fff" d="M52 72l48 36c6 3 10 2 11-5l20-93c2-8-3-11-8-9L7 45c-8 4-8 8-1 10l29 9 69-43c3-2 6-1 4 1"/></svg>
+			<span>君无止境</span>
+		</a>
+		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://www.kingfsen.cn" target="_blank">
+			<svg class="widget-social__link-icon icon-telegram" viewBox="0 0 132 110" width="24" height="24">
+			<path fill="#ddd" d="M50 103c-4 0-3-1-5-5L34 60l88-52"/><path fill="#aaa" d="M50 103c3 0 4-1 6-3l16-16-20-12"/><path fill="#fff" d="M52 72l48 36c6 3 10 2 11-5l20-93c2-8-3-11-8-9L7 45c-8 4-8 8-1 10l29 9 69-43c3-2 6-1 4 1"/></svg>
+			<span>君无止境</span>
+		</a>
+	</div>
+</div>
+
 </aside>
-						
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2019 君无止境.&nbsp;
-			<span class="footer__copyright-credits">京ICP备18052349号-1</span>&nbsp;&nbsp;
-			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1276840524'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s96.cnzz.com/z_stat.php%3Fid%3D1276840524%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+			&copy; 2019 君无止境.
+			<span class="footer__copyright-credits">使用 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 技术与 <a href="https://github.com/kingfsen/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主题</span>
 		</div>
 	</div>
 </footer>
 	</div>
-<script async defer src="/js/menu.js"></script><script>
+<script async defer src="/js/menu.js"></script> 
+  <script>
 (function(){
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
@@ -246,6 +266,21 @@
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
+
+
+ 
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1f3ac79473dea8a6643d0e73a08fa809";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
 
 </body>
 </html>

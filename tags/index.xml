@@ -5,7 +5,7 @@
     <link>/tags/</link>
     <description>Recent content in Tags on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-cn</language>
     <lastBuildDate>Tue, 19 Mar 2019 10:02:41 +0800</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
@@ -39,6 +39,15 @@
     </item>
     
     <item>
+      <title>Golang</title>
+      <link>/tags/golang/</link>
+      <pubDate>Sat, 30 Mar 2019 13:48:07 +0800</pubDate>
+      
+      <guid>/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Harbor</title>
       <link>/tags/harbor/</link>
       <pubDate>Tue, 19 Mar 2019 10:02:41 +0800</pubDate>
@@ -59,7 +68,7 @@
     <item>
       <title>Hugo</title>
       <link>/tags/hugo/</link>
-      <pubDate>Tue, 19 Mar 2019 20:05:49 +0800</pubDate>
+      <pubDate>Sun, 31 Mar 2019 12:54:26 +0800</pubDate>
       
       <guid>/tags/hugo/</guid>
       <description></description>

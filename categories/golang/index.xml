@@ -5,11 +5,20 @@
     <link>/categories/golang/</link>
     <description>Recent content in Golang on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 11 Mar 2019 15:14:25 +0800</lastBuildDate>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 30 Mar 2019 13:48:07 +0800</lastBuildDate>
     
 	<atom:link href="/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>深入理解Go语言的入门知识</title>
+      <link>/post/go_base/</link>
+      <pubDate>Sat, 30 Mar 2019 13:48:07 +0800</pubDate>
+      
+      <guid>/post/go_base/</guid>
+      <description>这篇文章主要讲解一些go语言开发的入门知识，希望对准备入门学习Go语言的开发者有点帮助。我之前也一直用Java语言进行开发，后来迫于公司的相关容器项目， 就自学Go语言，一边学习一边完成工作。Go语言是Google开源的编程语言，众多开源项目kubernetes、docker、prometh</description>
+    </item>
     
     <item>
       <title>基于数据库的简单Leader Elect</title>
@@ -17,7 +26,7 @@
       <pubDate>Mon, 11 Mar 2019 15:14:25 +0800</pubDate>
       
       <guid>/post/leader_elect_golang/</guid>
-      <description>某个系统只用来执行定时任务，如果只部署单台服务，那么又容易单点故障，如果部署多台服务，又如何只保证每次只会其中一台去执行呢，在这里，可以对N台服务，做一个简单的leader elect，成为leader的实例才可以去执行定时任务。虽然当前出现很多开源的leader选举组件，比如zookeeper、etcd等，但有时候对我们个人开发者或者小项目来说，代价太高。因此，我们可以基于mysql数据库进行一个简单的leader elect。 设计 首先，新建一张表，表结构如下 CREATE TABLE IF NOT EXISTS `leader_election` ( `service_id` varchar(50) NOT NULL DEFAULT &#39;&#39;, `leader_id` varchar(50) NOT NULL DEFAULT &#39;&#39;, `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`service_id`), UNIQUE KEY `uniq_service_id` (`service_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; service_id指的是</description>
+      <description>某个系统只用来执行定时任务，如果只部署单台服务，那么又容易单点故障，如果部署多台服务，又如何只保证每次只会其中一台去执行呢，在这里，可以对N台服务，做一个简单的leader elect，成为leader的实例才可以去执行定时任务。虽然当前出现很多开源的leader选举组件，比如zookeep</description>
     </item>
     
   </channel>

@@ -5,7 +5,7 @@
     <link>/tags/docker/</link>
     <description>Recent content in Docker on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-cn</language>
     <lastBuildDate>Sat, 16 Mar 2019 08:54:16 +0800</lastBuildDate>
     
 	<atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
@@ -17,7 +17,7 @@
       <pubDate>Sat, 16 Mar 2019 08:54:16 +0800</pubDate>
       
       <guid>/post/docker_login_process/</guid>
-      <description>docker安装的时候已经同时安装了docker client，通过命令docker version即可查看客户端以及服务端的版本信息，通过执行命令docker version查看docker版本信息。docker最近暴露的runc漏洞CVE-2019-5736，企业环境请安装18.09.2以上版本。 Client: Version: 18.06.0-ce API version: 1.38 Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:08:18 2018 OS/Arch: linux/amd64 Experimental: false Server: Engine: Version: 18.06.0-ce API version: 1.38 (minimum version 1.12) Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:10:42 2018 OS/Arch: linux/amd64 Experimental: false docker login等命令行则是用来对harbor服务发起http请求，早期版本的harbor registry服务url为/v1，后期harbor改为了/v2，所以如果你的do</description>
+      <description>docker安装的时候已经同时安装了docker client，通过命令docker version即可查看客户端以及服务端的版本信息，通过执行命令docker version查看docker版本信息。docker最近暴露的runc漏洞CVE-2019-5736，企业环境请安装18.09.2以上</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Wed, 13 Mar 2019 10:28:01 +0800</pubDate>
       
       <guid>/post/docker_deploy_wordpress/</guid>
-      <description>wordpress数据存储依赖mysql数据库，以docker容器方式部署完整的wordpress博客服务，则需要从镜像仓库拉取mysql、wordpress镜像，这里选择从开源的docker hub 获取mysql 5.7版本，wordpress latest版本，同时需要准备一台具备外网环境的机器，硬件配置最好1C2G以上，当然1C1G也是没有问题的。 docker pull mysql:5.7 docker pull wordpress:latest 数据库服务 启动mysql数据库服务 docker run --name mysql-db -p 3306:3306 -v /data/mysql:/var/lib/mysql -d -e MYSQL_ROOT_PASSWORD=root mysql:5.7 mysql容器的名字为mysql-db，数据库文件则保存在当前机器的/data/mysql目录下，-e MYSQL_ROOT_PASSWORD以环</description>
+      <description>wordpress数据存储依赖mysql数据库，以docker容器方式部署完整的wordpress博客服务，则需要从镜像仓库拉取mysql、wordpress镜像，这里选择从开源的docker hub 获取mysql 5.7版本，wordpress latest版本，同时需要准备一台具备外网环境的机器</description>
     </item>
     
     <item>
@@ -35,7 +35,7 @@
       <pubDate>Mon, 11 Mar 2019 15:14:25 +0800</pubDate>
       
       <guid>/post/deploy_harbor_service/</guid>
-      <description>harbor初期版本1.4是在vmware旗下，当前已经成立了新项目goharbor。并且1.6.0版本之后进行了重构，数据库由mysql转换到postgresql，部分表结构也稍微改变了，代码也增强了很多，同时新增了helm chartmuseum仓库功能。对于harbor这个项目，可能有些开发者不太了解或者疑惑，为什么不直接使用docker registry，然后在registry上面再增加一个Auth鉴权。当然对于个人开发者或者企业内部，完全可以这样，不用管授权的问题。但是对于一个企业对外提供镜像存储服务，没有授权，那是不行的，A上传的镜像，B可以随便</description>
+      <description>harbor初期版本1.4是在vmware旗下，当前已经成立了新项目goharbor。并且1.6.0版本之后进行了重构，数据库由mysql转换到postgresql，部分表结构也稍微改变了，代码也增强了很多，同时新增了helm chartmuseum仓库功能。对于harbor这个项目，可能有</description>
     </item>
     
   </channel>

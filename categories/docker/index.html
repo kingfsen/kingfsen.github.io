@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en-us">
+<html class="no-js" lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,48 +15,39 @@
 	<link rel="alternate" type="application/rss+xml" href="/categories/docker/index.xml" title="君无止境">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
+	
 	<link rel="stylesheet" href="/css/share.min.css">
-	<link rel="stylesheet" href="/css/card.css">
 	<script src="/js/social-share.min.js"></script>
 	<script src="/js/qrcode.js"></script>
 	
+	
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-
 </head>
 <body class="body">
-    
-  
 	<div class="container container--outer">
 		<header class="header">
 	<div class="container">
 		<div class="logo">
 			<a class="logo__link" href="/" title="君无止境" rel="home">
 				<div class="logo__title">君无止境</div>
-				
-				<div class="logo__tagline">代码沉淀技术，技术成就梦想~
-				</div>
-				
+				<div class="logo__tagline">代码沉淀技术，技术成就梦想!   Hugo、Java、Go、Docker、Harbor、Kubernetes~</div>
 			</a>
-			<div class="float_right"><div class="social-share"></div></div>
 		</div>
 		
 <nav class="menu">
 	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
-		<span class="menu__btn-title" tabindex="-1">Menu</span>
+		<span class="menu__btn-title" tabindex="-1">选择</span>
 	</button>
 	<ul class="menu__list">
-		
 		<li class="menu__item">
 			<a class="menu__link" href="/about/">关于我</a>
 		</li>
-		
 		<li class="menu__item">
-			<a class="menu__link" href="/arithmetic/">基础算法</a>
+			<a class="menu__link" href="/post/">博客</a>
 		</li>
-		
 		<li class="menu__item">
-			<a class="menu__link" href="/post/">技术博客</a>
+			<a class="menu__link" href="/timeline/">时间轴</a>
 		</li>
 	</ul>
 </nav>
@@ -66,8 +57,7 @@
 		<div class="wrapper flex">
 			<div class="primary">
 			
-<main class="main list" role="main">
-<article class="list__item post">
+<main class="main list" role="main"><article class="list__item post">
 	<figure class="list__thumbnail">
 		<a href="/post/docker_login_process/">
 			<img src="/img/docker.jpg" alt="Docker Login执行流程与原理" />
@@ -92,10 +82,10 @@
 </div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		docker安装的时候已经同时安装了docker client，通过命令docker version即可查看客户端以及服务端的版本信息，通过执行命令docker version查看docker版本信息。docker最近暴露的runc漏洞CVE-2019-5736，企业环境请安装18.09.2以上版本。 Client: Version: 18.06.0-ce API version: 1.38 Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:08:18 2018 OS/Arch: linux/amd64 Experimental: false Server: Engine: Version: 18.06.0-ce API version: 1.38 (minimum version 1.12) Go version: go1.10.3 Git commit: 0ffa825 Built: Wed Jul 18 19:10:42 2018 OS/Arch: linux/amd64 Experimental: false docker login等命令行则是用来对harbor服务发起http请求，早期版本的harbor registry服务url为/v1，后期harbor改为了/v2，所以如果你的do
+		docker安装的时候已经同时安装了docker client，通过命令docker version即可查看客户端以及服务端的版本信息，通过执行命令docker version查看docker版本信息。docker最近暴露的runc漏洞CVE-2019-5736，企业环境请安装18.09.2以上
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/docker_login_process/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/post/docker_login_process/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<figure class="list__thumbnail">
@@ -122,10 +112,10 @@
 </div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		wordpress数据存储依赖mysql数据库，以docker容器方式部署完整的wordpress博客服务，则需要从镜像仓库拉取mysql、wordpress镜像，这里选择从开源的docker hub 获取mysql 5.7版本，wordpress latest版本，同时需要准备一台具备外网环境的机器，硬件配置最好1C2G以上，当然1C1G也是没有问题的。 docker pull mysql:5.7 docker pull wordpress:latest 数据库服务 启动mysql数据库服务 docker run --name mysql-db -p 3306:3306 -v /data/mysql:/var/lib/mysql -d -e MYSQL_ROOT_PASSWORD=root mysql:5.7 mysql容器的名字为mysql-db，数据库文件则保存在当前机器的/data/mysql目录下，-e MYSQL_ROOT_PASSWORD以环
+		wordpress数据存储依赖mysql数据库，以docker容器方式部署完整的wordpress博客服务，则需要从镜像仓库拉取mysql、wordpress镜像，这里选择从开源的docker hub 获取mysql 5.7版本，wordpress latest版本，同时需要准备一台具备外网环境的机器
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/docker_deploy_wordpress/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/post/docker_deploy_wordpress/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<figure class="list__thumbnail">
@@ -152,10 +142,10 @@
 </div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		初次听说镜像扫描的人肯定有很多疑惑，总会想原理是什么呢？我们可以先思考下，windows控制面板、包括一些第三方软件比如三六零等，它们都能获取系统安装的软件以及版本，当然绿色解压版他们就无法识别，获取软件版本之后，他们就能提供一些升级的版本、以及当前软件版本的漏洞列举出来，由此可见，系统安装了哪些版本的软件，第三方都可以通过系统相关文件获取，那么Linux系统也一样。 Harbor仓库中的镜像扫描这个功能，看似很高大上，其实等你了解了它的底层原理与流程，你就会发现就是做了那么一件事而已，用通俗的一句话概括，就是找到每个镜像文件系统中已经安装的软件包与版本，
+		初次听说镜像扫描的人肯定有很多疑惑，总会想原理是什么呢？我们可以先思考下，windows控制面板、包括一些第三方软件比如三六零等，它们都能获取系统安装的软件以及版本，当然绿色解压版他们就无法识别，获取软件版本之后，他们就能提供一些升级的版本、以及当前软件版本的漏洞列举出来，由此可见，系统安
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/harbor_image_scan/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/post/harbor_image_scan/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<figure class="list__thumbnail">
@@ -182,10 +172,10 @@
 </div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		harbor初期版本1.4是在vmware旗下，当前已经成立了新项目goharbor。并且1.6.0版本之后进行了重构，数据库由mysql转换到postgresql，部分表结构也稍微改变了，代码也增强了很多，同时新增了helm chartmuseum仓库功能。对于harbor这个项目，可能有些开发者不太了解或者疑惑，为什么不直接使用docker registry，然后在registry上面再增加一个Auth鉴权。当然对于个人开发者或者企业内部，完全可以这样，不用管授权的问题。但是对于一个企业对外提供镜像存储服务，没有授权，那是不行的，A上传的镜像，B可以随便
+		harbor初期版本1.4是在vmware旗下，当前已经成立了新项目goharbor。并且1.6.0版本之后进行了重构，数据库由mysql转换到postgresql，部分表结构也稍微改变了，代码也增强了很多，同时新增了helm chartmuseum仓库功能。对于harbor这个项目，可能有
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/deploy_harbor_service/">Read more…</a>
+		<a class="list__footer-readmore btn" href="/post/deploy_harbor_service/">阅读全文…</a>
 	</div>
 </article>
 </main>
@@ -193,31 +183,39 @@
 
 			</div>
 			
-			
-<aside class="sidebar">
+<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="" />
+	</form>
+</div>
 <div class="widget-recent widget">
-	<h4 class="widget__title">Recent Posts</h4>
+	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/hugo_base/">Hugo入门详细教程</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/go_base/">深入理解Go语言的入门知识</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败分析</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/share_js/">网站一键分享插件Share.js</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/isso/">开源评论系统isso</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/futuretask/">FutureTask原理分析</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/tree_traverse/">递归与非递归遍历二叉树</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/binary_tree_base/">二叉树</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/tree_traverse/">递归与非递归遍历二叉树</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/binary_tree_base/">二叉树</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/hugo_blog/">高效的静态网站生成器Hugo</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/helm_harbor/">Helm Harbor</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/trie/">字典树的应用与实现</a></li>
-			<li class="widget__item"><a class="widget__link" href="/arithmetic/get_min_contains_sub_string/">字符串的最小包含子串</a></li>
 		</ul>
 	</div>
 </div>
 <div class="widget-categories widget">
-	<h4 class="widget__title">Categories</h4>
+	<h4 class="widget__title">分类</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/categories/docker">Docker</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/golang">Golang</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/hugo">Hugo</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81">容器生态</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/%e5%bc%80%e6%ba%90%e5%88%86%e4%ba%ab">开源分享</a></li>
@@ -226,14 +224,15 @@
 	</div>
 </div>
 <div class="widget-taglist widget">
-	<h4 class="widget__title">Tags</h4>
+	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/chartmuseum" title="Chartmuseum">Chartmuseum (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (4)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
@@ -253,7 +252,7 @@
 	</div>
 </div>
 <div class="widget-social widget">
-	<h4 class="widget-social__title widget__title">Social</h4>
+	<h4 class="widget-social__title widget__title">社群</h4>
 	<div class="widget-social__content widget__content">
 		<div class="widget-social__item widget__item">
 			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/kingfsen" target="_blank">
@@ -261,23 +260,44 @@
 				<span>GitHub</span>
 			</a>
 		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:562620163@qq.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>562620163@qq.com</span>
+			</a>
+		</div>
 	</div>
 </div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">友情链接</h4>
+	<div class="widget-social__item widget__item">
+		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://www.kingfsen.cn" target="_blank">
+			<svg class="widget-social__link-icon icon-telegram" viewBox="0 0 132 110" width="24" height="24">
+			<path fill="#ddd" d="M50 103c-4 0-3-1-5-5L34 60l88-52"/><path fill="#aaa" d="M50 103c3 0 4-1 6-3l16-16-20-12"/><path fill="#fff" d="M52 72l48 36c6 3 10 2 11-5l20-93c2-8-3-11-8-9L7 45c-8 4-8 8-1 10l29 9 69-43c3-2 6-1 4 1"/></svg>
+			<span>君无止境</span>
+		</a>
+		<a class="widget-social__link widget__link btn" title="君无止境" rel="noopener noreferrer" href="https://www.kingfsen.cn" target="_blank">
+			<svg class="widget-social__link-icon icon-telegram" viewBox="0 0 132 110" width="24" height="24">
+			<path fill="#ddd" d="M50 103c-4 0-3-1-5-5L34 60l88-52"/><path fill="#aaa" d="M50 103c3 0 4-1 6-3l16-16-20-12"/><path fill="#fff" d="M52 72l48 36c6 3 10 2 11-5l20-93c2-8-3-11-8-9L7 45c-8 4-8 8-1 10l29 9 69-43c3-2 6-1 4 1"/></svg>
+			<span>君无止境</span>
+		</a>
+	</div>
+</div>
+
 </aside>
-						
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2019 君无止境.&nbsp;
-			<span class="footer__copyright-credits">京ICP备18052349号-1</span>&nbsp;&nbsp;
-			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1276840524'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s96.cnzz.com/z_stat.php%3Fid%3D1276840524%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+			&copy; 2019 君无止境.
+			<span class="footer__copyright-credits">使用 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 技术与 <a href="https://github.com/kingfsen/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主题</span>
 		</div>
 	</div>
 </footer>
 	</div>
-<script async defer src="/js/menu.js"></script><script>
+<script async defer src="/js/menu.js"></script> 
+  <script>
 (function(){
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
@@ -291,6 +311,21 @@
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
+
+
+ 
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1f3ac79473dea8a6643d0e73a08fa809";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
 
 </body>
 </html>
