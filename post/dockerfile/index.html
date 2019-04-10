@@ -733,7 +733,7 @@ failed to copy files: lstat /data/docker/overlay2/026d474a8bae00c99e5b126df2ebb9
 <pre><code class="language-Dockerfile">docker build -t test:v2.0 -f Dockerfile docker
 </code></pre>
 
-<p>进入之后，我们才恍能大悟，上面已经详细介绍过<code>ADD</code>指令了，当<code>ADD</code>指令的<code>dest</code>没有以<code>\</code>结尾时，Docker会把它当成是一个文件，在这里相当于把readme.txt的文件内容写到
+<p>进入之后，我们才恍能大悟，上面已经详细介绍过<code>ADD</code>指令了，当<code>ADD</code>指令的<code>dest</code>没有以<code>/</code>结尾时，Docker会把它当成是一个文件，在这里相当于把readme.txt的文件内容写到
 了<code>/data</code>这个文件中了，此时<code>/data</code>并不是文件夹，当执行<code>ADD service.yml /data/yaml/</code>命令时，Docker会自动去创建<code>/data</code>目录，此时已经有一个<code>/data</code>同名文件存在，
 所以创建失败。</p></li>
 </ul>
