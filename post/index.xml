@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 02 Apr 2019 19:18:40 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 07 Apr 2019 20:35:36 +0800</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dockerfile详解以及高级技巧</title>
+      <link>/post/dockerfile/</link>
+      <pubDate>Sun, 07 Apr 2019 20:35:36 +0800</pubDate>
+      
+      <guid>/post/dockerfile/</guid>
+      <description>Docker是通过读取Dockerfile文件来自动构建镜像，Dockerfile其实就是一个包含了很多命令行指令的文本文件，通过这些指令来装配一个镜像。 要掌握Docker构建镜像的技巧，就必须首先了解Dockerfile的基本指令，下面先详细介绍Dockerfile中的一些常用指令。 基本</description>
+    </item>
     
     <item>
       <title>PostgreSQL命令行操作</title>
