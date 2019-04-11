@@ -6,7 +6,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>开发者孙金福详细资料 - 君无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	
+	<script src="/js/jquery.toTop.min.js"></script>
+	
 	<meta name="description" content="">
 	<meta name="generator" content="Hugo 0.54.0" />
 	
@@ -74,7 +77,7 @@
 </div>
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">751 字</time>
+	<time class="meta__text">761 字</time>
 </div></div>
 		</header>
 <div class="content post__content clearfix">
@@ -116,6 +119,8 @@ Prims能显示代码行数，同时右上角有一键复制代码代码功能按
 <li><p>增加了百度网页自动推送功能，但是经常会被谷歌浏览器截断，通过参数baidu_push控制是否开启推送。</p></li>
 
 <li><p>增加了百度统计功能，如果设置了baidu_count_id，则自动开启了百度统计功能，baidu_count_id是你的网站在百度统计分配的。</p></li>
+
+<li><p>增加了一键回顶部按钮</p></li>
 </ul>
 
 <p><strong>修改部分</strong></p>
@@ -328,5 +333,11 @@ var _hmt = _hmt || [];
         $("pre code").parent().addClass("line-numbers")
     }())
 </script>
+
+<a class="to-top" style="background-color:#666;color:#fff;width:40px;height:40px;text-align:center;padding-top:3px;line-height:18px;">返回顶部</a>
+<script type="text/javascript">
+$('.to-top').toTop();
+</script>
+
 </body>
 </html>
