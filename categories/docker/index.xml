@@ -6,10 +6,19 @@
     <description>Recent content in Docker on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 07 Apr 2019 20:35:36 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 19 Apr 2019 16:53:36 +0800</lastBuildDate>
     
 	<atom:link href="/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker容器数据文件管理</title>
+      <link>/post/docker_data/</link>
+      <pubDate>Fri, 19 Apr 2019 16:53:36 +0800</pubDate>
+      
+      <guid>/post/docker_data/</guid>
+      <description>在Docker容器内部创建的文件默认存储在可写的容器层，容易产生几个问题: 当容器不存在时，数据文件不能持久化，同时这些数据文件不方便在容器之外被其他进程使用。 当容器运行的时候容器可写层严重依赖宿主机，不能轻易移动这些数据文件到其他地方。 在容器层写数据文件需要存储驱动(storage driv</description>
+    </item>
     
     <item>
       <title>Dockerfile详解以及高级技巧</title>

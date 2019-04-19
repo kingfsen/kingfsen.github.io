@@ -4,13 +4,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>高效的静态网站生成器Hugo - 君无止境</title>
+	<title>Docker容器数据文件管理 - 君无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	
 	<script src="/js/jquery.toTop.min.js"></script>
 	
-	<meta name="description" content="Hugo是一款用Go编写的静态网站生成器，简单、快速、高效">
+	<meta name="description" content="Docker容器数据管理bind mount、volumes、tmpfs mount三种方式详解介绍">
 	<meta name="generator" content="Hugo 0.54.0" />
 	
 	
@@ -80,20 +80,20 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">高效的静态网站生成器Hugo</h1>
+			<h1 class="post__title">Docker容器数据文件管理</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-19T20:05:49">2019-03-19</time>
+	<time class="meta__text" datetime="2019-04-19T16:53:36">2019-04-19</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/hugo" rel="category">hugo</a></span>
+	<span class="meta__text"><a class="meta__link" href="/categories/docker" rel="category">docker</a></span>
 </div>
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">1788 字</time>
+	<time class="meta__text">1970 字</time>
 </div></div>
 		</header>
 
@@ -104,111 +104,92 @@
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<p>静态网站比较适用于博客、宣传、文档类的站点，比动态站点占用资源更小，访问速度更快。当前最流行的Wordpress博客系统功能很强大，插件也很丰富，
-但是整体感觉很臃肿，占用资源也比较大，同时还需要部署一个MySQL数据库，国内有一些个人或者小团队研发了一些开源的轻量级博客，根本没什么吸引力。
-越来越多的人更喜欢使用静态博客，甚至一些企业同样采用静态布局官网，因为静态网页可以托管在github等一些平台上，例如下面这些开源项目。</p>
+			<p>在Docker容器内部创建的文件默认存储在可写的容器层，容易产生几个问题:</p>
 
 <ul>
-<li>kubernetes，<a href="https://kubernetes.io">https://kubernetes.io</a></li>
-<li>prometheus，<a href="https://prometheus.io">https://prometheus.io</a></li>
-<li>hogo，<a href="https://gohugo.io">https://gohugo.io</a></li>
+<li>当容器不存在时，数据文件不能持久化，同时这些数据文件不方便在容器之外被其他进程使用。</li>
+<li>当容器运行的时候容器可写层严重依赖宿主机，不能轻易移动这些数据文件到其他地方。</li>
+<li>在容器层写数据文件需要存储驱动(storage driver)来管理文件系统，存储驱动使用Linux内核提供的联合文件系统，
+与<code>data volumes</code>直接将文件写到宿主机文件系统相比，性能降低。</li>
 </ul>
 
-<p>当前比较流行的静态网站生成器有hexo、jekyll、hugo等，这些软件有成熟的社区，社区中有很多人无私奉献的主题、插件等，本博客则是由hugo生成器构建的。
-静态网站生成框架一般都支持Markdown渲染，Markdown是最简洁最容易上手的轻量级标记语言，可以利用Markdown快速编写具备统一格式的文章。
-这里暂不比较hexo、jekyll、hugo优缺点，只介绍如何使用hugo构建独特风格的博客网站，选择hugo作为博客生成器绝对事半功倍，构建静态网站的速度很快。</p>
+<p>Docker为容器提供了两种方式将数据文件存储到宿主机上，即使容器停止运行或者被删除数据文件都可以持久化，这两种方式分别为
+<code>volumes</code>与<code>bind mounts</code>，当然如果Docker容器在Linux运行，也可以使用<code>tmpfs mounts</code>。不管使用哪种mount方式，数据文件在Docker容器内部文件系统中是相同的，
+要么是一个文件夹，或者一个独立的文件。</p>
 
-<p>hugo是由Go语言编写的开源项目，在国内基本没有中文资料，但是官网的英文文档手册很全面，并且有一些使用小案例描述。
-工作之余，每天在hugo的官方网站阅读几篇文档，两周下来大致看完整个文档手册了，英文资料写的非常详细，就是缺少基本的使用demo。</p>
+<p><img src="https://raw.githubusercontent.com/kingfsen/blog-images/master/blog/docker_data/001.png" alt="docker_data" /></p>
 
 <ul>
-<li>hugo官方网站: <a href="https://gohugo.io">https://gohugo.io</a></li>
-<li>github项目地址: <a href="https://github.com/gohugoio/hugo">https://github.com/gohugoio/hugo</a></li>
-<li>hugo原始文档: <a href="https://github.com/gohugoio/hugoDocs">https://github.com/gohugoio/hugoDocs</a></li>
+<li><strong>volumes</strong> 存储在Docker安装目录下，在Linux上默认指的是<code>/var/lib/docker/volumes</code>，Docker会自动管理，非Docker进程不应该修改这些文件系统，<code>volumes</code>是在Docker中是最好的数据持久化方式。</li>
+<li><strong>bind mount</strong> 存储在宿主机文件系统的任何地方，宿主机上的非Docker进程或者Docker容器都可以在任何时候修改它。</li>
+<li><strong>tmpfs mount</strong> 始终存储在宿主机系统内存中，不会被写到宿主机的文件系统中。</li>
 </ul>
 
-<p>要利用hugo构建网站，必须理解清楚hugo组织HTML内容的设计概念。看完文档，我马上想到了著名的前端开源框架Vue.js，每个可以页面定义Vue Object，
-然后通过Vue把data渲染到HTML中的Element Object上，作为一个后端程序员，基本的css、html、js技能知识还是必备的，何况还准备搭建网站呢。</p>
+<p>详细介绍这几种方式</p>
 
-<pre><code class="language-JS">&lt;div id=&quot;vue_div&quot;&gt;
-    &lt;h1&gt;site : {{site}}&lt;/h1&gt;
-    &lt;h1&gt;url : {{url}}&lt;/h1&gt;
-    &lt;h1&gt;{{details()}}&lt;/h1&gt;
-&lt;/div&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-    var vm = new Vue({
-        el: '#vue_div',
-        data: {
-            site: &quot;Vue教程&quot;,
-            url: &quot;www.younedless.com&quot;,
-            alexa: &quot;10000&quot;
-        },
-        methods: {
-            details: function() {
-                return  this.site + &quot; - 学的不仅是技术，更是梦想！&quot;;
-            }
-        }
-    })
-&lt;/script&gt;
+<ul>
+<li><p><strong>volumes</strong> <br/>
+Docker会自动创建并管理<code>volumes</code>，当然可以通过命令<code>docker volumes create</code>明确的创建一个<code>volume</code>，当成功创建了一个volume时，它存储在宿主机的某个目录下，
+当把这个<code>volume</code>挂载到一个Docker容器时，这个目录自然会挂载到容器内部，<code>volumes</code>与<code>bind mount</code>工作方式类似，除了<code>volumes</code>是被Docker自动管理以及隔离性，
+两者没什么区别。</p>
 
+<pre><code class="language-bash">[root@ins ~]# docker volume create mm
+mm
+[root@ins ~]# docker volume create
+cc0613fe5a32273134a76e5670f166f6e248634e909d64cf00061130086f5ae5
+[root@ins ~]# docker volume ls
+DRIVER              VOLUME NAME
+local               cc0613fe5a32273134a76e5670f166f6e248634e909d64cf00061130086f5ae5
+local               mm
+[root@ins ~]# 
 </code></pre>
 
-<p>hugo的思想跟这个Vue.js相似，在每个markdown文件中，都可以定义一些前置数据，官方的专业词语是Front Matter，定义之后在hugo的Page(html)中则可使用。
-hugo定义前置数据的格式有三种，分别为yaml、toml、json，下面展示了本篇文章的markdown文件开头一部分字符，Front Matter是由yaml格式定义的，即前后
-使用&mdash;包裹住，如果采用toml格式请使用前后三个+++，json则是{}。</p>
+<p>一个<code>volume</code>可以同时挂载到多个Docker容器，当没有任何Running状态的容器使用这个<code>volume</code>，这个<code>volume</code>仍然有效并且不会被自动删除，除非通过执行命令
+<code>docker volume prune</code>进行删除。当挂载一个<code>volume</code>时，这个<code>volume</code>可能匿名或者有一个名字，当它首次挂载到容器中的时候如果Docker发现该<code>volume</code>没有一个明确的名字，
+则会给它分配一个随机的名字，这个名字在Docker宿主机上是唯一的。</p>
 
-<pre><code>---
-title: &quot;高效的静态网站生成器Hugo&quot;
-date: 2019-03-19T20:05:49+08:00
-description: &quot;Hugo是一款用Go编写的静态网站生成器，简单、快速、高效&quot;
-Tags:
-- hugo
-Categories:
-- 开源分享
-thumbnail: &quot;img/hugo.png&quot;
----
+<p><code>volumes</code>支持<code>volume driver</code>，允许通过driver将数据存储到远程机器或者云厂商等。</p></li>
 
-静态网站比较适用于博客、宣传、文档类的站点，比动态站点占用资源更小，访问速度更快。当前最流行的Wordpress博客系统功能很强大，插件也很丰富，
-但是整体感觉很臃肿，占用资源也比较大，同时还需要部署一个MySQL数据库，国内有一些个人或者小团队研发了一些开源的轻量级博客，根本没什么吸引力。
-越来越多的人更喜欢使用静态博客，甚至一些企业同样采用静态布局官网，因为静态网页可以托管在github等一些平台上，例如下面这些开源项目。
+<li><p><strong>bind mounts</strong> <br/>
+这种方式与<code>volumes</code>相比，有一些功能限制。当使用<code>bind mounts</code>时，宿主机上的一个文件或者目录被挂载到Docker容器中，这个文件或者目录通过它在
+宿主机上的完整路径名被引用，他们在宿主机上不是必须存在的，在需要的时候Docker会自动创建它。<code>bind mounts</code>非常高效，但是他们依赖于宿主机文件系统明确的目录结构，
+同时通过<code>Docker CLI</code>命令无法直接管理这些<code>bind mounts</code>。</p>
 
-</code></pre>
+<blockquote>
+<ul>
+<li>注意：正在运行的容器中进程可以直接改变宿主机上的文件系统，包括创建、修改以及删除重要的文件或者目录，会引发安全风险问题，影响宿主机上运行的其它非Docker进程，请注意控制权限。</li>
+</ul>
+</blockquote></li>
 
-<p>toml格式</p>
+<li><p><strong>tmpfs mounts</strong> <br/>
+这种方式不能将数据持久化到磁盘，一个<code>tmpfs</code>可以被一个容器在整个生命周期内使用，用于存储一些非持久状态或者敏感数据，比如swarm services使用<code>tmpfs</code>将<code>secrets</code>
+挂载到service的容器中。</p></li>
+</ul>
 
-<pre><code class="language-Markdown">+++
-title = &quot;高效的静态网站生成器Hugo&quot;
-date = 2019-03-19T20:05:49+08:00
-description = &quot;Hugo是一款用Go编写的静态网站生成器，简单、快速、高效&quot;
-Tags = [&quot;hugo&quot;]
-Categories = [&quot;开源分享&quot;]
-thumbnail = &quot;img/hugo.png&quot;
-+++
-</code></pre>
+<p><code>volumes</code>与<code>bind mounts</code>都能通过<code>-v</code> 或者 <code>--volume</code> flag参数挂载到容器中，对于 <code>tmpfs mount</code>，可以使用<code>--tmpfs</code> flag参数，在Docker17.06以及更高版本中，
+推荐使用<code>--mount</code>，对于这三种方式<code>--mount</code>语法更明确。</p>
 
-<p>json格式就不用多说，大家非常熟悉。</p>
+<p>总结一下三种方式的特点以及使用场景</p>
 
-<pre><code>{ 
-    &quot;title&quot;:&quot;高效的静态网站生成器Hugo&quot;
-}
-</code></pre>
+<p><code>volumes</code>可以在多个运行的容器之间共享，解耦Docker容器与宿主机文件系统，支持存储远程以及云厂商，方便在不同的Docker机器上迁移数据。</p>
 
-<p>前置数据之后就是文档内容了，hugo会利用html模板将这些内容进行渲染，在模板中可以通过hugo内置的函数或者标签获取Front Matter，比如显示title的某个html模板。</p>
+<p><code>bind mounts</code>可以让多个容器共享宿主机文件，比如Docker就是通过将/etc/resolv.conf挂载到每个容器方式实现DNS解决方案，开发的时候可以共享项目源代码，在容器内编译运行。</p>
 
-<pre><code>{{ with .Params.title }}
-    &lt;span class=&quot;title&quot;&gt;{{- . -}}&lt;/span&gt;
-{{ end }}
+<p><code>tmpfs</code>保存敏感数据，非持久化数据，由于保存在内存中，相比文件系统性能更高。</p>
 
-</code></pre>
-
-<p>这篇文章就讲解到这里，后续会继续写一些hugo入门使用的文章，可以通过点击Tags中的hugo标签筛选hugo相关文章。</p>
+<blockquote>
+<ul>
+<li>如果将一个空的<code>volumes</code>挂载到容器内的某个目录，如果该目录中已经有一些文件或者目录，那么这些文件或者目录会直接复制到<code>volumes</code>中。</li>
+<li>如果将一个<code>bind mount</code>或者非空volume挂载到容器的某个目录，这个目录中已经存在文件或者目录，那么这个目录中的文件或者目录会被mount覆盖，被覆盖的文件或者目录只是暂时被隐藏，当移除挂载时即可恢复。</li>
+</ul>
+</blockquote>
 
 		</div>
 		
 <div class="post__tags tags clearfix">
 	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
 	<ul class="tags__list">
-		<li class="tags__item"><a class="tags__link btn" href="/tags/hugo/" rel="tag">hugo</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/docker/" rel="tag">docker</a></li>
 	</ul>
 </div>
 	</article>
@@ -235,7 +216,15 @@ thumbnail = &quot;img/hugo.png&quot;
 <div class="widget__content">
 		<ul class="widget__list">
 	
-	<li><a href="/post/hugo_base/">Hugo入门详细教程</a></li>
+	<li><a href="/post/dockerfile/">Dockerfile详解以及高级技巧</a></li>
+	
+	<li><a href="/post/postgresql/">PostgreSQL命令行操作</a></li>
+	
+	<li><a href="/post/docker_login_process/">Docker Login执行流程与原理</a></li>
+	
+	<li><a href="/post/docker_deploy_wordpress/">基于Docker快速搭建wordpress博客</a></li>
+	
+	<li><a href="/post/deploy_harbor_service/">部署企业级Harbor镜像仓库服务</a></li>
 	
 </ul>
 </div>
@@ -245,10 +234,7 @@ thumbnail = &quot;img/hugo.png&quot;
 
 <nav class="post-nav flex">
 	<div class="post-nav__item post-nav__item--prev">
-		<a class="post-nav__link" href="/post/helm_harbor/" rel="prev"><span class="post-nav__caption">«&thinsp;前一篇</span><p class="post-nav__post-title">Helm Harbor</p></a>
-	</div>
-	<div class="post-nav__item post-nav__item--next">
-		<a class="post-nav__link" href="/post/binary_tree_base/" rel="next"><span class="post-nav__caption">后一篇&thinsp;»</span><p class="post-nav__post-title">二叉树</p></a>
+		<a class="post-nav__link" href="/post/dockerfile/" rel="prev"><span class="post-nav__caption">«&thinsp;前一篇</span><p class="post-nav__post-title">Dockerfile详解以及高级技巧</p></a>
 	</div>
 </nav>
 
