@@ -90,6 +90,39 @@ if (!doNotTrack) {
 			<div class="primary">
 			
 <main class="main list" role="main"><article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="/post/docker_container_image/">
+			<img src="/img/docker.jpg" alt="Docker容器与镜像结构" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/post/docker_container_image/" rel="bookmark">
+			Docker容器与镜像结构
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-04-21T10:19:15">2019-04-21</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/docker" rel="category">docker</a></span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">1473 字</time>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		容器与镜像概念 Docker镜像是由一系列的层(Layer)组成的，每一个层对应的都是Dockerfile文件中的一个指令，Dockerfile中指令的行数越多， 镜像的层就会越多，镜像的每一层都是只读的，除了可写的容器层(容器运行时添加的一层)，例如下面的这个Dockerfile。 FROM ubuntu:15.04 COPY . /app
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/docker_container_image/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/post/docker_data/" rel="bookmark">
@@ -302,6 +335,7 @@ if (!doNotTrack) {
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/docker_container_image/">Docker容器与镜像结构</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/docker_data/">Docker容器数据文件管理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/dockerfile/">Dockerfile详解以及高级技巧</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/postgresql/">PostgreSQL命令行操作</a></li>
@@ -311,7 +345,6 @@ if (!doNotTrack) {
 			<li class="widget__item"><a class="widget__link" href="/post/share_js/">网站一键分享插件Share.js</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/isso/">开源评论系统isso</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/futuretask/">FutureTask原理分析</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/tree_traverse/">递归与非递归遍历二叉树</a></li>
 		</ul>
 	</div>
 </div>
@@ -335,7 +368,7 @@ if (!doNotTrack) {
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/chartmuseum" title="Chartmuseum">Chartmuseum (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (6)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (7)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (4)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (2)</a>

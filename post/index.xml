@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 19 Apr 2019 16:53:36 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 21 Apr 2019 10:19:15 +0800</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker容器与镜像结构</title>
+      <link>/post/docker_container_image/</link>
+      <pubDate>Sun, 21 Apr 2019 10:19:15 +0800</pubDate>
+      
+      <guid>/post/docker_container_image/</guid>
+      <description>容器与镜像概念 Docker镜像是由一系列的层(Layer)组成的，每一个层对应的都是Dockerfile文件中的一个指令，Dockerfile中指令的行数越多， 镜像的层就会越多，镜像的每一层都是只读的，除了可写的容器层(容器运行时添加的一层)，例如下面的这个Dockerfile。 FROM ubuntu:15.04 COPY . /app</description>
+    </item>
     
     <item>
       <title>Docker容器数据文件管理</title>
