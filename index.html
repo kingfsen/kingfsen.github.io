@@ -91,6 +91,39 @@ if (!doNotTrack) {
 			
 <main class="main list" role="main"><article class="list__item post">
 	<figure class="list__thumbnail">
+		<a href="/post/docker_storage_driver/">
+			<img src="/img/docker_driver.png" alt="Docker存储驱动storage driver" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/post/docker_storage_driver/" rel="bookmark">
+			Docker存储驱动storage driver
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-04-25T14:21:03">2019-04-25</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/docker" rel="category">docker</a></span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">4078 字</time>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Docker容器镜像存在哪儿，怎么存放? Docker容器在运行的过程中，只有小部分的数据可能需要写到容器可写层，因为大部分场景下，我们可以通过Docker volumes来写数据， 但是某些场景下，就是需要往容器可写层写数据，这就是Docker存储驱动Storage Driver出现的原因，这些
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/docker_storage_driver/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
+	<figure class="list__thumbnail">
 		<a href="/post/docker_container_image/">
 			<img src="/img/docker.jpg" alt="Docker容器与镜像结构" />
 		</a>
@@ -376,39 +409,6 @@ if (!doNotTrack) {
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/post/isso/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/post/futuretask/">
-			<img src="/img/futuretask.png" alt="FutureTask原理分析" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/futuretask/" rel="bookmark">
-			FutureTask原理分析
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-25T16:31:58">2019-03-25</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/java" rel="category">Java</a></span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">5054 字</time>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Callable Runnable 在Java中可以通过继承Thread或者实现Runnable接口两种方式来创建多线程，这两种方式创建的线程执行完毕之后，我们无法获取执行结果， 除非通过共享变量或者线程通信方式(Q消息等)间接实现，Java在1.5之后可以通过Callable和Future接口在线程执行完毕之后获取执行结
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/futuretask/">阅读全文…</a>
-	</div>
 </article>
 </main>
 
@@ -468,6 +468,7 @@ if (!doNotTrack) {
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/docker_storage_driver/">Docker存储驱动storage driver</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/docker_container_image/">Docker容器与镜像结构</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/docker_data/">Docker容器数据文件管理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/dockerfile/">Dockerfile详解以及高级技巧</a></li>
@@ -477,7 +478,6 @@ if (!doNotTrack) {
 			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败解决方法</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/share_js/">网站一键分享插件Share.js</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/isso/">开源评论系统isso</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/futuretask/">FutureTask原理分析</a></li>
 		</ul>
 	</div>
 </div>
@@ -501,7 +501,7 @@ if (!doNotTrack) {
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/chartmuseum" title="Chartmuseum">Chartmuseum (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (7)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (8)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (4)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (2)</a>
@@ -510,6 +510,7 @@ if (!doNotTrack) {
 		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/mysql" title="Mysql">Mysql (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/overlay" title="Overlay">Overlay (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/postgresql" title="Postgresql">Postgresql (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/wordpress" title="Wordpress">Wordpress (1)</a>
