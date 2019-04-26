@@ -104,7 +104,7 @@ if (!doNotTrack) {
 </div>
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">4078 字</time>
+	<time class="meta__text">4071 字</time>
 </div></div>
 		</header>
 
@@ -421,7 +421,7 @@ l/MGUMOBQVXCENNH3EYBVSA3FXIP:l/TFMVIO6TPMR4AGFI2O2TWAWZQ7:l/N2VPKSUXNXCWKUOSWR2H
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 </code></pre>
 
-<p>这个目录比镜像层目录以及容器层目录多了一个子目录<code>merged</code>，这个<code>merged</code>目录则是这些镜像层以及容器层挂载之后的统一视图目录，
+<p>这个目录比镜像层目录多了一个子目录<code>merged</code>，这个<code>merged</code>目录则是这些镜像层以及容器层挂载之后的统一视图目录，
 也就是进入容器之后能看见的文件系统了。为了验证一下，我这里手动在当前<code>merged</code>目录新建一个youendless.txt文本(这里仅用于测试，请勿手动操作Docker存储目录)，
 然后进入容器中查看是否存在。</p>
 
