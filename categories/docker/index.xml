@@ -6,10 +6,28 @@
     <description>Recent content in Docker on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 21 Apr 2019 10:19:15 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 30 Apr 2019 16:32:25 +0800</lastBuildDate>
     
 	<atom:link href="/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>详解Clair同步CVE漏洞数据源</title>
+      <link>/post/cve/</link>
+      <pubDate>Tue, 30 Apr 2019 16:32:25 +0800</pubDate>
+      
+      <guid>/post/cve/</guid>
+      <description>CVE，全称Common Vulnerabilities and Exposures，指的是公共已知的网络漏洞缺陷，每个漏洞都会分配一个唯一的标志CVE ID(如CVE-2008-7220)， 漏洞的相关信息由CNA维护，各系统厂商暴露出的漏洞通过CVE-ID均可在CVE 社区跟踪查询。 既然要搭建自己的CVE数据库，我们需要知道的是</description>
+    </item>
+    
+    <item>
+      <title>Docker存储驱动storage driver</title>
+      <link>/post/docker_storage_driver/</link>
+      <pubDate>Thu, 25 Apr 2019 14:21:03 +0800</pubDate>
+      
+      <guid>/post/docker_storage_driver/</guid>
+      <description>Docker容器镜像存在哪儿，怎么存放? Docker容器在运行的过程中，只有小部分的数据可能需要写到容器可写层，因为大部分场景下，我们可以通过Docker volumes来写数据， 但是某些场景下，就是需要往容器可写层写数据，这就是Docker存储驱动Storage Driver出现的原因，这些</description>
+    </item>
     
     <item>
       <title>Docker容器与镜像结构</title>

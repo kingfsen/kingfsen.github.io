@@ -6,10 +6,19 @@
     <description>Recent content in Clair on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 11 Mar 2019 15:59:41 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Apr 2019 16:32:25 +0800</lastBuildDate>
     
 	<atom:link href="/tags/clair/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>详解Clair同步CVE漏洞数据源</title>
+      <link>/post/cve/</link>
+      <pubDate>Tue, 30 Apr 2019 16:32:25 +0800</pubDate>
+      
+      <guid>/post/cve/</guid>
+      <description>CVE，全称Common Vulnerabilities and Exposures，指的是公共已知的网络漏洞缺陷，每个漏洞都会分配一个唯一的标志CVE ID(如CVE-2008-7220)， 漏洞的相关信息由CNA维护，各系统厂商暴露出的漏洞通过CVE-ID均可在CVE 社区跟踪查询。 既然要搭建自己的CVE数据库，我们需要知道的是</description>
+    </item>
     
     <item>
       <title>Harbor仓库镜像扫描原理</title>
