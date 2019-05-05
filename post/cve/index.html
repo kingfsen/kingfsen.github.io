@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>详解Clair同步CVE漏洞数据源 - 君无止境</title>
+	<title>Docker镜像扫描之CVE漏洞数据源 - 君无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	
@@ -38,6 +38,16 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+	
+    
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-6674741124867265",
+      enable_page_level_ads: true
+    });
+  </script>
 
 	
 </head>
@@ -81,7 +91,7 @@ if (!doNotTrack) {
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">详解Clair同步CVE漏洞数据源</h1>
+			<h1 class="post__title">Docker镜像扫描之CVE漏洞数据源</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
@@ -113,7 +123,7 @@ if (!doNotTrack) {
 或者github持续维护软件包在其系统版本上的产生的各种漏洞数据，不过它们各自提供的数据格式差异很大，我们获取的时候需要进行适配。</p>
 
 <p>随着Google的容器调度平台Kubernetes开源问世，<a href="https://coreos.com/">CoreOS</a>也开始备受关注，开源分布式KV数据存储系统etcd，网络组件项目flannel等都是其产物。
-我们现在要说的是另外一个项目<a href="https://github.com/coreos/clair">Clair</a> ，该项目用于支撑Docker镜像扫描功能，它定时从各社区同步CEV数据，然后解析汇总保存在自己的
+我们现在要说的是另外一个项目<a href="https://github.com/coreos/clair">Clair</a> ，该项目用于支撑Docker镜像扫描功能，它定时从各社区同步CVE数据，然后解析汇总保存在自己的
 PostgreSQL数据库中，当接收到镜像扫描请求时，直接将镜像中的软件版本数据与数据库比对一番，即可输出当前镜像软件包已存在的各级别漏洞。</p>
 
 <p>在Clair中，漏洞等级有以下几种:</p>
@@ -258,7 +268,7 @@ oracle的CVE数据处理方式与rhel非常相似，不做过多详细介绍。<
 <div class="post__tags tags clearfix">
 	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
 	<ul class="tags__list">
-		<li class="tags__item"><a class="tags__link btn" href="/tags/clair/" rel="tag">clair</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/clair/" rel="tag">Clair</a></li>
 	</ul>
 </div>
 	</article>
@@ -295,7 +305,7 @@ oracle的CVE数据处理方式与rhel非常相似，不做过多详细介绍。<
 
 <nav class="post-nav flex">
 	<div class="post-nav__item post-nav__item--prev">
-		<a class="post-nav__link" href="/post/docker_storage_driver/" rel="prev"><span class="post-nav__caption">«&thinsp;前一篇</span><p class="post-nav__post-title">Docker存储驱动storage driver</p></a>
+		<a class="post-nav__link" href="/post/docker_storage_driver/" rel="prev"><span class="post-nav__caption">«&thinsp;前一篇</span><p class="post-nav__post-title">Docker镜像存储结构与原理</p></a>
 	</div>
 </nav>
 
@@ -319,8 +329,8 @@ oracle的CVE数据处理方式与rhel非常相似，不做过多详细介绍。<
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/post/cve/">详解Clair同步CVE漏洞数据源</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/docker_storage_driver/">Docker存储驱动storage driver</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/cve/">Docker镜像扫描之CVE漏洞数据源</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/docker_storage_driver/">Docker镜像存储结构与原理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/docker_container_image/">Docker容器与镜像结构</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/docker_data/">Docker容器数据文件管理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/dockerfile/">Dockerfile详解以及高级技巧</a></li>
