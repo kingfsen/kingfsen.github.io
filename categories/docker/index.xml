@@ -6,10 +6,19 @@
     <description>Recent content in Docker on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 30 Apr 2019 16:32:25 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 05 May 2019 15:18:22 +0800</lastBuildDate>
     
 	<atom:link href="/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker镜像扫描原理</title>
+      <link>/post/docker_image_scan/</link>
+      <pubDate>Sun, 05 May 2019 15:18:22 +0800</pubDate>
+      
+      <guid>/post/docker_image_scan/</guid>
+      <description>初次听说镜像扫描想必很多疑惑，因为不明白其中的处理过程与原理。以Windows为例，它的控制面板以及一些第三方安全软件(三六零等)总能展示当前系统已安装的软件包， 当然绿色解压版则无法探测，它们无非是读取了操作系统的一些系统资源文件。Linux系统也不例外，通过软件管理包rpm、dpkg等安</description>
+    </item>
     
     <item>
       <title>Docker镜像扫描之CVE漏洞数据源</title>
