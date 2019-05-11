@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/docker_login_pass/</loc>
+    <lastmod>2019-05-11T14:10:54+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/docker_image_scan/</loc>
     <lastmod>2019-05-05T15:18:22+08:00</lastmod>
   </url>
@@ -192,13 +197,13 @@
   
   <url>
     <loc>/tags/docker/</loc>
-    <lastmod>2019-05-05T15:18:22+08:00</lastmod>
+    <lastmod>2019-05-11T14:10:54+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/docker/</loc>
-    <lastmod>2019-05-05T15:18:22+08:00</lastmod>
+    <lastmod>2019-05-11T14:10:54+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -282,7 +287,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-05-05T15:18:22+08:00</lastmod>
+    <lastmod>2019-05-11T14:10:54+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -336,7 +341,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-05-05T15:18:22+08:00</lastmod>
+    <lastmod>2019-05-11T14:10:54+08:00</lastmod>
     <priority>0</priority>
   </url>
   

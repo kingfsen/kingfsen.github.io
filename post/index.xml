@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 05 May 2019 15:18:22 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 11 May 2019 14:10:54 +0800</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker Login登录凭证安全存储</title>
+      <link>/post/docker_login_pass/</link>
+      <pubDate>Sat, 11 May 2019 14:10:54 +0800</pubDate>
+      
+      <guid>/post/docker_login_pass/</guid>
+      <description>Docker利用docker login命令来校验用户镜像仓库的登录凭证，实际并不是真正意义上的登录(Web Login)，仅仅是一种登录凭证的试探校验，如果用户名密码正确，Docker则会把用户名、密码 以及仓库域名等信息进行base64编码保存在Docker的配置文件中，在Linux中文件路</description>
+    </item>
     
     <item>
       <title>Docker镜像扫描原理</title>
