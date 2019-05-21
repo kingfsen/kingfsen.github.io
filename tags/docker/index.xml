@@ -6,10 +6,19 @@
     <description>Recent content in Docker on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 20 May 2019 14:18:25 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 May 2019 10:49:15 +0800</lastBuildDate>
     
 	<atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Harbor镜像构建流程优化</title>
+      <link>/post/harbor_optimize/</link>
+      <pubDate>Tue, 21 May 2019 10:49:15 +0800</pubDate>
+      
+      <guid>/post/harbor_optimize/</guid>
+      <description>以Harbor v1.4~v1.6之间的版本为例，详细分析其构建离线包的整个流程，然后结合当前的环境以及目标，去优化这个构建流程。 在Harbor的整个构建流程中，涉及的技术知识点包括Shell、Python、Make(Makefile)、Go、Docker等，不要求对这些技术熟练精通， 能看懂</description>
+    </item>
     
     <item>
       <title>开源Harbor功能结构</title>
