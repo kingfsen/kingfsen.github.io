@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Harbor - 君无止境</title>
+	<title>Kubernetes - 君无止境</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	
@@ -16,7 +16,7 @@
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/tags/harbor/index.xml" title="君无止境">
+	<link rel="alternate" type="application/rss+xml" href="/categories/kubernetes/index.xml" title="君无止境">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">	
 	<link rel="stylesheet" type="text/css" href="/css/highlight.css">
@@ -90,192 +90,37 @@ if (!doNotTrack) {
 			<div class="primary">
 			
 <main class="main list" role="main"><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/harbor_optimize/" rel="bookmark">
-			Harbor镜像构建流程优化
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-05-21T10:49:15">2019-05-21</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/harbor" rel="category">harbor</a></span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">3262 字</time>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		以Harbor v1.4~v1.6之间的版本为例，详细分析其构建离线包的整个流程，然后结合当前的环境以及目标，去优化这个构建流程。 在Harbor的整个构建流程中，涉及的技术知识点包括Shell、Python、Make(Makefile)、Go、Docker等，不要求对这些技术熟练精通， 能看懂
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/harbor_optimize/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/harbor_base/" rel="bookmark">
-			开源Harbor功能结构
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-05-20T14:18:25">2019-05-20</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/harbor" rel="category">harbor</a></span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">3248 字</time>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		在了解Harbor之前，有必要先了解一下Docker开源的Docker Registry，Registry就是用来存储管理Docker镜像的服务， 客户端可以向Registry发起镜像的上传、下拉等请求操作。Docker Registry服务早期是由Docker官方下的docker/regist
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/harbor_base/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
 	<figure class="list__thumbnail">
-		<a href="/post/helm_harbor/">
-			<img src="/img/helm.png" alt="Helm Harbor" />
+		<a href="/post/kubernetes_curl_apiserver/">
+			<img src="/img/kubernetes_2.png" alt="CURL探索Kubernetes API Server" />
 		</a>
 	</figure>
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/post/helm_harbor/" rel="bookmark">
-			Helm Harbor
+			<a href="/post/kubernetes_curl_apiserver/" rel="bookmark">
+			CURL探索Kubernetes API Server
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-19T10:02:41">2019-03-19</time>
+	<time class="meta__text" datetime="2019-05-22T19:30:52">2019-05-22</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81" rel="category">容器生态</a></span>
+	<span class="meta__text"><a class="meta__link" href="/categories/kubernetes" rel="category">kubernetes</a></span>
 </div>
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">3826 字</time>
+	<time class="meta__text">1352 字</time>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		chartmuseum chartmuseum是helm chart的仓库，它的存储层支持FileSystem以及各大云厂商的对象存储中间件， 默认支持阿里云的OSS、百度的BOS、Amazon S3、Microsoft Azure、Oracle、Openstack、Google等， 其他厂商需自行实现Storage的B
+		在Kubernetes集群中，API Server是集群管理API的入口，由运行在Master节点上的一个名为kube-apiserver的进程提供的服务。 用户进入API可以通过kubectl、客户端库或者http rest，User 或者 Service Account可以被授权进入API。当一个请求到达AP
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/helm_harbor/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/post/docker_login_process/">
-			<img src="/img/docker.jpg" alt="Docker Login执行流程与原理" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/docker_login_process/" rel="bookmark">
-			Docker Login执行流程与原理
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-16T08:54:16">2019-03-16</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/docker" rel="category">docker</a></span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">2001 字</time>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		docker安装的时候已经同时安装了docker client，通过命令docker version即可查看客户端以及服务端的版本信息，通过执行命令docker version查看docker版本信息。docker最近暴露的runc漏洞CVE-2019-5736，企业环境请安装18.09.2以上
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/docker_login_process/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/post/harbor_image_scan/">
-			<img src="/img/clair.png" alt="Harbor仓库镜像扫描原理" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/harbor_image_scan/" rel="bookmark">
-			Harbor仓库镜像扫描原理
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-11T15:59:41">2019-03-11</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/docker" rel="category">docker</a></span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">4013 字</time>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		初次听说镜像扫描的人肯定有很多疑惑，总会想原理是什么呢？我们可以先思考下，windows控制面板、包括一些第三方软件比如三六零等，它们都能获取系统安装的软件以及版本，当然绿色解压版他们就无法识别，获取软件版本之后，他们就能提供一些升级的版本、以及当前软件版本的漏洞列举出来，由此可见，系统安
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/harbor_image_scan/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/post/deploy_harbor_service/">
-			<img src="/img/harbor.png" alt="部署企业级Harbor镜像仓库服务" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/deploy_harbor_service/" rel="bookmark">
-			部署企业级Harbor镜像仓库服务
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-11T15:14:25">2019-03-11</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/docker" rel="category">docker</a></span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">3500 字</time>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		harbor初期版本1.4是在vmware旗下，当前已经成立了新项目goharbor。并且1.6.0版本之后进行了重构，数据库由mysql转换到postgresql，部分表结构也稍微改变了，代码也增强了很多，同时新增了helm chartmuseum仓库功能。对于harbor这个项目，可能有
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/deploy_harbor_service/">阅读全文…</a>
+		<a class="list__footer-readmore btn" href="/post/kubernetes_curl_apiserver/">阅读全文…</a>
 	</div>
 </article>
 </main>

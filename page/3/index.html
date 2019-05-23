@@ -91,6 +91,39 @@ if (!doNotTrack) {
 			
 <main class="main list" role="main"><article class="list__item post">
 	<figure class="list__thumbnail">
+		<a href="/post/helm_harbor/">
+			<img src="/img/helm.png" alt="Helm Harbor" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/post/helm_harbor/" rel="bookmark">
+			Helm Harbor
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-03-19T10:02:41">2019-03-19</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81" rel="category">容器生态</a></span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">3826 字</time>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		chartmuseum chartmuseum是helm chart的仓库，它的存储层支持FileSystem以及各大云厂商的对象存储中间件， 默认支持阿里云的OSS、百度的BOS、Amazon S3、Microsoft Azure、Oracle、Openstack、Google等， 其他厂商需自行实现Storage的B
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/helm_harbor/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
+	<figure class="list__thumbnail">
 		<a href="/post/trie/">
 			<img src="/img/avatar.png" alt="字典树的应用与实现" />
 		</a>
@@ -366,39 +399,6 @@ if (!doNotTrack) {
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/post/prometheus_monitor_k8s/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/post/docker_deploy_wordpress/">
-			<img src="/img/wordpress.jpg" alt="基于Docker快速搭建wordpress博客" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/docker_deploy_wordpress/" rel="bookmark">
-			基于Docker快速搭建wordpress博客
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-13T10:28:01">2019-03-13</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/docker" rel="category">docker</a></span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">1365 字</time>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		wordpress数据存储依赖mysql数据库，以docker容器方式部署完整的wordpress博客服务，则需要从镜像仓库拉取mysql、wordpress镜像，这里选择从开源的docker hub 获取mysql 5.7版本，wordpress latest版本，同时需要准备一台具备外网环境的机器
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/docker_deploy_wordpress/">阅读全文…</a>
-	</div>
 </article>
 </main>
 
@@ -460,6 +460,7 @@ if (!doNotTrack) {
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_curl_apiserver/">CURL探索Kubernetes API Server</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/harbor_optimize/">Harbor镜像构建流程优化</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/harbor_base/">开源Harbor功能结构</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/docker_login_pass/">Docker Login登录凭证安全存储</a></li>
@@ -469,7 +470,6 @@ if (!doNotTrack) {
 			<li class="widget__item"><a class="widget__link" href="/post/docker_container_image/">Docker容器与镜像结构</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/docker_data/">Docker容器数据文件管理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/dockerfile/">Dockerfile详解以及高级技巧</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/postgresql/">PostgreSQL命令行操作</a></li>
 		</ul>
 	</div>
 </div>
@@ -482,6 +482,7 @@ if (!doNotTrack) {
 			<li class="widget__item"><a class="widget__link" href="/categories/harbor">Harbor</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/hugo">Hugo</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/kubernetes">Kubernetes</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81">容器生态</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/%e5%bc%80%e6%ba%90%e5%88%86%e4%ba%ab">开源分享</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/%e7%94%9f%e6%b4%bb%e6%8a%80%e5%b7%a7">生活技巧</a></li>
@@ -500,7 +501,7 @@ if (!doNotTrack) {
 		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (4)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/mysql" title="Mysql">Mysql (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/overlay" title="Overlay">Overlay (1)</a>

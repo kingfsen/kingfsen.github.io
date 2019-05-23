@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 君无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 21 May 2019 10:49:15 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 22 May 2019 19:30:52 +0800</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CURL探索Kubernetes API Server</title>
+      <link>/post/kubernetes_curl_apiserver/</link>
+      <pubDate>Wed, 22 May 2019 19:30:52 +0800</pubDate>
+      
+      <guid>/post/kubernetes_curl_apiserver/</guid>
+      <description>在Kubernetes集群中，API Server是集群管理API的入口，由运行在Master节点上的一个名为kube-apiserver的进程提供的服务。 用户进入API可以通过kubectl、客户端库或者http rest，User 或者 Service Account可以被授权进入API。当一个请求到达AP</description>
+    </item>
     
     <item>
       <title>Harbor镜像构建流程优化</title>

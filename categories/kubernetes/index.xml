@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubernetes on 君无止境</title>
+    <link>/categories/kubernetes/</link>
+    <description>Recent content in Kubernetes on 君无止境</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 22 May 2019 19:30:52 +0800</lastBuildDate>
+    
+	<atom:link href="/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CURL探索Kubernetes API Server</title>
+      <link>/post/kubernetes_curl_apiserver/</link>
+      <pubDate>Wed, 22 May 2019 19:30:52 +0800</pubDate>
+      
+      <guid>/post/kubernetes_curl_apiserver/</guid>
+      <description>在Kubernetes集群中，API Server是集群管理API的入口，由运行在Master节点上的一个名为kube-apiserver的进程提供的服务。 用户进入API可以通过kubectl、客户端库或者http rest，User 或者 Service Account可以被授权进入API。当一个请求到达AP</description>
+    </item>
+    
+  </channel>
+</rss>
