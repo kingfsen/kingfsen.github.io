@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Grpc on 君无止境</title>
+    <link>/tags/grpc/</link>
+    <description>Recent content in Grpc on 君无止境</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 30 May 2019 16:39:50 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/grpc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>grpc协议Protocol Buffers</title>
+      <link>/post/protocol_buffers/</link>
+      <pubDate>Thu, 30 May 2019 16:39:50 +0800</pubDate>
+      
+      <guid>/post/protocol_buffers/</guid>
+      <description>Protocol Buffers是一种灵活、高效、自动序列化结构数据的协议，当前有两个版本，分别是proto2与proto3，两个版本的协议不能完全兼容。 proto3简化了协议使用，生成的协议使用代码支持更多的编程语言，如Java、C++、Python、Java、Lite、Ruby、JavaScript、</description>
+    </item>
+    
+  </channel>
+</rss>

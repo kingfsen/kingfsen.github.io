@@ -91,6 +91,39 @@ if (!doNotTrack) {
 			
 <main class="main list" role="main"><article class="list__item post">
 	<figure class="list__thumbnail">
+		<a href="/post/dockerfile/">
+			<img src="/img/docker.jpg" alt="Dockerfile详解以及高级技巧" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/post/dockerfile/" rel="bookmark">
+			Dockerfile详解以及高级技巧
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-04-07T20:35:36">2019-04-07</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/docker" rel="category">docker</a></span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">14 分钟</time>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Docker是通过读取Dockerfile文件来自动构建镜像，Dockerfile其实就是一个包含了很多命令行指令的文本文件，通过这些指令来装配一个镜像。 要掌握Docker构建镜像的技巧，就必须首先了解Dockerfile的基本指令，下面先详细介绍Dockerfile中的一些常用指令。 基本
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/dockerfile/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
+	<figure class="list__thumbnail">
 		<a href="/post/postgresql/">
 			<img src="/img/postgresql.png" alt="PostgreSQL命令行操作" />
 		</a>
@@ -381,39 +414,6 @@ if (!doNotTrack) {
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/post/binary_tree_base/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/post/hugo_blog/">
-			<img src="/img/hugo.png" alt="高效的静态网站生成器Hugo" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/hugo_blog/" rel="bookmark">
-			高效的静态网站生成器Hugo
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-19T20:05:49">2019-03-19</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/hugo" rel="category">hugo</a></span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">4 分钟</time>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		静态网站比较适用于博客、宣传、文档类的站点，比动态站点占用资源更小，访问速度更快。当前最流行的Wordpress博客系统功能很强大，插件也很丰富， 但是整体感觉很臃肿，占用资源也比较大，同时还需要部署一个MySQL数据库，国内有一些个人或者小团队研发了一些开源的轻量级博客，根本没什么吸引力。
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/hugo_blog/">阅读全文…</a>
-	</div>
 </article>
 </main>
 
@@ -478,6 +478,7 @@ if (!doNotTrack) {
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/protocol_buffers/">grpc协议Protocol Buffers</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_curl_apiserver/">CURL探索Kubernetes API Server</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/harbor_optimize/">Harbor镜像构建流程优化</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/harbor_base/">开源Harbor功能结构</a></li>
@@ -487,7 +488,6 @@ if (!doNotTrack) {
 			<li class="widget__item"><a class="widget__link" href="/post/docker_storage_driver/">Docker镜像存储结构与原理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/docker_container_image/">Docker容器与镜像结构</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/docker_data/">Docker容器数据文件管理</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/dockerfile/">Dockerfile详解以及高级技巧</a></li>
 		</ul>
 	</div>
 </div>
@@ -515,6 +515,7 @@ if (!doNotTrack) {
 		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (12)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/grpc" title="Grpc">Grpc (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (6)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (2)</a>
