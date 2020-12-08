@@ -1,62 +1,63 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en-us">
+<html class="no-js" lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Prometheus监控Kubernetes服务(一) - 君无止境</title>
+	<title>Prometheus监控Kubernetes服务(一) - </title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	
+	<script src="/js/jquery.toTop.min.js"></script>
+	
 	<meta name="description" content="Kubernetes中如何部署Prometheus监控服务">
-	<meta name="generator" content="Hugo 0.54.0" />
+	<meta name="generator" content="Hugo 0.55.6" />
 	
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css">	
+	<link rel="stylesheet" type="text/css" href="/css/highlight.css">
+	
+	
 	<link rel="stylesheet" href="/css/share.min.css">
-	<link rel="stylesheet" href="/css/card.css">
 	<script src="/js/social-share.min.js"></script>
 	<script src="/js/qrcode.js"></script>
 	
+	
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-
+	
 </head>
 <body class="body">
-  
-  
-
 	<div class="container container--outer">
 		<header class="header">
 	<div class="container">
 		<div class="logo">
-			<a class="logo__link" href="/" title="君无止境" rel="home">
-				<div class="logo__title">君无止境</div>
-				
-				<div class="logo__tagline">代码沉淀技术，技术成就梦想~
-				</div>
-				
+			<a class="logo__link" href="/" title="" rel="home">
+			<div class="logo__title"></div>			
+				 
 			</a>
-			<div class="float_right"><div class="social-share"></div></div>
+			
+			<div class="float_right"><div class="social-share"></div>
+  <br/></div>
+			
 		</div>
 		
 <nav class="menu">
 	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
-		<span class="menu__btn-title" tabindex="-1">Menu</span>
+		<span class="menu__btn-title" tabindex="-1">选择</span>
 	</button>
 	<ul class="menu__list">
-		
 		<li class="menu__item">
-			<a class="menu__link" href="/about/">关于我</a>
+			<a class="menu__link" href="/post/">博客</a>
 		</li>
-		
 		<li class="menu__item">
-			<a class="menu__link" href="/arithmetic/">基础算法</a>
+			<a class="menu__link" href="/about/">名站导航</a>
 		</li>
-		
 		<li class="menu__item">
-			<a class="menu__link" href="/post/">技术博客</a>
+			<a class="menu__link" href="/timeline/">时间轴</a>
 		</li>
 	</ul>
 </nav>
@@ -80,13 +81,17 @@
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
 	<span class="meta__text"><a class="meta__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81" rel="category">容器生态</a></span>
 </div>
-</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">6 分钟</time>
+</div></div>
 		</header>
 
-<div class="post__toc toc">
-	<div class="toc__title">Page content</div>
-	<div class="toc__menu">
-		<nav id="TableOfContents">
+  
+    <div class="toc">
+        <div class="toc__title"><span id="toc_menu_tip">展开书签</span></div>
+        <div class="toc__menu">
+          <nav id="TableOfContents">
 <ul>
 <li>
 <ul>
@@ -99,22 +104,34 @@
 </ul></li>
 </ul>
 </nav>
-	</div>
-</div>
+        </div>  
+    </div>
+    <script type="text/javascript">
+    $(".toc__title").click( function () {
+      if($(".toc__menu").css('display') == 'none') {
+        $(".toc__menu").show(); 
+        $("#toc_menu_tip").html("收起书签");
+      } else {
+        $(".toc__menu").hide(); 
+        $("#toc_menu_tip").html("展开书签");
+      }
+    });
+    </script>
+  
 <div class="content post__content clearfix">
 			
 
 <h3 id="prometheus功能结构">Prometheus功能结构</h3>
 
 <p>Prometheus是基于golang编写的一个开源监控项目，当前应用非常广泛，尤其是与当前的容器调度平台kubernetes融合，使用Prometheus之前，我们应该了解下它的使用场景，它不能用来进行大量无规则数据的收集，不能替代日志收集工具，同时由于Prometheus基于时间序列的sample采样收集，如果某个系统对自身的每个请求都要求精准监控，那Prometheus也不适合。Prometheus更多的用于基于时间序列的一个sample采样，统计分析，比如某个功能接口某段时间的调用频率、调用次数等。
-<img src="https://raw.githubusercontent.com/kingfsen/blog-images/master/blog/prometheus_monitor_k8s/001.png" alt="prometheus" />
+<img src="https://gitee.com/JunWuZhiJing/blog-images/raw/master/blog/prometheus_monitor_k8s/001.png" alt="prometheus" />
 橙色框 Pushgateway、Prometheus server、Prometheus web UI、Alertmanager都是prometheus自身提供的核功能组件，蓝色框是prometheus支持的服务自动发现方式，其他模块的实现都是第三方项目。对于prometheus server来说，所有的metrics数据都是通过Job定时轮询抽取过来的。prometheus也已经想到，某些数据源系统可能无规则或者生命周期短，更可能的是它们与prometheus server所在的网络不通，所以它又提供了一个Pushgateway组件，数据源系统可以通过http请求把metrics数据推送到Pushgateway，然后Prometheus server把Pushgateway的地址作为稳定的数据抽取源。</p>
 
 <p>Prometheus的服务自动发现，当前有两种方式，支持原生的Kubernetes以及基于静态配置文件file_sd。Prometheus定时获取解析file_sd中配置的数据抓取源URL，因此可以借助一些第三方组件比如DNS、Consul、Docker Swarm、Scaleway等当发现新服务时，自动更新file_sd。</p>
 
 <p>Prometheus数据的存储，默认是基于磁盘的一个tsdb时序数据库，当然它也支持远程数据读写，必须通过Adapter进行适配。
-<img src="https://raw.githubusercontent.com/kingfsen/blog-images/master/blog/prometheus_monitor_k8s/002.png" alt="prometheus" />
-<img src="https://raw.githubusercontent.com/kingfsen/blog-images/master/blog/prometheus_monitor_k8s/003.png" alt="prometheus" /></p>
+<img src="https://gitee.com/JunWuZhiJing/blog-images/raw/master/blog/prometheus_monitor_k8s/002.png" alt="prometheus" />
+<img src="https://gitee.com/JunWuZhiJing/blog-images/raw/master/blog/prometheus_monitor_k8s/003.png" alt="prometheus" /></p>
 
 <p>Prometheusd的Alertmanager、ui基本都被Grafana的组件替代。</p>
 
@@ -130,7 +147,7 @@ metadata:
 
 <p>然后创建prometheus的RBAC涉及的资源，ClusterRole、ServiceAccount、ClusterRoleBinding。</p>
 
-<pre><code>apiVersion: rbac.authorization.k8s.io/v1
+<pre><code class="language-yaml">apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: prometheus
@@ -173,7 +190,7 @@ subjects:
 
 <p>创建Prometheus的配置，在Kubernetes中以ConfigMap形式创建资源，然后执行部署Prometheus Deployment的时候Kubernetes自动将配置文件挂载到对应的容器目录，Prometheus的详细配置后面再做简单介绍。</p>
 
-<pre><code>apiVersion: v1
+<pre><code class="language-yaml">apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-config
@@ -285,7 +302,7 @@ data:
 
 <p>创建Prometheus的deployment、service资源文件</p>
 
-<pre><code>apiVersion: apps/v1beta2
+<pre><code class="language-yaml">apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   labels:
@@ -356,11 +373,11 @@ spec:
 
 <p>上面这个文件执行之后，Prometheus的服务则部署完成，上面我们通过端口映射已经将Prometheus的服务端口映射到宿主机的30003，浏览器直接访问:<a href="http://ip:30003。">http://ip:30003。</a></p>
 
-<p><img src="https://raw.githubusercontent.com/kingfsen/blog-images/master/blog/prometheus_monitor_k8s/004.png" alt="prometheus管理端" /></p>
+<p><img src="https://gitee.com/JunWuZhiJing/blog-images/raw/master/blog/prometheus_monitor_k8s/004.png" alt="prometheus管理端" /></p>
 
 <p>由于Prometheus的图形效果远逊于Grafana，接着在Kubernetes中部署Grafana服务。</p>
 
-<pre><code>apiVersion: extensions/v1beta1
+<pre><code class="language-yaml">apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: grafana-core
@@ -429,15 +446,15 @@ spec:
 </code></pre>
 
 <p>为了防止在Grafana服务重启时丢失上一次的创建好的配置信息，务必通过文件目录映射，持久化Grafana配置信息，Grafana的web端用户名默认admin，密码则是上面以环境变量注入的CONSOLE123456。通过浏览器访问 <a href="http://ip:30002/">http://ip:30002/</a> ，输入用户名密码进行登录。
-<img src="https://raw.githubusercontent.com/kingfsen/blog-images/master/blog/prometheus_monitor_k8s/005.png" alt="grafana_index" /></p>
+<img src="https://gitee.com/JunWuZhiJing/blog-images/raw/master/blog/prometheus_monitor_k8s/005.png" alt="grafana_index" /></p>
 
 <p>登录成功之后，开始配置数据源，将Prometheus的访问地址配置暴露给Grafana，然后Grafana可以从Prometheus请求数据，渲染页面。</p>
 
-<p><img src="https://raw.githubusercontent.com/kingfsen/blog-images/master/blog/prometheus_monitor_k8s/006.png" alt="datasource" /></p>
+<p><img src="https://gitee.com/JunWuZhiJing/blog-images/raw/master/blog/prometheus_monitor_k8s/006.png" alt="datasource" /></p>
 
 <p>解释一下上面的URL地址<a href="http://prometheus:9090">http://prometheus:9090</a> , 9090是Prometheus的service的服务端口，prometheus是service的名字，由于Prometheus与Grafana服务部署于同一个命名空间kube-prometheus，直接通过service名字即可访问，如果不是同一个命名空间，则必须<a href="http://prometheus.kube-promethues.svc.cluster.local:9090">http://prometheus.kube-promethues.svc.cluster.local:9090</a> 。配置URL之后，点击保存即可，然后去Grafana官网下载一个kubernetes的Template，导入到当前的Grafana中。</p>
 
-<p><img src="https://raw.githubusercontent.com/kingfsen/blog-images/master/blog/prometheus_monitor_k8s/007.png" alt="template_grafana" /></p>
+<p><img src="https://gitee.com/JunWuZhiJing/blog-images/raw/master/blog/prometheus_monitor_k8s/007.png" alt="template_grafana" /></p>
 
 <h3 id="细节问题">细节问题</h3>
 
@@ -455,22 +472,27 @@ spec:
 		<li class="tags__item"><a class="tags__link btn" href="/tags/prometheus/" rel="tag">prometheus</a></li>
 		<li class="tags__item"><a class="tags__link btn" href="/tags/kubernetes/" rel="tag">kubernetes</a></li>
 	</ul>
-</div> 
+</div>
 	</article>
 </main>
-
 <div class="social-share"></div>
+  <br/>
+
 
 
 
 <aside class="sidebar">
-<h4>See Also</h4>
+<h4>相关文章</h4>
 <div class="widget__content">
 		<ul class="widget__list">
 	
 	<li><a href="/post/prometheus_monitor_k8s2/">Prometheus监控Kubernetes服务(二)</a></li>
 	
-	<li><a href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败分析</a></li>
+	<li><a href="/post/kubernetes_io_deploy/">本地部署kubernetes.io官方网站</a></li>
+	
+	<li><a href="/post/kubernetes_curl_apiserver/">CURL探索Kubernetes API Server</a></li>
+	
+	<li><a href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败解决方法</a></li>
 	
 </ul>
 </div>
@@ -478,47 +500,133 @@ spec:
 </aside>
 
 
-<div class="authorbox clearfix">
-	<figure class="authorbox__avatar">
-		<img alt="孙金福 avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
-	</figure>
-	<div class="authorbox__header">
-		<span class="authorbox__name">About 孙金福</span>
-	</div>
-	<div class="authorbox__description">
-		一个没有天赋但很勤奋的开发工程师
-	</div>
-</div>
-
 <nav class="post-nav flex">
 	<div class="post-nav__item post-nav__item--prev">
-		<a class="post-nav__link" href="/post/docker_deploy_wordpress/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">基于Docker快速搭建wordpress博客</p></a>
+		<a class="post-nav__link" href="/post/docker_deploy_wordpress/" rel="prev"><span class="post-nav__caption">«&thinsp;前一篇</span><p class="post-nav__post-title">基于Docker快速搭建wordpress博客</p></a>
 	</div>
 	<div class="post-nav__item post-nav__item--next">
-		<a class="post-nav__link" href="/post/prometheus_monitor_k8s2/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Prometheus监控Kubernetes服务(二)</p></a>
+		<a class="post-nav__link" href="/post/get_random_number_from_array/" rel="next"><span class="post-nav__caption">后一篇&thinsp;»</span><p class="post-nav__post-title">从数组中获取指定数量的随机元素</p></a>
 	</div>
 </nav>
-<script data-isso="https://www.youendless.com/isso/"
-        src="https://www.youendless.com/isso/js/embed.min.js"></script>
 
+
+
+<script data-isso="/isso/" src="/isso/js/embed.min.js"></script>
 <section id="isso-thread"></section>
 
+
 			</div>
-			
-			
-						
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_io_deploy/">本地部署kubernetes.io官方网站</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/reentrantlock/">Java互斥锁ReentrantLock实现原理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/juc/">Java同步器框架AQS与锁实现原理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/helm_design/">Helm架构与中心化部署解决方案</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/grpc/">使用Golang部署gRPC服务</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/protocol_buffers/">gRPC协议Protocol Buffers</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_curl_apiserver/">CURL探索Kubernetes API Server</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/harbor_optimize/">Harbor镜像构建流程优化</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/harbor_base/">开源Harbor功能结构</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/docker_login_pass/">Docker Login登录凭证安全存储</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">分类</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/docker">Docker</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/golang">Golang</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95">Java基础算法</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%8d%9a%e5%ae%a2%e7%bb%84%e4%bb%b6">博客组件</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81">容器生态</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%94%9f%e6%b4%bb%e6%8a%80%e5%b7%a7">生活技巧</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">标签</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/aqs" title="Aqs">Aqs (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/chartmuseum" title="Chartmuseum">Chartmuseum (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/condition" title="Condition">Condition (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (12)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/grpc" title="Grpc">Grpc (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (6)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/juc" title="Juc">Juc (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (5)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql" title="Mysql">Mysql (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/overlay" title="Overlay">Overlay (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/postgresql" title="Postgresql">Postgresql (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/swift" title="Swift">Swift (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tiller" title="Tiller">Tiller (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/wordpress" title="Wordpress">Wordpress (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e4%ba%8c%e5%8f%89%e6%a0%91" title="二叉树">二叉树 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%85%89%e7%8c%ab" title="光猫">光猫 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%88%86%e4%ba%ab%e6%8f%92%e4%bb%b6" title="分享插件">分享插件 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%8d%9a%e5%ae%a2%e6%8f%92%e4%bb%b6" title="博客插件">博客插件 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%8f%98%e5%bd%a2%e8%af%8d" title="变形词">变形词 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e5%85%b8%e6%a0%91" title="字典树">字典树 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e7%ac%a6%e4%b8%b2" title="字符串">字符串 (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" title="数据结构">数据结构 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e7%bb%84" title="数组">数组 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e7%ae%97%e6%b3%95" title="算法">算法 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e8%af%84%e8%ae%ba%e7%b3%bb%e7%bb%9f" title="评论系统">评论系统 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%94%81" title="锁">锁 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%95%9c%e5%83%8f%e6%89%ab%e6%8f%8f" title="镜像扫描">镜像扫描 (2)</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">社群</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/kingfsen" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:562620163@qq.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>562620163@qq.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+</aside>
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2019 君无止境.&nbsp;
-			<span class="footer__copyright-credits">Generator by Hugo</span>&nbsp;&nbsp;
+			&copy; 2020 .
+			<span class="footer__copyright-credits">使用 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 技术与 <a href="https://github.com/kingfsen/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主题</span>
 		</div>
 	</div>
 </footer>
 	</div>
-<script async defer src="/js/menu.js"></script><script>
+<script async defer src="/js/menu.js"></script>
+<script async src="/js/highlight.js"></script> 
+  <script>
 (function(){
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
@@ -532,14 +640,32 @@ spec:
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
+
+
+ 
+  
 <script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?bc50444185089759841f5c78a2ecb638";
+  hm.src = "https://hm.baidu.com/hm.js?1f3ac79473dea8a6643d0e73a08fa809";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
+
+
+
+<script type="text/javascript">
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+</script>
+
+<a class="to-top" style="background-color:#666;color:#fff;width:40px;height:40px;text-align:center;padding-top:3px;line-height:18px;">返回顶部</a>
+<script type="text/javascript">
+$('.to-top').toTop();
+</script>
+
 </body>
 </html>

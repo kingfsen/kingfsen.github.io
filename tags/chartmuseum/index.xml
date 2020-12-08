@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Chartmuseum on 君无止境</title>
+    <title>chartmuseum on </title>
     <link>/tags/chartmuseum/</link>
-    <description>Recent content in Chartmuseum on 君无止境</description>
+    <description>Recent content in chartmuseum on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-cn</language>
     <lastBuildDate>Tue, 19 Mar 2019 10:02:41 +0800</lastBuildDate>
     
 	<atom:link href="/tags/chartmuseum/index.xml" rel="self" type="application/rss+xml" />
@@ -17,7 +17,7 @@
       <pubDate>Tue, 19 Mar 2019 10:02:41 +0800</pubDate>
       
       <guid>/post/helm_harbor/</guid>
-      <description>chartmuseum chartmuseum是helm chart的仓库，它的存储层支持FileSystem以及各大云厂商的对象存储中间件， 默认支持阿里云的OSS、百度的BOS、Amazon S3、Microsoft Azure、Oracle、Openstack、Google等， 其他厂商需自行实现Storage的Backend接口方法，同时增加了缓存redis，提升系统处理效率，项目地址https://github.com/helm/chartmuseum 。 chartmuseum支持多租户的实现，它通过一个index-cache.yaml索引文件来维护租户上传记录，类似docke</description>
+      <description>chartmuseum chartmuseum是helm chart的仓库，它的存储层支持FileSystem以及各大云厂商的对象存储中间件， 默认支持阿里云的OSS、百度的BOS、Amazon S3、Microsoft Azure、Oracle、Openstack、Google等， 其他厂商需自行实现Storage的B</description>
     </item>
     
   </channel>
