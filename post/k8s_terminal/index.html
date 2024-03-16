@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>WebSocket实现Kubernetes Exec Terminal - </title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	
+	<script src="/js/jquery.toTop.min.js"></script>
+	
+	<meta name="description" content="透过WebSocket实现kubernetes exec terminal">
+	<meta name="generator" content="Hugo 0.55.6" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	
+	<link rel="stylesheet" href="/css/style.css">	
+	<link rel="stylesheet" type="text/css" href="/css/highlight.css">
+	
+	
+	<link rel="stylesheet" href="/css/share.min.css">
+	<script src="/js/social-share.min.js"></script>
+	<script src="/js/qrcode.js"></script>
+	
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+	
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="" rel="home">
+				<div class="logo_item  logo__imagebox">
+					<img class="logo_img" style="max-width: 128px;max-height: 128px;" src="img/logo.png"></img>
+				</div>			
+			</a>
+			
+			<div class="float_right"><div class="social-share"></div>
+  <br/></div>
+			
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">选择</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">博客</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">名站导航</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/timeline/">时间轴</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">WebSocket实现Kubernetes Exec Terminal</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2022-04-19T09:31:16">2022-04-19</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81" rel="category">容器生态</a></span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">10 分钟</time>
+</div></div>
+		</header>
+
+  
+    <div class="toc">
+        <div class="toc__title"><span id="toc_menu_tip">展开书签</span></div>
+        <div class="toc__menu">
+          <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#实现原理">实现原理</a>
+<ul>
+<li><a href="#exec流程逻辑">Exec流程逻辑</a></li>
+</ul></li>
+<li><a href="#后端功能代码">后端功能代码</a>
+<ul>
+<li><a href="#streamhandler">StreamHandler</a></li>
+<li><a href="#httphandler">HttpHandler</a></li>
+<li><a href="#stream">Stream</a></li>
+</ul></li>
+<li><a href="#前端代码交互">前端代码交互</a>
+<ul>
+<li><a href="#html">HTML</a></li>
+<li><a href="#js模块">JS模块</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+        </div>  
+    </div>
+    <script type="text/javascript">
+    $(".toc__title").click( function () {
+      if($(".toc__menu").css('display') == 'none') {
+        $(".toc__menu").show(); 
+        $("#toc_menu_tip").html("收起书签");
+      } else {
+        $(".toc__menu").hide(); 
+        $("#toc_menu_tip").html("展开书签");
+      }
+    });
+    </script>
+  
+<div class="content post__content clearfix">
+			
+
+<h2 id="实现原理">实现原理</h2>
+
+<p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;通过WebSocket实现Kubernetes Exec命令行终端，我们需要提供一个http server，前端页面首先请求http server，http server与k8s api server交互。
+如下图，这里仅作为示例，按照正常的逻辑，肯定需要先进行一个参数校验以及权限认证，因为websocket请求上不可能出现账户相关敏感数据。比如，前端首先携带相关的clusterId、podName、namespace、
+containerName等参数请求后端的一个接口，该接口负责对参数的基本校验，以及pod状态等校验，最终状态是无法exec的，重要的是要进行权限检查。权限检查之后，就可以生成一个关键信息字符串token，
+前端通过这个token字符串作为参数请求server：<code>wss://xx.com/exec?s=BbiMvEr8CpM0cmeNdd1yVQ</code> ，可以采用<strong>JWT</strong>生成这个带时效性的token，也可以采用相关摘要算法对数据进行编码，然后作为
+key存储到redis中，value则是相关的源数据，同时设定过期时间。</p>
+
+<p><img src="/blog/terminal/k8s_terminal.jpg" alt="demo" /></p>
+
+<p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;前端我们采用xterm.js进行交互，后端采用golang <code>gin</code>框架构建http server，<code>github.com/gorilla/websocket</code>包升级websocket协议，
+选择<code>client-go</code>下的工具包<code>remotecommand</code>与kubernetes建立连接，<code>client-go</code>客户端版本<strong>v1.19</strong>以上才会有这个<code>remotecommand</code>工具，kubectl exec命令就是用这个包操作的。</p>
+
+<p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;WebSocket连接就是基于一次普通的http get请求之上建立的，客户端在这次http get请求时，需要在请求header中增加几个关键的属性，后端server才能升级到WebSocket连接。</p>
+
+<ul>
+<li><code>Connection: Upgrade</code> 连接需要升级</li>
+<li><code>Upgrade: websocket</code> 升级到什么协议，具体的依赖后端支持哪些协议</li>
+<li><code>Sec-WebSocket-Version：13</code> WebSocket版本</li>
+<li><code>Sec-WebSocket-Key：TdSpMGWJu22IiPM6B6oSWQ==</code> WebSocket握手Key</li>
+</ul>
+
+<p>后端http框架gin的ResponseWriter已经实现了<code>http.Hijacker</code>接口，调用者在一次http get请求响应之前调用了<code>Hijacker.Hijack</code>方法，http server库就会把这个底层连接交由调用者线程或者协程进行处理，
+前后端则可以通过这个连接进行WebSocket读写数据了。http server与kubernetes集群的api server则通过spdy协议建立长连接，打开Stream进行数据读写。首先我们查看一下kubectl exec发起的http请求：</p>
+
+<p><code>kubectl exec -t container-cms-5b75bc47c5-rj2j7 -v 8 -n container-team -- date</code></p>
+
+<p>部分http header信息如下：</p>
+
+<pre><code class="language-sh">I0419 09:47:35.741716   17438 round_trippers.go:416] POST https://156.0.1.9:9443/api/v1/namespaces/team/pods/container-cms-5b75bc47c5-rj2j7/exec?command=date&amp;container=container-cms&amp;stderr=true&amp;stdout=true
+I0419 09:47:35.741767   17438 round_trippers.go:423] Request Headers:
+I0419 09:47:35.741794   17438 round_trippers.go:426]     X-Stream-Protocol-Version: v4.channel.k8s.io
+I0419 09:47:35.741817   17438 round_trippers.go:426]     X-Stream-Protocol-Version: v3.channel.k8s.io
+I0419 09:47:35.741855   17438 round_trippers.go:426]     X-Stream-Protocol-Version: v2.channel.k8s.io
+I0419 09:47:35.741876   17438 round_trippers.go:426]     X-Stream-Protocol-Version: channel.k8s.io
+I0419 09:47:35.741907   17438 round_trippers.go:426]     User-Agent: kubectl/v1.15.5 (linux/amd64) kubernetes/20c265f
+I0419 09:47:35.794169   17438 round_trippers.go:441] Response Status: 101 Switching Protocols in 52 milliseconds
+I0419 09:47:35.794224   17438 round_trippers.go:444] Response Headers:
+I0419 09:47:35.794243   17438 round_trippers.go:447]     Connection: Upgrade
+I0419 09:47:35.794269   17438 round_trippers.go:447]     Upgrade: SPDY/3.1
+I0419 09:47:35.794288   17438 round_trippers.go:447]     X-Stream-Protocol-Version: v4.channel.k8s.io
+I0419 09:47:35.794303   17438 round_trippers.go:447]     Date: Tue, 19 Apr 2022 01:47:35 GMT
+</code></pre>
+
+<h3 id="exec流程逻辑">Exec流程逻辑</h3>
+
+<p>通过下面的图我们再来了解一下kubectl exec 执行的流程逻辑，最终提供服务的是节点上启动的Stream Server，这个服务一般随着CRI shim启动而一起启动。</p>
+
+<p><img src="/blog/terminal/exec_detail.png" alt="exec" /></p>
+
+<ul>
+<li>当在节点上执行kubectl exec时，这个请求首先是交给集群apiServer，apiServer则会调用kubelet的Exec API。</li>
+<li>kubelet收到请求之后，会调用CRI的Exec接口，负责响应这个接口的自然是对应的CRI shim，比如Docker shim。</li>
+<li>CRI shim并不会直接去调用后端的容器项目比如Docker来处理，而只是返回一个URL给kubelet，即CRI shim对应的Stream Server地址。</li>
+<li>kubelet拿到URL之后，通过Redirect方式返回给apiServer，apiServer则通过重定向来请求Stream Server的Exec，建立长连接。</li>
+</ul>
+
+<h2 id="后端功能代码">后端功能代码</h2>
+
+<p>后端server既然提供了websocket服务，则需提供一个websocket连接管理器，管理器需要统计系统中维护的连接数量，根据条件延续连接的生命周期，自动关闭无任何数据交互的连接，统计连接占用的时长，读写大小数据等，
+甚至可以提供Prometheus Metrics数据，实时掌控系统中各连接指标，进而作一些限制，这里简单起见，只提供一个简单功能的管理器，进行一些日志打印以及自动延续连接生命周期功能。</p>
+
+<pre><code class="language-go">package cluster
+
+import (
+    log &quot;container-cms/logger&quot;
+    &quot;container-cms/server&quot;
+    &quot;github.com/gorilla/websocket&quot;
+    &quot;sync&quot;
+    &quot;time&quot;
+)
+
+var webSocketManager *WebSocketManager
+
+type WebSocketManager struct {
+    sync.Mutex
+    pool        map[*websocket.Conn]time.Time
+    timer       *time.Ticker
+    liveMinutes int
+}
+
+func init() {
+    webSocketManager = &amp;WebSocketManager{}
+    webSocketManager.pool = make(map[*websocket.Conn]time.Time)
+    webSocketManager.timer = time.NewTicker(time.Second * 10)
+    liveMinutes := server.GetOptions().WebSocketLiveMinutes
+    if liveMinutes &lt; 2 {
+        liveMinutes = 10
+    }
+    // 无任何输入 默认存活10分钟
+    webSocketManager.liveMinutes = liveMinutes
+}
+
+func (wm *WebSocketManager) Put(conn *websocket.Conn) {
+    if conn == nil {
+        return
+    }
+    wm.Mutex.Lock()
+    defer wm.Mutex.Unlock()
+    wm.pool[conn] = time.Now().Add(time.Minute * time.Duration(wm.liveMinutes))
+    log.GetLogger().WithField(&quot;total&quot;, len(wm.pool)).Info(&quot;add one conn&quot;)
+}
+
+func (wm *WebSocketManager) Del(conn *websocket.Conn) {
+    if conn == nil {
+        return
+    }
+    wm.Mutex.Lock()
+    defer wm.Mutex.Unlock()
+    if _, exist := wm.pool[conn]; exist {
+        delete(wm.pool, conn)
+        log.GetLogger().WithField(&quot;total&quot;, len(wm.pool)).Info(&quot;release one conn&quot;)
+    }
+}
+
+// 延续WebSocket连接生命周期
+func (wm *WebSocketManager) Renew(conn *websocket.Conn) {
+    if conn == nil {
+        return
+    }
+    wm.Mutex.Lock()
+    defer wm.Mutex.Unlock()
+    expireTime, ok := wm.pool[conn]
+    if ok {
+        expireTime = time.Now().Add(time.Minute * time.Duration(wm.liveMinutes))
+        wm.pool[conn] = expireTime
+        log.GetLogger().WithField(&quot;client&quot;, conn.RemoteAddr()).Infof(&quot;renew, expire time: %v&quot;, expireTime)
+    }
+}
+
+// 自动关闭过期的WebSocket连接
+func (wm *WebSocketManager) DelIfExpire() {
+    wm.Lock()
+    defer wm.Unlock()
+    for k, v := range wm.pool {
+        if time.Now().Unix() &gt; v.Unix() {
+            log.GetLogger().WithField(&quot;client&quot;, k.RemoteAddr().String()).Info(&quot;connect will be killed by websocket manager&quot;)
+            delete(wm.pool, k)
+            k.Close()
+            log.GetLogger().WithField(&quot;total&quot;, len(wm.pool)).Info(&quot;release one conn&quot;)
+        }
+    }
+}
+
+// 启动WebSocket管理器
+func (wm *WebSocketManager) Run() {
+    for {
+        select {
+        case &lt;-wm.timer.C:
+            wm.DelIfExpire()
+        default:
+        }
+    }
+}
+func GetWebSocketManager() *WebSocketManager {
+    return webSocketManager
+}
+</code></pre>
+
+<p>在main方法中增加代码 <code>go cluster.GetWebSocketManager().Run()</code> 启动WebSocket管理器。remotecommand包中的Stream在打开之前，需要给这个Stream设置Stream handler，StreamOptions结构：</p>
+
+<pre><code class="language-go">// StreamOptions holds information pertaining to the current streaming session:
+// input/output streams, if the client is requesting a TTY, and a terminal size queue to
+// support terminal resizing.
+type StreamOptions struct {
+    Stdin             io.Reader
+    Stdout            io.Writer
+    Stderr            io.Writer
+    Tty               bool
+    TerminalSizeQueue TerminalSizeQueue
+}
+
+// TerminalSizeQueue is capable of returning terminal resize events as they occur.
+type TerminalSizeQueue interface {
+    // Next returns the new terminal size after the terminal has been resized. It returns nil when
+    // monitoring has been stopped.
+    Next() *TerminalSize
+}
+</code></pre>
+
+<h3 id="streamhandler">StreamHandler</h3>
+
+<p>因此，我们可以编写一个StreamHandler，实现io.Reader、io.Writer、TerminalSizeQueue接口，然后Stream在打开之后则会调用我们自定义的handler进行数据读写处理。</p>
+
+<pre><code class="language-go">type WebStreamHandler struct {
+    // web前端到后端的WebSocket连接
+    conn *websocket.Conn
+    sync.Mutex
+    // 条件通知，类似Java中的lock.Condition,必须持有锁之后才能调用, 不使用条件等待通知机制，容易空耗cpu，类似for{}
+    cond        *sync.Cond
+    buffer      []byte
+    resizeEvent chan remotecommand.TerminalSize
+    // 用户是否取消了WebSocket
+    cancel      chan struct{}
+}
+
+func NewWebStreamHandler(conn *websocket.Conn) *WebStreamHandler {
+    handler := &amp;WebStreamHandler{
+        conn:        conn,
+        resizeEvent: make(chan remotecommand.TerminalSize),
+        cancel:      make(chan struct{}, 1),
+    }
+    return handler
+}
+
+func (wsh *WebStreamHandler) InitCond() {
+    wsh.cond = sync.NewCond(wsh)
+}
+
+func (wsh *WebStreamHandler) Resize(ts remotecommand.TerminalSize) {
+    wsh.resizeEvent &lt;- ts
+}
+
+// 必须signal，否则还在等待条件的goroutine可能产生泄露
+func (wsh *WebStreamHandler) Cancel() {
+    wsh.cancel &lt;- struct{}{}
+    wsh.Lock()
+    defer wsh.Unlock()
+    wsh.cond.Signal()
+}
+
+func (wsh *WebStreamHandler) IsCanceled() bool {
+    select {
+    case &lt;-wsh.cancel:
+        return true
+    default:
+        return false
+    }
+}
+
+// main线程写入数据了，通知goroutine中的Stream进行读取
+func (wsh *WebStreamHandler) WriteBuffer(data []byte) {
+    wsh.Lock()
+    defer wsh.Unlock()
+    wsh.buffer = append(wsh.buffer, data...)
+    wsh.cond.Signal()
+}
+
+// stream 读取数据方法，必须实现的io.Reader
+func (wsh *WebStreamHandler) Read(b []byte) (size int, err error) {
+    wsh.Lock()
+    defer wsh.Unlock()
+    // 如果用了if，在多线程环境下，可能出现假唤醒
+    for len(wsh.buffer) == 0 {
+        if wsh.IsCanceled() {
+            log.GetLogger().WithField(&quot;clientKey&quot;, wsh.conn.RemoteAddr()).Info(&quot;connect cancel&quot;)
+            return 0, errors.New(&quot;connect has been canceled&quot;)
+        }
+        log.GetLogger().WithField(&quot;clientKey&quot;, wsh.conn.RemoteAddr()).Info(&quot;no data, waiting condition&quot;)
+        wsh.cond.Wait()
+        log.GetLogger().WithField(&quot;clientKey&quot;, wsh.conn.RemoteAddr()).Info(&quot;condition signal&quot;)
+    }
+    size = copy(b, wsh.buffer)
+    wsh.buffer = wsh.buffer[size:]
+    return
+}
+
+// stream 输出数据方法，必须实现的io.Writer
+func (wsh *WebStreamHandler) Write(b []byte) (size int, err error) {
+    if wsh.IsCanceled() {
+        log.GetLogger().WithField(&quot;clientKey&quot;, wsh.conn.RemoteAddr()).Info(&quot;connect cancel&quot;)
+        return 0, errors.New(&quot;connect has been canceled&quot;)
+    }
+    size = len(b)
+    log.GetLogger().WithField(&quot;data&quot;, string(b)).Info(&quot;stream handler write data&quot;)
+    err = wsh.conn.WriteMessage(websocket.TextMessage, b)
+    if err != nil {
+        log.GetLogger().WithField(&quot;err&quot;, err).Info(&quot;stream data write to websocket front error&quot;)
+    }
+    return
+}
+
+// stream改变终端大小的方法，必须实现
+func (wsh *WebStreamHandler) Next() (terminalSize *remotecommand.TerminalSize) {
+    e := &lt;-wsh.resizeEvent
+    terminalSize = &amp;e
+    return
+}
+</code></pre>
+
+<h3 id="httphandler">HttpHandler</h3>
+
+<p>我们自定义的WebStreamHandler已经定义完成，接下来则是提供http handler接收前端的WebSocket请求。</p>
+
+<pre><code class="language-go">type ExecParam struct {
+    Namespace     string `json:&quot;namespace&quot; form:&quot;namespace&quot;`
+    ClusterId     string `json:&quot;clusterId&quot; form:&quot;clusterId&quot;`
+    AccountId     string `json:&quot;accountId&quot; form:&quot;accountId&quot;`
+    Region        string `json:&quot;region&quot; form:&quot;region&quot;`
+    PodName       string `json:&quot;podName&quot; form:&quot;podName&quot;`
+    ContainerName string `json:&quot;containerName&quot; form:&quot;containerName&quot;`
+}
+
+type XtermMessage struct {
+    MsgType string `json:&quot;type&quot;`  // 类型:resize客户端调整终端, input客户端输入
+    Input   string `json:&quot;input&quot;` // msgtype=input情况下使用
+    Rows    uint16 `json:&quot;rows&quot;`  // msgtype=resize情况下使用
+    Cols    uint16 `json:&quot;cols&quot;`  // msgtype=resize情况下使用
+}
+</code></pre>
+
+<p>http handler中的一些权限认证前面已经提到，由于是演示，这里我们直接忽略。</p>
+
+<pre><code class="language-go">func (api *CmsApi) PodExec(c *gin.Context) {
+    var param common.ExecParam
+    log := logger.GetLoggerFromContext(c)
+    err := c.ShouldBindQuery(&amp;param)
+    if err != nil {
+        log.WithField(&quot;err&quot;, err).Error(&quot;PodExec parse param error&quot;)
+        c.JSON(http.StatusBadRequest, common.BadRequestErr)
+        return
+    }
+    if len(param.Region) == 0 || len(param.AccountId) == 0 || len(param.ClusterId) == 0 {
+        log.Error(&quot;region、accountId、clusterId required&quot;)
+        c.JSON(http.StatusBadRequest, common.BadRequestErr)
+        return
+    }
+    if len(param.Namespace) == 0 || len(param.PodName) == 0 {
+        log.Error(&quot;namespace、podName required&quot;)
+        c.JSON(http.StatusBadRequest, common.BadRequestErr)
+        return
+    }
+    var upgrader = websocket.Upgrader{
+        ReadBufferSize:  1024,
+        WriteBufferSize: 1024,
+        CheckOrigin: func(r *http.Request) bool {
+            return true
+        },
+    }
+    // 直接升级为WebSocket连接
+    ws, err := upgrader.Upgrade(c.Writer, c.Request, nil)
+    if err != nil {
+        log.WithField(&quot;err&quot;, err).Error(&quot;upgrade websocket error&quot;)
+        return
+    }
+    cluster.GetWebSocketManager().Put(ws)
+    websocketKey := c.GetHeader(&quot;Sec-WebSocket-Key&quot;)
+    clientKey := websocketKey + &quot;=&gt;&quot; + ws.RemoteAddr().String()
+    log.WithField(&quot;client&quot;, clientKey).Info(&quot;websocket connected&quot;)
+    defer func(ws *websocket.Conn) {
+        cluster.GetWebSocketManager().Del(ws)
+        log.WithField(&quot;client&quot;, clientKey).Info(&quot;websocket closing in api...&quot;)
+        ws.Close()
+    }(ws)
+
+    executor, err := cluster.GetPodExecReqExecutor(&amp;param)
+    if err != nil {
+        log.WithField(&quot;err&quot;, err).Error(&quot;get exec executor error&quot;)
+        c.JSON(http.StatusInternalServerError, common.Err(err.Error()))
+        return
+    }
+    streamHandler := cluster.NewWebStreamHandler(ws)
+    streamHandler.InitCond()
+    go cluster.OpenStream(ws, streamHandler, executor)
+    var lastInputTime = time.Now()
+    for {
+        _, p, err := ws.ReadMessage()
+        if err != nil {
+            log.WithField(&quot;err&quot;, err).Error(&quot;read front message error&quot;)
+            // must signal goroutine
+            streamHandler.Cancel()
+            break
+        }
+        log.WithField(&quot;xtermMessage&quot;, string(p)).Info(&quot;receive xterm message&quot;)
+        var xtermMsg common.XtermMessage
+        if err := json.Unmarshal(p, &amp;xtermMsg); err != nil {
+            log.WithField(&quot;err&quot;, err).Error(&quot;parse xterm message error&quot;)
+            continue
+        }
+        switch xtermMsg.MsgType {
+        case &quot;input&quot;:
+            // 控制调用WebSocket管理器的频率
+            if time.Now().Unix() &gt; lastInputTime.Add(time.Duration(1)*time.Minute).Unix() {
+                cluster.GetWebSocketManager().Renew(ws)
+                lastInputTime = time.Now()
+            }
+            streamHandler.WriteBuffer([]byte(xtermMsg.Input))
+        case &quot;resize&quot;:
+            ts := remotecommand.TerminalSize{
+                Width:  xtermMsg.Cols,
+                Height: xtermMsg.Rows,
+            }
+            streamHandler.Resize(ts)
+        default:
+            log.Info(&quot;unsupported xterm message&quot;)
+        }
+    }
+    log.WithField(&quot;client&quot;, clientKey).Info(&quot;websocket request end&quot;)
+}
+</code></pre>
+
+<h3 id="stream">Stream</h3>
+
+<p><code>GetPodExecReqExecutor</code>方法则是与指定集群建立SPDY长连接。</p>
+
+<pre><code class="language-go">func GetPodExecReqExecutor(param *common.ExecParam) (remotecommand.Executor, error) {
+    // 获取指定集群的kubeConfig，这个方法自行实现
+    kubeConfig, err := GetKubeConfig(param.ClusterId, param.Region, param.AccountId)
+    if err != nil {
+        return nil, err
+    }
+    restConfig, err := clientcmd.RESTConfigFromKubeConfig(kubeConfig)
+    if err != nil {
+        log.GetLogger().WithField(&quot;err&quot;, err).Error(&quot;init rest config error&quot;)
+        return nil, err
+    }
+    client, err := kubernetes.NewForConfig(restConfig)
+    if err != nil {
+        log.GetLogger().WithField(&quot;err&quot;, err).Error(&quot;new k8s client error&quot;)
+        return nil, err
+    }
+    opts := &amp;v1.PodExecOptions{
+        Command: []string{&quot;sh&quot;},
+        Stdin:   true,
+        Stdout:  true,
+        Stderr:  true,
+        TTY:     true,
+    }
+    if len(param.ContainerName) &gt; 0 {
+        opts.Container = strings.TrimSpace(param.ContainerName)
+    }
+    req := client.CoreV1().RESTClient().Post().
+        Resource(&quot;pods&quot;).
+        Name(param.PodName).
+        Namespace(param.Namespace).
+        SubResource(&quot;exec&quot;).
+        VersionedParams(opts, scheme.ParameterCodec)
+    executor, err := remotecommand.NewSPDYExecutor(restConfig, &quot;POST&quot;, req.URL())
+    if err != nil {
+        log.GetLogger().WithField(&quot;err&quot;, err).Error(&quot;failed to new executor&quot;)
+    }
+    return executor, err
+}
+</code></pre>
+
+<p><code>Executor</code>获取之后，在连接上打开一个读写数据的Stream，同时设定好响应的Stream Handler，<code>executor.Stream</code> 方法是阻塞的，所以把这个方法放在一个独立的goroutine中执行，
+Stream打开之后，Stream中的Stdin、Stdout、Stderr处理器返回任何error，则Stream方法会立刻返回。</p>
+
+<pre><code class="language-go">func OpenStream(conn *websocket.Conn, streamHandler *WebStreamHandler, executor remotecommand.Executor) {
+    defer func(conn *websocket.Conn) {
+        GetWebSocketManager().Del(conn)
+        log.GetLogger().WithField(&quot;client&quot;, conn.RemoteAddr()).Info(&quot;websocket in open stream goroutine quit...&quot;)
+        conn.Close()
+    }(conn)
+    opts := remotecommand.StreamOptions{
+        Stdin:             streamHandler,
+        Stdout:            streamHandler,
+        Stderr:            streamHandler,
+        TerminalSizeQueue: streamHandler,
+        Tty:               true,
+    }
+    log.GetLogger().WithField(&quot;clientKey&quot;, conn.RemoteAddr()).Info(&quot;opening stream&quot;)
+    err := executor.Stream(opts)
+    if err != nil {
+        log.GetLogger().WithField(&quot;err&quot;, err).Error(&quot;failed to open stream to pod&quot;)
+        return
+    }
+    log.GetLogger().Info(&quot;open stream goroutine over&quot;)
+}
+</code></pre>
+
+<p>最后提供好http handler 即可。</p>
+
+<pre><code class="language-go">router := gin.New()
+auth := router.Group(&quot;/auth&quot;, middleware.LoginCheck(), middleware.PermissionCheck())
+auth.GET(&quot;/pod/exec&quot;, api.PodExec)
+</code></pre>
+
+<h2 id="前端代码交互">前端代码交互</h2>
+
+<p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;前端主要采用了xterm.js组件，当前是4.0版本，官方推荐采用ES6 module语法，这就需要WebPack来构建打包前端js模块。
+除了xterm组件本身，还需下载其依赖的几个模块，如<code>webLink</code>、<code>winptyCompat</code>、<code>fit</code>，各依赖的具体作用请github自行搜索，效果图如下。</p>
+
+<p><img src="/blog/terminal/terminal_demo.png" alt="terminal" /></p>
+
+<pre><code class="language-js">npm -v
+npm install xterm
+npm install xterm-addon-fit
+</code></pre>
+
+<p>由于本项目未引入WebPack，我直接找了一个3.0版本的xterm.js以及相关依赖，直接引入项目即可用，相关的前端html/js/css请自行实现，这里仅供一个删减版参考。</p>
+
+<h3 id="html">HTML</h3>
+
+<pre><code class="language-html">&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;demo&lt;/title&gt;
+    &lt;link href=&quot;/static/bootstrap/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;link href=&quot;https://use.fontawesome.com/releases/v5.6.3/css/all.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;link href=&quot;/static/css/custom.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;link href=&quot;/static/css/xterm.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;script src=&quot;/static/js/jquery-2.1.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/static/js/xterm/xterm.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/static/js/xterm/addon/fit/fit.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/static/js/xterm/addon/webLinks/webLinks.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/static/js/xterm/addon/winptyCompat/winptyCompat.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class=&quot;container&quot;&gt;
+            &lt;div class=&quot;custom-exec-page&quot; id=&quot;execTerminalDiv&quot;&gt;
+                &lt;div class=&quot;terminal-title&quot;&gt;
+                    &lt;span class=&quot;terminal-span-key&quot;&gt;namespace&lt;/span&gt;
+                    &lt;input id=&quot;execTerminalNamespace&quot; class=&quot;terminal-span-value&quot; type=&quot;text&quot; value=&quot;&quot; readonly&gt;
+                    &amp;nbsp;
+                    &lt;span class=&quot;terminal-span-key&quot;&gt;pod&lt;/span&gt;
+                    &lt;input id=&quot;execTerminalPod&quot; class=&quot;terminal-span-value&quot; type=&quot;text&quot; value=&quot;&quot; readonly&gt;
+                    &amp;nbsp;
+                    &lt;span class=&quot;terminal-span-key&quot;&gt;container&lt;/span&gt;
+                    &lt;span&gt;
+                        &lt;select id=&quot;execTerminalContainerSelect&quot; class=&quot;terminal-span-value&quot;&gt;
+                        &lt;/select&gt;
+                    &lt;/span&gt;
+                    &amp;nbsp;
+                    &lt;span&gt;
+                        &lt;button type=&quot;button&quot; class=&quot;btn btn-sm&quot; id=&quot;execTerminalConfirmBtn&quot;&gt;确定&lt;/button&gt;&amp;nbsp;
+                    &lt;/span&gt;
+                    &lt;span&gt;
+                        &lt;button type=&quot;button&quot; class=&quot;btn btn-sm&quot; id=&quot;execTerminalCloseBtn&quot;&gt;关闭&lt;/button&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;full-view&quot; id=&quot;execTerminal&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;    
+    &lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+
+<p>部分样式</p>
+
+<pre><code class="language-html">.terminal-span-key {
+    font-weight: 800;
+}
+
+.terminal-span-value {
+    max-width: 140px;
+    overflow: hidden;
+}
+
+.custom-exec-page {
+    width:100%;
+    height: 100%;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    margin:auto;
+    z-index:9999;
+    overflow-x: hidden;
+    display: none;
+}
+
+.full-view {
+    width:100%;
+    height: 100%;
+}
+</code></pre>
+
+<h3 id="js模块">JS模块</h3>
+
+<pre><code class="language-js">let execConn;
+$(function(){
+    Terminal.applyAddon(fit);
+    Terminal.applyAddon(webLinks);
+    Terminal.applyAddon(winptyCompat);
+    $(&quot;#execTerminalConfirmBtn&quot;).click(function(){
+        let ns = $(&quot;#execTerminalNamespace&quot;).val();
+        let podName = $(&quot;#execTerminalPod&quot;).val();
+        let containerName = $(&quot;#execTerminalContainerSelect&quot;).val();
+        if (containerName == null) {
+            containerName = &quot;&quot;;
+        }
+        if (ns === '' || podName === '') {
+            alert(&quot;namespace podName containerName can't be empty&quot;);
+            return false;
+        }
+        $(this).attr(&quot;disabled&quot;, true);
+        let param = {};
+        fillCommonParam(param);
+        param.namespace = ns;
+        param.podName = podName;
+        if (containerName !== '') {
+            param.containerName = containerName;
+        }
+        let qs = getReqQueryParam(param);
+        let websocketUrl = 'ws://localhost:8080';
+        if (websocketUrl === '') {
+            alert(&quot;websocket domain lost&quot;);
+            return false;
+        }
+        let term = initExecTerminal();
+        execConn = new WebSocket(websocketUrl + &quot;/auth/pod/exec?&quot; + qs);
+        execConn.onopen=function(evt) {
+            console.log(&quot;websocket onopen&quot;, evt);
+            term.writeln('Welcome, websocket connected successfully');
+        }
+        execConn.onclose = function(evt) {
+            console.log(&quot;websocket close&quot;, evt);
+            term.write('websocket has been closed')
+        }
+        execConn.onmessage = function(evt) {
+            term.write(evt.data);
+        }
+        execConn.onerror = function(evt) {
+            console.log(&quot;websocket connect error&quot;, evt);
+            term.write(&quot;websocket connect error&quot;)
+        }
+        window.addEventListener(&quot;resize&quot;, function () {
+            term.fit()
+            let msg = {type: &quot;resize&quot;, rows: term.rows, cols: term.cols}
+            execConn.send(JSON.stringify(msg))
+        });
+        term.on('data', function(input) {
+            let msg = {type: &quot;input&quot;, input: input}
+            execConn.send(JSON.stringify(msg))
+        });
+    });
+
+    $(&quot;#execTerminalCloseBtn&quot;).click(function(){
+        if (term) {
+            term.dispose();
+        }
+        resetExecTerminalPage();
+    });
+
+
+});
+
+function initExecTerminal() {
+    term = new Terminal({
+        cursorStyle: &quot;block&quot;,
+        scrollback: 100,
+        rendererType: &quot;canvas&quot;,
+        cursorBlink: true
+    });
+    term.open(document.getElementById(&quot;execTerminal&quot;));
+    term.fit();
+    term.winptyCompatInit();
+    term.webLinksInit();
+    term.focus();
+    return term;
+}
+
+
+function fillCommonParam(param) {
+    let accountId = 'xxxx';
+    let region = 'xxxx';
+    let clusterId = 'xxxx';
+    param.accountId = accountId;
+    param.clusterId = clusterId;
+    param.region = region;
+}
+
+function getReqQueryParam(param) {
+    let qs = &quot;&quot;;
+    for (let key in param) {
+        if (qs.length &gt; 0) {
+            qs = qs + &quot;&amp;&quot; + key + &quot;=&quot; + param[key];
+            continue;
+        }
+        qs = key + &quot;=&quot; + param[key];
+    }
+    return qs;
+}
+
+function resetExecTerminalPage() {
+    $(&quot;#execTerminalDiv&quot;).hide();
+    if (execConn &amp;&amp; execConn.readyState === WebSocket.OPEN) {
+        execConn.close();
+    }
+    $(&quot;#execTerminalNamespace&quot;).val(&quot;&quot;);
+    $(&quot;#execTerminalPod&quot;).val(&quot;&quot;);
+    $(&quot;#execTerminalContainerSelect option&quot;).remove();
+    $(&quot;#execTerminalConfirmBtn&quot;).attr(&quot;disabled&quot;, false);
+}
+</code></pre>
+
+<p><img src="/blog/terminal/terminal_demo_2.png" alt="terminal2" /></p>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/kubernetes/" rel="tag">kubernetes</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/websocket/" rel="tag">websocket</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+<div class="social-share"></div>
+  <br/>
+
+
+
+
+<aside class="sidebar">
+<h4>相关文章</h4>
+<div class="widget__content">
+		<ul class="widget__list">
+	
+	<li><a href="/post/kubernetes_io_deploy/">本地部署kubernetes.io官方网站</a></li>
+	
+	<li><a href="/post/kubernetes_curl_apiserver/">CURL探索Kubernetes API Server</a></li>
+	
+	<li><a href="/post/kubernetes_image_pull/">kubernetes镜像拉取失败解决方法</a></li>
+	
+	<li><a href="/post/prometheus_monitor_k8s2/">Prometheus监控Kubernetes服务(二)</a></li>
+	
+	<li><a href="/post/prometheus_monitor_k8s/">Prometheus监控Kubernetes服务(一)</a></li>
+	
+</ul>
+</div>
+<br/>
+</aside>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/post/kubernetes_io_deploy/" rel="prev"><span class="post-nav__caption">«&thinsp;前一篇</span><p class="post-nav__post-title">本地部署kubernetes.io官方网站</p></a>
+	</div>
+</nav>
+
+
+
+<script data-isso="/isso/" src="/isso/js/embed.min.js"></script>
+<section id="isso-thread"></section>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/k8s_terminal/">WebSocket实现Kubernetes Exec Terminal</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_io_deploy/">本地部署kubernetes.io官方网站</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/reentrantlock/">Java互斥锁ReentrantLock实现原理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/juc/">Java同步器框架AQS与锁实现原理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/helm_design/">Helm架构与中心化部署解决方案</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/grpc/">使用Golang部署gRPC服务</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/protocol_buffers/">gRPC协议Protocol Buffers</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_curl_apiserver/">CURL探索Kubernetes API Server</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/harbor_optimize/">Harbor镜像构建流程优化</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/harbor_base/">开源Harbor功能结构</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">分类</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/docker">Docker</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/golang">Golang</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95">Java基础算法</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%8d%9a%e5%ae%a2%e7%bb%84%e4%bb%b6">博客组件</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81">容器生态</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%94%9f%e6%b4%bb%e6%8a%80%e5%b7%a7">生活技巧</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">标签</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/aqs" title="Aqs">Aqs (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/chartmuseum" title="Chartmuseum">Chartmuseum (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/condition" title="Condition">Condition (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (12)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/grpc" title="Grpc">Grpc (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (6)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/juc" title="Juc">Juc (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (6)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql" title="Mysql">Mysql (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/overlay" title="Overlay">Overlay (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/postgresql" title="Postgresql">Postgresql (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/swift" title="Swift">Swift (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tiller" title="Tiller">Tiller (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/websocket" title="Websocket">Websocket (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/wordpress" title="Wordpress">Wordpress (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e4%ba%8c%e5%8f%89%e6%a0%91" title="二叉树">二叉树 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%85%89%e7%8c%ab" title="光猫">光猫 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%88%86%e4%ba%ab%e6%8f%92%e4%bb%b6" title="分享插件">分享插件 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%8d%9a%e5%ae%a2%e6%8f%92%e4%bb%b6" title="博客插件">博客插件 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%8f%98%e5%bd%a2%e8%af%8d" title="变形词">变形词 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e5%85%b8%e6%a0%91" title="字典树">字典树 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e7%ac%a6%e4%b8%b2" title="字符串">字符串 (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" title="数据结构">数据结构 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e7%bb%84" title="数组">数组 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e7%ae%97%e6%b3%95" title="算法">算法 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e8%af%84%e8%ae%ba%e7%b3%bb%e7%bb%9f" title="评论系统">评论系统 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%94%81" title="锁">锁 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%95%9c%e5%83%8f%e6%89%ab%e6%8f%8f" title="镜像扫描">镜像扫描 (2)</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">社群</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/kingfsen" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:562620163@qq.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>562620163@qq.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 .
+			<span class="footer__copyright-credits">使用 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 技术与 <a href="https://github.com/kingfsen/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主题</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script async src="/js/highlight.js"></script> 
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+ 
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1f3ac79473dea8a6643d0e73a08fa809";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+</script>
+
+<a class="to-top" style="background-color:#666;color:#fff;width:40px;height:40px;text-align:center;padding-top:3px;line-height:18px;">返回顶部</a>
+<script type="text/javascript">
+$('.to-top').toTop();
+</script>
+
+</body>
+</html>
