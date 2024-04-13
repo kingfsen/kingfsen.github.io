@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>WebSocket实现Kubernetes Exec Terminal</title>
+      <title>WebSocket实现Kubernetes Pod Exec终端工具</title>
       <link>/post/k8s_terminal/</link>
       <pubDate>Tue, 19 Apr 2022 09:31:16 +0800</pubDate>
       

@@ -6,10 +6,19 @@
     <description>Recent content in Categories on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 19 Apr 2022 09:31:16 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Apr 2024 14:47:15 +0800</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java</title>
+      <link>/categories/java/</link>
+      <pubDate>Sat, 13 Apr 2024 14:47:15 +0800</pubDate>
+      
+      <guid>/categories/java/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>容器生态</title>
@@ -17,15 +26,6 @@
       <pubDate>Tue, 19 Apr 2022 09:31:16 +0800</pubDate>
       
       <guid>/categories/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>/categories/java/</link>
-      <pubDate>Tue, 07 Jan 2020 11:43:39 +0800</pubDate>
-      
-      <guid>/categories/java/</guid>
       <description></description>
     </item>
     
@@ -48,11 +48,11 @@
     </item>
     
     <item>
-      <title>博客组件</title>
-      <link>/categories/%E5%8D%9A%E5%AE%A2%E7%BB%84%E4%BB%B6/</link>
-      <pubDate>Sun, 31 Mar 2019 12:54:26 +0800</pubDate>
+      <title>建站工具</title>
+      <link>/categories/%E5%BB%BA%E7%AB%99%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Wed, 27 Mar 2019 23:02:17 +0800</pubDate>
       
-      <guid>/categories/%E5%8D%9A%E5%AE%A2%E7%BB%84%E4%BB%B6/</guid>
+      <guid>/categories/%E5%BB%BA%E7%AB%99%E5%B7%A5%E5%85%B7/</guid>
       <description></description>
     </item>
     

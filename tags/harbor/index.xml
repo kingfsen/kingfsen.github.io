@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>开源Harbor功能结构</title>
-      <link>/post/harbor_base/</link>
-      <pubDate>Mon, 20 May 2019 14:18:25 +0800</pubDate>
-      
-      <guid>/post/harbor_base/</guid>
-      <description>在了解Harbor之前，有必要先了解一下Docker开源的Docker Registry，Registry就是用来存储管理Docker镜像的服务， 客户端可以向Registry发起镜像的上传、下拉等请求操作。Docker Registry服务早期是由Docker官方下的docker/regist</description>
-    </item>
-    
-    <item>
       <title>Helm Harbor</title>
       <link>/post/helm_harbor/</link>
       <pubDate>Tue, 19 Mar 2019 10:02:41 +0800</pubDate>
@@ -54,15 +45,6 @@
       
       <guid>/post/harbor_image_scan/</guid>
       <description>初次听说镜像扫描的人肯定有很多疑惑，总会想原理是什么呢？我们可以先思考下，windows控制面板、包括一些第三方软件比如三六零等，它们都能获取系统安装的软件以及版本，当然绿色解压版他们就无法识别，获取软件版本之后，他们就能提供一些升级的版本、以及当前软件版本的漏洞列举出来，由此可见，系统安</description>
-    </item>
-    
-    <item>
-      <title>部署企业级Harbor镜像仓库服务</title>
-      <link>/post/deploy_harbor_service/</link>
-      <pubDate>Mon, 11 Mar 2019 15:14:25 +0800</pubDate>
-      
-      <guid>/post/deploy_harbor_service/</guid>
-      <description>harbor初期版本1.4是在vmware旗下，当前已经成立了新项目goharbor。并且1.6.0版本之后进行了重构，数据库由mysql转换到postgresql，部分表结构也稍微改变了，代码也增强了很多，同时新增了helm chartmuseum仓库功能。对于harbor这个项目，可能有</description>
     </item>
     
   </channel>

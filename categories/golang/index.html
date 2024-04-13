@@ -38,7 +38,7 @@
 		<div class="logo">
 			<a class="logo__link" href="/" title="" rel="home">
 				<div class="logo_item  logo__imagebox">
-					<img class="logo_img" style="max-width: 128px;max-height: 128px;" src="img/logo.png"></img>
+					<img class="logo_img" style="max-width: 128px;max-height: 128px;" src="/img/logo.png"></img>
 				</div>			
 			</a>
 			
@@ -53,13 +53,13 @@
 	</button>
 	<ul class="menu__list">
 		<li class="menu__item">
-			<a class="menu__link" href="/post/">博客</a>
+			<a class="menu__link" href="/post/">博客笔记</a>
 		</li>
 		<li class="menu__item">
-			<a class="menu__link" href="/about/">名站导航</a>
+			<a class="menu__link" href="/timeline/">笔记时光轴</a>
 		</li>
 		<li class="menu__item">
-			<a class="menu__link" href="/timeline/">时间轴</a>
+			<a class="menu__link" href="/about/">航站链接</a>
 		</li>
 	</ul>
 </nav>
@@ -103,6 +103,11 @@
 		<a class="list__footer-readmore btn" href="/post/grpc/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="/post/protocol_buffers/">
+			<img src="/img/grpc.png" alt="gRPC协议Protocol Buffers" />
+		</a>
+	</figure>
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/post/protocol_buffers/" rel="bookmark">
@@ -211,7 +216,8 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/post/k8s_terminal/">WebSocket实现Kubernetes Exec Terminal</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/java/">一篇文章让你秒懂Java运行基础</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/k8s_terminal/">WebSocket实现Kubernetes Pod Exec终端工具</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_io_deploy/">本地部署kubernetes.io官方网站</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/reentrantlock/">Java互斥锁ReentrantLock实现原理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/juc/">Java同步器框架AQS与锁实现原理</a></li>
@@ -220,7 +226,6 @@
 			<li class="widget__item"><a class="widget__link" href="/post/protocol_buffers/">gRPC协议Protocol Buffers</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_curl_apiserver/">CURL探索Kubernetes API Server</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/harbor_optimize/">Harbor镜像构建流程优化</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/harbor_base/">开源Harbor功能结构</a></li>
 		</ul>
 	</div>
 </div>
@@ -232,8 +237,8 @@
 			<li class="widget__item"><a class="widget__link" href="/categories/golang">Golang</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/java%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95">Java基础算法</a></li>
-			<li class="widget__item"><a class="widget__link" href="/categories/%e5%8d%9a%e5%ae%a2%e7%bb%84%e4%bb%b6">博客组件</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81">容器生态</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%bb%ba%e7%ab%99%e5%b7%a5%e5%85%b7">建站工具</a></li>
 			<li class="widget__item"><a class="widget__link" href="/categories/%e7%94%9f%e6%b4%bb%e6%8a%80%e5%b7%a7">生活技巧</a></li>
 		</ul>
 	</div>
@@ -241,41 +246,29 @@
 <div class="widget-taglist widget">
 	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/aqs" title="Aqs">Aqs (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/chartmuseum" title="Chartmuseum">Chartmuseum (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/condition" title="Condition">Condition (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (12)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (9)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/grpc" title="Grpc">Grpc (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (6)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (4)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/juc" title="Juc">Juc (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jar" title="Jar">Jar (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/javac" title="Javac">Javac (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (6)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql" title="Mysql">Mysql (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/overlay" title="Overlay">Overlay (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/postgresql" title="Postgresql">Postgresql (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/swift" title="Swift">Swift (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tiller" title="Tiller">Tiller (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/websocket" title="Websocket">Websocket (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/wordpress" title="Wordpress">Wordpress (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e4%ba%8c%e5%8f%89%e6%a0%91" title="二叉树">二叉树 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e4%ba%8c%e5%8f%89%e6%a0%91" title="二叉树">二叉树 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%85%89%e7%8c%ab" title="光猫">光猫 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%88%86%e4%ba%ab%e6%8f%92%e4%bb%b6" title="分享插件">分享插件 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%8d%9a%e5%ae%a2%e6%8f%92%e4%bb%b6" title="博客插件">博客插件 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%8f%98%e5%bd%a2%e8%af%8d" title="变形词">变形词 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e5%85%b8%e6%a0%91" title="字典树">字典树 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e7%ac%a6%e4%b8%b2" title="字符串">字符串 (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e7%ac%a6%e4%b8%b2" title="字符串">字符串 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%8f%92%e4%bb%b6" title="插件">插件 (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" title="数据结构">数据结构 (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e7%bb%84" title="数组">数组 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e7%ae%97%e6%b3%95" title="算法">算法 (4)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e8%af%84%e8%ae%ba%e7%b3%bb%e7%bb%9f" title="评论系统">评论系统 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%94%81" title="锁">锁 (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%95%9c%e5%83%8f%e6%89%ab%e6%8f%8f" title="镜像扫描">镜像扫描 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%95%9c%e5%83%8f%e6%89%ab%e6%8f%8f" title="镜像扫描">镜像扫描 (1)</a>
 	</div>
 </div>
 <div class="widget-social widget">
@@ -301,7 +294,7 @@
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2022 .
+			&copy; 2024 .
 			<span class="footer__copyright-credits">使用 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 技术与 <a href="https://github.com/kingfsen/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主题</span>
 		</div>
 	</div>

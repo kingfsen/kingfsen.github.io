@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>开源Harbor功能结构</title>
-      <link>/post/harbor_base/</link>
-      <pubDate>Mon, 20 May 2019 14:18:25 +0800</pubDate>
-      
-      <guid>/post/harbor_base/</guid>
-      <description>在了解Harbor之前，有必要先了解一下Docker开源的Docker Registry，Registry就是用来存储管理Docker镜像的服务， 客户端可以向Registry发起镜像的上传、下拉等请求操作。Docker Registry服务早期是由Docker官方下的docker/regist</description>
-    </item>
-    
-    <item>
       <title>Docker Login登录凭证安全存储</title>
       <link>/post/docker_login_pass/</link>
       <pubDate>Sat, 11 May 2019 14:10:54 +0800</pubDate>
@@ -84,15 +75,6 @@
     </item>
     
     <item>
-      <title>PostgreSQL命令行操作</title>
-      <link>/post/postgresql/</link>
-      <pubDate>Tue, 02 Apr 2019 19:18:40 +0800</pubDate>
-      
-      <guid>/post/postgresql/</guid>
-      <description>PostgreSQL是一个功能强大的开源对象关系数据库管理系统(ORDBMS)，PostgreSQL(也称为Post-gress-Q-L)由PostgreSQL全球开发集团(全球志愿者团队)开发， 其源代码是免费提供的。但是在中国互联网的后端数据库中，PostgreSQL目前使用的比较少，大</description>
-    </item>
-    
-    <item>
       <title>Docker Login执行流程与原理</title>
       <link>/post/docker_login_process/</link>
       <pubDate>Sat, 16 Mar 2019 08:54:16 +0800</pubDate>
@@ -108,15 +90,6 @@
       
       <guid>/post/docker_deploy_wordpress/</guid>
       <description>wordpress数据存储依赖mysql数据库，以docker容器方式部署完整的wordpress博客服务，则需要从镜像仓库拉取mysql、wordpress镜像，这里选择从开源的docker hub 获取mysql 5.7版本，wordpress latest版本，同时需要准备一台具备外网环境的机器</description>
-    </item>
-    
-    <item>
-      <title>部署企业级Harbor镜像仓库服务</title>
-      <link>/post/deploy_harbor_service/</link>
-      <pubDate>Mon, 11 Mar 2019 15:14:25 +0800</pubDate>
-      
-      <guid>/post/deploy_harbor_service/</guid>
-      <description>harbor初期版本1.4是在vmware旗下，当前已经成立了新项目goharbor。并且1.6.0版本之后进行了重构，数据库由mysql转换到postgresql，部分表结构也稍微改变了，代码也增强了很多，同时新增了helm chartmuseum仓库功能。对于harbor这个项目，可能有</description>
     </item>
     
   </channel>

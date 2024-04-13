@@ -6,10 +6,19 @@
     <description>Recent content in Java on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 07 Jan 2020 11:43:39 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Apr 2024 14:47:15 +0800</lastBuildDate>
     
 	<atom:link href="/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一篇文章让你秒懂Java运行基础</title>
+      <link>/post/java/</link>
+      <pubDate>Sat, 13 Apr 2024 14:47:15 +0800</pubDate>
+      
+      <guid>/post/java/</guid>
+      <description>Javac编译 javac命令几个常用的选项 -classpath 指定依赖的class文件搜索路径 -sourcepath 指定依赖的源文件搜索路径 -d 指定编译后的class存放目录，这个目录必须提前建好 -extdirs 指定第三方依赖包，如jar、zip搜索目录 -encoding 指定源文件编码 如UTF-8 下面以简单的java项目进行操作说明，所有命令操作都在项目根目</description>
+    </item>
     
     <item>
       <title>Java互斥锁ReentrantLock实现原理</title>

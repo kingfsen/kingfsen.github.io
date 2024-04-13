@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Wordpress on </title>
+    <title>wordpress on </title>
     <link>/tags/wordpress/</link>
-    <description>Recent content in Wordpress on </description>
+    <description>Recent content in wordpress on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 13 Mar 2019 10:28:01 +0800</lastBuildDate>
