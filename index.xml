@@ -6,10 +6,19 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 13 Apr 2024 14:47:15 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2024 09:34:21 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Maven依赖管理</title>
+      <link>/post/maven_dependency_manage/</link>
+      <pubDate>Wed, 24 Apr 2024 09:34:21 +0800</pubDate>
+      
+      <guid>/post/maven_dependency_manage/</guid>
+      <description>首先通过maven交互式命令创建一个项目进行讲解，groupId一般为公司或者组织域名的倒排，如 com.example.course，artifactId为项目工程名，如course-demo01。 mvn archetype:generate 创建完成后查看项目pom.xml文件如下 &amp;lt;project xmlns=&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xsi:schemaLocation=&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&amp;gt; 添加依赖 如现在需要将google的gu</description>
+    </item>
     
     <item>
       <title>一篇文章让你秒懂Java运行基础</title>

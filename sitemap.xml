@@ -4,30 +4,47 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2024-04-13T14:47:15+08:00</lastmod>
+    <lastmod>2024-04-24T09:34:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2024-04-13T14:47:15+08:00</lastmod>
+    <lastmod>2024-04-24T09:34:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/java/</loc>
-    <lastmod>2024-04-13T14:47:15+08:00</lastmod>
-    <priority>0</priority>
+    <loc>/post/maven_dependency_manage/</loc>
+    <lastmod>2024-04-24T09:34:21+08:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2024-04-13T14:47:15+08:00</lastmod>
+    <lastmod>2024-04-24T09:34:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
+    <lastmod>2024-04-24T09:34:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/maven/</loc>
+    <lastmod>2024-04-24T09:34:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/maven/</loc>
+    <lastmod>2024-04-24T09:34:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/java/</loc>
     <lastmod>2024-04-13T14:47:15+08:00</lastmod>
     <priority>0</priority>
   </url>

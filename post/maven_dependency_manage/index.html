@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Maven依赖管理 - </title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	
+	<script src="/js/jquery.toTop.min.js"></script>
+	
+	<meta name="description" content="maven依赖管理机制探索">
+	<meta name="generator" content="Hugo 0.55.6" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	
+	<link rel="stylesheet" href="/css/style.css">	
+	<link rel="stylesheet" type="text/css" href="/css/highlight.css">
+	
+	
+	<link rel="stylesheet" href="/css/share.min.css">
+	<script src="/js/social-share.min.js"></script>
+	<script src="/js/qrcode.js"></script>
+	
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+	
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="" rel="home">
+				<div class="logo_item  logo__imagebox">
+					<img class="logo_img" style="max-width: 128px;max-height: 128px;" src="/img/logo.png"></img>
+				</div>			
+			</a>
+			
+			<div class="float_right"><div class="social-share"></div>
+  <br/></div>
+			
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">选择</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">博客笔记</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/timeline/">笔记时光轴</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">航站链接</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Maven依赖管理</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2024-04-24T09:34:21">2024-04-24</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/maven" rel="category">maven</a></span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">14 分钟</time>
+</div></div>
+		</header>
+
+  
+    <div class="toc">
+        <div class="toc__title"><span id="toc_menu_tip">展开书签</span></div>
+        <div class="toc__menu">
+          <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#添加依赖">添加依赖</a></li>
+<li><a href="#依赖范围">依赖范围</a></li>
+<li><a href="#依赖传递">依赖传递</a></li>
+<li><a href="#依赖去重">依赖去重</a>
+<ul>
+<li><a href="#版本仲裁">版本仲裁</a></li>
+<li><a href="#统一版本">统一版本</a></li>
+<li><a href="#主动排除">主动排除</a></li>
+</ul></li>
+<li><a href="#依赖继承">依赖继承</a>
+<ul>
+<li><a href="#创建父项目">创建父项目</a></li>
+<li><a href="#创建子项目">创建子项目</a></li>
+</ul></li>
+<li><a href="#聚合">聚合</a>
+<ul>
+<li><a href="#创建项目骨架">创建项目骨架</a></li>
+<li><a href="#创建module">创建module</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+        </div>  
+    </div>
+    <script type="text/javascript">
+    $(".toc__title").click( function () {
+      if($(".toc__menu").css('display') == 'none') {
+        $(".toc__menu").show(); 
+        $("#toc_menu_tip").html("收起书签");
+      } else {
+        $(".toc__menu").hide(); 
+        $("#toc_menu_tip").html("展开书签");
+      }
+    });
+    </script>
+  
+<div class="content post__content clearfix">
+			
+
+<p>首先通过maven交互式命令创建一个项目进行讲解，<strong>groupId</strong>一般为公司或者组织域名的倒排，如
+com.example.course，<strong>artifactId</strong>为项目工程名，如course-demo01。</p>
+
+<pre><code class="language-bash">mvn archetype:generate
+</code></pre>
+
+<p>创建完成后查看项目pom.xml文件如下</p>
+
+<pre><code class="language-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+</code></pre>
+
+<h2 id="添加依赖">添加依赖</h2>
+
+<p>如现在需要将google的guava包添加到项目中</p>
+
+<ul>
+<li><p><strong>获取guava包的GAV坐标</strong><br/>使用关键字guava去远程仓库或者maven仓库 (<a href="https://mvnrepository.com/">https://mvnrepository.com/</a>) 进行搜索，尽量选择
+一个下载使用比较多的版本，注意查看包的漏洞风险，复制maven坐标。
+<img src="/blog/maven/第27页-16.PNG" alt="guava" /></p></li>
+
+<li><p><strong>添加依赖到项目pom</strong><br/>复制guava包的GAV坐标，将其添加到pom.xml中的dependences标签中。</p></li>
+</ul>
+
+<pre><code class="language-xml">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+    &lt;artifactId&gt;guava&lt;/artifactId&gt;
+    &lt;version&gt;18.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<ul>
+<li><strong>下载依赖包</strong><br/>修改pom文件后，开发工具如idea等通常会自动去下载依赖包到本地仓库，也可以手动点击刷新，
+或者在终端中执行mvn compile等命令主动触发maven去下载依赖包，下载完成后maven将该依
+赖包自动添加到项目classpath中。</li>
+</ul>
+
+<h2 id="依赖范围">依赖范围</h2>
+
+<p>依赖范围主要用来控制项目在编译、运行或测试时，某个依赖包是否出现在classpath中，或者限制依
+赖传递性等，通过pom.xml中的<code>dependencies/dependency/scope</code>标签来配置依赖范围。</p>
+
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p><strong>scope</strong>有以下六种类型值</p>
+
+<table>
+<thead>
+<tr>
+<th>scope</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>compile</code></td>
+<td>默认值，依赖项在编译、测试和运行时都可用。</td>
+</tr>
+
+<tr>
+<td><code>provided</code></td>
+<td>依赖项由JDK或某些应用服务器（如tomcat）提供，在编译和测试期间需要依赖项，但在运行时不需要，不可传递。例如，servlet-api就是一个提供作用域的例子，线上tomcat服务器自带该依赖包。</td>
+</tr>
+
+<tr>
+<td><code>runtime</code></td>
+<td>在编译时不需要依赖项，但在运行或者测试时需要，该依赖出现在运行时和测试时的classpath中。</td>
+</tr>
+
+<tr>
+<td><code>test</code></td>
+<td>在测试范围内编译和执行测试时可用，而不在项目编译和运行classpath中，不可传递，例如，JUnit依赖项。</td>
+</tr>
+
+<tr>
+<td><code>system</code></td>
+<td>类似于provided作用域，但需要显式指定依赖项的路径，应尽量避免使用，该依赖不在仓库中进行管理。</td>
+</tr>
+
+<tr>
+<td><code>import</code></td>
+<td>该类型只能在pom.xml中的dependencyManagement标签中使用，相当于将某个类型为pom项目的全部依赖dependency都复制过来，因为POM跟Java类似都是单继承，然后通过import来实现增强。</td>
+</tr>
+</tbody>
+</table>
+
+<p>import使用示例</p>
+
+<pre><code class="language-xml">&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+      &lt;artifactId&gt;course-parent&lt;/artifactId&gt;
+      &lt;version&gt;1.0&lt;/version&gt;
+      &lt;scope&gt;import&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+</code></pre>
+
+<p>scope范围依赖项在生命周期不同阶段的classpath列表</p>
+
+<p><img src="/blog/maven/第29页-17.PNG" alt="guava" /></p>
+
+<p>如项目中的scope为<code>test</code>的依赖包junit，只在<code>src/main/test</code>目录下生效，在<code>src/main/java</code>目录下的包
+引用junit中Test注解无法通过编译。</p>
+
+<pre><code class="language-java">package com.example.course;
+
+import org.junit.Test;
+
+public class App {
+    @Test
+    public void test() {
+
+    }
+    public static void main( String[] args ) {
+        System.out.println( &quot;Hello World!&quot; );
+   }
+}
+</code></pre>
+
+<p>idea中直接编译错误，通过maven命令执行也是编译失败。</p>
+
+<pre><code class="language-log"># mvn compile
+...
+[ERROR] COMPILATION ERROR :
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.676 s
+[INFO] Finished at: 2023-05-09T09:34:00+08:00
+[INFO] Final Memory: 13M/209M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compilerplugin:
+3.1:compile (default-compile) on project course-demo01: Compilation
+failure
+[ERROR] /D:/campus/workspace/coursedemo01/
+src/main/java/com/example/course/App.java:[3,17] 程序包org.junit不存在
+[ERROR] /D:/campus/workspace/coursedemo01/
+src/main/java/com/example/course/App.java:[10,6] 找不到符号
+...
+</code></pre>
+
+<p>将其scope改为compile，刷新一下maven配置，则可以编译成功。这不难理解，如java编译命令</p>
+
+<pre><code class="language-bash">javac -d target/class 
+-classpath &quot;D:\maven\respoistory\junit\junit-4.12.jar&quot;  
+src/main/java/com/example/course/*.java
+</code></pre>
+
+<p>当junit包的依赖范围为compile时，maven在编译src/main/java源代码时则把它加入到classpath中，Java编译运行基础请参考:<a href="/post/java/">一篇文章让你秒懂Java运行基础</a> 。</p>
+
+<h2 id="依赖传递">依赖传递</h2>
+
+<p>项目中A依赖B，B依赖C，那A中是否可以直接使用C包？</p>
+
+<p><img src="/blog/maven/第30页-18.PNG" width="600" alt="依赖传递"></p>
+
+<p>在A中是否可以直接使用C包，取决于B对依赖C配置的scope以及A对依赖B配置的scope。
+创建项目course-demo02充当B角色，在course-demo02中添加4个依赖包，4个依赖包的scope分别不同，这个4个依赖包充当C角色。</p>
+
+<pre><code class="language-pom">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+  &lt;artifactId&gt;course-demo02&lt;/artifactId&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+  &lt;properties&gt;
+    &lt;!-- maven compiler插件使用 --&gt;
+    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+    &lt;!-- 设定文件读写编码，maven resource处理插件使用 --&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+  &lt;/properties&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;3.8.1&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+      &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;
+      &lt;version&gt;3.1&lt;/version&gt;
+      &lt;scope&gt;runtime&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+      &lt;artifactId&gt;guava&lt;/artifactId&gt;
+      &lt;version&gt;18.0&lt;/version&gt;
+      &lt;scope&gt;compile&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+      &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+      &lt;version&gt;3.1.0&lt;/version&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>查看course-demo02依赖树图</p>
+
+<pre><code class="language-bash"># mvn dependency:tree
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ course-demo02 ---
+[INFO] com.example.course:course-demo02:jar:1.0
+[INFO] +- junit:junit:jar:3.8.1:test
+[INFO] +- org.apache.commons:commons-lang3:jar:3.1:runtime
+[INFO] +- com.google.guava:guava:jar:18.0:compile
+[INFO] \- javax.servlet:javax.servlet-api:jar:3.1.0:provided
+</code></pre>
+
+<p><img src="/blog/maven/第32页-19.PNG" width="600" alt="依赖传递"></p>
+
+<p>执行命令安装到本地仓库</p>
+
+<pre><code class="language-bash"># mvn clean install
+</code></pre>
+
+<p>将上面的course-demo01项目充当A角色，清空其全部依赖后，添加依赖包course-demo02-1.0.jar</p>
+
+<pre><code class="language-pom">&lt;groupId&gt;com.example.course&lt;/groupId&gt;
+&lt;artifactId&gt;course-demo01&lt;/artifactId&gt;
+&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+&lt;packaging&gt;jar&lt;/packaging&gt;
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo02&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<ul>
+<li>course-demo02scope默认是compile，查看course-demo01依赖树图</li>
+</ul>
+
+<pre><code class="language-bash"># mvn dependency:tree
+[INFO] com.example.course:course-demo01:jar:1.0-SNAPSHOT
+[INFO] \- com.example.course:course-demo02:jar:1.0:compile
+[INFO] +- org.apache.commons:commons-lang3:jar:3.1:runtime
+[INFO] \- com.google.guava:guava:jar:18.0:compile
+</code></pre>
+
+<p><img src="/blog/maven/第33页-20.PNG" width="600" alt="依赖传递"></p>
+
+<ul>
+<li>将course-demo02 scope设置为test</li>
+</ul>
+
+<pre><code class="language-bash"># mvn dependency:tree
+[INFO] com.example.course:course-demo01:jar:1.0-SNAPSHOT
+[INFO] \- com.example.course:course-demo02:jar:1.0:test
+[INFO] +- org.apache.commons:commons-lang3:jar:3.1:test
+[INFO] \- com.google.guava:guava:jar:18.0:test
+</code></pre>
+
+<p><img src="/blog/maven/第34页-22.PNG" width="600" alt="依赖传递"></p>
+
+<ul>
+<li>将course-demo02 scope设置为runtime</li>
+</ul>
+
+<pre><code class="language-bash"># mvn dependency:tree
+[INFO] com.example.course:course-demo01:jar:1.0-SNAPSHOT
+[INFO] \- com.example.course:course-demo02:jar:1.0:runtime
+[INFO] +- org.apache.commons:commons-lang3:jar:3.1:runtime
+[INFO] \- com.google.guava:guava:jar:18.0:runtime
+</code></pre>
+
+<p><img src="/blog/maven/第34页-21.PNG" width="600" alt="依赖传递"></p>
+
+<ul>
+<li>将course-demo02 scope设置为provided</li>
+</ul>
+
+<pre><code class="language-bash">mvn dependency:tree
+[INFO] com.example.course:course-demo01:jar:1.0-SNAPSHOT
+[INFO] \- com.example.course:course-demo02:jar:1.0:provided
+[INFO] +- org.apache.commons:commons-lang3:jar:3.1:provided
+[INFO] \- com.google.guava:guava:jar:18.0:provided
+</code></pre>
+
+<p><img src="/blog/maven/第35页-24.PNG" width="600" alt="依赖传递"></p>
+
+<p>结论：scope为test、provided的包不会传递，其它scope类型的包会传递，传递后的scope跟直接引
+用包的scope有关系。</p>
+
+<p>scope范围依赖传递如下图</p>
+
+<p><img src="/blog/maven/第35页-23.PNG" width="800" alt="依赖传递"></p>
+
+<p>备注: <font color=red>横向第一排是C包的scope，纵向第一列是B包在A中的scope</font></p>
+
+<p>maven提供了依赖传递的特性，但是没有层级深度的限制，项目最终的依赖树图会非常庞大，可以通过如下几种方式控制树图。</p>
+
+<ul>
+<li>通过scope可以限制依赖传递</li>
+<li>通过配置optional属性，B依赖C，同时B将C设置为optional，此时A依赖B时，不会引入B的可选依赖</li>
+</ul>
+
+<p>将course-demo02的依赖junit、commons-lang3、servlet-api的optional设置为true，guava依赖不设置，默认为发false，再次将course-demo02 install到本地仓库。</p>
+
+<pre><code class="language-pom">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;3.8.1&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+    &lt;optional&gt;true&lt;/optional&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;
+    &lt;version&gt;3.1&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+    &lt;optional&gt;true&lt;/optional&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+    &lt;artifactId&gt;guava&lt;/artifactId&gt;
+    &lt;version&gt;18.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+    &lt;version&gt;3.1.0&lt;/version&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;optional&gt;true&lt;/optional&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<p>此时查看course-demo01的依赖树图，course-demo02只引入了guava包。</p>
+
+<pre><code class="language-bash"># mvn dependency:tree
+[INFO] com.example.course:course-demo01:jar:1.0-SNAPSHOT
+[INFO] \- com.example.course:course-demo02:jar:1.0:compile
+[INFO] \- com.google.guava:guava:jar:18.0:compile
+</code></pre>
+
+<p><img src="/blog/maven/第37页-27.PNG" width="400" alt="依赖传递"></p>
+
+<p>optional属性并不会干扰包传递后的scope，只是多了一层包传递的筛选控制。</p>
+
+<h2 id="依赖去重">依赖去重</h2>
+
+<p><img src="/blog/maven/第37页-26.PNG" width="600" alt="依赖去重"></p>
+
+<p>项目A引用B与D，项目B引用C，C又引用D，由于maven的依赖传递，项目A中就可能出现两个版本不
+同的D，maven提供了一些机制自动解决依赖重复，但并不能解决所有场景，有时需要开发人员在
+pom中进行明确处理。</p>
+
+<h3 id="版本仲裁">版本仲裁</h3>
+
+<p>当某个依赖包在项目中存在多个不同版本时，maven通过就近原则确定使用哪个版本，就近原则指的
+是依赖树图中的层级关系。</p>
+
+<p><img src="/blog/maven/第37页-25.PNG" width="600" alt="依赖去重"></p>
+
+<p>项目A中，依赖B，B依赖C，C依赖D 2.0版本， A-&gt;B-&gt;C-&gt;D 2.0,
+项目A同时引入了E， E依赖D 1.0版本，A-&gt;E-&gt;D 1.0,
+根据就近原则，maven最终选择D 1.0引入到A中，如果层级一样，根据pom中声明的先后顺序，选择最早声明的版本。</p>
+
+<p>course-demo02引入guava-18.0.jar，创建个项目course-demo03引入guava-19.0.jar。
+<img src="/blog/maven/第38页-28.PNG" width="400" alt="依赖去重"></p>
+
+<p>在course-demo01中添加course-demo02、course-demo03依赖</p>
+
+<pre><code class="language-xml">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo02&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo03&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<p>上面两个依赖引入的guava包路径长度相同，按声明的先后顺序，最终项目中引入的是guava-
+18.0.jar。</p>
+
+<pre><code class="language-bash"># mvn dependency:tree
+[INFO] com.example.course:course-demo01:jar:1.0-SNAPSHOT
+[INFO] +- com.example.course:course-demo02:jar:1.0:compile
+[INFO] | \- com.google.guava:guava:jar:18.0:compile
+[INFO] \- com.example.course:course-demo03:jar:1.0:compile
+</code></pre>
+
+<p>调整course-demo03与course-demo02声明顺序</p>
+
+<pre><code class="language-xml">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo03&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo02&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<p>再次查看项目course-demo01依赖树图，最终引入的是guava-19.0.jar。</p>
+
+<pre><code class="language-bash"># mvn dependency:tree
+[INFO] com.example.course:course-demo01:jar:1.0-SNAPSHOT
+[INFO] +- com.example.course:course-demo03:jar:1.0:compile
+[INFO] | \- com.google.guava:guava:jar:19.0:compile
+[INFO] \- com.example.course:course-demo02:jar:1.0:compile
+</code></pre>
+
+<p>这种通过声明先后顺序的方式，虽然能解决问题，但是存在不稳定性，并且每个包引入了其它很多
+包，改一下顺序，某些包的版本均发生变化了，最简单直接的方法就是使用最短路径，直接在项目
+dependency中声明依赖。</p>
+
+<pre><code class="language-xml">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo03&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo02&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+    &lt;artifactId&gt;guava&lt;/artifactId&gt;
+    &lt;version&gt;18.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<p>maven根据就近原则，最终项目选择guava-18.0.jar，不依赖声明的先后循序。</p>
+
+<p><img src="/blog/maven/第40页-29.PNG" width="600" alt="依赖去重"></p>
+
+<pre><code class="language-bash"># mvn dependency:tree
+[INFO] com.example.course:course-demo01:jar:1.0-SNAPSHOT
+[INFO] +- com.example.course:course-demo03:jar:1.0:compile
+[INFO] +- com.example.course:course-demo02:jar:1.0:compile
+[INFO] \- com.google.guava:guava:jar:18.0:compile
+</code></pre>
+
+<h3 id="统一版本">统一版本</h3>
+
+<ul>
+<li>在maven中的依赖包尽量要明确版本，A依赖B，B依赖C，在A中使用的是B传递来的C，后续B降低了C版本，可能导致A项目编译错误。随着项目中的依赖逐渐庞大，版本仲裁的潜在风险也越大。</li>
+<li>采用最短路径方式，在pom.xml中通过dependency标签直接声明依赖虽然可以解决问题，但是会导致项目的依赖树层次关系比较混乱，dependencies标签中尽量用于声明项目直接使用的依赖，而不是为了解决版本问题。</li>
+<li>maven提供了另外一种方式dependencyManagement统一管理传递进来的依赖版本。</li>
+</ul>
+
+<p>修改course-demo01的pom.xml配置，将guava的依赖配置到<code>dependencyManagement</code>标签中。</p>
+
+<pre><code class="language-xml">&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+      &lt;artifactId&gt;guava&lt;/artifactId&gt;
+      &lt;version&gt;18.0&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo03&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo02&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<p>查看依赖树图，注意guava包引入路径</p>
+
+<pre><code class="language-bash"># mvn dependency:tree
+[INFO] com.example.course:course-demo01:jar:1.0-SNAPSHOT
+[INFO] +- com.example.course:course-demo03:jar:1.0:compile
+[INFO] | \- com.google.guava:guava:jar:18.0:compile
+[INFO] \- com.example.course:course-demo02:jar:1.0:compile
+</code></pre>
+
+<p>guava包在树图中上一级是course-demo03，而course-demo03中添加的是guava-19.0.jar，这就是
+dependencyManagement的统一版本管理，如果course-demo02声明的顺序在course-demo03上
+面，那guava-18.0.jar引入路径则在course-demo02下。</p>
+
+<p>现在将spring-beans添加到course-demo01的dependencyManagement标签中，保存配置后通过命
+令再次查看依赖树图。</p>
+
+<pre><code class="language-xml">&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+      &lt;artifactId&gt;guava&lt;/artifactId&gt;
+      &lt;version&gt;18.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+      &lt;version&gt;5.0.7.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo03&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo02&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<pre><code class="language-bash"># mvn dependency:tree
+[INFO] com.example.course:course-demo01:jar:1.0-SNAPSHOT
+[INFO] +- com.example.course:course-demo03:jar:1.0:compile
+[INFO] | \- `com.google.guava:guava:jar:18.0:compile`
+[INFO] \- com.example.course:course-demo02:jar:1.0:compile
+</code></pre>
+
+<p>依赖树图没有任何变化，spring-beans包并没有添加到项目中。</p>
+
+<p>结论：<font color=red>dependencyManagement配置的依赖，并不会一定引入到项目中，它只是用来管理传递进来
+的依赖版本，推荐使用dependencyManagement标签来解决依赖传递。</font></p>
+
+<p>思考下面这段臃肿重复的配置，maven最终选择添加哪个版本的guava包？</p>
+
+<pre><code class="language-xml">&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+      &lt;artifactId&gt;guava&lt;/artifactId&gt;
+      &lt;version&gt;18.0&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;!-- 这个包中引入了guava-19.0.jar --&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-demo03&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+    &lt;artifactId&gt;guava&lt;/artifactId&gt;
+    &lt;version&gt;17.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<h3 id="主动排除">主动排除</h3>
+
+<p>使用dependencyManagement来管理依赖传递性，传递的jar全部会引入到项目中，但是有些传递的
+依赖包在项目中明确不会使用，则可以采用主动排除方式，在pom.xml中通过<code>exclusion</code>明确去除传递
+进来的依赖。</p>
+
+<p>如在course-demo01中直接明确排除course-demo02的guava依赖。</p>
+
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+  &lt;artifactId&gt;course-demo02&lt;/artifactId&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+      &lt;artifactId&gt;guava&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>也可以将course-demo02的全部依赖去除</p>
+
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+  &lt;artifactId&gt;course-demo02&lt;/artifactId&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;*&lt;/groupId&gt;
+      &lt;artifactId&gt;*&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>项目开发完成后，尽量去除未使用的相关依赖包，减小项目包占用的空间，可通过一些辅助命令分析依赖。</p>
+
+<pre><code class="language-bash"># mvn dependency:analyze
+</code></pre>
+
+<h2 id="依赖继承">依赖继承</h2>
+
+<ul>
+<li>在Maven中POM是可以继承的，类似Java只能单继承，A项目继承B项目，实际上指的是A项目的POM继承了B项目POM中的配置内容，父工程的作用经常用于统一管理依赖信息的版本。</li>
+<li>常见的场景就是大型项目的模块拆分、如以SpringCloud、SpingBoot构建的微服务项目最典型。如果每个项目都单独引入依赖，可能导致各项目依赖版本不统一，后期维护升级非常麻烦，也存在兼容性问题。</li>
+<li>父工程必须是pom类型的Maven项目，即打包类型(packaging)必须是pom。</li>
+</ul>
+
+<p>packaging打包类型有如下常用的几种方式</p>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>jar</code></td>
+<td>默认值，普通jar包</td>
+</tr>
+
+<tr>
+<td><code>war</code></td>
+<td>web服务器(如tomcat) war包</td>
+</tr>
+
+<tr>
+<td><code>pom</code></td>
+<td>作为父工程，管理其它项目的依赖</td>
+</tr>
+
+<tr>
+<td><code>maven-plugin</code></td>
+<td>maven插件类型</td>
+</tr>
+</tbody>
+</table>
+
+<p>maven会根据项目pom中配置的packaging类型，在生命周期的阶段绑定不同的目标。比如现在需要使用springboot开发很多项目，而springboot依赖很多包，这些包又都必须保持在同一个版本才能兼容使用。</p>
+
+<h3 id="创建父项目">创建父项目</h3>
+
+<p>通过命令<code>mvn archetype:generate</code>创建maven项目course-web-parent，并将其packaging标签值改
+为<code>pom</code>。</p>
+
+<pre><code class="language-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+  &lt;artifactId&gt;course-web-parent&lt;/artifactId&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+  &lt;packaging&gt;pom&lt;/packaging&gt;
+  &lt;properties&gt;
+    &lt;!-- maven compiler插件使用 --&gt;
+    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+    &lt;!-- 设定文件读写编码，maven resource处理插件使用 --&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+  &lt;/properties&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>添加开发springboot web应用所需的依赖包添加到dependencyManagement中</p>
+
+<pre><code class="language-xml">&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+      &lt;version&gt;5.0.7.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+      &lt;version&gt;5.0.7.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+      &lt;version&gt;5.0.7.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+      &lt;version&gt;5.0.7.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+      &lt;version&gt;5.0.7.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+      &lt;version&gt;5.0.7.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+      &lt;version&gt;5.0.7.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;mysql&lt;/groupId&gt;
+      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+      &lt;version&gt;5.1.47&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+</code></pre>
+
+<p>执行<code>mvn install</code>命令安装到本地仓库中，最终的包是course-web-parent-1.0.pom</p>
+
+<pre><code class="language-bash"># mvn clean install
+...
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ course-webparent ---
+[INFO] Installing D:\campus\workspace\course-web-parent\pom.xml to
+D:\campus\m2\repo\com\example\course\course-web-parent\1.0\course-web-parent-
+1.0.pom
+...
+</code></pre>
+
+<p>dependencyManagement中配置的依赖并不会直接引入到项目中，pom类型项目是用来管理依赖信
+息的，因此通过命令<code>mvn dependency:tree</code>查看不会有任何依赖树图。</p>
+
+<h3 id="创建子项目">创建子项目</h3>
+
+<p>通过命令<code>mvn archetype:generate</code>创建maven项目course-web，通过parent标签继承courseweb-parent项目。</p>
+
+<pre><code class="language-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;parent&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course-web-parent&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/parent&gt;
+  &lt;!-- 继承父项目，直接用父项目的groupId --&gt;
+  &lt;!-- &lt;groupId&gt;com.example.course&lt;/groupId&gt; --&gt;
+  &lt;artifactId&gt;course-web&lt;/artifactId&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+  &lt;properties&gt;
+    &lt;!-- maven compiler插件使用 --&gt;
+    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+    &lt;!-- 设定文件读写编码，maven resource处理插件使用 --&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+  &lt;/properties&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>course-web项目默认将父项目pom.xml中的groupId、dependencyManagement等配置信息继承，
+实际并不会将任何依赖引入到项目中，通过<code>mvn help:effective-pom</code>命令查看course-web生
+效的pom信息，最终生效的pom配置来自于超级pom、父pom、当前pom的合并。</p>
+
+<p>前面提到scope范围import的作用，也可以使用import导入父配置，解决了pom只能单继承问题。</p>
+
+<pre><code class="language-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+  &lt;artifactId&gt;course-web&lt;/artifactId&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+  &lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+        &lt;artifactId&gt;course-web-parent&lt;/artifactId&gt;
+        &lt;version&gt;1.0&lt;/version&gt;
+        &lt;type&gt;pom&lt;/type&gt;
+        &lt;scope&gt;import&lt;/scope&gt;
+      &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+  &lt;/dependencyManagement&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>import只能将某项目的dependencyManagement配置信息导入到本项目的dependencyManagement，而通过parent继承方式，可以获得父项目pom中的绝大部分配置，具体配置项请参阅Maven官网。
+使用parent继承父项目后，导入父项目中定义的依赖时不用再填写具体版本号，默认使用父项目中定义的版本，如spring-beans包，即5.0.7.RELEASE，这样多个子项目使用的版本保持一致。</p>
+
+<pre><code class="language-xml">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<p>有时父项目中的某个依赖定义有兼容性问题，子项目course-web也可以指定spring-beans具体的版本
+号进行覆盖。</p>
+
+<h2 id="聚合">聚合</h2>
+
+<p>通常在项目中可以根据业务或者功能将项目拆分为多个小模块进行开发，每个模块对应的就是maven中的一个module。在maven中，一个工程聚合多个modules，在项目下执行maven命令时，maven会先在各module中先执行。
+现在开发一个项目course，可能按照功能定义如下模块</p>
+
+<ul>
+<li>course-api 提供对外访问的http api</li>
+<li>course-mq 处理系统收发mq消息的模块</li>
+<li>course-db 操作数据库的模块</li>
+<li>course-core 核心业务逻辑模块</li>
+</ul>
+
+<h3 id="创建项目骨架">创建项目骨架</h3>
+
+<p>通过命令 <code>mvn archetype:generate</code> 创建course项目，packaging必须为<code>pom</code>。</p>
+
+<pre><code class="language-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+  &lt;artifactId&gt;course&lt;/artifactId&gt;
+  &lt;packaging&gt;pom&lt;/packaging&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+&lt;/project&gt;
+</code></pre>
+
+<h3 id="创建module">创建module</h3>
+
+<p>在项目course根目录下通过命令<code>mvn archetype:generate</code>分别创建四个子项目<code>course-api</code>、<code>coursedb</code>、<code>course-mq</code>、<code>course-db</code>，maven自动将每个子项目作为module添加到了course项目的pom.xml中。</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;project xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;
+xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+  xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;parent&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  &lt;/parent&gt;
+  &lt;artifactId&gt;course-core&lt;/artifactId&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>根据业务场景，核心业务实现模块course-core引用course-db以及course-mq，course-api引用course-core对外提供api服务。
+<img src="/blog/maven/第49页-30.PNG" width="600" alt="聚合"></p>
+
+<p>course-api引用核心业务模块course-core</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;project xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;
+xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;parent&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  &lt;/parent&gt;
+  &lt;artifactId&gt;course-api&lt;/artifactId&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+      &lt;artifactId&gt;course-core&lt;/artifactId&gt;
+      &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>核心业务模块course-core引用消息处理模块course-mq、以及数据库操作模块course-db</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;project xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;
+xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;parent&gt;
+    &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+    &lt;artifactId&gt;course&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  &lt;/parent&gt;
+  &lt;artifactId&gt;course-core&lt;/artifactId&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+      &lt;artifactId&gt;course-db&lt;/artifactId&gt;
+      &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+      &lt;artifactId&gt;course-mq&lt;/artifactId&gt;
+      &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>在course根目录下执行安装命令 <code>mvn clean install</code>，它会根据依赖关系决定优先构建哪个模块，而不
+是根据pom.xml中定义的modules顺序构建。</p>
+
+<pre><code class="language-bash">$ mvn clean install
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] course
+[INFO] course-db
+[INFO] course-mq
+[INFO] course-core
+[INFO] course-api
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building course 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ course ---
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ course ---
+[INFO] Installing D:\campus\workspace\course\pom.xml to
+D:\maven\respoistory\com\example\course\course\1.0-SNAPSHOT\course-1.0-
+SNAPSHOT.pom
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building course-db 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building course-mq 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] ...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building course-core 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] ...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building course-api 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] course ............................................. SUCCESS [ 0.499 s]
+[INFO] course-db .......................................... SUCCESS [ 1.268 s]
+[INFO] course-mq .......................................... SUCCESS [ 0.226 s]
+[INFO] course-core ........................................ SUCCESS [ 0.125 s]
+[INFO] course-api ......................................... SUCCESS [ 0.076 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+</code></pre>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/maven/" rel="tag">maven</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+<div class="social-share"></div>
+  <br/>
+
+
+
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/post/java/" rel="prev"><span class="post-nav__caption">«&thinsp;前一篇</span><p class="post-nav__post-title">一篇文章让你秒懂Java运行基础</p></a>
+	</div>
+</nav>
+
+
+
+<script data-isso="/isso/" src="/isso/js/embed.min.js"></script>
+<section id="isso-thread"></section>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/maven_dependency_manage/">Maven依赖管理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/java/">一篇文章让你秒懂Java运行基础</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/k8s_terminal/">WebSocket实现Kubernetes Pod Exec终端工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_io_deploy/">本地部署kubernetes.io官方网站</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/reentrantlock/">Java互斥锁ReentrantLock实现原理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/juc/">Java同步器框架AQS与锁实现原理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/helm_design/">Helm架构与中心化部署解决方案</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/grpc/">使用Golang部署gRPC服务</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/protocol_buffers/">gRPC协议Protocol Buffers</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_curl_apiserver/">CURL探索Kubernetes API Server</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">分类</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/docker">Docker</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/golang">Golang</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95">Java基础算法</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/maven">Maven</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81">容器生态</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%bb%ba%e7%ab%99%e5%b7%a5%e5%85%b7">建站工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%94%9f%e6%b4%bb%e6%8a%80%e5%b7%a7">生活技巧</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">标签</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/condition" title="Condition">Condition (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (9)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/grpc" title="Grpc">Grpc (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jar" title="Jar">Jar (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/javac" title="Javac">Javac (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (6)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/wordpress" title="Wordpress">Wordpress (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e4%ba%8c%e5%8f%89%e6%a0%91" title="二叉树">二叉树 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%85%89%e7%8c%ab" title="光猫">光猫 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e5%85%b8%e6%a0%91" title="字典树">字典树 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e7%ac%a6%e4%b8%b2" title="字符串">字符串 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%8f%92%e4%bb%b6" title="插件">插件 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" title="数据结构">数据结构 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e7%bb%84" title="数组">数组 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e7%ae%97%e6%b3%95" title="算法">算法 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%95%9c%e5%83%8f%e6%89%ab%e6%8f%8f" title="镜像扫描">镜像扫描 (1)</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">社群</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/kingfsen" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:562620163@qq.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>562620163@qq.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2024 .
+			<span class="footer__copyright-credits">使用 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 技术与 <a href="https://github.com/kingfsen/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主题</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script async src="/js/highlight.js"></script> 
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+ 
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1f3ac79473dea8a6643d0e73a08fa809";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+</script>
+
+<a class="to-top" style="background-color:#666;color:#fff;width:40px;height:40px;text-align:center;padding-top:3px;line-height:18px;">返回顶部</a>
+<script type="text/javascript">
+$('.to-top').toTop();
+</script>
+
+</body>
+</html>
