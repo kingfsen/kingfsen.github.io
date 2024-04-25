@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Maven生命周期 - </title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	
+	<script src="/js/jquery.toTop.min.js"></script>
+	
+	<meta name="description" content="maven生命周期探索">
+	<meta name="generator" content="Hugo 0.55.6" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	
+	<link rel="stylesheet" href="/css/style.css">	
+	<link rel="stylesheet" type="text/css" href="/css/highlight.css">
+	
+	
+	<link rel="stylesheet" href="/css/share.min.css">
+	<script src="/js/social-share.min.js"></script>
+	<script src="/js/qrcode.js"></script>
+	
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+	
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="" rel="home">
+				<div class="logo_item  logo__imagebox">
+					<img class="logo_img" style="max-width: 128px;max-height: 128px;" src="/img/logo.png"></img>
+				</div>			
+			</a>
+			
+			<div class="float_right"><div class="social-share"></div>
+  <br/></div>
+			
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">选择</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">博客笔记</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/timeline/">笔记时光轴</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">航站链接</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Maven生命周期</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2024-04-25T09:34:21">2024-04-25</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/maven" rel="category">maven</a></span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">10 分钟</time>
+</div></div>
+		</header>
+
+  
+    <div class="toc">
+        <div class="toc__title"><span id="toc_menu_tip">展开书签</span></div>
+        <div class="toc__menu">
+          <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#生命周期类型">生命周期类型</a></li>
+<li><a href="#目标绑定关系">目标绑定关系</a></li>
+<li><a href="#自定义目标绑定">自定义目标绑定</a>
+<ul>
+<li><a href="#开发插件">开发插件</a></li>
+<li><a href="#插件绑定到目标">插件绑定到目标</a></li>
+<li><a href="#插件接收参数">插件接收参数</a></li>
+</ul></li>
+<li><a href="#查看生命周期与目标">查看生命周期与目标</a></li>
+<li><a href="#扩展">扩展</a>
+<ul>
+<li><a href="#示例">示例</a></li>
+<li><a href="#参考答案">参考答案</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+        </div>  
+    </div>
+    <script type="text/javascript">
+    $(".toc__title").click( function () {
+      if($(".toc__menu").css('display') == 'none') {
+        $(".toc__menu").show(); 
+        $("#toc_menu_tip").html("收起书签");
+      } else {
+        $(".toc__menu").hide(); 
+        $("#toc_menu_tip").html("展开书签");
+      }
+    });
+    </script>
+  
+<div class="content post__content clearfix">
+			
+
+<p>Maven引入了生命周期模型，对项目的整个构建过程进行了抽象和统一。Maven定义了三种类型的生命周期分别用于完成不同的工作，分别是<code>default</code>、<code>clean</code>、<code>site</code>，每种生命周期都是由不同的一系列过程阶段组成。</p>
+
+<p><img src="/blog/maven/第16页-11.PNG" alt="生命周期"></p>
+
+<h2 id="生命周期类型">生命周期类型</h2>
+
+<ul>
+<li><strong>clean</strong>生命周期<br/>
+该生命周期主要用于清理项目相关资源文件，它包含了如下阶段：
+
+<ol>
+<li><code>pre-clean</code>：执行一些clean前需要完成的工作</li>
+<li><code>clean</code>：清理上一次构建生成的相关文件</li>
+<li><code>post-clean</code>：执行一些clean后的需要完成的工作
+当运行命令<code>mvn clean</code>时，执行的就是clean生命周期中的clean阶段。</li>
+</ol></li>
+<li><strong>site</strong>生命周期<br/>
+该生命周期主要用于生成项目文档以及构建项目web站点，当前很少用到，后续有需要可自行学习。</li>
+<li><strong>default</strong>生命周期<br/>
+该生命中周期主要用于项目的构建部署，是maven最重要的核心生命周期，该生命周期包含的阶段非常多，下面介绍常用的几个生命中后期阶段。
+
+<ol>
+<li><code>validate</code>：验证项目是否正确，必要的资源信息是否有效</li>
+<li><code>compile</code>：编译项目中的源代码文件</li>
+<li><code>test</code>：使用合适的单元测试框架测试已编译好的测试代码，这些测试代码文件不会被打包和部署</li>
+<li><code>package</code>：把已编译的代码打包成可发布的格式，如jar</li>
+<li><code>install</code>：将打好的包安装到maven本地仓库，然后可以在作为其他项目的依赖进行引用</li>
+<li><code>deploy</code>：将包发布到远程仓库，供其它开发者或项目共享
+<br /></li>
+</ol></li>
+</ul>
+
+<p>Maven生命周期中的各个阶段都是有顺序的，在项目中执行生命周期中指定的某个阶段，那么这个阶段前面的所有阶段都会执行，如执行 <code>mvn package</code> 打包时， 会先执行package前面的阶段<code>validate</code>、<code>compile</code>、<code>test</code>等，编译了源代码才能进行打包。</p>
+
+<p><img src="/blog/maven/第17页-12.PNG" alt="生命周期"></p>
+
+<p>但是不同类型生命周期中的阶段原则上是没有先后顺序的，maven也不会自动关联这些阶段，需要明确指定。</p>
+
+<pre><code class="language-bash">mvn clean package
+</code></pre>
+
+<p>Maven将先执行clean生命周期中的clean阶段，再执行default生命周期的package阶段。</p>
+
+<h2 id="目标绑定关系">目标绑定关系</h2>
+
+<p>Maven作为核心程序，其实际是一个插件调度框架，所有任务都是通过插件来完成的。一个插件可以定义多个目标Goal(类似Ant中的Task任务)，Maven支持将插件的目标绑定到不同生命周期的各个阶段上。</p>
+
+<p><img src="/blog/maven/第18页-13.PNG" width="480" alt="目标绑定关系"></p>
+
+<ul>
+<li>不同的目标可以绑定到相同的生命周期阶段</li>
+<li>同一个目标也可以绑定到不同的生命周期阶段，只需定义<code>execution id</code>即可，否则使用插件时会报<code>must be unique</code>错误</li>
+</ul>
+
+<pre><code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+  &lt;artifactId&gt;course-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;first-hello&lt;/id&gt;
+      &lt;phase&gt;compile&lt;/phase&gt;
+      &lt;goals&gt;&lt;goal&gt;hello&lt;/goal&gt;&lt;/goals&gt;
+    &lt;/execution&gt;
+    &lt;execution&gt;
+      &lt;id&gt;second-hello&lt;/id&gt;
+      &lt;phase&gt;package&lt;/phase&gt;
+      &lt;goals&gt;&lt;goal&gt;hello&lt;/goal&gt;&lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+<p>Maven的default生命周期中阶段非常多，但并不是所有的阶段都会执行，如果某个阶段上未绑定任何目标，那这个阶段相当于直接忽略。Maven提供了一些默认插件，根据项目类型会自动将插件目标绑定到生命周期的某些阶段上。</p>
+
+<p>如下packaging为pom类型的项目时，通常是用来统一管理依赖，没有任何源代码，因此该项目构建过程
+不会经历compile等阶段，而只有package、install、deploy。</p>
+
+<pre><code class="language-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+  &lt;artifactId&gt;course-parent&lt;/artifactId&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+  &lt;packaging&gt;pom&lt;/packaging&gt;
+&lt;project&gt;
+</code></pre>
+
+<p>当构建类型为jar或者war项目时，目标通常被绑定到生命周期的这些阶段上</p>
+
+<p><img src="/blog/maven/第19页-14.PNG" width="600" alt="目标绑定关系"></p>
+
+<h2 id="自定义目标绑定">自定义目标绑定</h2>
+
+<p>编写一个简单的插件，在插件中定义一个目标，然后将插件打包安装到本地仓库，其它项目则引用这个插件，将其目标绑定到指定的生命周期阶段上。</p>
+
+<h3 id="开发插件">开发插件</h3>
+
+<p>通过命令行以非交互模式快速创建一个mvn项目，maven官方插件命名规范是<code>maven-xxx-plugin</code>，而我们自定义的插件命名规范是<code>xxx-maven-plugin</code>。</p>
+
+<pre><code class="language-shell">$ mvn archetype:generate -DgroupId=com.example.course -DartifactId=course-maven-plugin
+-Dversion=1.0 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</code></pre>
+
+<ul>
+<li>将项目导入idea，编译器相关版本设置Java8，编码设置为<code>UTF-8</code></li>
+<li>开发maven插件，packaging必须设置为<code>maven-plugin</code></li>
+</ul>
+
+<p>项目pom.xml如下</p>
+
+<pre><code class="language-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+  &lt;artifactId&gt;course-maven-plugin&lt;/artifactId&gt;
+  &lt;packaging&gt;maven-plugin&lt;/packaging&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.12&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>添加依赖</p>
+
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.maven&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-plugin-api&lt;/artifactId&gt;
+  &lt;version&gt;3.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.maven.plugin-tools&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-plugin-annotations&lt;/artifactId&gt;
+  &lt;version&gt;3.4&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>在com.example.course包下创建类<strong>PrintlnHelloMojo</strong>，<strong>PrintlnHelloMojo</strong>继承<strong>AbstractMojo</strong>，通过注解
+<code>@Mojo</code>定义了插件目标名为<code>hello</code>。</p>
+
+<pre><code class="language-java">package com.example.course;
+
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugins.annotations.Mojo;
+
+@Mojo(name=&quot;hello&quot;)
+public class PrintlnHelloMojo extends AbstractMojo {
+
+    public void execute() {
+        getLog().info(&quot;Hello, this is my custom plugin&quot;);
+    }
+    
+}
+</code></pre>
+
+<p>通过命令<code>mvn clean install</code>将插件构建安装到本地仓库，com.example.course:course-maven-plugin:1.0就开发完成。</p>
+
+<h3 id="插件绑定到目标">插件绑定到目标</h3>
+
+<p>通过如下非交互命令行再次创建一个maven项目，在这个项目中使用开发好的插件 <code>course-maven-plugin</code> 构建项目。</p>
+
+<pre><code class="language-bash">$ mvn archetype:generate -DgroupId=com.example.course -DartifactId=use-course-maven-plugin 
+-Dversion=1.0 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</code></pre>
+
+<p>项目pom如下</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+  xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.example.train&lt;/groupId&gt;
+  &lt;artifactId&gt;use-course-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>通过在pom.xml中自定义构建过程使用插件，将插件<code>course-maven-plugin:1.0</code>的目标<code>hello</code>绑定到生命周期的<code>compile</code>阶段。</p>
+
+<pre><code class="language-xml">&lt;build&gt;
+  &lt;plugins&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+      &lt;artifactId&gt;course-maven-plugin&lt;/artifactId&gt;
+      &lt;version&gt;1.0&lt;/version&gt;
+      &lt;executions&gt;
+        &lt;execution&gt;
+          &lt;phase&gt;compile&lt;/phase&gt;
+          &lt;goals&gt;
+            &lt;goal&gt;hello&lt;/goal&gt;
+          &lt;/goals&gt;
+        &lt;/execution&gt;
+      &lt;/executions&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+
+<p>编写完构建过程，在idea的右侧maven栏则可以看见自定义的course插件。</p>
+
+<p>由于插件目标<code>hello</code>在定义时，并未绑定默认的生命的周期，如果此时不填写<code>&lt;phase&gt;compile&lt;/phase&gt;</code>，那插件则不会运用到构建过程中。</p>
+
+<p>执行如下任何一个命令验证，是否输出对应的日志。</p>
+
+<pre><code class="language-bash"># mvn course:hello
+# mvn compile
+</code></pre>
+
+<pre><code class="language-bash">D:\campus\workspace\use-course-maven-plugin&gt;mvn course:hello
+1327 [INFO] Scanning for projects...
+1462 [INFO]
+1462 [INFO] -------------------------------------------------------------------
+1462 [INFO] Building use-course-maven-plugin 1.0-SNAPSHOT
+1464 [INFO] -------------------------------------------------------------------
+1469 [INFO]
+1470 [INFO] --- course-maven-plugin:1.0:hello (default-cli) @ use-course-maven-plugin
+1658 [INFO] Hello, this is my custom plugin
+1659 [INFO] -------------------------------------------------------------------
+1659 [INFO] BUILD SUCCESS
+1659 [INFO] -------------------------------------------------------------------
+</code></pre>
+
+<h3 id="插件接收参数">插件接收参数</h3>
+
+<p>给目标传递参数主要有两种方式，首先需要通过<code>@Parameter</code>定义插件目标接收的参数。</p>
+
+<pre><code class="language-java">@Mojo(name=&quot;hello&quot;)
+public class PrintlnHelloMojo extends AbstractMojo {
+
+    @Parameter(defaultValue = &quot;${hello.author}&quot;, required = true)
+    private String author;
+    
+    @Parameter(property = &quot;description&quot;, required = true)
+    private String description;
+    
+    public void execute() {
+        getLog().info(&quot;Hello, this is my custom plugin, description: &quot; +
+            description + &quot;, author: &quot; + author);
+    }
+}
+</code></pre>
+
+<ul>
+<li>参数可以通过property方式接收，即<code>-Ddescription=xxx</code>，也可通过系统属性接收参数值或者在项目pom.xml中进行配置</li>
+<li>required指定参数是否必须，如果强制需要，在项目构建时未传递相关参数则编译失败</li>
+</ul>
+
+<p>在使用插件的构建过程中定义author参数</p>
+
+<pre><code class="language-xml">&lt;build&gt;
+  &lt;plugins&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;com.example.course&lt;/groupId&gt;
+      &lt;artifactId&gt;course-maven-plugin&lt;/artifactId&gt;
+      &lt;version&gt;1.0&lt;/version&gt;
+      &lt;executions&gt;
+        &lt;execution&gt;
+          &lt;phase&gt;compile&lt;/phase&gt;
+          &lt;goals&gt;
+            &lt;goal&gt;hello&lt;/goal&gt;
+          &lt;/goals&gt;
+          &lt;!-- 给插件传递author参数 --&gt;
+          &lt;configuration&gt;
+            &lt;author&gt;example.com&lt;/author&gt;
+          &lt;/configuration&gt;
+        &lt;/execution&gt;
+      &lt;/executions&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+
+<p>通过-D系统属性给插件传递<code>description</code>参数</p>
+
+<pre><code class="language-bash"># mvn clean compile -Ddescription=&quot;测试插件动态参数&quot;
+...
+2680 [INFO] --- course-maven-plugin:1.0:hello (default) @ use-course-maven-plugin
+---
+2777 [INFO] Hello, this is my custom plugin, description: 测试插件动态参数,
+author: example.com
+...
+</code></pre>
+
+<h2 id="查看生命周期与目标">查看生命周期与目标</h2>
+
+<p>通过以下几种方式可以查看生命周期绑定或者目标</p>
+
+<ul>
+<li>查看最终生效的pom</li>
+</ul>
+
+<pre><code class="language-bash"># mvn help:effective-pom
+</code></pre>
+
+<ul>
+<li>查看插件定义的目标</li>
+</ul>
+
+<pre><code class="language-bash"># mvn help:describe -Dplugin=course
+[INFO] com.example.course:course-maven-plugin:1.0
+Name: course-maven-plugin
+Description: (no description available)
+Group Id: com.example.course
+Artifact Id: course-maven-plugin
+Version: 1.0
+Goal Prefix: course
+
+This plugin has 1 goal:
+
+course:hello
+  Description: (no description available)
+...
+</code></pre>
+
+<ul>
+<li>查看默认的生命周期全部阶段</li>
+</ul>
+
+<pre><code class="language-bash"># mvn help:describe -Dcmd=package
+</code></pre>
+
+<ul>
+<li>通过插件查看项目default生命周期各阶段绑定的目标</li>
+</ul>
+
+<pre><code class="language-bash"># mvn fr.jcgay.maven.plugins:buildplan-maven-plugin:list-phase
+[INFO] Build Plan for container-group-console:
+process-resources -----------------------------------------------------
++ maven-resources-plugin | default-resources | resources
+compile ---------------------------------------------------------------
++ maven-compiler-plugin | default-compile | compile
++ `course-maven-plugin` | default | hello
+process-test-resources ------------------------------------------------
++ maven-resources-plugin | default-testResources | testResources
+test-compile ----------------------------------------------------------
++ maven-compiler-plugin | default-testCompile | testCompile
+test ------------------------------------------------------------------
++ maven-surefire-plugin | default-test | test
+package ---------------------------------------------------------------
++ maven-jar-plugin | default-jar | jar
++ spring-boot-maven-plugin | default | repackage
+install ---------------------------------------------------------------
++ maven-install-plugin | default-install | install
+deploy ----------------------------------------------------------------
++ maven-deploy-plugin | default-deploy | deploy
+------------------------------------------------------------------------
+</code></pre>
+
+<h2 id="扩展">扩展</h2>
+
+<p>编写一个插件构建Java项目zip包</p>
+
+<p>要求：</p>
+
+<ul>
+<li>插件生成的zip包路径位于项目根目录下的<code>target</code>文件夹</li>
+<li>插件必须基于maven生命中周期的compile阶段生成的target/classes才能完成工作</li>
+<li>zip文件中必须包含可执行的jar包，以及程序运行依赖的第三jar包lib目录</li>
+</ul>
+
+<p>参考资料:</p>
+
+<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/deployment/jar/appman.html">https://docs.oracle.com/javase/tutorial/deployment/jar/appman.html</a></li>
+<li><a href="https://maven.apache.org/plugin-tools/index.html">https://maven.apache.org/plugin-tools/index.html</a></li>
+<li><a href="/post/java">Java编译运行基础</a></li>
+</ul>
+
+<p>涉及的知识点:</p>
+
+<ul>
+<li>Java可执行Jar包的构建与运行(class加载机制)</li>
+<li>Maven插件编写、构建、绑定、打包等</li>
+<li>Java读写文件以及打包相关API，如ZipOutputStream、JarOutputStream、Manifest等</li>
+</ul>
+
+<h3 id="示例">示例</h3>
+
+<p>假定现有如下项目<code>use-plugin-demo</code>，你的插件必须能按要求将如下示例项目进行打包，为了降低作业难度，不需要考虑依赖的传递，但需要考虑pom.xml中可能引入多个jar包 , 示例项目就引用了两个依赖包<code>guava</code>、<code>collections</code>，这个两个包不会传递其它任何包。</p>
+
+<p>use-plugin-demo项目pom如下</p>
+
+<pre><code class="language-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  
+  &lt;groupId&gt;com.example.train&lt;/groupId&gt;
+  &lt;artifactId&gt;use-plugin-demo&lt;/artifactId&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+
+  &lt;properties&gt;
+    &lt;!-- maven compiler插件使用 --&gt;
+    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+    &lt;!-- 设定文件读写编码，maven resource处理插件使用 --&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+  &lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+      &lt;artifactId&gt;guava&lt;/artifactId&gt;
+      &lt;version&gt;18.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;commons-collections&lt;/groupId&gt;
+      &lt;artifactId&gt;commons-collections&lt;/artifactId&gt;
+      &lt;version&gt;3.1&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>项目源代码结构</p>
+
+<pre><code class="language-text">├─src
+│  ├─main
+│  │  └─java
+│  │      └─com
+│  │          └─example
+│  │              └─train
+│  │                  │  App.java
+│  │                  │
+│  │                  └─util
+│  │                          ListUtil.java
+│  │
+│  └─test
+│      └─java
+│          └─com
+│              └─example
+│                  └─train
+</code></pre>
+
+<p>程序入口App main方法，main方法引用了com.example.train.util下的工具类ListUtil。</p>
+
+<pre><code class="language-java">package com.example.train;
+
+import com.example.train.util.ListUtil;
+
+import java.util.List;
+
+public class App {
+    public static void main( String[] args ) {
+    
+        List&lt;String&gt; emptyList = ListUtil.getEmptyList();
+        CollectionUtils.size(emptyList);
+        System.out.println(&quot;OK&quot;);
+    }
+}
+</code></pre>
+
+<pre><code class="language-java">package com.example.train.util;
+
+import com.google.common.collect.Lists;
+
+import java.util.List;
+
+public class ListUtil {
+
+    public static List&lt;String&gt; getEmptyList() {
+        return Lists.newArrayList();
+    }
+}
+</code></pre>
+
+<p>项目构建过程</p>
+
+<pre><code class="language-xml">&lt;build&gt;
+  &lt;plugins&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;com.example.train.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;bootJar-maven-plugin&lt;/artifactId&gt;
+      &lt;version&gt;1.0&lt;/version&gt;
+      &lt;executions&gt;
+        &lt;execution&gt;
+          &lt;phase&gt;package&lt;/phase&gt;
+          &lt;goals&gt;
+            &lt;goal&gt;bootJar&lt;/goal&gt;
+          &lt;/goals&gt;
+        &lt;/execution&gt;
+      &lt;/executions&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+
+<p>执行命令构建打包</p>
+
+<pre><code class="language-bash">D:\campus\workspace\use-plugin-demo&gt;mvn clean package -Dmain.class=com.example.train.App
+</code></pre>
+
+<p>最终在项目的target目录下生成了use-plugin-demo-1.0.zip文件</p>
+
+<pre><code class="language-text">└─target
+    │  use-plugin-demo-1.0.zip
+    │
+    ├─classes
+    │  └─com
+    │      └─example
+    │          └─train
+    │              │  App.class
+    │              │
+    │              └─util
+    │                      ListUtil.class
+</code></pre>
+
+<p>解压use-plugin-demo-1.0.zip，文件目录结构如下</p>
+
+<pre><code class="language-text">│  use-plugin-demo-1.0.jar
+│
+└─lib
+        guava-18.0.jar
+        commons-collections-3.1.jar
+</code></pre>
+
+<p>在zip解压后的目录下通过java -jar命令运行jar，能成功运行main方法，并输出日志</p>
+
+<pre><code class="language-bash">D:\campus\workspace\use-plugin-demo-1.0&gt;java -jar use-plugin-demo-1.0.jar 
+OK
+</code></pre>
+
+<p>解压use-plugin-demo-1.0.jar文件内容格式如下</p>
+
+<pre><code class="language-text">├─com
+│  └─example
+│      └─train
+│          │  App.class
+│          │
+│          └─util
+│                  ListUtil.class
+│
+└─META-INF
+        MANIFEST.MF
+</code></pre>
+
+<h3 id="参考答案">参考答案</h3>
+
+<p>项目pom.xml</p>
+
+<pre><code class="language-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.example.train.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;bootJar-maven-plugin&lt;/artifactId&gt;
+  &lt;packaging&gt;maven-plugin&lt;/packaging&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+
+  &lt;properties&gt;
+    &lt;!-- maven compiler插件使用 --&gt;
+    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+    &lt;!-- 设定文件读写编码，maven resource处理插件使用 --&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+  &lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.maven&lt;/groupId&gt;
+      &lt;artifactId&gt;maven-plugin-api&lt;/artifactId&gt;
+      &lt;version&gt;3.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.maven.plugin-tools&lt;/groupId&gt;
+      &lt;artifactId&gt;maven-plugin-annotations&lt;/artifactId&gt;
+      &lt;version&gt;3.4&lt;/version&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.maven&lt;/groupId&gt;
+      &lt;artifactId&gt;maven-core&lt;/artifactId&gt;
+      &lt;version&gt;3.1.1&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+        &lt;artifactId&gt;maven-plugin-plugin&lt;/artifactId&gt;
+        &lt;version&gt;3.5.2&lt;/version&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>插件核心类</p>
+
+<pre><code class="language-java">@Mojo(name=&quot;bootJar&quot;)
+public class BootJarMojo extends AbstractMojo {
+
+    @Parameter(
+            defaultValue = &quot;${settings.localRepository}&quot;,
+            required = true
+    )
+    private String localRepository;
+
+    @Parameter(
+            property = &quot;main.class&quot;,
+            required = true
+    )
+    private String mainClass;
+
+    @Component
+    protected MavenProject project;
+
+    public void execute() throws MojoFailureException {
+        getLog().info(&quot;project localRepository is &quot; + localRepository);
+        File baseDir = project.getBasedir();
+        getLog().info(&quot;project base dir is &quot; + baseDir);
+        String artifactId = project.getArtifactId();
+        String version = project.getVersion();
+        File targetDirectory = new File(baseDir, &quot;target&quot;);
+        File classesDirectory = new File(targetDirectory, &quot;classes&quot;);
+        getLog().info(&quot;project classes dir is &quot; + classesDirectory.getAbsolutePath());
+        // get project dependency jars, ignore dependency transfer, only one demo
+        List&lt;File&gt; dependencyFiles = project.getDependencyArtifacts()
+                .stream()
+                .map(Artifact::getFile)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        // prepare manifest classpath
+        String classpath = &quot;&quot;;
+        if (dependencyFiles.size() &gt; 0) {
+            classpath = dependencyFiles.stream().map(File::getName).map(e -&gt; &quot;lib/&quot; + e).collect(Collectors.joining(&quot; &quot;));
+        }
+        getLog().info(&quot;classpath will be set as &quot; + classpath);
+        // create jar manifest
+        Manifest manifest = createManifest(mainClass, classpath);
+        getLog().info(&quot;manifest generated complete&quot;);
+        String artifactName = artifactId + &quot;-&quot; + version;
+        File bootJar = new File(targetDirectory, artifactName + &quot;.jar&quot;);
+        createJar(bootJar, manifest, classesDirectory);
+        getLog().info(bootJar.getAbsolutePath() + &quot; created successfully&quot;);
+        File zip = new File(targetDirectory, artifactName + &quot;.zip&quot;);
+        createTargetZip(zip, bootJar, dependencyFiles);
+        getLog().info(zip.getAbsolutePath() + &quot; created successfully&quot;);
+        // clear bootJar
+        clearFile(bootJar);
+        getLog().info(&quot;bootJar done&quot;);
+    }
+
+    /**
+     * create the final zip file
+     * @param zip zip file path
+     * @param bootJar java jar
+     * @param dependencyJars dependency jar lib
+     */
+    private void createTargetZip(File zip, File bootJar, List&lt;File&gt; dependencyJars) throws MojoFailureException {
+        try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zip))) {
+            boolean result = zip.createNewFile();
+            getLog().info(zip.getAbsolutePath() + &quot; created result: &quot; + result);
+            zos.putNextEntry(new ZipEntry(bootJar.getName()));
+            writeFile(zos, bootJar);
+            getLog().info(bootJar.getName() + &quot; has been added to &quot; + zip.getAbsolutePath());
+            if (Objects.nonNull(dependencyJars) &amp;&amp; dependencyJars.size() &gt; 0) {
+                for (File jar : dependencyJars) {
+                    zos.putNextEntry(new ZipEntry(&quot;lib/&quot; + jar.getName()));
+                    writeFile(zos, jar);
+                }
+                getLog().info(&quot;copy dependency jars done&quot;);
+            }
+            zos.closeEntry();
+            zos.flush();
+        } catch (Exception e) {
+            getLog().error(e);
+            throw new MojoFailureException(&quot;create target zip error,&quot; + e.getMessage());
+        }
+    }
+
+    /**
+     * write file
+     * @param os
+     * @param file
+     * @throws MojoFailureException
+     */
+    private void writeFile(OutputStream os, File file) throws Exception {
+        try (FileInputStream fis = new FileInputStream(file)) {
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = fis.read(buf)) != -1) {
+                os.write(buf, 0, len);
+            }
+        } catch (Exception e) {
+            getLog().error(&quot;write file error&quot;, e);
+            throw e;
+        }
+    }
+
+    /**
+     * clear file or directory
+     * @param file
+     */
+    private void clearFile(File file) {
+        if (!file.exists()) {
+            return;
+        }
+        if (file.isFile()) {
+            if (!file.delete()) {
+                getLog().warn(&quot;failed to delete file, &quot; + file.getAbsolutePath());
+            }
+            return;
+        }
+        File[] files = file.listFiles();
+        if (Objects.nonNull(files) &amp;&amp; files.length &gt; 0) {
+            for (File f : files) {
+                clearFile(f);
+            }
+        }
+        if (!file.delete()) {
+            getLog().warn(&quot;failed to delete dir, &quot; + file.getAbsolutePath());
+        }
+    }
+
+    /**
+     * create jar file which can be executed by java -jar
+     * @param bootJar target jar path
+     * @param manifest
+     * @param classesDirectory project class files
+     * @throws MojoFailureException
+     */
+    private void createJar(File bootJar, Manifest manifest, File classesDirectory) throws MojoFailureException {
+        try (JarOutputStream jos = new JarOutputStream(new FileOutputStream(bootJar), manifest)) {
+            boolean result = bootJar.createNewFile();
+            getLog().info(bootJar.getAbsolutePath() + &quot; created result: &quot; + result);
+            addJarEntry(jos, classesDirectory, &quot;&quot;);
+            jos.closeEntry();
+            jos.flush();
+        } catch (Exception e) {
+            getLog().error(e);
+            throw new MojoFailureException(&quot;create bootJar error,&quot; + e.getMessage());
+        }
+    }
+
+    /**
+     *
+     * @param jos
+     * @param file
+     * @param rootPath
+     * @throws MojoFailureException
+     */
+    private void addJarEntry(JarOutputStream jos, File file, String rootPath) throws Exception {
+        try {
+            if (file.isDirectory()) {
+                File[] files = file.listFiles();
+                if (Objects.isNull(files) || files.length == 0) {
+                    return;
+                }
+                // note: separator must be /, can't be //
+                if (Objects.nonNull(rootPath) &amp;&amp; rootPath.length() &gt; 0) {
+                    rootPath = rootPath + &quot;/&quot;;
+                }
+                for (File f : files) {
+                    addJarEntry(jos, f, rootPath + f.getName());
+                }
+            } else {
+                jos.putNextEntry(new JarEntry(rootPath));
+                writeFile(jos, file);
+            }
+        } catch (Exception e) {
+            getLog().error(e);
+            throw e;
+        }
+    }
+
+    /**
+     * copy maven repository jar to lib
+     *
+     * @param source
+     * @param target
+     * @throws MojoFailureException
+     */
+    private void copyFile(File source, File target) throws MojoFailureException {
+        getLog().info(&quot;copy &quot; + source.getAbsolutePath() + &quot; to &quot; + target.getAbsolutePath());
+        try (FileInputStream fis = new FileInputStream(source);
+             FileOutputStream fos = new FileOutputStream(target)) {
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = fis.read(buf)) != -1) {
+                fos.write(buf, 0, len);
+            }
+        } catch (Exception e) {
+            getLog().error(e);
+            throw new MojoFailureException(&quot;copy file error,&quot; + e.getMessage());
+        }
+    }
+
+    /**
+     * create jar manifest
+     * @param mainClass
+     * @param classPath
+     * @return
+     */
+    private Manifest createManifest(String mainClass, String classPath) {
+        Manifest manifest = new Manifest();
+        manifest.getMainAttributes().putValue(&quot;Manifest-Version&quot;, &quot;1.0&quot;);
+        manifest.getMainAttributes().putValue(&quot;Created-By&quot;, &quot;example&quot;);
+        manifest.getMainAttributes().putValue(&quot;Main-Class&quot;, mainClass);
+        if (Objects.nonNull(classPath) &amp;&amp; classPath.length() &gt; 0) {
+            manifest.getMainAttributes().putValue(&quot;Class-Path&quot;, classPath);
+        }
+        return manifest;
+    }
+}
+</code></pre>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/maven/" rel="tag">maven</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+<div class="social-share"></div>
+  <br/>
+
+
+
+
+<aside class="sidebar">
+<h4>相关文章</h4>
+<div class="widget__content">
+		<ul class="widget__list">
+	
+	<li><a href="/post/maven_dependency_manage/">Maven依赖管理</a></li>
+	
+</ul>
+</div>
+<br/>
+</aside>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/post/maven_dependency_manage/" rel="prev"><span class="post-nav__caption">«&thinsp;前一篇</span><p class="post-nav__post-title">Maven依赖管理</p></a>
+	</div>
+</nav>
+
+
+
+<script data-isso="/isso/" src="/isso/js/embed.min.js"></script>
+<section id="isso-thread"></section>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/maven_lifecyle/">Maven生命周期</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/maven_dependency_manage/">Maven依赖管理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/java/">一篇文章让你秒懂Java运行基础</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/k8s_terminal/">WebSocket实现Kubernetes Pod Exec终端工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_io_deploy/">本地部署kubernetes.io官方网站</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/reentrantlock/">Java互斥锁ReentrantLock实现原理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/juc/">Java同步器框架AQS与锁实现原理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/helm_design/">Helm架构与中心化部署解决方案</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/grpc/">使用Golang部署gRPC服务</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/protocol_buffers/">gRPC协议Protocol Buffers</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">分类</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/docker">Docker</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/golang">Golang</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95">Java基础算法</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/maven">Maven</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81">容器生态</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%bb%ba%e7%ab%99%e5%b7%a5%e5%85%b7">建站工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%94%9f%e6%b4%bb%e6%8a%80%e5%b7%a7">生活技巧</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">标签</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/condition" title="Condition">Condition (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (9)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/grpc" title="Grpc">Grpc (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jar" title="Jar">Jar (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/javac" title="Javac">Javac (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (6)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/wordpress" title="Wordpress">Wordpress (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e4%ba%8c%e5%8f%89%e6%a0%91" title="二叉树">二叉树 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%85%89%e7%8c%ab" title="光猫">光猫 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e5%85%b8%e6%a0%91" title="字典树">字典树 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e7%ac%a6%e4%b8%b2" title="字符串">字符串 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%8f%92%e4%bb%b6" title="插件">插件 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" title="数据结构">数据结构 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e7%bb%84" title="数组">数组 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e7%ae%97%e6%b3%95" title="算法">算法 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%95%9c%e5%83%8f%e6%89%ab%e6%8f%8f" title="镜像扫描">镜像扫描 (1)</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">社群</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/kingfsen" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:562620163@qq.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>562620163@qq.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2024 .
+			<span class="footer__copyright-credits">使用 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 技术与 <a href="https://github.com/kingfsen/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主题</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script async src="/js/highlight.js"></script> 
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+ 
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1f3ac79473dea8a6643d0e73a08fa809";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+</script>
+
+<a class="to-top" style="background-color:#666;color:#fff;width:40px;height:40px;text-align:center;padding-top:3px;line-height:18px;">返回顶部</a>
+<script type="text/javascript">
+$('.to-top').toTop();
+</script>
+
+</body>
+</html>

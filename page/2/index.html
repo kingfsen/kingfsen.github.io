@@ -70,6 +70,39 @@
 			<div class="primary">
 			
 <main class="main list" role="main"><article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="/post/kubernetes_curl_apiserver/">
+			<img src="/img/kubernetes_2.png" alt="CURL探索Kubernetes API Server" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/post/kubernetes_curl_apiserver/" rel="bookmark">
+			CURL探索Kubernetes API Server
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-05-22T19:30:52">2019-05-22</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81" rel="category">容器生态</a></span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">3 分钟</time>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		在Kubernetes集群中，API Server是集群管理API的入口，由运行在Master节点上的一个名为kube-apiserver的进程提供的服务。 用户进入API可以通过kubectl、客户端库或者http rest，User 或者 Service Account可以被授权进入API。当一个请求到达AP
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/kubernetes_curl_apiserver/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/post/harbor_optimize/" rel="bookmark">
@@ -346,39 +379,6 @@
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/post/go_base/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/post/kubernetes_image_pull/">
-			<img src="/img/kubernetes.png" alt="kubernetes镜像拉取失败解决方法" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/kubernetes_image_pull/" rel="bookmark">
-			kubernetes镜像拉取失败解决方法
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-03-29T10:17:45">2019-03-29</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81" rel="category">容器生态</a></span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">5 分钟</time>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Docker Hub以及利用开源harbor项目搭建的镜像仓库服务，对于Docker Client发起的docker login、docker push、docker pull等命令都会做基本的用户认证， 最简单常用的认证方式就是Basic Auth，即在发起的http请求头中添加一个Authorization，
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/kubernetes_image_pull/">阅读全文…</a>
-	</div>
 </article>
 </main>
 
@@ -443,6 +443,7 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/maven_lifecyle/">Maven生命周期</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/maven_dependency_manage/">Maven依赖管理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/java/">一篇文章让你秒懂Java运行基础</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/k8s_terminal/">WebSocket实现Kubernetes Pod Exec终端工具</a></li>
@@ -452,7 +453,6 @@
 			<li class="widget__item"><a class="widget__link" href="/post/helm_design/">Helm架构与中心化部署解决方案</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/grpc/">使用Golang部署gRPC服务</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/protocol_buffers/">gRPC协议Protocol Buffers</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_curl_apiserver/">CURL探索Kubernetes API Server</a></li>
 		</ul>
 	</div>
 </div>
@@ -486,7 +486,7 @@
 		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (6)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/wordpress" title="Wordpress">Wordpress (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e4%ba%8c%e5%8f%89%e6%a0%91" title="二叉树">二叉树 (1)</a>

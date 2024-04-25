@@ -6,10 +6,19 @@
     <description>Recent content in maven on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 24 Apr 2024 09:34:21 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 25 Apr 2024 09:34:21 +0800</lastBuildDate>
     
 	<atom:link href="/categories/maven/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Maven生命周期</title>
+      <link>/post/maven_lifecyle/</link>
+      <pubDate>Thu, 25 Apr 2024 09:34:21 +0800</pubDate>
+      
+      <guid>/post/maven_lifecyle/</guid>
+      <description>Maven引入了生命周期模型，对项目的整个构建过程进行了抽象和统一。Maven定义了三种类型的生命周期分别用于完成不同的工作，分别是default、clean、site，每种生命周期都是由不同的一系列过程阶段组成。 生命周期类型 clean生命周期 该生命周期主要用于清理项目相关资源文件，它包含</description>
+    </item>
     
     <item>
       <title>Maven依赖管理</title>
