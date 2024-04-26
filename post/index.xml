@@ -6,13 +6,22 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 25 Apr 2024 09:34:21 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 25 Apr 2024 19:54:59 +0800</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Maven生命周期</title>
+      <title>Maven基础概念与使用(一)</title>
+      <link>/post/maven_base/</link>
+      <pubDate>Thu, 25 Apr 2024 19:54:59 +0800</pubDate>
+      
+      <guid>/post/maven_base/</guid>
+      <description>前言 为什么需要自动化构建工具 一个Java项目要部署上线，最简单的构建过程都要经过编译、打包，项目比较少并且互相没有依赖时，我们可以手动调用javac命令编译java源文件，调用jar命令将class文件打包，当工程项目非常多， 并且很多有依赖关系，甚至一些复杂的项目还有很多流程需要处理，如J</description>
+    </item>
+    
+    <item>
+      <title>Maven生命周期(二)</title>
       <link>/post/maven_lifecyle/</link>
       <pubDate>Thu, 25 Apr 2024 09:34:21 +0800</pubDate>
       
@@ -21,7 +30,7 @@
     </item>
     
     <item>
-      <title>Maven依赖管理</title>
+      <title>Maven依赖管理(三)</title>
       <link>/post/maven_dependency_manage/</link>
       <pubDate>Wed, 24 Apr 2024 09:34:21 +0800</pubDate>
       
