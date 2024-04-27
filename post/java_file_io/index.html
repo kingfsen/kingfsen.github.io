@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Java基础文件与IO(一) - </title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	
+	<script src="/js/jquery.toTop.min.js"></script>
+	
+	<meta name="description" content="Java文件基本操作以及IO流">
+	<meta name="generator" content="Hugo 0.55.6" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	
+	<link rel="stylesheet" href="/css/style.css">	
+	<link rel="stylesheet" type="text/css" href="/css/highlight.css">
+	
+	
+	<link rel="stylesheet" href="/css/share.min.css">
+	<script src="/js/social-share.min.js"></script>
+	<script src="/js/qrcode.js"></script>
+	
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+	
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="" rel="home">
+				<div class="logo_item  logo__imagebox">
+					<img class="logo_img" style="max-width: 128px;max-height: 128px;" src="/img/logo.png"></img>
+				</div>			
+			</a>
+			
+			<div class="float_right"><div class="social-share"></div>
+  <br/></div>
+			
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">选择</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">博客笔记</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/timeline/">笔记时光轴</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">航站链接</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Java基础文件与IO(一)</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2024-04-26T17:10:03">2024-04-26</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/java" rel="category">Java</a></span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">24 分钟</time>
+</div></div>
+		</header>
+
+  
+    <div class="toc">
+        <div class="toc__title"><span id="toc_menu_tip">展开书签</span></div>
+        <div class="toc__menu">
+          <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#文件操作">文件操作</a>
+<ul>
+<li><a href="#构造file对象">构造File对象</a></li>
+<li><a href="#常用的判断方法">常用的判断方法</a></li>
+<li><a href="#常用的获取属性方法">常用的获取属性方法</a></li>
+<li><a href="#操作文件方法">操作文件方法</a></li>
+<li><a href="#遍历文件目录">遍历文件目录</a></li>
+<li><a href="#files">Files</a></li>
+</ul></li>
+<li><a href="#io流">IO流</a>
+<ul>
+<li><a href="#字节流">字节流</a>
+<ul>
+<li><a href="#inputstream">InputStream</a></li>
+<li><a href="#outputstream">OutputStream</a></li>
+</ul></li>
+<li><a href="#操作使用">操作使用</a></li>
+<li><a href="#字符流">字符流</a>
+<ul>
+<li><a href="#字符编码">字符编码</a></li>
+<li><a href="#reader">Reader</a></li>
+<li><a href="#writer">Writer</a></li>
+<li><a href="#操作使用-1">操作使用</a></li>
+</ul></li>
+<li><a href="#缓冲流">缓冲流</a>
+<ul>
+<li><a href="#字节缓冲流">字节缓冲流</a></li>
+<li><a href="#字符缓冲流">字符缓冲流</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+        </div>  
+    </div>
+    <script type="text/javascript">
+    $(".toc__title").click( function () {
+      if($(".toc__menu").css('display') == 'none') {
+        $(".toc__menu").show(); 
+        $("#toc_menu_tip").html("收起书签");
+      } else {
+        $(".toc__menu").hide(); 
+        $("#toc_menu_tip").html("展开书签");
+      }
+    });
+    </script>
+  
+<div class="content post__content clearfix">
+			
+
+<h2 id="文件操作">文件操作</h2>
+
+<p><code>java.io.File</code>是Java提供的专门针对文件操作的类，File是文件与目录路径的一种抽象表示，用于操作文件与目录，不能操作文件内容。</p>
+
+<h3 id="构造file对象">构造File对象</h3>
+
+<p>一个File对象通常表示磁盘上一个真实存在的文件或目录，创建File对象时，无论对应的文件与目录是否存在，不会影响File对象的构造。</p>
+
+<p>常用的三个构造File方法</p>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>public File(String pathname)</td>
+<td>通过给定的路径名创建指定的File实例</td>
+</tr>
+
+<tr>
+<td>public File(String parent, String child)</td>
+<td>根据指定的父路径与子路径字符串创建File实例</td>
+</tr>
+
+<tr>
+<td>public File(File parent, String child)</td>
+<td>根据指定的父路径File与子路径字符串创建新的File实例</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-java">public static void main(String[] args) {
+    // 创建表示一个目录的File实例
+    File dir = new File(&quot;D://test&quot;);
+    // 创建表示文件的File实例
+    File sourceFile1 = new File(&quot;D://test&quot;, &quot;source.txt&quot;);
+    // 根据父路径File实例创建新的File实例
+    File sourceFile2 = new File(dir, &quot;source.txt&quot;);
+}
+</code></pre>
+
+<h3 id="常用的判断方法">常用的判断方法</h3>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>public boolean exists()</td>
+<td>判断文件或者目录是否存在</td>
+</tr>
+
+<tr>
+<td>public boolean isDirectory()</td>
+<td>判断File表示的路径是否是一个目录</td>
+</tr>
+
+<tr>
+<td>public boolean isFile()</td>
+<td>判断File表示的路径是否是一个文件</td>
+</tr>
+
+<tr>
+<td>public boolean isHidden()</td>
+<td>判断File是否是一个隐藏的文件与路径，即Unix以.开始命名的文件或目录，<br/>Window需要在文件系统中明确标记是否隐藏</td>
+</tr>
+
+<tr>
+<td>public boolean canRead()</td>
+<td>判断是否可读</td>
+</tr>
+
+<tr>
+<td>public boolean canWrite()</td>
+<td>判断是否可写</td>
+</tr>
+
+<tr>
+<td>public boolean canExecute()</td>
+<td>判断是否可执行</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-java">public static void main(String[] args) {
+    File hiddenSshDir = new File(&quot;D://test/hidden&quot;);
+    System.out.println(hiddenSshDir.isHidden()); // true
+    System.out.println(hiddenSshDir.isFile()); // false
+    System.out.println(hiddenSshDir.isDirectory()); //true
+    System.out.println(hiddenSshDir.exists()); // true
+}
+</code></pre>
+
+<h3 id="常用的获取属性方法">常用的获取属性方法</h3>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>public String getName()</td>
+<td>获取文件名或目录名，如source.txt</td>
+</tr>
+
+<tr>
+<td>public String getAbsolutePath()</td>
+<td>获取文件或目录绝对路径</td>
+</tr>
+
+<tr>
+<td>public String getPath()</td>
+<td>获取文件或目录相对路径，如果构造File时指定的就是绝对路径，<br/>则与getAbsolutePath返回内容一致，如果是相对路径，则以系统属性user.dir为目录创建</td>
+</tr>
+
+<tr>
+<td>public long length()</td>
+<td>返回文件内容大小，单位字节。如果File表示的是目录，则返回0</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-java">public static void main(String[] args) {
+    File sourceFile = new File(&quot;test/dir&quot;); 
+    System.out.println(sourceFile.getName()); // dir
+    System.out.println(sourceFile.getAbsolutePath()); // D:\workspace\base-star-point\test\dir
+    System.out.println(sourceFile.getParent()); // test
+    System.out.println(sourceFile.getPath()); // test\dir
+    System.out.println(sourceFile.length()); // 0
+}
+</code></pre>
+
+<h3 id="操作文件方法">操作文件方法</h3>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>public boolean createNewFile()</td>
+<td>创建文件，如果文件已经存在，则返回false</td>
+</tr>
+
+<tr>
+<td>public boolean mkdir()</td>
+<td>创建目录</td>
+</tr>
+
+<tr>
+<td>public boolean mkdirs()</td>
+<td>创建目录，父路径中任何一级目录不存在都会自动创建，类似mkdir -p /data/test/dir 命令</td>
+</tr>
+
+<tr>
+<td>public boolean delete()</td>
+<td>删除文件或目录，如果File是一个目录，并且目录不为空，则无法删除，<br/>文件或目录正被其他程序使用，也无法删除。</td>
+</tr>
+
+<tr>
+<td>public boolean renameTo(File dest)</td>
+<td>重命名文件，即移动文件</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-java">public static void main(String[] args) throws IOException {
+    File file = new File(&quot;D://test/txt&quot;);
+    boolean suc = file.createNewFile();
+    System.out.println(suc); // true，创建成功
+    suc = file.createNewFile();
+    System.out.println(suc); // false, 文件已经存在
+    suc = file.mkdir();
+    System.out.println(suc); // fasle, 相同路径名的文件已经存在，无法创建同名目录
+
+    File dir = new File(&quot;D://test/a/b/c&quot;);
+    suc = dir.mkdir();
+    System.out.println(suc); // false，无法创建目录c, 父目录D://test/a/b不存在
+    suc = dir.mkdirs();
+    System.out.println(suc); // true，整个目录D://test/a/b/c全部创建
+}
+</code></pre>
+
+<p>重命名文件，将D://test/source.txt移动到D://test/sub目录，并命名为b.txt。</p>
+
+<pre><code class="language-java">public static void main(String[] args) {
+    File source = new File(&quot;D://test/source.txt&quot;);
+    File dir = new File(&quot;D://test/sub&quot;);
+    dir.mkdir();
+    File target = new File(&quot;D://test/sub/b.txt&quot;);
+    System.out.println(source.renameTo(target));
+}
+</code></pre>
+
+<p>创建临时文件,File提供了一个静态方法创建临时文件</p>
+
+<pre><code class="language-java">// 未指定临时目录，使用系统属性java.io.tmpdir值作为临时目录
+public static File createTempFile(String prefix, String suffix)
+// 指定临时目录创建临时文件
+public static File createTempFile(String prefix, String suffix, File directory)
+</code></pre>
+
+<p>创建临时文件时，可以指定系统临时目录，File类默认使用系统属性java.io.tmpdir( <code>java -XshowSettings:properties -version</code> 查看)值作为临时目录，后缀未填写则默认为<code>.tmp</code>。</p>
+
+<pre><code class="language-java">public static void main(String[] args) throws IOException {
+    Properties properties = System.getProperties();
+    properties.forEach((k,v) -&gt; System.out.println(k + &quot;=&quot; + v));
+    // C:\Users\SUNJINFU\AppData\Local\Temp\test-1385972536118005697.log
+    System.out.println(File.createTempFile(&quot;test-&quot;, &quot;.log&quot;));
+}
+</code></pre>
+
+<h3 id="遍历文件目录">遍历文件目录</h3>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>public String[] list()</td>
+<td>返回目录下子文件与子目录名，不是目录直接返回null</td>
+</tr>
+
+<tr>
+<td>public String[] list(FilenameFilter filter)</td>
+<td>返回目录下符合文件名条件的子文件与子目录字符串名</td>
+</tr>
+
+<tr>
+<td>public File[] listFiles()</td>
+<td>与list方法类似，返回类型是File数组</td>
+</tr>
+
+<tr>
+<td>public File[] listFiles(FilenameFilter filter)</td>
+<td>返回目录下符合文件名条件的子文件或子目录File数组</td>
+</tr>
+
+<tr>
+<td>public File[] listFiles(FileFilter filter)</td>
+<td>返回目录下符合条件的子文件或子目录File数组</td>
+</tr>
+</tbody>
+</table>
+
+<p>删除指定目录下的所有.txt文件</p>
+
+<pre><code class="language-java">public static void main(String[] args) {
+    File file = new File(&quot;D://test&quot;);
+    // 通过name filter过滤出文件名后缀为.txt的文件
+    File[] files = file.listFiles((dir, name) -&gt; name.endsWith(&quot;.txt&quot;));
+    if (files != null) {
+        for (File f : files) {
+            f.delete();
+        }
+    }
+}
+</code></pre>
+
+<p>删除目录，如果目录不为空，则需先遍历删除子文件、子目录</p>
+
+<pre><code class="language-text">D:\test&gt;tree /f
+│  1.log
+│
+├─a
+│      a.txt
+│
+└─b
+    └─c
+            c.txt
+</code></pre>
+
+<pre><code class="language-java">public class DeleteDirectoryDemo {
+
+    public static void main(String[] args) {
+        File file = new File(&quot;D://test&quot;);
+        deleteFile(file);
+    }
+
+    public static void deleteFile(File file) {
+        // 判断文件是否存在
+        if (!file.exists()) {
+            return;
+        }
+        // 如果是文件，直接删除
+        if (file.isFile()) {
+            if (!file.delete()) {
+                System.out.println(&quot;failed to delete file: &quot; +  file.getAbsolutePath());
+            }
+            return;
+        }
+        // 如果是目录，则先遍历删除目录下文件或者子目录
+        File[] files = file.listFiles();
+        if (Objects.nonNull(files) &amp;&amp; files.length &gt; 0) {
+            for (File f : files) {
+                deleteFile(f);
+            }
+        }
+        // 最后删除目录
+        if (!file.delete()) {
+            System.out.println(&quot;failed to delete directory: &quot; +  file.getAbsolutePath());
+        }
+    }
+}
+</code></pre>
+
+<h3 id="files">Files</h3>
+
+<p>从Java7开始，在java.nio.file包下提供了一个文件或者目录操作工具类Files，Files的方法基本都是静态方法，该类不仅能操作文件，还能结合IO流操作文件内容。与File类相比，Files的很多方法都能明确的返回操作失败的异常信息，而不是只返回简单的true或者false。</p>
+
+<p>如test目录不存在时直接使用Files创建source.txt</p>
+
+<pre><code class="language-java">// Exception in thread &quot;main&quot; java.nio.file.NoSuchFileException: D:\test\source.txt
+Files.createFile(Paths.get(&quot;D://test/source.txt&quot;)); 
+</code></pre>
+
+<p>删除不存在的文件</p>
+
+<pre><code class="language-java">// Exception in thread &quot;main&quot; java.nio.file.NoSuchFileException: D:\test\1.txt
+Files.delete(Paths.get(&quot;D://test/1.txt&quot;));
+</code></pre>
+
+<p>Files提供了非常丰富的方法，按功能分为如下几类方法</p>
+
+<p><img src="/blog/java_star/图片 1.png" width="600" alt="Files"></p>
+
+<h2 id="io流">IO流</h2>
+
+<p>一个IO流代表了一个输入源(Input)以及对应的输出目的地(Output)，其中包括磁盘文件、设备、程序、内存数组等。IO流的数据类型支持字节、原始数据类型、本地化字符以及对象等，不管什么数据类型，最终将这些数据转换成01二进制序列，一个IO流就是由一序列01数据组成。</p>
+
+<p>程序可以从输入流(Input Stream)中读取数据</p>
+
+<p><img src="/blog/java_star/图片 2.png" width="600" alt="input"></p>
+
+<p>程序也可以通过输出流(Output Stream)将数据写到目的地</p>
+
+<p><img src="/blog/java_star/图片 3.png" width="600" alt="input"></p>
+
+<p>输入源与输出目标最常见的就是磁盘文件(文件IO)、网络socket(网络IO)以及内存字节数组。</p>
+
+<h3 id="字节流">字节流</h3>
+
+<p>字节流的输入输出都是以字节为单位处理数据，一个字节等于<code>8</code>个二进制位，即由8位<code>0</code>或<code>1</code>组成的序列，如01102300为一个字节。在Java中所有的字节流都是从抽象类<strong>InputStream</strong>或<strong>OutputStream</strong>类继承而来。大部分字节流使用方式相同，只是它们的构造方式可能不一样。</p>
+
+<h4 id="inputstream">InputStream</h4>
+
+<p><img src="/blog/java_star/图片 4.png" width="600" alt="input"></p>
+
+<p>InputStream提供的方法</p>
+
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>签名</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>read</td>
+<td>public abstract int read()</td>
+<td>这是一个抽象方法，需要子类实现，用于从输入流中读取下一个字节数据。<br/>由于一个字节是<code>8</code>位，返回值介于<code>0~255</code>之间，如果没有可读数据，即达到了流的末尾，则返回<code>-1</code>。<br/>方法会一直阻塞直到有字节数据可读、到达流末尾或者发生IO异常。</td>
+</tr>
+
+<tr>
+<td>read</td>
+<td>public int read(byte b[])</td>
+<td>从输入流中读取b.length个字节，并储存到字节数组b中，如果b长度为0，则不会读取任何字节数据，方法返回0。<br/><code>read(byte b[])</code> -&gt; <code>read(byte b[], int off, int len)</code> -&gt; <code>read</code></td>
+</tr>
+
+<tr>
+<td>read</td>
+<td>public int read(byte b[], int off, int len)</td>
+<td>从输入流中读取最多len个字节，如果len为0，不会读取任何字节数据，直接返回0，读取的字节从数组b的off位置开始存放。<br/><code>read(byte b[], int off, int len)</code> -&gt; <code>read()</code></td>
+</tr>
+
+<tr>
+<td>skip</td>
+<td>public long skip(long n)</td>
+<td>跳过并丢弃输入流中的n个字节数据，通过调用read(byte b[], int off, int len)读取字节并丢弃。</td>
+</tr>
+
+<tr>
+<td>available</td>
+<td>public int available()</td>
+<td>返回下一次操作时，输入流中预估的可读字节数量</td>
+</tr>
+
+<tr>
+<td>close</td>
+<td>public void close()</td>
+<td>关闭输入流，释放与流关联的系统资源</td>
+</tr>
+
+<tr>
+<td>markSupported</td>
+<td>public boolean markSupported()</td>
+<td>用于测试输入流是否支持mark与reset方法</td>
+</tr>
+
+<tr>
+<td>mark</td>
+<td>public synchronized void mark(int readlimit)</td>
+<td>在输入流中标记当前位置，标记位置后，还可以读取最多readlimit字节，后续可以通过reset方法回到上一次mark的位置，达到重复读取相同字节数据的操作，使用mark方法，则markSupported必须返回true，在关闭的流中调用mark方法，不会有任何效果。</td>
+</tr>
+
+<tr>
+<td>reset</td>
+<td>public synchronized void reset()</td>
+<td>在流中复位，回到上一次调用mark方法标记的位置，如果未发现任何mark或者上一次mark标记后读取的字节数超过readlimit，则发生IOException，使用reset方法，则markSupported必须返回<code>true</code>。</td>
+</tr>
+</tbody>
+</table>
+
+<p>InputStream中的方法大部分都是一种规范，最终的字节流子类某些方法可能会有所不同。</p>
+
+<h4 id="outputstream">OutputStream</h4>
+
+<p><img src="/blog/java_star/图片 5.png" width="600" alt="output"></p>
+
+<p>OutputStream提供的方法</p>
+
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>签名</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>write</td>
+<td>public abstract void write(int b)</td>
+<td>这是一个抽象方法，需要子类实现，用于将指定的字节数据写入到输出流中，在Java中int是<code>32</code>位，<code>4</code>个字节，write方法实际写入的只是整型数据b的低<code>8</code>位，其余<code>24</code>位直接忽略。</td>
+</tr>
+
+<tr>
+<td>write</td>
+<td>public void write(byte b[])</td>
+<td>将字节数组b中的数据写入到输出流中。<br/><code>write(byte b[])</code> -&gt; <code>write(byte b[], int off, int len)</code> -&gt; <code>write()</code></td>
+</tr>
+
+<tr>
+<td>write</td>
+<td>public void write(byte b[], int off, int len)</td>
+<td>从字节数组b下标为off的位置开始，将len个字节数据写入到输出流中。<br/><code>write(byte b[], int off, int len)</code> -&gt; <code>write()</code></td>
+</tr>
+
+<tr>
+<td>flush</td>
+<td>public void flush()</td>
+<td>刷新输出流，强制一些缓冲输出流将内部缓冲的一些字节数据立即写入目标地，如果目标地是磁盘文件，调用flush方法后，并不保证文件马上更新，这取决于操作系统。</td>
+</tr>
+
+<tr>
+<td>close</td>
+<td>public void close()</td>
+<td>关闭输出流，释放与流关联的系统资源</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="操作使用">操作使用</h3>
+
+<p>文件IO字节流FileInputStream、FileOutputStream是使用最广泛的两个类，以这两个类进行操作说明。</p>
+
+<pre><code class="language-java">public class CopyBytes {
+    public static void main(String[] args) throws IOException {
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            // 文件数据输入流，如果文件不存在或者是一个目录，则发生FileNotFoundException
+            fis = new FileInputStream(&quot;D://test/source.txt&quot;);
+            // 数据输出流，目标文件不存在，大部分系统都会自动创建，如果文件已存在，则覆盖文件中已有内容
+            fos = new FileOutputStream(&quot;D://test/target.txt&quot;);
+            int c;
+            // 如果返回-1，表示已经读到流的末端
+            while ((c = fis.read()) != -1) {
+                // 如果是ascii字符，每个字符对应的整型值一定是0~127，
+                // 如果是汉字，而一个汉字由多个字节组成，因此会输出多个整型数据，128~255
+                System.out.print(c + &quot; &quot;);
+                fos.write(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // 从输入流读取数据完成后，一定要关闭流，释放系统资源
+            if (fis != null) {
+                fis.close();
+            }
+            // 将数据写入输出流完成后，一定要关闭流，释放系统资源
+            if (fos != null) {
+                fos.close();
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>注意:<code>IO流操作完成后，一定要在finally语句块中进行关闭。</code> Java7开始提供了<code>try-with-resources</code>语法，编译器识别该语法后，在字节码文件中自动生成了对应的<code>finally</code>语句块，并在语句块中关闭对应的流。</p>
+
+<pre><code class="language-java">try (...) {
+    ...
+} catch (Exception e) {
+    ...
+}
+</code></pre>
+
+<p>用<code>try-with-resources</code>语法读写文件代码</p>
+
+<pre><code class="language-java">public class CopyBytes2 {
+    public static void main(String[] args) {
+        try (FileInputStream fis = new FileInputStream(&quot;D://test/source.txt&quot;);
+             FileOutputStream fos = new FileOutputStream(&quot;D://test/target.txt&quot;)) {
+            int c;
+            // 内容长度(可读取的字节数量)
+            System.out.println(&quot;内容有效字节数: &quot; + fis.available());
+            while ((c = fis.read()) != -1) {
+                System.out.print(c + &quot; &quot;);
+                fos.write(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<p>如source.txt文件有如下字符内容：<code>I2023,我</code> ，文件编码为<code>UTF-8</code>时输出<code>9</code>个字节(汉字占用了三个字节)。</p>
+
+<p>输出结果: 73 50 48 50 51 44 <strong>230 136 145</strong></p>
+
+<p>最后三个大于127的十进制值则表示汉字 <code>我</code>，其余的对应的是<code>ascii</code>字符。</p>
+
+<p>FileOutputStream可以控制字节内容写入起始位置</p>
+
+<ul>
+<li>通过 <strong>new FileOutputStream(&ldquo;D://test/target.txt&rdquo;)</strong> 构造输出流，每次从文件开头写入字节数据，因此会覆盖上一次打开文件时写入的内容。</li>
+</ul>
+
+<pre><code class="language-java">public class FileOutputStreamDemo {
+    public static void main(String[] args) {
+        try (FileOutputStream fos = new FileOutputStream(&quot;D://test/target.txt&quot;)) {
+            String s = &quot;2023,Baby 加油努力干&quot;;
+            // 调用FileOutputStream的write(byte b[])方法，写入多个字节
+            fos.write(s.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<ul>
+<li>通过 <strong>new FileOutputStream(&ldquo;D://test/target.txt&rdquo;, <code>true</code>)</strong> 构造输出流，每次从文件末尾写入字节数据，相当于向文档中追加数据内容，多次运行上述main方法，会发现D://test/target.txt文件内容增加。</li>
+</ul>
+
+<p>字节流是IO流中最底层的低水平操作流，文件中包含的是字符数据，更高效的方法是通过字符流进行操作。</p>
+
+<h3 id="字符流">字符流</h3>
+
+<p>Java采用<code>Unicode</code>规范处理字符，字符流IO自动将Java内部字符格式与本地字符集进行转换，自动解码编码，因此比起直接使用IO字节流，字符流操作相对更简单高效，所有的字符操作流都是从抽象类<code>Reader</code>以及<code>Writer</code>继承而来。</p>
+
+<h4 id="字符编码">字符编码</h4>
+
+<p>字符都有编码，读写字符时的编码不一致，则容易出现乱码，因此首先需要简单了解下常见的字符编码规则。</p>
+
+<p><strong>ASCII码</strong></p>
+
+<p>ASCII是American Standard Code for Information Interchange缩写，称为美国信息交换标准代码。ASCII一共定义了<code>128</code>个字符，其中<code>33</code>个字符是不可显示的控制字符，<code>95</code>个可显示的字符。</p>
+
+<p><img src="/blog/java_star/图片 7.png" width="720" alt="ascii"></p>
+
+<p>一个字节占<code>8</code>位，2^8=256，即一个字节可表示<code>256</code>个字符(0~255)，而ASCII字符只有<code>128</code>个，因此一个字节的低<code>7</code>位，2^7=128，足以表达全部的ASCII字符(0~127)，128~255则预留扩展其它字符，但128位根本不足以表示其它国家的字符。</p>
+
+<p><strong>GBK</strong></p>
+
+<ul>
+<li><p>GBK全称汉字内码扩展规范，GBK一共收集了<code>2</code>万多汉字与字符，一个中文字符编码成<code>2</code>个字节进行存储。</p></li>
+
+<li><p>GBK兼容了ASCII字符集</p></li>
+</ul>
+
+<p>假定有字符串： <strong>我a你</strong></p>
+
+<p>按照<code>GBK</code>编码规范，最终需要<code>5</code>个字节来存储。</p>
+
+<p><img src="/blog/java_star/图片 8.png" width="600" alt="gbk"></p>
+
+<p>那上面5个字节，怎么能确定是5个ASCII码，还是包含中文字呢？GBK规定中文字符第一个字节第一位必须是<code>1</code>。</p>
+
+<p><img src="/blog/java_star/图片 9.png" width="600" alt="gbk"></p>
+
+<p>当程序采用<code>GBK</code>编码读取上面<code>5</code>个字节时，发现字节最高位是<code>1</code>时，还需再读下一个字节，然后将<code>2</code>个字节作为一个整体进行解码。<code>GBK</code>编码只用了高位字节的一位用作特殊标记，余下15位可用于表示字符集，即一共可表示<code>2^15=32768</code>个字符。
+<code>GBK</code>是从<code>GB2312</code>编码规范上扩展的，而中国的汉字与符号有数十万，显然<code>GBK</code>也是不够的，因此又出现了<code>GB18030</code>, 按照字符集表示范围<code>GB18030</code> &gt; <code>GBK</code> &gt; <code>GB2312</code>。</p>
+
+<p><strong>Unicode</strong></p>
+
+<p>各个国家都有自己的编码，当计算机信息在国际上进行交换时，就会出现问题，如用GBK编码的字节数据发送给A国家，A国家采用A国码解码肯定就出现了乱码，此时国际标准组织就制定了一套通用的字符集<code>Unicode</code>，即统一码，也叫万国码。Unicode字符集收纳了世界上所有文字、符号，统一进行编号。</p>
+
+<p><code>UTF-8</code></p>
+
+<p>Unicode只是一种字符集，并不是编码方案，没有编码方案则无法存储。Unicode字符集出现最早的编码方案是<code>UTF-32</code>，它规定所有的字符都采用固定的<code>4</code>个字节来表示，<code>4</code>个字节<code>32</code>位，可以表示42亿字符，足以支撑Unicode字符集。即使只需一个字节的ASCII字符a(二进制0110 0001 )，也必须用<code>4</code>个字节表示，前三字节直接补<code>0</code>。</p>
+
+<p><img src="/blog/java_star/图片 10.png" width="600" alt="utf8"></p>
+
+<p><code>UTF-32</code>采用固定字节编码，程序处理简单，但是占用空间太大，基本很少使用，此时国际标准组织推出了Unicode编码方案<code>UTF-8</code>。</p>
+
+<ul>
+<li><p><code>UTF-8</code>针对Unicode字符集采取可变长编码方案，共分为四个长度区，<code>1~4</code>个字节</p></li>
+
+<li><p>英文、数字等只占用<code>1</code>个字节(兼容标准的ASCII编码)，汉字字符占用<code>3</code>个字节</p></li>
+</ul>
+
+<p>UTF8编码示例</p>
+
+<table>
+<thead>
+<tr>
+<th>UTF-8编码方式(二进制)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>0</code>xxxxxxx (ASCII码)</td>
+</tr>
+
+<tr>
+<td><code>110</code>xxxxx  <code>10</code>xxxxxx</td>
+</tr>
+
+<tr>
+<td><code>1110</code>xxxx  <code>10</code>xxxxxx  <code>10</code>xxxxxx</td>
+</tr>
+
+<tr>
+<td><code>11110</code>xxx  <code>10</code>xxxxxx  <code>10</code>xxxxxx  <code>10</code>xxxxxx</td>
+</tr>
+</tbody>
+</table>
+
+<p>中文字 <strong>我</strong> unicode码是<code>\u6211</code>，这是十六进制，转换成二进制是 <code>0110 0010 0001 0001</code>，按照<code>UTF-8</code>中文字三字节编码。</p>
+
+<p>0110  001000  010001</p>
+
+<p>按三字节填充后</p>
+
+<p><code>1110</code>0110  <code>10</code>001000  <code>10</code>010001</p>
+
+<p>最终中文 <strong>我</strong> 字UTF-8编码后存储的十六进制数据为 <code>E6 88 91</code>，通过文本工具Notepad以十六进制模式查看验证。</p>
+
+<p>结论：<font color=red>UTF-8编码的汉字比GBK编码占用空间会更大。</font></p>
+
+<h4 id="reader">Reader</h4>
+
+<p>Reader读取字符流，子类必须实现read、close方法，大部分子类会覆盖Reader中方法，提供更高效的操作或者一些额外的功能。</p>
+
+<p><img src="/blog/java_star/图片 11.png" width="400" alt="utf8"></p>
+
+<p>Reader提供的方法</p>
+
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>签名</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>read</td>
+<td>abstract public int read(char cbuf[], int off, int len)</td>
+<td>抽象方法，子类必须实现，读取字符到字符数组cbuf，并从数组off位置开始存储，最多读取len个字符。方法会阻塞直到有有效字符可读取、IO错误或者读取流结束。</td>
+</tr>
+
+<tr>
+<td>read</td>
+<td>public int read(java.nio.CharBuffer target)</td>
+<td>读取字符并存储到字符缓冲区，如果读取到达了字符末尾，则返回<code>-1</code>。<br/>read(java.nio.CharBuffer target) -&gt; read(char cbuf[], int off, int len)</td>
+</tr>
+
+<tr>
+<td>read</td>
+<td>public int read()</td>
+<td>读取单个字符，返回值范围0~65535(2^16)，-1表示流读取完毕。<br/>read() -&gt; read(char cbuf[], int off, int len)</td>
+</tr>
+
+<tr>
+<td>skip</td>
+<td>public long skip(long n)</td>
+<td>跳过并丢弃输入流中的n个字符数据，该方法也是通过调用int read(char cbuf[], int off, int len)达到操作目的。</td>
+</tr>
+
+<tr>
+<td>ready</td>
+<td>public boolean ready()</td>
+<td>测试流是否已就绪可读，返回true保证下一次的read()调用不会阻塞，返回false不保证下次调用一定会阻塞。</td>
+</tr>
+
+<tr>
+<td>close</td>
+<td>abstract public void close()</td>
+<td>抽象方法，子类必须实现，关闭输入流，释放与流关联的系统资源</td>
+</tr>
+
+<tr>
+<td>markSupported</td>
+<td>public boolean markSupported()</td>
+<td>用于测试输入流是否支持mark与reset方法</td>
+</tr>
+
+<tr>
+<td>mark</td>
+<td>public void mark(int readAheadLimit)</td>
+<td>在输入流中标记当前位置，标记位置后，还可以读取最多readAheadLimit字符，后续可以通过reset方法回到mark位置，则markSupported必须返回true，在关闭的流中调用mark方法，不会有任何效果。</td>
+</tr>
+
+<tr>
+<td>reset</td>
+<td>public void reset()</td>
+<td>在流中复位，回到上一次调用mark方法标记的位置，如果未发现任何mark则回到相应的位置如起点，使用reset方法，则markSupported必须返回true。</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="writer">Writer</h4>
+
+<p>Writer用于将字符写入到字符流中，子类必须实现write、flush、close方法，大部分子类会覆盖Writer中方法，提供更高效的操作或者一些额外的功能。<font color=red>Note: 下图中少了一个常用的PrintWriter</font></p>
+
+<p><img src="/blog/java_star/图片 12.png" width="400" alt="utf8"></p>
+
+<p>Writer提供的方法</p>
+
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>签名</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>write</td>
+<td>public abstract void write(char cbuf[], int off, int len)</td>
+<td>这是一个抽象方法，需要子类实现。将字符数组cbuf从下标off开始的字符写入到输出流中，最多写入len个字符。</td>
+</tr>
+
+<tr>
+<td>write</td>
+<td>public void write(char cbuf[])</td>
+<td>将字符数组中全部字符写入到输出流中。<br/>write(char cbuf[]) -&gt; write(char cbuf[], int off, int len)</td>
+</tr>
+
+<tr>
+<td>write</td>
+<td>public void write(int c)</td>
+<td>将单个字符写入到输出流中，由于int是<code>4</code>个字节<code>32</code>位，该方法实际只写入int的低<code>16</code>位，高<code>16</code>位被丢弃。<br/>write(int c) -&gt; write(char cbuf[], int off, int len)</td>
+</tr>
+
+<tr>
+<td>write</td>
+<td>public void write(String str, int off, int len)</td>
+<td>将字符串中off位置开始的的部分字符写入到输出流中，最终调用的方法是write(char cbuf[], int off, int len)</td>
+</tr>
+
+<tr>
+<td>write</td>
+<td>public void write(String str)</td>
+<td>将字符串str中字符全部写入到输出流中。<br/>write(String str) -&gt; write(String str, int off, int len)</td>
+</tr>
+
+<tr>
+<td>append</td>
+<td>public Writer append(char c)</td>
+<td>附加指定的字符到Writer，实际调用的是write(int c)</td>
+</tr>
+
+<tr>
+<td>append</td>
+<td>public Writer append(CharSequence csq)</td>
+<td>附加指定的字符序列到Writer，实际调用的是write(String str)</td>
+</tr>
+
+<tr>
+<td>append</td>
+<td>public Writer append(CharSequence csq, int start, int end)</td>
+<td>附加指定字符序列中的部分字符到Writer</td>
+</tr>
+
+<tr>
+<td>flush</td>
+<td>abstract public void flush()</td>
+<td>抽象方法，刷新输出流，将流中缓冲的字符立即写到目标，如果输出流目标是另一个字符或者字节流，整个流形成的链都会被立即刷新。</td>
+</tr>
+
+<tr>
+<td>close</td>
+<td>public void close()</td>
+<td>先刷新流，再关闭输出流，释放与流关联的系统资源，close一个已关闭的流，不会发生任何影响。</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="操作使用-1">操作使用</h4>
+
+<p>一个字符流通常包装一个字节流，通过字节流去实现底层物理IO操作，字符流处理字符与字节之间的数据转换。在Java中有两个通用的字节到字符的桥接流，<code>InputStreamReader</code>与<code>OutputStreamReader</code>。</p>
+
+<pre><code class="language-java">public class CopyCharacters {
+    public static void main(String[] args) {
+        try (InputStreamReader isr = new InputStreamReader(
+                new FileInputStream(&quot;D://test/source.txt&quot;));
+             OutputStreamWriter osw = new OutputStreamWriter(
+                     new FileOutputStream(&quot;D://test/target.txt&quot;))) {
+            int c;
+            while((c=isr.read()) != -1) {
+                System.out.println(c);
+                osw.write(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<p>从字符输入流中读取数据</p>
+
+<p><img src="/blog/java_star/图片 13.png" width="640" alt="utf8"></p>
+
+<p>将数据写入字符输出流中</p>
+
+<p><img src="/blog/java_star/图片 14.png" width="640" alt="utf8"></p>
+
+<p>上述main方法在构造字符输入输出流时，未明确指定读写字符编码，字符流最终采用的是系统平台默认编码。</p>
+
+<ul>
+<li><p>Windows中文系统默认是<code>GBK</code></p></li>
+
+<li><p>Linux系统默认是<code>UTF-8</code></p></li>
+</ul>
+
+<p>Java在安装时，根据系统编码自动设置Java系统属性，通过如下命令查看Java系统属性</p>
+
+<pre><code class="language-bash">java -XshowSettings:property -version
+</code></pre>
+
+<p>Java系统属性值中有2个与编码相关的属性</p>
+
+<ul>
+<li><p><code>file.encoding</code>：这个非常重要，在Java中读取文件、URLEncode、字符串数据编码等都与此属性有关。</p></li>
+
+<li><p><code>sun.jnu.encoding</code>：不用关注，用于JVM查找加载class的类名路径编码等</p></li>
+</ul>
+
+<p>注意：在Windows下开发时，使用Java命令查看Java系统属性时，file.encoding=GBK，当使用IDEA工具开发项目时，通过IDEA给项目又设置了UTF-8编码，最终IDEA运行Java程序时，会通过<code>-Dfile.encoding=UTF-8</code>去覆盖默认的编码。当开发过程中遇见字符乱码时，需要关注JVM实际运行时的系统属性，也可通过代码获取。</p>
+
+<pre><code class="language-java">String fileEncoding = System.getProperty(&quot;file.encoding&quot;)
+</code></pre>
+
+<p>指定字符编码构造字符输入输出流</p>
+
+<pre><code class="language-java">// 指定UTF-8编码读字符数据
+new InputStreamReader(new FileInputStream(&quot;D://test/source.txt&quot;), StandardCharsets.UTF_8));
+// 指定UTF-8编码写字符数据
+new OutputStreamWriter(new FileOutputStream(&quot;D://test/target.txt&quot;), StandardCharsets.UTF_8))
+</code></pre>
+
+<p><font color=red>读写字符数据时编码必须保持一致，否则会出现字符乱码。</font></p>
+
+<p>在中文Windows上使用记事本新建D://test/source.txt文件，写入 <strong>2024,加油努力干</strong> ，然后以<code>ANSI</code>编码保存，在Windows中文系统上<code>ANSI</code>处理中文时就是<code>GBK</code>。</p>
+
+<p><img src="/blog/java_star/图片 15.png" width="640" alt="utf8"></p>
+
+<p>然后使用InputStreamReader字符流以<code>UTF-8</code>编码读取字符内容，使用OutputStreamWriter将字符数据写入到<code>D://test/target.txt</code>。</p>
+
+<pre><code class="language-java">public class CopyCharactersWithCharset {
+
+    public static void main(String[] args) {
+        try (InputStreamReader isr = new InputStreamReader(
+       
+                new FileInputStream(&quot;D://test/source.txt&quot;), StandardCharsets.UTF_8);
+           
+             OutputStreamWriter osw = new OutputStreamWriter(
+                     new FileOutputStream(&quot;D://test/target.txt&quot;))) {
+            int c;
+            while((c=isr.read()) != -1) {
+                System.out.println(c);
+                osw.write(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<p>代码运行后，查看文件<code>D://test/target.txt</code>内容出现乱码</p>
+
+<p><img src="/blog/java_star/图片 16.png" width="640" alt="utf8"></p>
+
+<p>出现乱码的原因是<code>InputStreamReader</code>读取字符的编码与字符存储时编码不一致导致的，与OutputStreamWriter无任何关系，构造InputStreamReader时指定<code>GBK</code>编码后，再次运行则不会出现字符乱码。</p>
+
+<pre><code class="language-java">// 指定GBK，StandardCharsets类中定义的都是标准的字符集编码
+new InputStreamReader(new FileInputStream(&quot;D://test/source.txt&quot;), &quot;GBK&quot;))
+</code></pre>
+
+<p>处理String时也需要关注编码</p>
+
+<pre><code class="language-java">public class StringEncodeDemo {
+    public static void main(String[] args) throws Exception {
+        String fileEncoding = System.getProperties().getProperty(&quot;file.encoding&quot;);
+        System.out.println(&quot;JVM默认编码: &quot; + fileEncoding);
+        String str = &quot;2024,加油努力干&quot;;
+        System.out.println(new String(str.getBytes(), &quot;GBK&quot;));
+    }
+}
+</code></pre>
+
+<p>代码输出如下</p>
+
+<pre><code class="language-text">JVM默认编码: UTF-8
+2024,鍔犳补鍔姏骞�
+</code></pre>
+
+<p><font color=red>为何乱码？</font></p>
+
+<p>str.getBytes()方法实际调用的是str.getBytes(&ldquo;UTF-8&rdquo;)，存储时用的是<code>UTF-8</code>，读取字符时用的是<code>GBK</code>，字符读写编码不一致出现字符乱码。
+强烈推荐统一采用UTF-8编码，使用IDEA编写Java代码时，必须设定编码，File -&gt; Settings -&gt; Editor -&gt; File Encoding，或者通过<code>-Dfile.encoding=UTF-8</code>设定。</p>
+
+<p>Java中还提供了<code>FileReader</code>、<code>FileWriter</code>简化了从文件读写字符，其内部自动封装包裹了对应的文件字节流，但是采用FileReader、FileWriter时只能使用JVM默认编码，无法单独设置读取字符的编码，因此统一编码非常重要。</p>
+
+<pre><code class="language-java">// InputStreamReader从文件读取字符内容
+new InputStreamReader(new FileInputStream(&quot;D://test/source.txt&quot;), StandardCharsets.UTF_8));
+// OutputStreamWriter将字符内容写入文件
+new OutputStreamWriter(new FileOutputStream(&quot;D://test/target.txt&quot;), StandardCharsets.UTF_8))
+</code></pre>
+
+<p>使用FileReader、FileWriter读写字符内容</p>
+
+<pre><code class="language-java">public class CopyFileCharacters {
+
+    public static void main(String[] args) {
+        try (FileReader fr = new FileReader(&quot;D://test/source.txt&quot;);
+             FileWriter fw = new FileWriter(&quot;D://test/target.txt&quot;)) {
+            // 查看FileReader读取字符编码
+            System.out.println(fr.getEncoding());
+            // 查看FileWriter写入字符编码
+            System.out.println(fw.getEncoding());
+            int c;
+            while ((c = fr.read()) != -1) {
+                System.out.println(c);
+                fw.write(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<p>如果需要追加内容到文件中，请使用FileWriter带有两个参数的构造方法，第二个参数设置为<code>true</code>即可</p>
+
+<pre><code class="language-java">public FileWriter(File file, boolean append)
+// 第二个参数为true，字符内容会从文件末尾开始写入
+FileWriter fw = new FileWriter(&quot;D://test/target.txt&quot;, true);
+</code></pre>
+
+<p>字符流IO经常会以更大单位读取字符，最常用的就是按行读取字符。一行包括一系列字符组成的字符串以及末尾的行结束符，行结束符可以是回车换行符<code>\r\n</code>，也可以是单个回车键字符<code>\r</code>，或者单个换行符<code>\n</code>。不同的操作系统，其换行符可能有所不同。</p>
+
+<ul>
+<li>Dos、Windows采用回车+换行符(CR+LF)表示下一行，即字符表现形式<code>\r\n</code></li>
+<li>Unix、Linux采用换行符(LF)表示下一行，字符表现形式为<code>\n</code></li>
+<li>Mac采用回车符(CR)表示下一行，字符表现形式为<code>\r</code></li>
+</ul>
+
+<p>CR回车符ascii码十进制为<code>13</code>, 换行符ascii码十进制为<code>10</code>。支持按行读写的字符流有<code>BufferedReader</code>、<code>BufferedWriter</code>、<code>PrintWriter</code>等，根据操作系统自动处理行结束符。</p>
+
+<p><img src="/blog/java_star/图片 18.png" width="640" alt="utf8"></p>
+
+<p>BufferedReader按行读取D://test/source.txt字符内容</p>
+
+<pre><code class="language-java">public class BufferedReaderDemo {
+    public static void main(String[] args) {
+        try (BufferedReader br = new BufferedReader(new FileReader(&quot;D://test/source.txt&quot;))) {
+            String line;
+            // 按行读取，自动处理回车换行符
+            while((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<p>代码运行后输出</p>
+
+<pre><code class="language-text">﻿2024,加油努力干
+2024,加油努力干
+2024,加油努力干 2024,加油努力干
+</code></pre>
+
+<p>BufferedWriter按行将字符写入D://test/target.txt</p>
+
+<pre><code class="language-java">public class BufferedWriterDemo {
+
+    public static void main(String[] args) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(&quot;D://test/target.txt&quot;))) {
+            bw.write(&quot;﻿2024,加油努力干&quot;);
+            // 自动获取操作系统换行符写入到文件中
+            bw.newLine();
+            // 写入空行
+            bw.newLine();
+            bw.write(&quot;﻿2024,加油努力干&quot;);
+            // 写入结束，最后一行后未添加换行符
+            bw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<p>Windows下使用Notepad查看文件内容，视图中选择显示行尾符，Notepad文本视图中的<code>CR</code> <code>LF</code>只是一种控制字符展示形式，并不是实际的<code>CR</code> <code>LF</code>字符，发现十进制值<code>13</code>展示<code>CR</code>，<code>10</code>展示<code>LF</code>。</p>
+
+<p><img src="/blog/java_star/图片 19.png" width="640" alt="utf8"></p>
+
+<p>Nodepad上用十六进制查看数据</p>
+
+<p><img src="/blog/java_star/bin.png" width="640" alt="utf8"></p>
+
+<p>BufferedWriter.newLine()控制换行，实际调用的就是write(&rdquo;\r\n&rdquo;)写入换行</p>
+
+<pre><code class="language-java">bw.write(&quot;﻿2024,加油努力干&quot;);
+// 与newLine()方法达到一样的换行效果
+bw.write(&quot;\r\n&quot;);
+bw.write(&quot;\r\n&quot;);
+bw.write(&quot;﻿2024,加油努力干&quot;);
+bw.flush();
+</code></pre>
+
+<p>BufferedWriter每次写完字符内容时，需要显式调用插入换行符操作，因此Java提供了一个使用更广泛的<code>PrintWriter</code>字符输出流，PrintWriter中提供了一个println()方法，在文本字符写入结束后，自动调用了一次<code>newLine()</code>方法插入换行符。</p>
+
+<pre><code class="language-java">public class PrintWriterDemo {
+
+    public static void main(String[] args) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(&quot;D://test/target.txt&quot;))) {
+            // 自动添加换行符
+            pw.println(&quot;2024,加油努力干&quot;);
+            // 空行
+            pw.println();
+            // 自动添加换行符
+            pw.println(&quot;2024,加油努力干&quot;);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<h3 id="缓冲流">缓冲流</h3>
+
+<p>Java非缓冲流的每次读写都需要进行本地方法调用，交给底层操作系统进行处理，工作效率非常低，因为每次请求可能都会触发磁盘读写、网络活动以及其它一些开销昂贵的操作。为了减少操作系统的负载，Java提供了IO缓冲流，缓冲流内部提供了缓冲区(buffer)进行读写，大部分缓冲流的buffer默认大小为8192字节(8KB)。</p>
+
+<ul>
+<li><p>缓冲输入流从内存区域的buffer读取数据，当buffer数据为空时，Java本地输入方法才会进行调用。</p></li>
+
+<li><p>缓冲输出流将数据写入到内存区域的buffer，当buffer写满时，Java本地输出方法才会进行调用。</p></li>
+</ul>
+
+<p>Java程序可以通过包装方式将非缓冲流构造成为一个缓冲流，BufferedInputStream、BufferedOutputStream用于构造缓冲字节流，BufferedReader、BufferedWriter用于构造缓冲字符流。</p>
+
+<h4 id="字节缓冲流">字节缓冲流</h4>
+
+<p>字节缓冲流主要包括缓冲输入流BufferedInputStream，缓冲输出流BufferedOutputStreamWriter。</p>
+
+<p>BufferedInputStream通过非缓冲字节流FileInputStream进行一次磁盘IO，一次性读取多个字节数据到内存buffer(字节数组)，后续程序只需从内存中的buffer数组中读取字节数据，减少IO操作次数。</p>
+
+<pre><code class="language-java">public class BufferedInputStreamDemo {
+
+    public static void main(String[] args) {
+        try (BufferedInputStream bis = new BufferedInputStream(
+                new FileInputStream(&quot;D://test/source.txt&quot;))) {
+            int c;
+            // 从内存buffer中读取字节数据，如果buffer为空，才会进行IO操作
+            while((c = bis.read()) != -1) {
+                System.out.println(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<p>BufferedInputStream通过FileInputStream提供的本地方法readBytes，可以通过一次IO操作读取多个字节数据。</p>
+
+<p><img src="/blog/java_star/图片 21.png" width="640" alt="utf8"></p>
+
+<p>BufferedOutputStream通过非缓冲字节流FileOutputStream进行一次磁盘IO，将内存缓冲区buffer中的多个字节数据一次性写入文件中，减少IO操作次数。</p>
+
+<pre><code class="language-java">public class BufferedOutputStreamDemo {
+
+    public static void main(String[] args) {
+        try (BufferedOutputStream bos = new BufferedOutputStream(
+                new FileOutputStream(&quot;D://test/target.txt&quot;))) {
+            // 写入字符 '2' 到内存buffer
+            bos.write(50);
+            // 写入字符 '0' 到内存buffer
+            bos.write(48);
+            // 写入字符 '2' 到内存buffer 
+            bos.write(50);
+            // 写入字符 '3' 到内存buffer
+            bos.write(51);
+// 可在此 sleep 10s，去检测文件内容， 10s后调用了flush方法文件内容才写入         
+//        try {
+//            Thread.sleep(10000);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+            // 刷新输出流，将内存buffer数据写到文件中
+            // 缓冲流的close方法调用时，会先自动调用一次flush方法，强制将数据写出
+            // 但是明确后续没有数据可写时，最好养成良好习惯，手动调用一次flush方法
+            bos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<p>BufferedOutputStream此时依赖的方法是非缓冲字节流FileOutputStream提供的本地方法writeBytes。</p>
+
+<p><img src="/blog/java_star/图片 22.png" width="640" alt="utf8"></p>
+
+<h4 id="字符缓冲流">字符缓冲流</h4>
+
+<p>字符缓冲流主要包括缓冲输入流BufferedReader，缓冲输出流BufferedWriter。</p>
+
+<p>BufferedReader可基于InputStreamReader、FileReader等非字符缓冲流构造。</p>
+
+<pre><code class="language-java">public class BufferedReaderDemo {
+    public static void main(String[] args) {
+        try (BufferedReader br = new BufferedReader(new FileReader(&quot;D://test/source.txt&quot;))) {
+            String line;
+            // 按行读取，自动处理回车换行符
+            while((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<p>基于FileReader构造BufferedReader</p>
+
+<pre><code class="language-java">BufferedReader br = new BufferedReader(new FileReader(&quot;D://test/source.txt&quot;))
+</code></pre>
+
+<p>BufferedWriter可基于OutputStreamReader、FileWriter等非字符缓冲流构造。</p>
+
+<pre><code class="language-java">public class BufferedWriterDemo2 {
+
+    public static void main(String[] args) {
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(&quot;D://test/target.txt&quot;)))) {
+            bw.write(&quot;2024,加油努力干&quot;);
+            // windows换行符
+            // bw.write(&quot;\r\n&quot;);
+            bw.newLine();
+            bw.write(&quot;2024,加油努力干&quot;);
+            bw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<p>基于FileWriter构造BufferedWriter</p>
+
+<pre><code class="language-java">BufferedWriter bw = new BufferedWriter(new FileWriter(&quot;D://test/target.txt&quot;))
+</code></pre>
+
+<p>基于PrintWriter构造BufferedWriter</p>
+
+<pre><code class="language-java">BufferedWriter bw = new BufferedWriter(new PrintWriter(new FileWriter(&quot;D://test/target.txt&quot;)))
+</code></pre>
+
+<p>flush方法是属于输出流的方法，调用非缓冲流的flush方法不会产生任何作用。</p>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/java/" rel="tag">java</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+<div class="social-share"></div>
+  <br/>
+
+
+
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/post/maven_base/" rel="prev"><span class="post-nav__caption">«&thinsp;前一篇</span><p class="post-nav__post-title">Maven基础概念与使用(一)</p></a>
+	</div>
+</nav>
+
+
+
+<script data-isso="/isso/" src="/isso/js/embed.min.js"></script>
+<section id="isso-thread"></section>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/java_file_io/">Java基础文件与IO(一)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/maven_base/">Maven基础概念与使用(一)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/maven_lifecyle/">Maven生命周期(二)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/maven_dependency_manage/">Maven依赖管理(三)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/java/">一篇文章让你秒懂Java运行基础</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/k8s_terminal/">WebSocket实现Kubernetes Pod Exec终端工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes_io_deploy/">本地部署kubernetes.io官方网站</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/reentrantlock/">Java互斥锁ReentrantLock实现原理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/juc/">Java同步器框架AQS与锁实现原理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/helm_design/">Helm架构与中心化部署解决方案</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">分类</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/docker">Docker</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/golang">Golang</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95">Java基础算法</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/maven">Maven</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%ae%b9%e5%99%a8%e7%94%9f%e6%80%81">容器生态</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%bb%ba%e7%ab%99%e5%b7%a5%e5%85%b7">建站工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%94%9f%e6%b4%bb%e6%8a%80%e5%b7%a7">生活技巧</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">标签</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/clair" title="Clair">Clair (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/condition" title="Condition">Condition (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (9)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/grpc" title="Grpc">Grpc (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jar" title="Jar">Jar (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/javac" title="Javac">Javac (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (6)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/leader-elect" title="Leader elect">Leader elect (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/prometheus" title="Prometheus">Prometheus (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/wordpress" title="Wordpress">Wordpress (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e4%ba%8c%e5%8f%89%e6%a0%91" title="二叉树">二叉树 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%85%89%e7%8c%ab" title="光猫">光猫 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e5%85%b8%e6%a0%91" title="字典树">字典树 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%ad%97%e7%ac%a6%e4%b8%b2" title="字符串">字符串 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%8f%92%e4%bb%b6" title="插件">插件 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" title="数据结构">数据结构 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%95%b0%e7%bb%84" title="数组">数组 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e7%ae%97%e6%b3%95" title="算法">算法 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e9%95%9c%e5%83%8f%e6%89%ab%e6%8f%8f" title="镜像扫描">镜像扫描 (1)</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">社群</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/kingfsen" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:562620163@qq.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>562620163@qq.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2024 .
+			<span class="footer__copyright-credits">使用 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 技术与 <a href="https://github.com/kingfsen/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主题</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script async src="/js/highlight.js"></script> 
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+ 
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1f3ac79473dea8a6643d0e73a08fa809";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+</script>
+
+<a class="to-top" style="background-color:#666;color:#fff;width:40px;height:40px;text-align:center;padding-top:3px;line-height:18px;">返回顶部</a>
+<script type="text/javascript">
+$('.to-top').toTop();
+</script>
+
+</body>
+</html>

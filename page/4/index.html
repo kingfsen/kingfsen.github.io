@@ -70,6 +70,34 @@
 			<div class="primary">
 			
 <main class="main list" role="main"><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/post/get_min_contains_sub_string/" rel="bookmark">
+			字符串的最小包含子串
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-03-16T13:19:14">2019-03-16</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/java%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95" rel="category">Java基础算法</a></span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text">2 分钟</time>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		问题 给定字符串str1，str2，获取字符串str1中包含str2的最小字符子串。 str1=&ldquo;abcde&rdquo;, str2=&ldquo;bd&rdquo; -&gt; bcd str1=&ldquo;abcde&rdquo;, str2=&ldquo;cg&rdquo; -&gt; &ldquo;&rdquo; 思路 假定字符编码范围0~255 创建一个size为256的整形数组charCount，用来保存字符串str2所有字符的出现次数 整形变量match用来表示当前差几个字符未匹配 将str1、str2分
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/get_min_contains_sub_string/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
 	<figure class="list__thumbnail">
 		<a href="/post/docker_login_process/">
 			<img src="/img/docker.jpg" alt="Docker Login执行流程与原理" />
@@ -351,34 +379,6 @@
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/post/leader_elect_golang/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/unicom_cat/" rel="bookmark">
-			破解联通HG8347R光猫
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2018-10-26T08:41:19">2018-10-26</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/%e7%94%9f%e6%b4%bb%e6%8a%80%e5%b7%a7" rel="category">生活技巧</a></span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text">6 分钟</time>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		安装的联通宽带，自带光猫设备，型号为HG8347R，光猫后面可以清楚的看见这个设备是华为生产的，联通定制版本。 后台管理页面基本只有设备重启这个功能了，其他所有的功能都被屏蔽，无法操作，这个自带的光猫有一些限制。 不支持5G 只有LAN1口是千兆口 穿透能力、信号很弱 强制路由拨号，联通限制一个宽带
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/unicom_cat/">阅读全文…</a>
-	</div>
 </article>
 </main>
 
@@ -409,13 +409,23 @@
 		
 		
 	
+		
+		
+	
 	
 	<span class="pagination__item pagination__item--current">4</span>
 		
 	
 	
+		
+			<a class="pagination__item pagination__item btn" href="/page/5/">5</a>
+		
+		
 	
-	&nbsp;&nbsp;&nbsp;&nbsp;<span>共&nbsp;4&nbsp;页</span>
+	<a class="pagination__item pagination__item--next btn" href="/page/5/">›</a>
+	<a class="pagination__item pagination__item--next btn" href="/page/5/">»</a>
+	
+	&nbsp;&nbsp;&nbsp;&nbsp;<span>共&nbsp;5&nbsp;页</span>
 	
 </div>
 
@@ -435,6 +445,7 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/java_file_io/">Java基础文件与IO(一)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/maven_base/">Maven基础概念与使用(一)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/maven_lifecyle/">Maven生命周期(二)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/maven_dependency_manage/">Maven依赖管理(三)</a></li>
@@ -444,7 +455,6 @@
 			<li class="widget__item"><a class="widget__link" href="/post/reentrantlock/">Java互斥锁ReentrantLock实现原理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/juc/">Java同步器框架AQS与锁实现原理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/helm_design/">Helm架构与中心化部署解决方案</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/grpc/">使用Golang部署gRPC服务</a></li>
 		</ul>
 	</div>
 </div>
@@ -474,6 +484,7 @@
 		<a class="widget-taglist__link widget__link btn" href="/tags/harbor" title="Harbor">Harbor (4)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/helm" title="Helm">Helm (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/jar" title="Jar">Jar (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/javac" title="Javac">Javac (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/java%e6%ba%90%e7%a0%81" title="Java源码">Java源码 (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes" title="Kubernetes">Kubernetes (6)</a>

@@ -6,10 +6,19 @@
     <description>Recent content in Java on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 13 Apr 2024 14:47:15 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 26 Apr 2024 17:10:03 +0800</lastBuildDate>
     
 	<atom:link href="/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java基础文件与IO(一)</title>
+      <link>/post/java_file_io/</link>
+      <pubDate>Fri, 26 Apr 2024 17:10:03 +0800</pubDate>
+      
+      <guid>/post/java_file_io/</guid>
+      <description>文件操作 java.io.File是Java提供的专门针对文件操作的类，File是文件与目录路径的一种抽象表示，用于操作文件与目录，不能操作文件内容。 构造File对象 一个File对象通常表示磁盘上一个真实存在的文件或目录，创建File对象时，无论对应的文件与目录是否存在，不会影响File对象</description>
+    </item>
     
     <item>
       <title>一篇文章让你秒懂Java运行基础</title>

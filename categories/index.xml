@@ -6,10 +6,19 @@
     <description>Recent content in Categories on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 25 Apr 2024 19:54:59 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 26 Apr 2024 17:10:03 +0800</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java</title>
+      <link>/categories/java/</link>
+      <pubDate>Fri, 26 Apr 2024 17:10:03 +0800</pubDate>
+      
+      <guid>/categories/java/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>maven</title>
@@ -17,15 +26,6 @@
       <pubDate>Thu, 25 Apr 2024 19:54:59 +0800</pubDate>
       
       <guid>/categories/maven/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>/categories/java/</link>
-      <pubDate>Sat, 13 Apr 2024 14:47:15 +0800</pubDate>
-      
-      <guid>/categories/java/</guid>
       <description></description>
     </item>
     
@@ -48,7 +48,7 @@
     </item>
     
     <item>
-      <title>docker</title>
+      <title>Docker</title>
       <link>/categories/docker/</link>
       <pubDate>Tue, 21 May 2019 10:49:15 +0800</pubDate>
       
