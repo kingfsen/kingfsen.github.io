@@ -6,10 +6,19 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 26 Apr 2024 17:10:03 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 28 Apr 2024 17:15:14 +0800</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java基础注解(二)</title>
+      <link>/post/java_annotation_generic/</link>
+      <pubDate>Sun, 28 Apr 2024 17:15:14 +0800</pubDate>
+      
+      <guid>/post/java_annotation_generic/</guid>
+      <description>注解（Annotation）又称 Java 标注，是 JDK5.0 引入的一种注释机制。注解是一种元数据，注解本身对被标注的代码没有任何直接的影响，它为程序提供了一些额外的数据信息，注解通常使用在如下场景 为编译器提供信息：编译器可通过注解去探测错误或者压制警告，如@Deprecated @SuppressWarnings(&amp;quot;unchecked&amp;quot;) 编译时处理：在程序编译时，</description>
+    </item>
     
     <item>
       <title>Java基础文件与IO(一)</title>
