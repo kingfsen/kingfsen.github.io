@@ -489,6 +489,9 @@ type XtermMessage struct {
         _, p, err := ws.ReadMessage()
         if err != nil {
             log.WithField(&quot;err&quot;, err).Error(&quot;read front message error&quot;)
+            // 用户关闭页面时，主动向k8s容器发送exit命令，结束shell进程，然后等待2秒。
+            sph.WriteData([]byte(&quot;exit\r\n&quot;))
+            time.Sleep(time.Duration(2) * time.Second)
             // must signal goroutine
             streamHandler.Cancel()
             break
